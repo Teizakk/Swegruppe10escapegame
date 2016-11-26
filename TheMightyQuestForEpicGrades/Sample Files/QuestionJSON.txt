@@ -1,0 +1,18 @@
+﻿{
+  "Answers": {
+    "Answer1": "ImagePath1",
+    "Answer2": "ImagePath2",
+    "Answer3": "ImagePath3"
+  },
+  "QuestionText": "Test",
+  "ImagePath": "Test",
+  "Hints": [
+    "Hint 1",
+    "Hint 2",
+    "Hint 3"
+  ],
+  "Difficulty": 0,
+  "Modul": "ADS",
+  "inUse"": "true",
+  "Level": "5"
+}
