@@ -17,5 +17,7 @@ namespace Assets.Scripts
         public String Modul { get; set; }
         public Boolean inUse { get; set; }
         public int Level { get; set; }
+        public int correctAnswer { get; set; }
+        public TimeSpan QuestionDuration { get; set; }
     }
 }
