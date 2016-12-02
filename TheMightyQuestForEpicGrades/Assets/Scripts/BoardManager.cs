@@ -5,21 +5,90 @@ using System.Collections.Generic;
 public class BoardManager : MonoBehaviour {
 
     private Transform boardHolder;
-    private List<Vector3> gridPositions = new List<Vector3>();
-    private char[,] levelData;
-
     // TODO
+    // Überlegen, ob man die gridPositions tatsächlich braucht?
+    private List<Vector3> gridPositions = new List<Vector3>();
+    private char[,] levelData = null;
+    private int max_x = 0;
+    private int max_z = 0;
+
+    public GameObject WallBlock;
+    public GameObject FloorBlock;
+    public GameObject ChestBlock;
+    public GameObject PortalBlock;
+    public GameObject StartBlock;
+    public GameObject EndBlock;
+
     // Initialisiere die Liste mit den möglichen Positionen
     void InitializeList()
     {
-        
+        gridPositions.Clear();
+
+        for (int x = 0; x < max_x; ++x)
+        {
+            for (int z = 0; z < max_z; ++z)
+            {
+                // Das sind die möglichen Positionen für Wände, Truhen, Portalsteine, Gegner (die wir nicht implementieren müssen) usw.
+                gridPositions.Add(new Vector3((float)x, 1.0f, (float)z));
+            }
+        }
     }
 
-    // TODO
-    // Erstelle die Wände und den Boden
-    void BoardSetup()
+    // Erstelle die Wände und die Objekte, die über dem Boden stehen
+    void UpperBoardSetup()
     {
+        // Um eine schöne Struktur zu wahren, werden alle Boardobjekte den Parent "Board" erhalten (boardHolder)
+        boardHolder = new GameObject("Board").transform;
 
+        GameObject toInstantiate = null;
+
+        for (int x = 0; x < max_x; ++x)
+        {
+            for (int z = 0; z < max_z; ++z)
+            {
+                switch(levelData[x,z])
+                {
+                    case '#':   // Wall
+                        toInstantiate = WallBlock;
+                        break;
+                    case 'c':
+                    case 'C':   // Chest
+                        toInstantiate = ChestBlock;
+                        break;
+                    case 'p':
+                    case 'P':   // Portal
+                        toInstantiate = PortalBlock;
+                        break;
+                    case 's':
+                    case 'S':   // Start
+                        toInstantiate = StartBlock;
+                        break;
+                    case 'e':
+                    case 'E':   // End
+                        toInstantiate = EndBlock;
+                        break;
+                    default:    // Sollte niemals aufgerufen werden
+                        toInstantiate = null;
+                        break;
+                }
+
+                if (toInstantiate != null)
+                {
+                    GameObject instance = Instantiate(toInstantiate, new Vector3(x, 1.0f, z), Quaternion.identity) as GameObject;
+                    instance.transform.SetParent(boardHolder);
+                }
+                else
+                    throw new System.Exception("Unerlaubtes Zeichen innerhalb der Leveldaten gefunden! Erlaubte Zeichen sind: {'#', 'C', 'P', 'S', 'E', 'F'}");
+            }
+        }
+    }
+
+    // Setze den Boden
+    void LowerBoardSetup()
+    {
+        // 64 Einheiten lang und 64 Einheiten breit
+        FloorBlock.transform.localScale = new Vector3(64.0f, 0.0f, 64.0f);
+        Instantiate(FloorBlock, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
     }
 
     // TODO
@@ -42,6 +111,20 @@ public class BoardManager : MonoBehaviour {
     {
         levelData = GetComponent<LevelLoader>().loadLevel(level);
 
-        BoardSetup();
+        // Die LevelDaten müssen gesetzt sein, sodass man die möglichen Positionen zum Spawnen setzen kann.
+        if (levelData != null)
+        {
+            // GetLength(int x) ist dazu da, die Anzahl der möglichen Elemente innerhalb der "x."-Dimension zu erhalten
+            max_x = levelData.GetLength(0);
+            max_z = levelData.GetLength(1);
+        }
+        else
+            throw new System.Exception("Das Level konnte nicht richtig eingelesen werden. Versuchen Sie es erneut.");
+
+        LowerBoardSetup();
+        UpperBoardSetup();
+        InitializeList();
+
+        
     }
 }
