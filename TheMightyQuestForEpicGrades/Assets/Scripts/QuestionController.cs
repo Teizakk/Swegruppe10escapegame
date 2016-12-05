@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
@@ -8,7 +9,25 @@ namespace Assets.Scripts
     class QuestionController
     {
         private List<Question> Questions { get; set; }
+        private static readonly QuestionController qc = new QuestionController();
         // Use this for initialization
+        private QuestionController()
+        {
+
+        }
+        /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
+        public static QuestionController GetInstance()
+        {
+            try
+            {
+                return qc;
+            }
+            catch (NullReferenceException e)
+            {
+                throw new Exception("Das Objekt wurde nicht instanziert.", e);
+            }
+
+        }
         void Start()
         {
             Questions = new List<Question>();
@@ -17,43 +36,128 @@ namespace Assets.Scripts
         // Update is called once per frame
         void Update()
         {
+
         }
+
         void setQuestions(List<Question> qs)
         {
-            Questions = qs;
+            this.Questions = qs;
         }
-        Question getQuestionNotInUse()
+        /// <exception cref="IndexOutOfRangeException">Es wurde keine unbenutze Frage gefunden</exception>
+        /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
+        Question GetQuestionNotInUse()
         {
-            System.Random rand = new System.Random();
-            var q = Questions.Where(x => !x.inUse).ToList()[rand.Next(Questions.Count)];
-            q.inUse = true;
-            return q;
+            try
+            {
+                System.Random rand = new System.Random();
+                var q = Questions.Where(x => !x.inUse).ToList()[rand.Next(Questions.Count)];
+                q.inUse = true;
+                return q;
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                throw new Exception("Es wurde keine unbenutze Frage gefunden", e);
+            }
+            catch (NullReferenceException e)
+            {
+                throw new Exception("Das Objekt wurde nicht instanziert.", e);
+            }
         }
-        Question getQuestionNotInUse(Difficulties d)
+        /// <exception cref="IndexOutOfRangeException">Es wurde keine unbenutze Frage gefunden</exception>
+        /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
+        Question GetQuestionNotInUse(Difficulties d)
         {
-            System.Random rand = new System.Random();
-            var q = Questions.Where(x => !x.inUse && x.Difficulty == d).ToList()[rand.Next(Questions.Count)];
-            q.inUse = true;
-            return q;
+            try
+            {
+                System.Random rand = new System.Random();
+                var q = Questions.Where(x => !x.inUse && x.Difficulty == d).ToList()[rand.Next(Questions.Count)];
+                q.inUse = true;
+                return q;
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                throw new Exception("Es wurde keine unbenutze Frage, aus der entsprechenden Difficulty gefunden", e);
+            }
+            catch (NullReferenceException e)
+            {
+                throw new Exception("Das Objekt wurde nicht instanziert.", e);
+            }
         }
-        Question getQuestionNotInUse(int level)
+        /// <exception cref="IndexOutOfRangeException">Es wurde keine unbenutze Frage gefunden</exception>
+        /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
+        Question GetQuestionNotInUse(int level)
         {
-            System.Random rand = new System.Random();
-            var q = Questions.Where(x => !x.inUse && x.Level == level).ToList()[rand.Next(Questions.Count)];
-            q.inUse = true;
-            return q;
+            try
+            {
+                System.Random rand = new System.Random();
+                var q = Questions.Where(x => !x.inUse && x.Level == level).ToList()[rand.Next(Questions.Count)];
+                q.inUse = true;
+                return q;
+            }
+
+            catch (IndexOutOfRangeException e)
+            {
+                throw new Exception("Es wurde keine unbenutze Frage, aus dem entsprechenden level gefunden", e);
+            }
+            catch (NullReferenceException e)
+            {
+                throw new Exception("Das Objekt wurde nicht instanziert.", e);
+            }
         }
-        Question getQuestionNotInUse(int level, Difficulties d)
+        /// <exception cref="IndexOutOfRangeException">Es wurde keine unbenutze Frage gefunden</exception>
+        /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
+        Question GetQuestionNotInUse(int level, Difficulties d)
         {
-            System.Random rand = new System.Random();
-            var q = Questions.Where(x => !x.inUse && x.Level == level && x.Difficulty == d).ToList()[rand.Next(Questions.Count)];
-            q.inUse = true;
-            return q;
+            try
+            {
+                System.Random rand = new System.Random();
+                var q = Questions.Where(x => !x.inUse && x.Level == level && x.Difficulty == d).ToList()[rand.Next(Questions.Count)];
+                q.inUse = true;
+                return q;
+            }
+            catch (IndexOutOfRangeException e)
+            {
+
+                throw new Exception("Es wurde keine unbenutze Frage gefunden, aus dem entsprechenden level und der entsprechenden Difficulty gefunden.", e);
+            }
+            catch (NullReferenceException e)
+            {
+                throw new Exception("Das Objekt wurde nicht instanziert.", e);
+            }
         }
-        Question getQuestion()
+        /// <exception cref="IndexOutOfRangeException">Es wurde keine Frage gefunden</exception>
+        /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
+        Question GetQuestion()
         {
-            System.Random rand = new System.Random();
-            return Questions[rand.Next(Questions.Count)];
+            try
+            {
+                System.Random rand = new System.Random();
+                return Questions[rand.Next(Questions.Count)];
+            }
+            catch (IndexOutOfRangeException e)
+            {
+
+                throw new Exception("Es wurde keine Frage gefunden.", e);
+            }
+        }
+        /// <exception cref="IndexOutOfRangeException">Es wurde keine Fragen gefunden mit angegebenem Index</exception>
+        /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
+        Question GetQuestion(int index)
+        {
+            try
+            {
+                return Questions[index];
+            }
+            catch (IndexOutOfRangeException e)
+            {
+
+                throw new Exception("Es wurde keine Fragen gefunden mit angegebenem Index.", e);
+            }
+        }
+        /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
+        IList<Question> GetQuestions()
+        {
+            return Questions;
         }
     }
 }

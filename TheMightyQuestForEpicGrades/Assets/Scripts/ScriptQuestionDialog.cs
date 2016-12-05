@@ -4,21 +4,24 @@ using System.Linq;
 using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class ScriptQuestionDialog : MonoBehaviour
 {
     #region UnityObjects
     public Text TimerText;
-    public GameObject btnBild0, btnBild1, btnBild2, btnBild3;
+    public List<GameObject> btnPictures;
     private GameObject[] btnBild;
+
     #endregion
 
     #region Properties
     private int tippsShowed;
     private int chosenAnswerIndex;
-    private float startTime;
-    private float timer;
-    private string[] imagePaths;
+    private DateTime startTime;
+    private DateTime endTime;
+    private TimeSpan usedTime;
+    private String[] imagePaths;
     private static Question q;
     #endregion
 
@@ -31,10 +34,13 @@ public class ScriptQuestionDialog : MonoBehaviour
         // Werte initialisieren
         tippsShowed = 1;
         chosenAnswerIndex = 1;
-        timer = 0.0f;
+        startTime = DateTime.Now;
         btnBild = new GameObject[4]
         {
-            btnBild0, btnBild1, btnBild2, btnBild3
+            btnPictures[0],
+            btnPictures[1],
+            btnPictures[2],
+            btnPictures[3]
         };
 
         // Frage laden
@@ -44,11 +50,12 @@ public class ScriptQuestionDialog : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
-        timer = Time.time - startTime;
-        int mins = (int) timer/60;
-        string minutes = (mins < 10 ? "0" : "") + mins;
-        string seconds = ((timer % 60)).ToString("f0").PadLeft(2,'0');
-        TimerText.text = minutes + ":" + seconds;
+        usedTime = TimeSpan.FromTicks(DateTime.Now.Ticks - startTime.Ticks);
+        TimerText.text = String.Format("{0:hh\\:mm\\:ss\\:ff}", usedTime);
+        //int mins = (int) timer/60;
+        //string minutes = (mins < 10 ? "0" : "") + mins;
+        //string seconds = ((timer % 60)).ToString("f0").PadLeft(2,'0');
+        //TimerText.text = minutes + ":" + seconds;
     }
 
     // beantwortet die Frage
@@ -57,6 +64,8 @@ public class ScriptQuestionDialog : MonoBehaviour
 
         if (AnswerCorrect())
         {
+            endTime = DateTime.Now;
+            usedTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
             Debug.Log("Frage korrekt beantwortet!");
             // Popup anzeigen
 
@@ -144,11 +153,23 @@ public class ScriptQuestionDialog : MonoBehaviour
             Level = 1,
             ImagePath = "Assets/Pictures/Beispielbild.jpg",
             Answers =
-                new Dictionary<string, string>
+                new List<Question.Answer>()
                 {
-                        {"Ein Netz", "Assets/Pictures/Beispielbild.jpg"},
-                        {"Nur physikalisch vorhanden", ""},
-                        {"Ein Netz von Netzen", ""}
+                    new Question.Answer()
+                    {
+                        AnswerText = "Answer1",
+                        ImagePath = "Path1"
+                    },
+                    new Question.Answer()
+                    {
+                        AnswerText = "Answer2",
+                        ImagePath = "Path2"
+                    },
+                    new Question.Answer()
+                    {
+                        AnswerText = "Answer3",
+                        ImagePath = "Path3"
+                    },
                 },
             CorrectAnswer = 3,
             Hints = new List<string> { "inter", "connected", "networks" }
@@ -168,8 +189,8 @@ public class ScriptQuestionDialog : MonoBehaviour
         int i = 1;
         foreach (var answer in q.Answers)
         {
-            GameObject.Find("outAnswer" + i).GetComponent<Text>().text = answer.Key;
-            imagePaths[i] = answer.Value;
+            GameObject.Find("outAnswer" + i).GetComponent<Text>().text = answer.AnswerText;
+            imagePaths[i] = answer.ImagePath;
 
             // Bild vorhanden?
             if (!string.IsNullOrEmpty(imagePaths[i - 1]))
