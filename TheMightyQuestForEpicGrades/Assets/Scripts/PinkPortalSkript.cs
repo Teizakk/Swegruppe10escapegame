@@ -4,15 +4,15 @@ using UnityEngine.SceneManagement;
 
 public class PinkPortalSkript : MonoBehaviour {
 
-    public static bool activated;
-    public int levelIndex;
+    public static bool Activated;
+    public int LevelIndex;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && GreenPortalSkript.activated == true && PinkPortalSkript.activated == true)
+        if (other.gameObject.CompareTag("Player") && GreenPortalSkript.Activated == true && PinkPortalSkript.Activated == true)
         {
 
-            SceneManager.LoadScene(levelIndex);
+            SceneManager.LoadScene(LevelIndex);
         }
     }
 }

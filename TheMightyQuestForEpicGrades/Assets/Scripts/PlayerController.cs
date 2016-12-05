@@ -26,15 +26,15 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("PinkPortal") && Input.GetKeyDown("E"))// && Portalstein vorhanden)
         {
-            PinkPortalSkript.activated = true;
+            PinkPortalSkript.Activated = true;
         }
         else if (other.gameObject.CompareTag("GreenPortal") && Input.GetKeyDown("E"))// && Portalstein vorhanden)
         {
-            GreenPortalSkript.activated = true;
+            GreenPortalSkript.Activated = true;
         }
         else if (other.gameObject.CompareTag("BluePortal") && Input.GetKeyDown("E"))// && Portalstein vorhanden)
         {
-            BluePortalSkript.activated = true;
+            BluePortalSkript.Activated = true;
         }
     }
 
