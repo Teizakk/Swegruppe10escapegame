@@ -24,9 +24,17 @@ public class PlayerController : MonoBehaviour
         {
             //öffnen der Truhe,Fragen laden
         }
-        else if (other.gameObject.CompareTag("Portal") && Input.GetKeyDown("E"))// && Portalstein vorhanden)
+        else if (other.gameObject.CompareTag("PinkPortal") && Input.GetKeyDown("E"))// && Portalstein vorhanden)
         {
-            //Portal öffnen
+            PinkPortalSkript.activated = true;
+        }
+        else if (other.gameObject.CompareTag("GreenPortal") && Input.GetKeyDown("E"))// && Portalstein vorhanden)
+        {
+            GreenPortalSkript.activated = true;
+        }
+        else if (other.gameObject.CompareTag("BluePortal") && Input.GetKeyDown("E"))// && Portalstein vorhanden)
+        {
+            BluePortalSkript.activated = true;
         }
     }
 
