@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
         else if (instance != this)
             Destroy(gameObject);
 
+        boardManager = GetComponent<BoardManager>();
+
         DontDestroyOnLoad(instance);
         // TODO
         // InitGame darf erst geschehen, wenn das eigentliche Spiel gestartet wird
@@ -26,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     void InitGame()
     {
-        instance.boardManager.SetupScene(1);
+        boardManager.SetupScene(1);
     }
 
     // Update is called once per frame

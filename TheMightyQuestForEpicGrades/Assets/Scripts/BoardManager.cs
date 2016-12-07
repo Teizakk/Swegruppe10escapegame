@@ -41,11 +41,13 @@ public class BoardManager : MonoBehaviour {
         boardHolder = new GameObject("Board").transform;
 
         GameObject toInstantiate = null;
+        
 
         for (int x = 0; x < max_x; ++x)
         {
             for (int z = 0; z < max_z; ++z)
             {
+                float height = 1.0f;
                 switch(levelData[x,z])
                 {
                     case '#':   // Wall
@@ -63,6 +65,11 @@ public class BoardManager : MonoBehaviour {
                     case 'S':   // Start
                         toInstantiate = StartBlock;
                         break;
+                    case 'f':
+                    case 'F':
+                        height = 0.0f;
+                        toInstantiate = FloorBlock;
+                        break;
                     case 'e':
                     case 'E':   // End
                         toInstantiate = EndBlock;
@@ -74,7 +81,7 @@ public class BoardManager : MonoBehaviour {
 
                 if (toInstantiate != null)
                 {
-                    GameObject instance = Instantiate(toInstantiate, new Vector3(x, 1.0f, z), Quaternion.identity) as GameObject;
+                    GameObject instance = Instantiate(toInstantiate, new Vector3(x, height, z), Quaternion.identity) as GameObject;
                     instance.transform.SetParent(boardHolder);
                 }
                 else
@@ -121,7 +128,7 @@ public class BoardManager : MonoBehaviour {
         else
             throw new System.Exception("Das Level konnte nicht richtig eingelesen werden. Versuchen Sie es erneut.");
 
-        LowerBoardSetup();
+        //LowerBoardSetup();
         UpperBoardSetup();
         InitializeList();
 
