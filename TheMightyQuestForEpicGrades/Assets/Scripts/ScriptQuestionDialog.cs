@@ -130,6 +130,15 @@ public class ScriptQuestionDialog : MonoBehaviour
     public void ShowPicture(int index)
     {
         // TODO : connect to ImagePopup
+        //ImagePopup imagePopup = ImagePopup.Instance();
+        //if (index > 0)
+        //{
+        //    imagePopup.ConfigureAndShow(q.Answers[index].AnswerText,imagePaths[index]);
+        //}
+        //else
+        //{
+        //    imagePopup.ConfigureAndShow(q.QuestionText,imagePaths[index]);
+        //}
         Debug.Log("Bild " + Path.GetFullPath(imagePaths[index]) + " anzeigen!");
     }
 
