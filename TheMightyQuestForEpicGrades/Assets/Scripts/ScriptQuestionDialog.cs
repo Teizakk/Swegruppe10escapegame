@@ -11,7 +11,6 @@ public class ScriptQuestionDialog : MonoBehaviour
     #region UnityObjects
     public Text TimerText;
     public List<GameObject> btnPictures;
-    private GameObject[] btnBild;
 
     #endregion
 
@@ -35,13 +34,6 @@ public class ScriptQuestionDialog : MonoBehaviour
         tippsShowed = 1;
         chosenAnswerIndex = 1;
         startTime = DateTime.Now;
-        btnBild = new GameObject[4]
-        {
-            btnPictures[0],
-            btnPictures[1],
-            btnPictures[2],
-            btnPictures[3]
-        };
 
         // Frage laden
         LoadQuestion();
@@ -61,7 +53,6 @@ public class ScriptQuestionDialog : MonoBehaviour
     // beantwortet die Frage
     public void AnswerQuestion()
     {
-
         if (AnswerCorrect())
         {
             endTime = DateTime.Now;
@@ -123,7 +114,6 @@ public class ScriptQuestionDialog : MonoBehaviour
         {
             Text lblTipp = GameObject.Find("lblTipp" + tippsShowed).GetComponent<Text>();
             Text outTipp = GameObject.Find("outTipp" + tippsShowed).GetComponent<Text>();
-
             // Tipp anzeigen
             lblTipp.enabled = true;
             outTipp.enabled = true;
@@ -136,40 +126,41 @@ public class ScriptQuestionDialog : MonoBehaviour
         }
     }
 
-    // zeigt Bild an
+    // zeigt Bild (ImagePopup) an
     public void ShowPicture(int index)
     {
+        // TODO : connect to ImagePopup
         Debug.Log("Bild " + Path.GetFullPath(imagePaths[index]) + " anzeigen!");
     }
 
     // Frage und Antworten in den Dialog laden
     void LoadQuestion()
     {
-        // Question = gameManager.questionController.getQuestion();
+        //q = QuestionController.GetInstance().GetQuestionNotInUse();
         q = new Question
         {
             QuestionText = "Was ist das Internet?",
             Difficulty = Difficulties.Easy,
             Level = 1,
-            ImagePath = "Assets/Pictures/Beispielbild.jpg",
+            ImagePath = Path.GetFullPath("Assets/ImagePopupV1/Data/Beispielbild.jpg"),
             Answers =
                 new List<Question.Answer>()
                 {
-                    new Question.Answer()
-                    {
-                        AnswerText = "Answer1",
-                        ImagePath = "Path1"
-                    },
-                    new Question.Answer()
-                    {
-                        AnswerText = "Answer2",
-                        ImagePath = "Path2"
-                    },
-                    new Question.Answer()
-                    {
-                        AnswerText = "Answer3",
-                        ImagePath = "Path3"
-                    },
+                        new Question.Answer()
+                        {
+                            AnswerText = "Ein Netz",
+                            ImagePath = "Path1"
+                        },
+                        new Question.Answer()
+                        {
+                            AnswerText = "Nur physikalisch vorhanden",
+                            ImagePath = "Path2"
+                        },
+                        new Question.Answer()
+                        {
+                            AnswerText = "Ein Netz von Netzen",
+                            ImagePath = "Path3"
+                        },
                 },
             CorrectAnswer = 3,
             Hints = new List<string> { "inter", "connected", "networks" }
@@ -187,25 +178,29 @@ public class ScriptQuestionDialog : MonoBehaviour
 
         // Antworten laden
         int i = 1;
+        Text outAnswer;
         foreach (var answer in q.Answers)
         {
-            GameObject.Find("outAnswer" + i).GetComponent<Text>().text = answer.AnswerText;
+            outAnswer = GameObject.Find("outAnswer" + i).GetComponent<Text>();
+            outAnswer.text = answer.AnswerText;
             imagePaths[i] = answer.ImagePath;
 
             // Bild vorhanden?
             if (!string.IsNullOrEmpty(imagePaths[i - 1]))
             {
                 // Button anzeigen
-                btnBild[i - 1].SetActive(true);
+                btnPictures[i - 1].SetActive(true);
             }
             i++;
         }
 
         // Tipps laden
         i = 1;
+        Text outTipp;
         foreach (var tipp in q.Hints)
         {
-            GameObject.Find("outTipp" + i).GetComponent<Text>().text = tipp;
+            outTipp = GameObject.Find("outTipp" + i).GetComponent<Text>();
+            outTipp.text = tipp;
             i++;
         }
 
