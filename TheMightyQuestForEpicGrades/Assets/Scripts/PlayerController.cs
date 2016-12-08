@@ -9,10 +9,11 @@ public class PlayerController : MonoBehaviour
     public float position_Z;
 
     private Rigidbody rb;
-
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.tag = "Player";
 
         //Setzen der Start-Position
         rb.MovePosition(new Vector3(position_X,0,position_Z));
