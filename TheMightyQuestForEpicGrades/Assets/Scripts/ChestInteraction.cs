@@ -8,7 +8,7 @@ public class ChestInteraction : MonoBehaviour
     private bool ChestIsOpen = false;
     private bool ChestIsLocked = false;
 
-    public void OnTriggerStay2D(Collider2D col)
+    public void OnTriggerStay(Collider col)
     {
         if (Input.GetKeyDown("e") && !ChestIsLocked) //col.gameObject.tag == "Player")
         {
@@ -21,7 +21,7 @@ public class ChestInteraction : MonoBehaviour
 
     public void OpenChest()
     {
-        
+        Debug.Log("derp");
         //Fragemenü aufrufen
         ChestIsOpen = false;
     }
