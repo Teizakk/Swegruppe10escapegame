@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class BoardManager : MonoBehaviour {
+public class BoardManager : MonoBehaviour
+{
 
     private Transform boardHolder;
     // TODO
@@ -18,6 +19,10 @@ public class BoardManager : MonoBehaviour {
     public GameObject PortalBlock;
     public GameObject StartBlock;
     public GameObject EndBlock;
+    [HideInInspector]
+    public Vector3 StartPosition;
+    [HideInInspector]
+    public Vector3 EndPosition;
 
     // Initialisiere die Liste mit den möglichen Positionen
     void InitializeList()
@@ -34,21 +39,21 @@ public class BoardManager : MonoBehaviour {
         }
     }
 
-    // Erstelle die Wände und die Objekte, die über dem Boden stehen
-    void UpperBoardSetup()
+    // Erstelle die Spielfläche
+    void BoardSetup()
     {
         // Um eine schöne Struktur zu wahren, werden alle Boardobjekte den Parent "Board" erhalten (boardHolder)
         boardHolder = new GameObject("Board").transform;
 
         GameObject toInstantiate = null;
-        
+
 
         for (int x = 0; x < max_x; ++x)
         {
             for (int z = 0; z < max_z; ++z)
             {
                 float height = 1.0f;
-                switch(levelData[x,z])
+                switch (levelData[x, z])
                 {
                     case '#':   // Wall
                         toInstantiate = WallBlock;
@@ -63,7 +68,10 @@ public class BoardManager : MonoBehaviour {
                         break;
                     case 's':
                     case 'S':   // Start
+                        StartPosition = new Vector3(x, height, z);
                         toInstantiate = StartBlock;
+                        GameObject startInst = Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject;
+                        startInst.transform.SetParent(boardHolder);
                         break;
                     case 'f':
                     case 'F':
@@ -72,7 +80,10 @@ public class BoardManager : MonoBehaviour {
                         break;
                     case 'e':
                     case 'E':   // End
+                        EndPosition = new Vector3(x, height, z);
                         toInstantiate = EndBlock;
+                        GameObject endInst = Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject;
+                        endInst.transform.SetParent(boardHolder);
                         break;
                     default:    // Sollte niemals aufgerufen werden
                         toInstantiate = null;
@@ -90,29 +101,6 @@ public class BoardManager : MonoBehaviour {
         }
     }
 
-    // Setze den Boden
-    void LowerBoardSetup()
-    {
-        // 64 Einheiten lang und 64 Einheiten breit
-        FloorBlock.transform.localScale = new Vector3(64.0f, 0.0f, 64.0f);
-        Instantiate(FloorBlock, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
-    }
-
-    // TODO
-    // Erhalte eine zufällige Position für eine Truhe
-    Vector3 RandomPosition()
-    {
-        return new Vector3();
-    }
-
-    // TODO
-    // Setze das Objekt (Truhe) an der RandomPosition
-    void LayoutObjectAtRandom(GameObject gameObj, int min, int max)
-    {
-
-    }
-
-    // TODO
     // Erstelle die Szene
     public void SetupScene(int level)
     {
@@ -128,10 +116,7 @@ public class BoardManager : MonoBehaviour {
         else
             throw new System.Exception("Das Level konnte nicht richtig eingelesen werden. Versuchen Sie es erneut.");
 
-        //LowerBoardSetup();
-        UpperBoardSetup();
+        BoardSetup();
         InitializeList();
-
-        
     }
 }
