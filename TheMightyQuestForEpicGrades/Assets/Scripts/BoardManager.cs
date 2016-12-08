@@ -18,6 +18,10 @@ public class BoardManager : MonoBehaviour {
     public GameObject PortalBlock;
     public GameObject StartBlock;
     public GameObject EndBlock;
+    [HideInInspector]
+    public Vector3 StartPosition;
+    [HideInInspector]
+    public Vector3 EndPosition;
 
     // Initialisiere die Liste mit den möglichen Positionen
     void InitializeList()
@@ -63,7 +67,10 @@ public class BoardManager : MonoBehaviour {
                         break;
                     case 's':
                     case 'S':   // Start
+                        StartPosition = new Vector3(x, height, z);
                         toInstantiate = StartBlock;
+                        GameObject startInstance = Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject;
+                        startInstance.transform.SetParent(boardHolder);
                         break;
                     case 'f':
                     case 'F':
@@ -72,7 +79,10 @@ public class BoardManager : MonoBehaviour {
                         break;
                     case 'e':
                     case 'E':   // End
+                        EndPosition = new Vector3(x, height, z);
                         toInstantiate = EndBlock;
+                        GameObject endInstance = Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject;
+                        endInstance.transform.SetParent(boardHolder);
                         break;
                     default:    // Sollte niemals aufgerufen werden
                         toInstantiate = null;
