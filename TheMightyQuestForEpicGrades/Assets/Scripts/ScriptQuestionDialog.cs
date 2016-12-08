@@ -15,6 +15,7 @@ public class ScriptQuestionDialog : MonoBehaviour
     #endregion
 
     #region Properties
+    private static ScriptQuestionDialog questionDialog;
     private int tippsShowed;
     private int chosenAnswerIndex;
     private DateTime startTime;
@@ -48,6 +49,18 @@ public class ScriptQuestionDialog : MonoBehaviour
         //string minutes = (mins < 10 ? "0" : "") + mins;
         //string seconds = ((timer % 60)).ToString("f0").PadLeft(2,'0');
         //TimerText.text = minutes + ":" + seconds;
+    }
+
+
+    public static ScriptQuestionDialog Instance()
+    {
+        if (!questionDialog)
+        {
+            questionDialog = FindObjectOfType(typeof(ScriptQuestionDialog)) as ScriptQuestionDialog;
+            if (!questionDialog)
+                Debug.LogError("Es muss ein aktives ScriptQuestionDialog Skript auf einem GameObject in der Scene existieren");
+        }
+        return questionDialog;
     }
 
     // beantwortet die Frage
@@ -130,15 +143,18 @@ public class ScriptQuestionDialog : MonoBehaviour
     public void ShowPicture(int index)
     {
         // TODO : connect to ImagePopup
-        //ImagePopup imagePopup = ImagePopup.Instance();
-        //if (index > 0)
-        //{
-        //    imagePopup.ConfigureAndShow(q.Answers[index].AnswerText,imagePaths[index]);
-        //}
-        //else
-        //{
-        //    imagePopup.ConfigureAndShow(q.QuestionText,imagePaths[index]);
-        //}
+        ImagePopup imagePopup = ImagePopup.Instance();
+        var popupController = GetComponent<PopupController>();
+        if (index > 0)
+        {
+            popupController.SetUpImagePopupAnswer(tippsShowed);
+            imagePopup.ConfigureAndShow(q.Answers[index].AnswerText, imagePaths[index]);
+        }
+        else
+        {
+            popupController.SetUpImagePopupAnswer(tippsShowed);
+            imagePopup.ConfigureAndShow(q.QuestionText, imagePaths[index]);
+        }
         Debug.Log("Bild " + Path.GetFullPath(imagePaths[index]) + " anzeigen!");
     }
 
