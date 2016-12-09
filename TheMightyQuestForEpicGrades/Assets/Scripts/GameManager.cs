@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance = null;
+    public static bool cheat = false;
     public BoardManager boardManager;
     private QuestionController qc { get; set; }
     private int level = 1;
