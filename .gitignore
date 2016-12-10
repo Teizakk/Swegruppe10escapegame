@@ -1,15 +1,30 @@
-# Persönlich hinzugefügt
-/Library/metadata/
-/Library/ScriptAssemblies/
-/Library/ShaderCache/
-/Library/shadercompiler-*
-/Temp/
-/obj/
-/Obj/
-/build/
-/Build/
-/builds/
-/Builds/
+# P E R S Ö N L I C H   H I N Z U G E F Ü G T
+
+# ORDNER
+
+/TheMightyQuestForEpicGrades/Library/metadata/
+/TheMightyQuestForEpicGrades/Library/ScriptAssemblies/
+/TheMightyQuestForEpicGrades/Library/ShaderCache/
+/TheMightyQuestForEpicGrades/Library/shadercompiler-*
+/TheMightyQuestForEpicGrades/Temp/
+/TheMightyQuestForEpicGrades/obj/
+/TheMightyQuestForEpicGrades/Obj/
+/TheMightyQuestForEpicGrades/build/
+/TheMightyQuestForEpicGrades/Build/
+/TheMightyQuestForEpicGrades/builds/
+/TheMightyQuestForEpicGrades/Builds/
+
+# DATEIEN
+
+#    Diese verursachen ab und zu Probleme
+/TheMightyQuestForEpicGrades/Library/CurrentLayout.dwlt
+/TheMightyQuestForEpicGrades/Library/assetDatabase3
+
+#    Diese haben für die andere Person keinen Mehrwert
+/TheMightyQuestForEpicGrades/Library/LastSceneManagerSetup.txt
+
+# Gerade nicht genutzt
+# *.meta --  im Moment auskommentiert (kann man sich noch überlegen)
 
 # Ich glaube die funktionieren so leider nicht
 /[Ll]ibrary/
