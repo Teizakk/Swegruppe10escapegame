@@ -1,15 +1,15 @@
 # Persönlich hinzugefügt
-/Library/metadata/*
-/Library/ScriptAssemblies/*
-/Library/ShaderCache/*
+/Library/metadata/
+/Library/ScriptAssemblies/
+/Library/ShaderCache/
 /Library/shadercompiler-*
-/Temp/*
-/obj/*
-/Obj/*
-/build/*
-/Build/*
-/builds/*
-/Builds/*
+/Temp/
+/obj/
+/Obj/
+/build/
+/Build/
+/builds/
+/Builds/
 
 # Ich glaube die funktionieren so leider nicht
 /[Ll]ibrary/
