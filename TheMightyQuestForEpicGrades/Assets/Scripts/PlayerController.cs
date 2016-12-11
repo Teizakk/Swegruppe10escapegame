@@ -80,8 +80,8 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         //Movement
-        float moveHorizontal = Input.GetAxis("Vertical");
-        float moveVertical = Input.GetAxis("Horizontal") * (-1);
+        float moveHorizontal = Input.GetAxis("Vertical") * (-1);
+        float moveVertical = Input.GetAxis("Horizontal");
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         rb.velocity = movement * speed;
     }
