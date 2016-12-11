@@ -18,7 +18,7 @@ public class HighscoreController : MonoBehaviour
     //Für Speichern
     public Text score;
     public Text zeit;
-    public Text name;
+    public Text playerName;
 
     //Für laden
     public Text p1;
@@ -111,7 +111,7 @@ public class HighscoreController : MonoBehaviour
         Highscore neu = new Highscore();
 
         //Felder haben den entsprechenden Tag bekommen
-        neu.name = name.text;
+        neu.name = playerName.text;
         neu.zeit = zeit.text;
         neu.score = score.text;
         Debug.Log("Werte gesetzt auf: " + neu.name + " " + neu.zeit + " " + neu.score);
@@ -135,7 +135,7 @@ public class HighscoreController : MonoBehaviour
     //        //erzeuge Labels an der stelle wo immoment die Textfelder stehen
     //        for (int i = 0; i < 10; i++)
     //        {
-    //            string str = platz + ". " + highscoreliste[i].name + "\t" + highscoreliste[i].score + "\t" + highscoreliste[i].zeit;
+    //            string str = platz + ". " + highscoreliste[i].playerName + "\t" + highscoreliste[i].score + "\t" + highscoreliste[i].zeit;
     //            GUI.Label(new Rect(x, y, width, height), str);
     //            platz++;
     //            y -= 28;
@@ -156,7 +156,7 @@ public class HighscoreController : MonoBehaviour
     //        //erzeuge Labels an der stelle wo immoment die Textfelder stehen
     //        for (int i = 0; i < anzahl; i++)
     //        {
-    //            string str = platz + ". " + highscoreliste[i].name + "\t" + highscoreliste[i].score + "\t" + highscoreliste[i].zeit;
+    //            string str = platz + ". " + highscoreliste[i].playerName + "\t" + highscoreliste[i].score + "\t" + highscoreliste[i].zeit;
     //            GUI.Label(new Rect(x, y, width, height), str);
     //            platz++;
     //            y -= 28;
