@@ -62,8 +62,8 @@ public class cheatmode : MonoBehaviour {
             {
 
                 Debug.Log("x");
-                GameManager.cheat = true;
-                if (GameManager.cheat == true)
+                //GameManager.cheat = true;
+                //if (GameManager.cheat == true)
                     Debug.Log("easy");
             } else
             {
