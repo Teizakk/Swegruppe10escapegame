@@ -49,36 +49,30 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(new Vector3(position_X, 1.0f, position_Z));
     }
 
-    //void OnCollisionStay(Collision other)
-    //{
-    //    if (other.gameObject.CompareTag("Chest") && Input.GetKeyDown("e"))
-    //    {
-    //        //öffnen der Truhe,Fragen laden
-    //        Debug.Log("Truhe öffnen");
-    //    }
-    //    else if (other.gameObject.CompareTag("PinkPortal") && Input.GetKeyDown("e"))// && Portalstein vorhanden)
-    //    {
-    //        PinkPortalSkript.Activated = true;
-    //        Debug.Log("PinkPortalSkript.Activated = " + PinkPortalSkript.Activated.ToString());
-    //    }
-    //    else if (other.gameObject.CompareTag("GreenPortal") && Input.GetKeyDown("e"))// && Portalstein vorhanden)
-    //    {
-    //        GreenPortalSkript.Activated = true;
-    //        Debug.Log("GreenPortalSkript.Activated = " + GreenPortalSkript.Activated.ToString());
-    //    }
-    //    else if (other.gameObject.CompareTag("BluePortal") && Input.GetKeyDown("e"))// && Portalstein vorhanden)
-    //    {
-    //        BluePortalSkript.Activated = true;
-    //        Debug.Log("BluePortalSkript.Activated = " + BluePortalSkript.Activated.ToString());
-    //    }
-    //}
-
-    int bla = 0;
-    void OnCollisionStay(Collision col)
+    private int DebugLogVar = 0;
+    void OnCollisionStay(Collision other)
     {
-        if (col.gameObject.CompareTag("Chest") && Input.GetKeyDown("e"))
+        DebugLogVar++;
+
+        if (other.gameObject.CompareTag("Chest") && Input.GetKeyDown("e"))
         {
-            UnityEngine.Debug.Log(bla++);
+            //öffnen der Truhe,Fragen laden
+            Debug.Log("Truhe öffnen (" + DebugLogVar + ")");
+        }
+        else if (other.gameObject.CompareTag("PinkPortal") && Input.GetKeyDown("e"))// && Portalstein vorhanden)
+        {
+            PinkPortalSkript.Activated = true;
+            Debug.Log("PinkPortalSkript.Activated = " + PinkPortalSkript.Activated.ToString() + " (" + DebugLogVar + ")");
+        }
+        else if (other.gameObject.CompareTag("GreenPortal") && Input.GetKeyDown("e"))// && Portalstein vorhanden)
+        {
+            GreenPortalSkript.Activated = true;
+            Debug.Log("GreenPortalSkript.Activated = " + GreenPortalSkript.Activated.ToString() + " (" + DebugLogVar + ")");
+        }
+        else if (other.gameObject.CompareTag("BluePortal") && Input.GetKeyDown("e"))// && Portalstein vorhanden)
+        {
+            BluePortalSkript.Activated = true;
+            Debug.Log("BluePortalSkript.Activated = " + BluePortalSkript.Activated.ToString() + " (" + DebugLogVar + ")");
         }
     }
 
