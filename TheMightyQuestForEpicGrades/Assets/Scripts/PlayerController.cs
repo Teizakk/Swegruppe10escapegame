@@ -80,9 +80,19 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         //Movement
-        float moveHorizontal = Input.GetAxis("Vertical");
-        float moveVertical = Input.GetAxis("Horizontal") * (-1);
+        float moveHorizontal = Input.GetAxis("Vertical") * (-1);
+        float moveVertical = Input.GetAxis("Horizontal");
+
+        //Gucken ob die kombinierte Bewegung von X und Z Achse über dem gesetzten Maximum von 1 liegt
+        float combindedSpeed = Mathf.Sqrt((moveHorizontal*moveHorizontal) + (moveVertical*moveVertical));
+        if ( combindedSpeed > 1.0f ) {
+            //Limitiert die Quadrate der Bewegungen so, dass maximal 1 als kombinierte Bewegung resultiert
+            moveHorizontal /= combindedSpeed;
+            moveVertical /= combindedSpeed;
+        }
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         rb.velocity = movement * speed;
+        //Debug Ausgabe zeigt Spielergeschwindigkeit
+        //Debug.Log(Mathf.Sqrt((moveHorizontal * moveHorizontal) + (moveVertical * moveVertical)));
     }
 }

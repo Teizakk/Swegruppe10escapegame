@@ -21,3 +21,5 @@ EditorBuildSettings:
     path: Assets/Scenes/NewQuestion.unity
   - enabled: 1
     path: Assets/Scenes/LoadGame.unity
+  - enabled: 1
+    path: Assets/Scenes/MainGame(MovingCamera).unity
