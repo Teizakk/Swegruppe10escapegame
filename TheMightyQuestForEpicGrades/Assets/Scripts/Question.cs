@@ -29,7 +29,14 @@ namespace Assets.Scripts
             {
                 get
                 {
-                    return Path.GetFullPath(_imgPath);
+                    if (!_imgPath.Equals(String.Empty))
+                    {
+                        return Path.GetFullPath(_imgPath);
+                    }
+                    else
+                    {
+                        return _imgPath;
+                    }
                 }
                 set
                 {
