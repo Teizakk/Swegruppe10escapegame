@@ -145,12 +145,12 @@ public class HighscoreController : MonoBehaviour
     {
         Highscore neu = new Highscore();
 
-<<<<<<< HEAD
+        //<<<<<<< HEAD
         //Felder haben den entsprechenden Tag bekommen
         neu.name = playerName.text;
-=======
-        neu.name = name.text;
->>>>>>> origin/Highscore2
+        //=======
+        //neu.name = name.text;
+        //>>>>>>> origin/Highscore2
         neu.zeit = zeit.text;
         neu.score = score.text;
         
@@ -161,7 +161,7 @@ public class HighscoreController : MonoBehaviour
         SceneManager.LoadScene(level);
     }
 
-<<<<<<< HEAD
+    //<<<<<<< HEAD
     //Labels auf Gui Highscoreboard
     //void OnGUI()
     //{
@@ -213,7 +213,7 @@ public class HighscoreController : MonoBehaviour
 
     //    }
     //}
-=======
+    //=======
     List<Highscore> InsertInto(List<Highscore> old, Highscore neu)
     {
         int stelle = 0;
@@ -223,7 +223,7 @@ public class HighscoreController : MonoBehaviour
             old.Add(neu);
             return old;
         }
->>>>>>> origin/Highscore2
+    //>>>>>>> origin/Highscore2
 
         int wert;
         int.TryParse(neu.score, out wert);
