@@ -15,39 +15,8 @@ public class cheatmode : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-     /*   if (Input.GetKeyDown("h"))
-        {
-            Debug.Log("h");
-            h = true;
-            
+     
 
-
-        }
-
-        if (Input.GetKeyDown("a"))
-        {
-            if (h == true)
-            {
-                Debug.Log("a");
-                a = true;
-            }
-
-
-        }
-
-        if (Input.GetKeyDown("x"))
-        {
-            if (h == true && a == true)
-            {
-                Debug.Log("x");
-                GameManager.cheat = true;
-                if (GameManager.cheat == true)
-                    Debug.Log("easy");
-            }
-
-    
-
-        }*/
         if (Input.anyKey) {
 
             if (Input.GetKey("h"))
@@ -69,7 +38,7 @@ public class cheatmode : MonoBehaviour {
             {
                 Debug.Log("false");
                 h = false;
-                a = true;
+                a = false;
             }
 
         }
