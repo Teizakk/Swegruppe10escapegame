@@ -148,7 +148,7 @@ public class ScriptQuestionDialog : MonoBehaviour
         popupController.usedQuestion = q;
         if (index > 0)
         {
-            popupController.SetUpImagePopupAnswer(tippsShowed);
+            popupController.SetUpImagePopupAnswer(tippsShowed,index);
         }
         else
         {
@@ -173,12 +173,12 @@ public class ScriptQuestionDialog : MonoBehaviour
                         new Question.Answer()
                         {
                             AnswerText = "Ein Netz",
-                            ImagePath = "Assets/ImagePopupV1/Data/Bild2.png"
+                            ImagePath = ""
                         },
                         new Question.Answer()
                         {
                             AnswerText = "Nur physikalisch vorhanden",
-                            ImagePath = ""
+                            ImagePath = "Assets/ImagePopupV1/Data/Bild2.png"
                         },
                         new Question.Answer()
                         {
