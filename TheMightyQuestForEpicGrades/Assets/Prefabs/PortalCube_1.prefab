@@ -25,7 +25,7 @@ GameObject:
   - 114: {fileID: 114000011572329662}
   m_Layer: 0
   m_Name: PortalCube_1
-  m_TagString: Untagged
+  m_TagString: PinkPortal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

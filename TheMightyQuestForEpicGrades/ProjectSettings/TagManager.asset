@@ -9,6 +9,9 @@ TagManager:
   - name
   - zeit
   - Chest
+  - PinkPortal
+  - BluePortal
+  - GreenPortal
   layers:
   - Default
   - TransparentFX

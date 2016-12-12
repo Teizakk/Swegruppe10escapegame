@@ -56,8 +56,10 @@ MonoBehaviour:
   WallBlock: {fileID: 1000010234473194, guid: 01e118575226cc740bc65b97dbba11cf, type: 2}
   FloorBlock: {fileID: 1000014227828250, guid: aef0c7a6bd80a2f409fa63c63bc706e9, type: 2}
   ChestBlock: {fileID: 1000012791200902, guid: 49550a0a1bc6b2a4399d3f7b5ff63f7b, type: 2}
-  PortalBlock: {fileID: 1000014181535220, guid: 23c4296eedaa69744b57307eae42e134,
-    type: 2}
+  PortalBlock:
+  - {fileID: 1000014181535220, guid: 23c4296eedaa69744b57307eae42e134, type: 2}
+  - {fileID: 1000012686282368, guid: 92b25693d5e24b04889065785e890e61, type: 2}
+  - {fileID: 1000010668390076, guid: eb879fc2a63785a49ae8ff87c4e33821, type: 2}
   StartBlock: {fileID: 1000010980092512, guid: 82c0c1c8a9703c346aaf17574ac33c46, type: 2}
   EndBlock: {fileID: 1000010201025734, guid: b2f56e2e30e988642bdae2de456aa972, type: 2}
   StartPosition: {x: 0, y: 0, z: 0}
