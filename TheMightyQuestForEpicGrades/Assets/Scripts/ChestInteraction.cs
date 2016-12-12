@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class ChestInteraction : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ChestInteraction : MonoBehaviour
     {
         if (Input.GetKeyDown("e") && !ChestIsLocked) //col.gameObject.tag == "Player")
         {
+            
             ChestIsOpen = true;
             OpenChest();
             ChestIsLocked = true; //Truhe abschließen
@@ -21,8 +23,9 @@ public class ChestInteraction : MonoBehaviour
 
     public void OpenChest()
     {
-        Debug.Log("derp");
+        SceneManager.LoadScene("NewQuestion");
         //Fragemenü aufrufen
         ChestIsOpen = false;
     }
+
 }
