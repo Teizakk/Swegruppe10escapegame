@@ -16,7 +16,7 @@ public class BoardManager : MonoBehaviour
     public GameObject WallBlock;
     public GameObject FloorBlock;
     public GameObject ChestBlock;
-    public GameObject PortalBlock;
+    public GameObject[] PortalBlock;
     public GameObject StartBlock;
     public GameObject EndBlock;
     [HideInInspector]
@@ -47,6 +47,7 @@ public class BoardManager : MonoBehaviour
 
         GameObject toInstantiate = null;
 
+        int portalNumber = 0;
 
         for (int x = 0; x < max_x; ++x)
         {
@@ -64,7 +65,7 @@ public class BoardManager : MonoBehaviour
                         break;
                     case 'p':
                     case 'P':   // Portal
-                        toInstantiate = PortalBlock;
+                        toInstantiate = PortalBlock[portalNumber++];
                         break;
                     case 's':
                     case 'S':   // Start
