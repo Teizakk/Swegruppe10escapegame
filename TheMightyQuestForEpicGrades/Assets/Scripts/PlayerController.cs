@@ -7,8 +7,8 @@ public class PlayerController : MonoBehaviour
 
     public float speed;
 
-    public float position_X;
-    public float position_Z;
+    [HideInInspector] public float position_X;
+    [HideInInspector] public float position_Z;
 
     private Rigidbody rb;
 
@@ -49,31 +49,36 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(new Vector3(position_X, 1.0f, position_Z));
     }
 
-    //void OnTriggerStay(Collider other)
+    //void OnCollisionStay(Collision other)
     //{
-    //    if (other.gameObject.CompareTag("Chest") && Input.GetKeyDown("E"))
+    //    if (other.gameObject.CompareTag("Chest") && Input.GetKeyDown("e"))
     //    {
     //        //öffnen der Truhe,Fragen laden
+    //        Debug.Log("Truhe öffnen");
     //    }
-    //    else if (other.gameObject.CompareTag("PinkPortal") && Input.GetKeyDown("E"))// && Portalstein vorhanden)
+    //    else if (other.gameObject.CompareTag("PinkPortal") && Input.GetKeyDown("e"))// && Portalstein vorhanden)
     //    {
     //        PinkPortalSkript.Activated = true;
+    //        Debug.Log("PinkPortalSkript.Activated = " + PinkPortalSkript.Activated.ToString());
     //    }
-    //    else if (other.gameObject.CompareTag("GreenPortal") && Input.GetKeyDown("E"))// && Portalstein vorhanden)
+    //    else if (other.gameObject.CompareTag("GreenPortal") && Input.GetKeyDown("e"))// && Portalstein vorhanden)
     //    {
     //        GreenPortalSkript.Activated = true;
+    //        Debug.Log("GreenPortalSkript.Activated = " + GreenPortalSkript.Activated.ToString());
     //    }
-    //    else if (other.gameObject.CompareTag("BluePortal") && Input.GetKeyDown("E"))// && Portalstein vorhanden)
+    //    else if (other.gameObject.CompareTag("BluePortal") && Input.GetKeyDown("e"))// && Portalstein vorhanden)
     //    {
     //        BluePortalSkript.Activated = true;
+    //        Debug.Log("BluePortalSkript.Activated = " + BluePortalSkript.Activated.ToString());
     //    }
     //}
 
-    void OnCollisionEnter(Collision col)
+    int bla = 0;
+    void OnCollisionStay(Collision col)
     {
-        if (col.gameObject.CompareTag("Chest"))
+        if (col.gameObject.CompareTag("Chest") && Input.GetKeyDown("e"))
         {
-            Debug.Log("Hit a chest");
+            UnityEngine.Debug.Log(bla++);
         }
     }
 
