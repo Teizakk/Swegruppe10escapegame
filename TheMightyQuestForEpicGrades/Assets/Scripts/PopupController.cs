@@ -18,7 +18,7 @@ public class PopupController : MonoBehaviour
     public void TestImagePopupRaw()
     {
         string display_text = "Dies ist eine Frage";
-        string image_path = "C:/Test/Beispielbild.png";
+        string image_path = "~/Assets/Samples+Placeholder/Beispielbid.png";
         string Hint1Text = "Ich bin Hinweis 1";
         string Hint2Text = "Ich bin Hinweis 2";
         string Hint3Text = "Ich bin Hinweis 3";
