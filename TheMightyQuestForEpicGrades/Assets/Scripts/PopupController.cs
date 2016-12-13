@@ -7,10 +7,10 @@ using Assets.Scripts;
 public class PopupController : MonoBehaviour
 {
     private ImagePopup _imagePopup;
-    public Question usedQuestion;
+    public Question usedQuestion { get; set; }
     private void Awake()
     {
-        Debug.Log("Awake on LauncherSkript called");
+        Debug.Log("Awake on PopupController called");
         _imagePopup = ImagePopup.Instance();
     }
 
@@ -46,20 +46,20 @@ public class PopupController : MonoBehaviour
         }
     }
 
-    public void SetUpImagePopupAnswer(int hintsToShow) {
+    public void SetUpImagePopupAnswer(int hintsToShow,int index) {
         switch (hintsToShow)
         {
             case 0:
-                _imagePopup.ConfigureAndShow(usedQuestion.Answers[0].AnswerText, usedQuestion.Answers[0].ImagePath);
+                _imagePopup.ConfigureAndShow(usedQuestion.Answers[index].AnswerText, usedQuestion.Answers[index].ImagePath);
                 break;
             case 1:
-                _imagePopup.ConfigureAndShow(usedQuestion.Answers[0].AnswerText, usedQuestion.Answers[0].ImagePath, usedQuestion.Hints[0]);
+                _imagePopup.ConfigureAndShow(usedQuestion.Answers[index].AnswerText, usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0]);
                 break;
             case 2:
-                _imagePopup.ConfigureAndShow(usedQuestion.Answers[0].AnswerText, usedQuestion.Answers[0].ImagePath, usedQuestion.Hints[0], usedQuestion.Hints[1]);
+                _imagePopup.ConfigureAndShow(usedQuestion.Answers[index].AnswerText, usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0], usedQuestion.Hints[1]);
                 break;
             case 3:
-                _imagePopup.ConfigureAndShow(usedQuestion.Answers[0].AnswerText, usedQuestion.Answers[0].ImagePath, usedQuestion.Hints[0], usedQuestion.Hints[1], usedQuestion.Hints[2]);
+                _imagePopup.ConfigureAndShow(usedQuestion.Answers[index].AnswerText, usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0], usedQuestion.Hints[1], usedQuestion.Hints[2]);
                 break;
         }
     }
