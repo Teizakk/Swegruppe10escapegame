@@ -143,12 +143,11 @@ public class ScriptQuestionDialog : MonoBehaviour
     // zeigt Bild (ImagePopup) an
     public void ShowPicture(int index)
     {
-        // TODO : connect to ImagePopup
-        var popupController = GetComponent<PopupController>();
+        var popupController = GameObject.Find("PopupController").GetComponent<PopupController>();
         popupController.usedQuestion = q;
         if (index > 0)
         {
-            popupController.SetUpImagePopupAnswer(tippsShowed,index);
+            popupController.SetUpImagePopupAnswer(tippsShowed,index-1);
         }
         else
         {
@@ -166,7 +165,7 @@ public class ScriptQuestionDialog : MonoBehaviour
             QuestionText = "Was ist das Internet?",
             Difficulty = Difficulties.Easy,
             Level = 1,
-            ImagePath = Path.GetFullPath("Assets/ImagePopupV1/Data/Beispielbild.png"),
+            ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
             Answers =
                 new List<Question.Answer>()
                 {
@@ -178,7 +177,7 @@ public class ScriptQuestionDialog : MonoBehaviour
                         new Question.Answer()
                         {
                             AnswerText = "Nur physikalisch vorhanden",
-                            ImagePath = "Assets/ImagePopupV1/Data/Bild2.png"
+                            ImagePath = "Assets/Samples+Placeholder/Bild2.png"
                         },
                         new Question.Answer()
                         {

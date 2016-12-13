@@ -50,16 +50,16 @@ public class PopupController : MonoBehaviour
         switch (hintsToShow)
         {
             case 0:
-                _imagePopup.ConfigureAndShow(usedQuestion.Answers[index-1].AnswerText, usedQuestion.Answers[index-1].ImagePath);
+                _imagePopup.ConfigureAndShow(usedQuestion.Answers[index].AnswerText, usedQuestion.Answers[index].ImagePath);
                 break;
             case 1:
-                _imagePopup.ConfigureAndShow(usedQuestion.Answers[index-1].AnswerText, usedQuestion.Answers[index-1].ImagePath, usedQuestion.Hints[0]);
+                _imagePopup.ConfigureAndShow(usedQuestion.Answers[index].AnswerText, usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0]);
                 break;
             case 2:
-                _imagePopup.ConfigureAndShow(usedQuestion.Answers[index-1].AnswerText, usedQuestion.Answers[index-1].ImagePath, usedQuestion.Hints[0], usedQuestion.Hints[1]);
+                _imagePopup.ConfigureAndShow(usedQuestion.Answers[index].AnswerText, usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0], usedQuestion.Hints[1]);
                 break;
             case 3:
-                _imagePopup.ConfigureAndShow(usedQuestion.Answers[index-1].AnswerText, usedQuestion.Answers[index-1].ImagePath, usedQuestion.Hints[0], usedQuestion.Hints[1], usedQuestion.Hints[2]);
+                _imagePopup.ConfigureAndShow(usedQuestion.Answers[index].AnswerText, usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0], usedQuestion.Hints[1], usedQuestion.Hints[2]);
                 break;
         }
     }
