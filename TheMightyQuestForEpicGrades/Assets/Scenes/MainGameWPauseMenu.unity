@@ -3513,7 +3513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 114000013148426976, guid: 8f5dd9e30899ae64da4ff6f576f18a63,
     type: 2}
-  playerController: {fileID: 114000013135823970, guid: a5c2d680a1ed9174cb3057d21615fc6e,
+  playerController: {fileID: 114000013135823970, guid: 1cd905b46974115458093773dc83a6bf,
     type: 2}
 --- !u!1001 &1623953468
 Prefab:
