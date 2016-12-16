@@ -24,9 +24,15 @@
 /TheMightyQuestForEpicGrades/Library/LastSceneManagerSetup.txt
 /TheMightyQuestForEpicGrades/Library/InspectorExpandedItems.asset
 /TheMightyQuestForEpicGrades/Library/expandedItems
+/TheMightyQuestForEpicGrades/Library/CurrentMaximizeLayout.dwlt
+
+# speichert nur die Version und wir haben eh alle unterschiedliche xD
+/TheMightyQuestForEpicGrades/Library/UnityAssemblies/version.txt
 
 # Gerade nicht genutzt
 # *.meta --  im Moment auskommentiert (kann man sich noch überlegen)
+
+
 
 # Ich glaube die funktionieren so leider nicht
 /[Ll]ibrary/

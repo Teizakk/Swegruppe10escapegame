@@ -2,29 +2,91 @@ Initialize engine version: 5.4.2f2 (b7e030c65c9b)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
-    Renderer: NVIDIA GeForce GT 740M (ID=0x1292)
-    Vendor:   NVIDIA
-    VRAM:     2020 MB
+    Renderer: Intel(R) HD Graphics 520 (ID=0x1916)
+    Vendor:   Intel
+    VRAM:     1205 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Lennart\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Lennart\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Lennart\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Lennart\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\Lennart\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\Lennart\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\Lennart\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\Lennart\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.081 seconds
-Platform assembly: C:\Users\Lennart\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\Lennart\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\Yannick\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Yannick\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Yannick\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Yannick\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Yannick\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Yannick\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Yannick\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Yannick\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Yannick\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\Newtonsoft.Json.dll (this message is harmless)
+Loading C:\Users\Yannick\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\Newtonsoft.Json.dll into Unity Child Domain
+- Completed reload, in  0.044 seconds
+Platform assembly: C:\Users\Yannick\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Yannick\Documents\GitHub\Swegruppe10escapegame\TheMightyQuestForEpicGrades\TheMightyQuestForEpicGrades_Data\Managed\System.dll (this message is harmless)
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.255738 ms
+UnloadTime: 1.294967 ms
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 248c -> priority: 1 
-Neues Spiel wurde gedrückt
+  Thread -> id: 1590 -> priority: 1 
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 5.555957 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 299.
+Total: 0.309322 ms (FindLiveObjects: 0.035949 ms CreateObjectMapping: 0.015406 ms MarkObjects: 0.230708 ms  DeleteObjects: 0.025283 ms)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.525809 ms
+
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 366.
+Total: 0.441268 ms (FindLiveObjects: 0.042665 ms CreateObjectMapping: 0.013431 ms MarkObjects: 0.340136 ms  DeleteObjects: 0.044640 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.316695 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 299.
+Total: 0.338556 ms (FindLiveObjects: 0.042665 ms CreateObjectMapping: 0.027653 ms MarkObjects: 0.240584 ms  DeleteObjects: 0.026468 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.469317 ms
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 234.
+Total: 0.286409 ms (FindLiveObjects: 0.035159 ms CreateObjectMapping: 0.009481 ms MarkObjects: 0.210955 ms  DeleteObjects: 0.030023 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.421516 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 299.
+Total: 0.334605 ms (FindLiveObjects: 0.022912 ms CreateObjectMapping: 0.026863 ms MarkObjects: 0.256781 ms  DeleteObjects: 0.026863 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.434157 ms
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 243.
+Total: 0.338951 ms (FindLiveObjects: 0.020542 ms CreateObjectMapping: 0.009876 ms MarkObjects: 0.278508 ms  DeleteObjects: 0.029628 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.526204 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 299.
+Total: 0.318408 ms (FindLiveObjects: 0.023307 ms CreateObjectMapping: 0.026468 ms MarkObjects: 0.240584 ms  DeleteObjects: 0.027258 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.566103 ms
+
+Unloading 11 unused Assets to reduce memory usage. Loaded Objects now: 246.
+Total: 0.323544 ms (FindLiveObjects: 0.051751 ms CreateObjectMapping: 0.009086 ms MarkObjects: 0.232288 ms  DeleteObjects: 0.029628 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.447194 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 336.
+Total: 0.376085 ms (FindLiveObjects: 0.068738 ms CreateObjectMapping: 0.013036 ms MarkObjects: 0.267842 ms  DeleteObjects: 0.025283 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.437713 ms
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 3445.
+Total: 0.618250 ms (FindLiveObjects: 0.179746 ms CreateObjectMapping: 0.082170 ms MarkObjects: 0.339741 ms  DeleteObjects: 0.016196 ms)
+
+Instanz wurde verknuepft
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
