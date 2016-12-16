@@ -12,6 +12,7 @@ TagManager:
   - PinkPortal
   - BluePortal
   - GreenPortal
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
