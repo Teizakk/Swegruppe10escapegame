@@ -2,11 +2,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class PauseMenuScript : MonoBehaviour {
 
     private const float _FADE_FACTOR = 0.04f;
 
+    #region variablen
     //private bool switches
     private bool _gamePaused;
     private bool _visible;
@@ -19,17 +22,15 @@ public class PauseMenuScript : MonoBehaviour {
     public GameObject LoadMenu;
     public GameObject CloseWarning;
 
-    [Header("Pausenmenü Buttons")]
-    public Button SpielFortsetzenButton;
-    public Button SpielSpeichernButton;
-    public Button SpielLadenButton;
-    public Button ZurückZumHauptmenüButton;
+    private Button SpielFortsetzenButton;
 
     private CanvasGroup _pauseMenuCanvasGroup;
     private CanvasGroup _saveMenuCanvasGroup;
     private CanvasGroup _loadMenuCanvasGroup;
     private CanvasGroup _closeWarningCanvasGroup;
+    #endregion
 
+    #region Sonstige Funktionen
     //Funktion um von außen zu fragen, ob das Spiel pausiert ist (für die Controls zb)
     public bool IsGamePaused() {
         return _gamePaused;
@@ -39,29 +40,13 @@ public class PauseMenuScript : MonoBehaviour {
         PlayerController.instance.switchControlBlock();
     }
 
-    // Use this for initialization
-    void Start () {
-        //Das Pausenmenü selbst
-	    gameObject.SetActive(true);
-        _pauseMenuCanvasGroup = gameObject.GetComponent<CanvasGroup>();
-        _pauseMenuCanvasGroup.alpha = 0;
-        _pauseMenuCanvasGroup.interactable = false;
-        //Das Speichernmenü
-        SaveMenu.SetActive(false);
-        _saveMenuCanvasGroup = SaveMenu.GetComponent<CanvasGroup>();
-        _saveMenuCanvasGroup.alpha = 0;
-        _saveMenuCanvasGroup.interactable = false;
-        //Das Lademenü
-        LoadMenu.SetActive(false);
-        _loadMenuCanvasGroup = LoadMenu.GetComponent<CanvasGroup>();
-        _loadMenuCanvasGroup.alpha = 0;
-        _loadMenuCanvasGroup.interactable = false;
-        //Die Schließen-Warnung
-        CloseWarning.SetActive(false);
-        _closeWarningCanvasGroup = CloseWarning.GetComponent<CanvasGroup>();
-        _closeWarningCanvasGroup.alpha = 0;
-        _closeWarningCanvasGroup.interactable = false;
+    public void ContinueGame() {
+        _fadingOut = true;
+        //Trick um das gedrückte Aussehen des Buttons zu beheben, wenn man erneut ins Pausenmenü geht (und in der Zwischenzeit nichts "gedrückt" wurde)
+        SpielFortsetzenButton.enabled = false;
+        SpielFortsetzenButton.enabled = true;
     }
+    #endregion
 
     #region show&hide submenus
     //Speichermenü anzeigen / ausblenden
@@ -105,8 +90,34 @@ public class PauseMenuScript : MonoBehaviour {
     }
     #endregion
 
-    public void ContinueGame() {
-        _fadingOut = true;
+    #region Unity Call-Backs
+    // Use this for initialization
+    void Start () {
+        //Das Pausenmenü selbst
+	    gameObject.SetActive(true);
+        _pauseMenuCanvasGroup = gameObject.GetComponent<CanvasGroup>();
+        _pauseMenuCanvasGroup.alpha = 0;
+        _pauseMenuCanvasGroup.interactable = false;
+        //Das Speichernmenü
+        SaveMenu.SetActive(false);
+        _saveMenuCanvasGroup = SaveMenu.GetComponent<CanvasGroup>();
+        _saveMenuCanvasGroup.alpha = 0;
+        _saveMenuCanvasGroup.interactable = false;
+        //Das Lademenü
+        LoadMenu.SetActive(false);
+        _loadMenuCanvasGroup = LoadMenu.GetComponent<CanvasGroup>();
+        _loadMenuCanvasGroup.alpha = 0;
+        _loadMenuCanvasGroup.interactable = false;
+        //Die Schließen-Warnung
+        CloseWarning.SetActive(false);
+        _closeWarningCanvasGroup = CloseWarning.GetComponent<CanvasGroup>();
+        _closeWarningCanvasGroup.alpha = 0;
+        _closeWarningCanvasGroup.interactable = false;
+        //Der eine Button den man für den kleinen Trick in der ContinueGame Funktion braucht
+        var buttonList = FindObjectsOfType<Button>().ToList();
+        SpielFortsetzenButton = buttonList.FindLast(button => button.name.Equals("ContinueGameButton")); //evtl. Fehleranfällig
+        if (SpielFortsetzenButton == null) Debug.LogError("Der Spielfortsetzen Button wurde nicht unter dem Namen 'ContinueGameButton' gefunden - falsch benannt?");
+        buttonList.Clear();
     }
 
     // Update is called once per frame
@@ -130,7 +141,7 @@ public class PauseMenuScript : MonoBehaviour {
                 //Wenn es die volle Sichtbarkeit erreicht hat
                 if (mainCanvasGroup.alpha.Equals(1.0f)) { //... sonst Verlust der Genauigkeit? ist das hässlich...
                     _visible = true;
-                    mainCanvasGroup.interactable = true;
+                    mainCanvasGroup.interactable = true; //lässt Button beim reinfaden verblassen
                     _fadingIn = false;
                     _gamePaused = true;
                     blockAndUnblockMovement();
@@ -159,4 +170,5 @@ public class PauseMenuScript : MonoBehaviour {
             }
         }
 	}
+    #endregion
 }

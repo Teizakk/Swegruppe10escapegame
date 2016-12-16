@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692504, g: 0.4967869, b: 0.57508504, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692492, g: 0.4967869, b: 0.57508546, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1543,6 +1543,21 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 0.78431374
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d29f56592784b94da6ed44ea2462178, type: 2}
   m_IsPrefabParent: 0
@@ -1574,12 +1589,6 @@ MonoBehaviour:
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
---- !u!114 &868878321 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
-    type: 2}
-  m_PrefabInternal: {fileID: 868878317}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &908741678
 GameObject:
   m_ObjectHideFlags: 0
@@ -2554,6 +2563,21 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 0.78431374
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d29f56592784b94da6ed44ea2462178, type: 2}
   m_IsPrefabParent: 0
@@ -2585,12 +2609,6 @@ MonoBehaviour:
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
---- !u!114 &1128885584 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
-    type: 2}
-  m_PrefabInternal: {fileID: 1128885580}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1133702608
 GameObject:
   m_ObjectHideFlags: 0
@@ -3028,10 +3046,6 @@ MonoBehaviour:
   SaveMenu: {fileID: 1438437481}
   LoadMenu: {fileID: 908741678}
   CloseWarning: {fileID: 1040278959}
-  SpielFortsetzenButton: {fileID: 1791281055}
-  SpielSpeichernButton: {fileID: 868878321}
-  SpielLadenButton: {fileID: 1128885584}
-  "Zur\xFCckZumHauptmen\xFCButton": {fileID: 1776795334}
 --- !u!225 &1393525276
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3935,6 +3949,26 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 0.5019608
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d29f56592784b94da6ed44ea2462178, type: 2}
   m_IsPrefabParent: 0
@@ -3966,12 +4000,6 @@ MonoBehaviour:
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
---- !u!114 &1776795334 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
-    type: 2}
-  m_PrefabInternal: {fileID: 1776795330}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &1791281051
 Prefab:
   m_ObjectHideFlags: 0
@@ -4118,6 +4146,21 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 0.78431374
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d29f56592784b94da6ed44ea2462178, type: 2}
   m_IsPrefabParent: 0
@@ -4149,12 +4192,6 @@ MonoBehaviour:
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
---- !u!114 &1791281055 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
-    type: 2}
-  m_PrefabInternal: {fileID: 1791281051}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1815753145
 GameObject:
   m_ObjectHideFlags: 0
