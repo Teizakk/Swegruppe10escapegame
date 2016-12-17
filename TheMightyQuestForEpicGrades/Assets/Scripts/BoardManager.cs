@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 public class BoardManager : MonoBehaviour
 {
-
     private Transform boardHolder;
-    // TODO
-    // Überlegen, ob man die gridPositions tatsächlich braucht?
+    // TODO Überlegen, ob man die gridPositions tatsächlich braucht?
     private List<Vector3> gridPositions = new List<Vector3>();
     private char[,] levelData = null;
     private int max_x = 0;

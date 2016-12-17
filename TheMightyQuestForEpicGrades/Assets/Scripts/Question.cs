@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Assets.Scripts
 {
-    public enum Difficulties { Easy, Medium, Hard }
+    public enum Difficulties { Easy = 1, Medium = 2, Hard = 3 }
     [Serializable]
     public class Question
     {

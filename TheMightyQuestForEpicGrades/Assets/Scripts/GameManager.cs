@@ -20,13 +20,13 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         boardManager = GetComponent<BoardManager>();
         DontDestroyOnLoad(instance);
-        // TODO
-        // InitGame darf erst geschehen, wenn das eigentliche Spiel gestartet wird
+        // TODO InitGame darf erst geschehen, wenn das eigentliche Spiel gestartet wird
         InitGame();
     }
 
     void InitGame()
     {
+        //TODO Das muss auch noch differntiert werden...
         boardManager.SetupScene(1);
     }
 
