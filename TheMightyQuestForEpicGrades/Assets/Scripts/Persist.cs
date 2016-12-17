@@ -13,8 +13,6 @@ namespace Assets.Scripts
 
         public static void saveOld<T>(T state)
         {
-            QuestionController q = QuestionController.GetInstance();
-            q.
             JsonSerializerSettings s = new JsonSerializerSettings();
             s.TypeNameHandling = TypeNameHandling.Auto;
             File.WriteAllText("~" + DateTime.Now.Ticks, JsonConvert.SerializeObject(state, Formatting.Indented, s));
