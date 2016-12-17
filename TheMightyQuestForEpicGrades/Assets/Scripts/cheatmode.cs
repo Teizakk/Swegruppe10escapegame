@@ -1,51 +1,53 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngineInternal;
 
 public class cheatmode : MonoBehaviour {
 
-    private bool h = false;
-    private bool a= false;
+    private GameStateHolder GameStateHolderInstance;
 
-    
+    private bool h;
+    private bool a;
 
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-     
+    private bool HaxActivated = false; //TODO Ausweichlösung - bis wir uns unten geeinigt haben
 
-        if (Input.anyKey) {
+    public void Start() {
+        GameStateHolderInstance = GameStateHolder.Instance();
+    }
 
-            if (Input.GetKey("h"))
-            {
+    // Update is called once per frame
+    private void Update() {
+        if (Input.anyKey)
+            if (Input.GetKey("h")) {
                 h = true;
                 Debug.Log("h");
-            } else if (Input.GetKey("a") && h == true)
-            {
+            }
+            else if (Input.GetKey("a") && h) {
                 a = true;
                 Debug.Log("a");
-            } else if (Input.GetKey("x") && h == true && a == true)
-            {
-
+            }
+            else if (Input.GetKey("x") && h && a) {
                 Debug.Log("x");
-                //GameManager.cheat = true;
-                //if (GameManager.cheat == true)
-                    Debug.Log("easy");
-            } else
-            {
-                Debug.Log("false");
+
+                //TODO hier folgt der TripleKill...
+                if (HaxActivated) {
+                    Debug.Log("Cheatmode deactivated");
+                    HaxActivated = false;
+                    GameManager.cheat = false;
+                    GameStateHolderInstance.GameStateObject.LevelState.Cheatmode = false;
+                }
+                else {
+                    Debug.Log("Cheatmode activated");
+                    HaxActivated = true;
+                    GameManager.cheat = true;
+                    GameStateHolderInstance.GameStateObject.LevelState.Cheatmode = true;
+                }
                 h = false;
                 a = false;
             }
-
-        }
-
-        
-
-       
-
+            else {
+                //Debug.Log("false");
+                h = false;
+                a = false;
+            }
     }
 }
