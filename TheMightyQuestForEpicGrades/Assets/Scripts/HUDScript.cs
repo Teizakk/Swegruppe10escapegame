@@ -6,10 +6,6 @@ using UnityEngine.UI;
 
 public class HUDScript : MonoBehaviour {
 
-    enum difficulties {
-       Easy = 1, Medium = 2, Hard = 3
-    }
-
     #region HUDIcons
     public RawImage[] hearts = new RawImage[7];
     public RawImage[] hints = new RawImage[5];
@@ -24,7 +20,6 @@ public class HUDScript : MonoBehaviour {
     public Text scoreDisplay;
     #endregion
 
-
     private int maxLives;
     private int numberOfLives;
     private int numberOfHints;
@@ -37,13 +32,13 @@ public class HUDScript : MonoBehaviour {
     public void FirstSetUpHUD(int difficulty) {
         //Je nach Schwierigkeit die Werte setzen
         switch (difficulty) {
-            case (int)difficulties.Easy:
+            case (int)Assets.Scripts.Difficulties.Easy:
                 numberOfLives = maxLives = 7;
                 break;
-            case (int)difficulties.Medium:
+            case (int)Assets.Scripts.Difficulties.Medium:
                 numberOfLives = maxLives = 5;
                 break;
-            case (int)difficulties.Hard:
+            case (int)Assets.Scripts.Difficulties.Hard:
                 numberOfLives = maxLives = 3;
                 break;
             default:
@@ -186,7 +181,5 @@ public class HUDScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	    //Anzeige Logik hier hin verschieben? oder ist das gut so, weil es Abfragen spart?
-        
-
 	}
 }
