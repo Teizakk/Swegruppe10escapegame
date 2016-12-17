@@ -16,7 +16,7 @@ public class cheatmode : MonoBehaviour {
 
     // Update is called once per frame
     private void Update() {
-        if (Input.anyKey)
+        if (Input.anyKey) {
             if (Input.GetKey("h")) {
                 h = true;
                 Debug.Log("h");
@@ -45,9 +45,10 @@ public class cheatmode : MonoBehaviour {
                 a = false;
             }
             else {
-                //Debug.Log("false");
+                Debug.Log("false Key");
                 h = false;
                 a = false;
             }
+        }
     }
 }
