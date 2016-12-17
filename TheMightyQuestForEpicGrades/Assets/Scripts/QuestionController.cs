@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Assets.Scripts
 {
-    class QuestionController
+    public class QuestionController
     {
         private List<Question> Questions { get; set; }
         private static readonly QuestionController qc = new QuestionController();
@@ -39,13 +39,13 @@ namespace Assets.Scripts
 
         }
 
-        void setQuestions(List<Question> qs)
+        public void setQuestions(List<Question> qs)
         {
             this.Questions = qs;
         }
         /// <exception cref="IndexOutOfRangeException">Es wurde keine unbenutze Frage gefunden</exception>
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
-        Question GetQuestionNotInUse()
+        public Question GetQuestionNotInUse()
         {
             try
             {
@@ -65,7 +65,7 @@ namespace Assets.Scripts
         }
         /// <exception cref="IndexOutOfRangeException">Es wurde keine unbenutze Frage gefunden</exception>
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
-        Question GetQuestionNotInUse(Difficulties d)
+        public Question GetQuestionNotInUse(Difficulties d)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace Assets.Scripts
         }
         /// <exception cref="IndexOutOfRangeException">Es wurde keine unbenutze Frage gefunden</exception>
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
-        Question GetQuestionNotInUse(int level)
+        public Question GetQuestionNotInUse(int level)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace Assets.Scripts
         }
         /// <exception cref="IndexOutOfRangeException">Es wurde keine unbenutze Frage gefunden</exception>
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
-        Question GetQuestionNotInUse(int level, Difficulties d)
+        public Question GetQuestionNotInUse(int level, Difficulties d)
         {
             try
             {
@@ -127,7 +127,7 @@ namespace Assets.Scripts
         }
         /// <exception cref="IndexOutOfRangeException">Es wurde keine Frage gefunden</exception>
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
-        Question GetQuestion()
+        public Question GetQuestion()
         {
             try
             {
@@ -142,7 +142,7 @@ namespace Assets.Scripts
         }
         /// <exception cref="IndexOutOfRangeException">Es wurde keine Fragen gefunden mit angegebenem Index</exception>
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
-        Question GetQuestion(int index)
+        public Question GetQuestion(int index)
         {
             try
             {
@@ -155,7 +155,7 @@ namespace Assets.Scripts
             }
         }
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
-        IList<Question> GetQuestions()
+        public IList<Question> GetQuestions()
         {
             return Questions;
         }

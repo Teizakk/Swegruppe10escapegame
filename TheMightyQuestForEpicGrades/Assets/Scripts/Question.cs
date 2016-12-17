@@ -21,6 +21,7 @@ namespace Assets.Scripts
         public int CorrectAnswer { get; set; }
         public TimeSpan QuestionDuration { get; set; }
 
+        [Serializable]
         public class Answer
         {
             public String AnswerText { get; set; }
