@@ -1,39 +1,48 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System;
+using UnityEngine;
 
 public class ModuleLoader {
-    private List<string> module = new List<string>();
+    private readonly List<string> module = new List<string>();
 
-    public ModuleLoader(string dateiname)
-    {
+    public ModuleLoader(string dateiname) {
         module.Clear();
-
-        try
-        {
+        try {
             if (dateiname != null)
-            {
-                using (StreamReader streamReader = new StreamReader(dateiname))
-                {
+                using (var streamReader = new StreamReader(dateiname)) {
                     string line;
                     while ((line = streamReader.ReadLine()) != null)
-                    {
                         module.Add(line);
-                    }
                 }
-            }
             else Debug.LogError("Dateiname muss gesetzt werden!");
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             Debug.LogError(e);
         }
     }
 
-    public string[] getModules()
-    {
+    public string[] getModules() {
         return module.ToArray();
+    }
+
+    public bool SaveNewModule(string dateiname, string newModuleName) {
+        try
+        {
+            if (File.Exists(dateiname)) {
+                using (var myStreamWriter = new StreamWriter(dateiname, true)) { //true = append
+                    myStreamWriter.WriteLine(newModuleName);
+                }
+                return true;
+            }
+            else {
+                Debug.LogError("Module Savefile existiert nicht!");
+                return false;
+            }
+        }
+        catch (Exception e) {
+            Debug.LogError(e);
+            return false;
+        }
     }
 }
