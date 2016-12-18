@@ -13,6 +13,7 @@ public class GameState {
     public class Preselectives {
         public int Difficulty { get; set; }
         public string Modul { get; set; } //imo fehleranfällig, mal gucken ob wir damit durchkommen
+        public string PlayerName { get; set; }
         }
 
     [Serializable]
@@ -46,7 +47,7 @@ public class GameState {
 
     #endregion
 
-    //Kontruktor
+    //Konstruktor
     public GameState() {
         GameOptions = new Preselectives();
         LevelState = new CurrentLevelState();

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ public class ModuleController : MonoBehaviour {
 
     public Dropdown difficultyDropdown;
     public Dropdown moduleDropdown;
+    public InputField playerName;
 
     public string Dateiname;
 
@@ -30,6 +32,14 @@ public class ModuleController : MonoBehaviour {
     public void SetGameOptionsInGameState() {
         GameStateHolder.Instance().GameStateObject.GameOptions.Difficulty = difficultyDropdown.value + 1; //+ 1 weil Easy = 1, Medium = 2, ... usw
         GameStateHolder.Instance().GameStateObject.GameOptions.Modul = moduleDropdown.options[moduleDropdown.value].text; //Hier könnte man auch mit Value implementieren, allerdings würde dann ein ändern der Modulliste die Savegames schrotten.
+        var setPlayerName = playerName.text;
+        //wenn nicht gesetzt = Anonymus
+        if (String.IsNullOrEmpty(setPlayerName)) {
+            GameStateHolder.Instance().GameStateObject.GameOptions.PlayerName = "Anonymous";
+        }
+        else {
+            GameStateHolder.Instance().GameStateObject.GameOptions.PlayerName = playerName.text;
+        }
     }
 
     public void SaveNewModule(string newModuleName) {
