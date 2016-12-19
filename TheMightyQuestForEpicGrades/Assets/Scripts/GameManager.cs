@@ -18,9 +18,7 @@ public class GameManager : MonoBehaviour
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-
         boardManager = GetComponent<BoardManager>();
-
         DontDestroyOnLoad(instance);
         // TODO
         // InitGame darf erst geschehen, wenn das eigentliche Spiel gestartet wird
@@ -42,7 +40,7 @@ public class GameManager : MonoBehaviour
         qc = QuestionController.GetInstance();
     }
 
-    QuestionController QuestionControllerInstance()
+    public QuestionController QuestionControllerInstance()
     {
         return qc;
     }
