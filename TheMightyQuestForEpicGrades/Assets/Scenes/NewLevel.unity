@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37356448, g: 0.3811204, b: 0.35887685, a: 1}
+  m_IndirectSpecularColor: {r: 0.37356392, g: 0.38112, b: 0.35887662, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -628,7 +628,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1991431687}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -914,7 +914,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2125384590}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2019,7 +2019,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2084263320}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 685bcdaa89f7b7a4e86456f357fa39ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d74aef95946a434183690243df74ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BrowseButton: {fileID: 1357997012}
@@ -2027,7 +2027,7 @@ MonoBehaviour:
   CheckButton: {fileID: 2068940618}
   RefreshButton: {fileID: 1124229630}
   BackButton: {fileID: 1830002949}
-  FileTextPrefab: {fileID: 1000013092694884, guid: 12b6049a60f399442bb5b849c2621409,
+  FileTextPrefab: {fileID: 1000013092694884, guid: 92880b74865fe524a82390baf4e17968,
     type: 2}
 --- !u!4 &2084263322
 Transform:
