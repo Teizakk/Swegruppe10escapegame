@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.CompilerServices;
+using Assets.Scripts;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,8 +13,10 @@ public class PlayerController : MonoBehaviour
 
     public float speed;
 
-    [HideInInspector] public float position_X;
-    [HideInInspector] public float position_Z;
+    [HideInInspector]
+    public float position_X;
+    [HideInInspector]
+    public float position_Z;
 
     private Rigidbody rb;
 
@@ -41,7 +47,8 @@ public class PlayerController : MonoBehaviour
         return instance;
     }
 
-    public void switchControlBlock() {
+    public void switchControlBlock()
+    {
         controlsBlocked = !controlsBlocked;
         //Debug Ausgabe
         Debug.Log(controlsBlocked ? "Controls are now blocked" : "Controls are now enabled");
@@ -59,11 +66,45 @@ public class PlayerController : MonoBehaviour
     void OnCollisionStay(Collision other)
     {
         DebugLogVar++;
-        if (!controlsBlocked) {
+        if (!controlsBlocked)
+        {
             if (other.gameObject.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E))
             {
                 //öffnen der Truhe,Fragen laden
                 Debug.Log("Truhe öffnen (" + DebugLogVar + ")");
+                
+                var questionDialog = GameObject.Find("QuestionDialog").GetComponent<ScriptQuestionDialog>();
+
+                Question question = new Question
+                {
+                    QuestionText = "Was ist das Internet?",
+                    Difficulty = Difficulties.Easy,
+                    Level = 1,
+                    ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
+                    Answers =
+                new List<Question.Answer>()
+                {
+                        new Question.Answer()
+                        {
+                            AnswerText = "Ein Netz",
+                            ImagePath = ""
+                        },
+                        new Question.Answer()
+                        {
+                            AnswerText = "Nur physikalisch vorhanden",
+                            ImagePath = "Assets/Samples+Placeholder/Bild2.png"
+                        },
+                        new Question.Answer()
+                        {
+                            AnswerText = "Ein Netz von Netzen",
+                            ImagePath = ""
+                        },
+                },
+                    CorrectAnswer = 3,
+                    Hints = new List<string> { "inter", "connected", "networks" }
+                };
+
+                questionDialog.ShowQuestion(question);
             }
             else if (other.gameObject.CompareTag("PinkPortal") && Input.GetKeyDown(KeyCode.E))// && Portalstein vorhanden)
             {
@@ -85,7 +126,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!controlsBlocked) {
+        if (!controlsBlocked)
+        {
             //Movement
             float moveHorizontal = Input.GetAxis("Vertical") * (-1);
             float moveVertical = Input.GetAxis("Horizontal");
