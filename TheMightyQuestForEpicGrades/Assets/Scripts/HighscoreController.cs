@@ -36,17 +36,17 @@ public class HighscoreController : MonoBehaviour
     List<Highscore> highscoreliste = new List<Highscore>();
 
     // Use this for initialization
-    //Start ruft on Gui auf wenn man im Highscoreboard ist (hoffentlich :S)
+    //nur beim Highscoreboard genutzt
     void Start()
     {
 
 
-        //if(Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory()) != null)
-        //        {
-                         //highscoreliste = Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory());
-        //        }
-       
-        
+        //if (Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory()) != null)
+        //{
+        //    highscoreliste = Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory());
+        //}
+
+
         if (Application.loadedLevelName == "Highscore")
         {
             //Wenn Liste voll ist
@@ -64,19 +64,19 @@ public class HighscoreController : MonoBehaviour
                 p10.text = "10. " + highscoreliste[9].name + "\t" + highscoreliste[9].score + "\t" + highscoreliste[9].zeit;
             }
             //Es git Einträge Liste ist aber nicht voll
-            else if (highscoreliste.Count >0)
+            else if (highscoreliste.Count > 0)
             {
                 int anzahl = highscoreliste.Count;
                 int i = 0;
-                for (; i<anzahl;i++)
+                for (; i < anzahl; i++)
                 {
                     if (i == 0)
                         p1.text = "1. " + highscoreliste[0].name + "\t" + highscoreliste[0].score + "\t" + highscoreliste[0].zeit;
-                    if(i==1)
+                    if (i == 1)
                         p2.text = "2. " + highscoreliste[1].name + "\t" + highscoreliste[1].score + "\t" + highscoreliste[1].zeit;
-                    if(i==2)
+                    if (i == 2)
                         p3.text = "3. " + highscoreliste[2].name + "\t" + highscoreliste[2].score + "\t" + highscoreliste[2].zeit;
-                    if(i==3)
+                    if (i == 3)
                         p4.text = "4. " + highscoreliste[3].name + "\t" + highscoreliste[3].score + "\t" + highscoreliste[3].zeit;
                     if (i == 4)
                         p5.text = "5. " + highscoreliste[4].name + "\t" + highscoreliste[4].score + "\t" + highscoreliste[4].zeit;
@@ -92,7 +92,7 @@ public class HighscoreController : MonoBehaviour
                         p10.text = "10. " + highscoreliste[9].name + "\t" + highscoreliste[9].score + "\t" + highscoreliste[9].zeit;
                 }
                 //Liste ist leer, es gibt keien Einträge
-                for(;i<10;i++)
+                for (; i < 10; i++)
                 {
                     if (i == 0)
                         p1.text = "1. XX\t\tXX\t\tXX";
@@ -127,10 +127,11 @@ public class HighscoreController : MonoBehaviour
                 p7.text = "7. XX\t\tXX\t\tXX";
                 p8.text = "8. XX\t\tXX\t\tXX";
                 p9.text = "9. XX\t\tXX\t\tXX";
-                p10.text = "10. XX\t\tXX\t\tXX";                
+                p10.text = "10. XX\t\tXX\t\tXX";
             }
         }
-    }
+ }
+
 
     // Update is called once per frame
     void Update()
@@ -138,82 +139,43 @@ public class HighscoreController : MonoBehaviour
        
     }
 
-    
+
 
     //Speichern eines Highscores EndOFGame
+    //beim klicken auf Hinzufügen 
     public void NextWindowOnClick(int level)
     {
-        Highscore neu = new Highscore();
+        if (Application.loadedLevelName == "InsertHighscoreEndOFGame")
+        {
+            //if (Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory()) != null)
+            //{
+            //    highscoreliste = Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory());
+            //}
+            //else fall kommt jetzt
+            //{
+                highscoreliste = new List<Highscore>();
+            //}
+           
+            Highscore neu = new Highscore();
 
-        //<<<<<<< HEAD
-        //Felder haben den entsprechenden Tag bekommen
-        neu.name = playerName.text;
-        //=======
-        //neu.name = name.text;
-        //>>>>>>> origin/Highscore2
-        neu.zeit = zeit.text;
-        neu.score = score.text;
-        
-       
-        highscoreliste = InsertInto(highscoreliste, neu);
-        
-        //Persist.save<List<Highscore>>(highscoreliste);
-        SceneManager.LoadScene(level);
-    }
+            //<<<<<<< HEAD
+            //Felder haben den entsprechenden Tag bekommen
+            neu.name = playerName.text;
+            //=======
+            //neu.name = name.text;
+            //>>>>>>> origin/Highscore2
+            neu.zeit = zeit.text;
+            neu.score = score.text;
 
-    //<<<<<<< HEAD
-    //Labels auf Gui Highscoreboard
-    //void OnGUI()
-    //{
-    //    if (highscoreliste.Count >= 10)
-    //    {
-    //        int x = 17;
-    //        int y = 138;
-    //        int height = 20;
-    //        int width = 505;
-    //        int platz = 1;
 
-    //        //erzeuge Labels an der stelle wo immoment die Textfelder stehen
-    //        for (int i = 0; i < 10; i++)
-    //        {
-    //            string str = platz + ". " + highscoreliste[i].playerName + "\t" + highscoreliste[i].score + "\t" + highscoreliste[i].zeit;
-    //            GUI.Label(new Rect(x, y, width, height), str);
-    //            platz++;
-    //            y -= 28;
-    //        }
+            highscoreliste = InsertInto(highscoreliste, neu);
+            //Persist.save<List<Highscore>>(highscoreliste);
+            SceneManager.LoadScene(level);
+        }
+}
 
-    //    }
-    //    else
-    //    {
-    //        int anzahl = highscoreliste.Count;
-    //        int j = 10 - anzahl;
 
-    //        int x = 17;
-    //        int y = 138;
-    //        int height = 20;
-    //        int width = 505;
-    //        int platz = 1;
 
-    //        //erzeuge Labels an der stelle wo immoment die Textfelder stehen
-    //        for (int i = 0; i < anzahl; i++)
-    //        {
-    //            string str = platz + ". " + highscoreliste[i].playerName + "\t" + highscoreliste[i].score + "\t" + highscoreliste[i].zeit;
-    //            GUI.Label(new Rect(x, y, width, height), str);
-    //            platz++;
-    //            y -= 28;
-    //        }
-
-    //        for (int k = 0; k < anzahl; k++)
-    //        {
-    //            string str = platz + ". ";
-    //            GUI.Label(new Rect(x, y, width, height), str);
-    //            platz++;
-    //            y -= 28;
-    //        }
-
-    //    }
-    //}
-    //=======
     List<Highscore> InsertInto(List<Highscore> old, Highscore neu)
     {
         int stelle = 0;
