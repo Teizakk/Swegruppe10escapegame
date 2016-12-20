@@ -50,8 +50,8 @@ namespace Assets.Scripts
             try
             {
                 System.Random rand = new System.Random();
-                var q = Questions.Where(x => !x.inUse).ToList()[rand.Next(Questions.Count)];
-                q.inUse = true;
+                var q = Questions.Where(x => !x.Used).ToList()[rand.Next(Questions.Count)];
+                q.Used = true;
                 return q;
             }
             catch (IndexOutOfRangeException e)
@@ -70,8 +70,8 @@ namespace Assets.Scripts
             try
             {
                 System.Random rand = new System.Random();
-                var q = Questions.Where(x => !x.inUse && x.Difficulty == d).ToList()[rand.Next(Questions.Count)];
-                q.inUse = true;
+                var q = Questions.Where(x => !x.Used && x.Difficulty == d).ToList()[rand.Next(Questions.Count)];
+                q.Used = true;
                 return q;
             }
             catch (IndexOutOfRangeException e)
@@ -90,8 +90,8 @@ namespace Assets.Scripts
             try
             {
                 System.Random rand = new System.Random();
-                var q = Questions.Where(x => !x.inUse && x.Level == level).ToList()[rand.Next(Questions.Count)];
-                q.inUse = true;
+                var q = Questions.Where(x => !x.Used && x.Level == level).ToList()[rand.Next(Questions.Count)];
+                q.Used = true;
                 return q;
             }
 
@@ -111,8 +111,8 @@ namespace Assets.Scripts
             try
             {
                 System.Random rand = new System.Random();
-                var q = Questions.Where(x => !x.inUse && x.Level == level && x.Difficulty == d).ToList()[rand.Next(Questions.Count)];
-                q.inUse = true;
+                var q = Questions.Where(x => !x.Used && x.Level == level && x.Difficulty == d).ToList()[rand.Next(Questions.Count)];
+                q.Used = true;
                 return q;
             }
             catch (IndexOutOfRangeException e)

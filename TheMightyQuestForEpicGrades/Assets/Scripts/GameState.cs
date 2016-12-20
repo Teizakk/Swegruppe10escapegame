@@ -12,13 +12,13 @@ public class GameState {
     [Serializable]
     public class Preselectives {
         public int Difficulty { get; set; }
-        public string Modul { get; set; } //imo fehleranfällig, mal gucken ob wir damit durchkommen
+        public string Modul { get; set; } //imo fehleranfällig, mal gucken ob wir damit durchkommen (sollte aber ok sein, weil in der Frage das Modul auch als String gespeichert ist)
         public string PlayerName { get; set; }
         }
 
     [Serializable]
     public class CurrentLevelState {
-        //Die genutzte Leveldatei
+        //Die genutzte Leveldatei TODO eine Pfadangabe oder sogar der Index müsste reichen, allerdings sind dann Savegames broken, wenn die Leveldateien nicht mehr übereinstimmen
         public string Level { get; set; }
         //Die aktuelle Stufe bzw das Level im Spieldurchgang
         public int Stage { get; set; }
