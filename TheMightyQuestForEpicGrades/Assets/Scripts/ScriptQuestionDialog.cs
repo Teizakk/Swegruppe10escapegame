@@ -64,7 +64,7 @@ public class ScriptQuestionDialog : MonoBehaviour
     {
         if (!questionDialog)
         {
-            questionDialog = FindObjectOfType(typeof(ScriptQuestionDialog)) as ScriptQuestionDialog;
+            questionDialog = GameObject.Find("QuestionDialog").GetComponent<ScriptQuestionDialog>();
             if (!questionDialog)
                 Debug.LogError("Es muss ein aktives ScriptQuestionDialog Skript auf einem GameObject in der Scene existieren");
         }
@@ -88,16 +88,14 @@ public class ScriptQuestionDialog : MonoBehaviour
 
         // QuestionDialog anzeigen
         questionDialogPopup.SetActive(true);
-        _questionDialogCanvasGroup = questionDialogPopup.GetComponent<CanvasGroup>();
-        _questionDialogCanvasGroup.alpha = 1.0f;
-        _questionDialogCanvasGroup.interactable = true;
     }
 
-    public void CloseQuestion()
+    void CloseQuestion()
     {
-        _questionDialogCanvasGroup.alpha = 0.0f;
-        _questionDialogCanvasGroup.interactable = false;
         questionDialogPopup.SetActive(false);
+
+        // die erste Antwort auswählen
+        blockAndUnblockMovement();
     }
 
     // zeigt PopUp mit Text an für Frage richtig/falsch
@@ -105,14 +103,10 @@ public class ScriptQuestionDialog : MonoBehaviour
     {
         popupText.text = text;
         popup.SetActive(true);
-        _popupCanvasGroup.alpha = 1.0f;
-        _popupCanvasGroup.interactable = true;
     }
 
     public void HidePopup()
     {
-        _popupCanvasGroup.alpha = 0.0f;
-        _popupCanvasGroup.interactable = false;
         popup.SetActive(false);
         // und Frage schliessen
         CloseQuestion();

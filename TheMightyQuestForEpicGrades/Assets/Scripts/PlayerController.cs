@@ -72,8 +72,8 @@ public class PlayerController : MonoBehaviour
             {
                 //öffnen der Truhe,Fragen laden
                 Debug.Log("Truhe öffnen (" + DebugLogVar + ")");
-                
-                var questionDialog = GameObject.Find("QuestionDialog").GetComponent<ScriptQuestionDialog>();
+
+                var questionDialog = ScriptQuestionDialog.Instance();
 
                 Question question = new Question
                 {
