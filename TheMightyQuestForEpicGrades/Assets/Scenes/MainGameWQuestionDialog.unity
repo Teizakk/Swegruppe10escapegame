@@ -628,7 +628,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 265, y: -34.95019}
+  m_AnchoredPosition: {x: 265.00015, y: -34.950256}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &21772896
@@ -1743,7 +1743,6 @@ RectTransform:
   m_Children:
   - {fileID: 1899433133}
   - {fileID: 299056830}
-  - {fileID: 543538370}
   m_Father: {fileID: 76446383}
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3631,12 +3630,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 543538368}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -775.7075, y: -445.7241, z: 0}
+  m_LocalPosition: {x: -775.7075, y: -432.22415, z: 0}
   m_LocalScale: {x: 2.462564, y: 2.462564, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 238406128}
-  m_RootOrder: 2
+  m_Father: {fileID: 1899433133}
+  m_RootOrder: 5
 --- !u!1001 &549703642
 Prefab:
   m_ObjectHideFlags: 0
@@ -6231,6 +6230,8 @@ MonoBehaviour:
   questionDialogPopup: {fileID: 238406127}
   popupText: {fileID: 466211705}
   outQuestion: {fileID: 1668479554}
+  tglAnswer1: {fileID: 21772897}
+  toggleGroup: {fileID: 543538369}
   outAnswer:
   - {fileID: 534563372}
   - {fileID: 214203876}
@@ -7981,6 +7982,7 @@ RectTransform:
   - {fileID: 14374887}
   - {fileID: 1209859114}
   - {fileID: 1981048013}
+  - {fileID: 543538370}
   m_Father: {fileID: 238406128}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}

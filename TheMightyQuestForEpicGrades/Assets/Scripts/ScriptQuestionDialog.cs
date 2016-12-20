@@ -14,6 +14,8 @@ public class ScriptQuestionDialog : MonoBehaviour
     public GameObject questionDialogPopup;
     public Text popupText;
     public Text outQuestion;
+    public Toggle tglAnswer1;
+    public ToggleGroup toggleGroup;
     public List<Text> outAnswer;
     public List<Text> lblTipp;
     public List<Text> outTipp;
@@ -49,7 +51,8 @@ public class ScriptQuestionDialog : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-       
+        // ToggleGroup initialisieren
+        toggleGroup.RegisterToggle(tglAnswer1);
     }
 
     //Update is called once per frame
@@ -92,9 +95,21 @@ public class ScriptQuestionDialog : MonoBehaviour
 
     void CloseQuestion()
     {
+        // die erste Antwort auswählen
+        toggleGroup.ActiveToggles().FirstOrDefault().isOn = false;
+        tglAnswer1.isOn = true;
+        toggleGroup.NotifyToggleOn(tglAnswer1);
+
+        // QuestionDialog schliessen
         questionDialogPopup.SetActive(false);
 
-        // die erste Antwort auswählen
+        // Tipps zurücksetzen
+        for (int i = 0; i < lblTipp.Count; i++)
+        {
+            lblTipp[i].enabled = false;
+            outTipp[i].enabled = false;
+        }
+        
         blockAndUnblockMovement();
     }
 
