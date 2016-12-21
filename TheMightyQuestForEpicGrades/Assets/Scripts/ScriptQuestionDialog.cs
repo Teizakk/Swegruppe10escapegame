@@ -10,8 +10,16 @@ public class ScriptQuestionDialog : MonoBehaviour
 {
     #region UnityObjects
     public Text TimerText;
+    public GameObject popup;
+    public GameObject questionDialogPopup;
+    public Text popupText;
+    public Text outQuestion;
+    public Toggle tglAnswer1;
+    public ToggleGroup toggleGroup;
+    public List<Text> outAnswer;
+    public List<Text> lblTipp;
+    public List<Text> outTipp;
     public List<GameObject> btnPictures;
-
     #endregion
 
     #region Properties
@@ -25,19 +33,26 @@ public class ScriptQuestionDialog : MonoBehaviour
     private static Question q;
     #endregion
 
+    #region Popup Variablen
+
+    private CanvasGroup _questionDialogCanvasGroup;
+    private CanvasGroup _popupCanvasGroup;
+    #endregion
+    //"Nachrichten"-Funktion an PlayerController
+    public void blockAndUnblockMovement()
+    {
+        PlayerController.instance.switchControlBlock();
+    }
+
+
     private int punkte;
 
 
     // Use this for initialization
     void Start()
     {
-        // Werte initialisieren
-        tippsShowed = 0;
-        chosenAnswerIndex = 1;
-        startTime = DateTime.Now;
-
-        // Frage laden
-        LoadQuestion();
+        // ToggleGroup initialisieren
+        toggleGroup.RegisterToggle(tglAnswer1);
     }
 
     //Update is called once per frame
@@ -45,10 +60,6 @@ public class ScriptQuestionDialog : MonoBehaviour
     {
         usedTime = TimeSpan.FromTicks(DateTime.Now.Ticks - startTime.Ticks);
         TimerText.text = String.Format("{0:hh\\:mm\\:ss\\:ff}", usedTime);
-        //int mins = (int) timer/60;
-        //string minutes = (mins < 10 ? "0" : "") + mins;
-        //string seconds = ((timer % 60)).ToString("f0").PadLeft(2,'0');
-        //TimerText.text = minutes + ":" + seconds;
     }
 
 
@@ -56,11 +67,64 @@ public class ScriptQuestionDialog : MonoBehaviour
     {
         if (!questionDialog)
         {
-            questionDialog = FindObjectOfType(typeof(ScriptQuestionDialog)) as ScriptQuestionDialog;
+            questionDialog = GameObject.Find("QuestionDialog").GetComponent<ScriptQuestionDialog>();
             if (!questionDialog)
                 Debug.LogError("Es muss ein aktives ScriptQuestionDialog Skript auf einem GameObject in der Scene existieren");
         }
         return questionDialog;
+    }
+
+    public void ShowQuestion(Question question)
+    {
+        blockAndUnblockMovement();
+
+        Debug.Log("Frage anzeigen");
+        q = question;
+
+        // Werte initialisieren
+        tippsShowed = 0;
+        chosenAnswerIndex = 1;
+        startTime = DateTime.Now;
+
+        // Frage in die Felder laden
+        LoadQuestion();
+
+        // QuestionDialog anzeigen
+        questionDialogPopup.SetActive(true);
+    }
+
+    void CloseQuestion()
+    {
+        // die erste Antwort auswählen
+        toggleGroup.ActiveToggles().FirstOrDefault().isOn = false;
+        tglAnswer1.isOn = true;
+        toggleGroup.NotifyToggleOn(tglAnswer1);
+
+        // QuestionDialog schliessen
+        questionDialogPopup.SetActive(false);
+
+        // Tipps zurücksetzen
+        for (int i = 0; i < lblTipp.Count; i++)
+        {
+            lblTipp[i].enabled = false;
+            outTipp[i].enabled = false;
+        }
+        
+        blockAndUnblockMovement();
+    }
+
+    // zeigt PopUp mit Text an für Frage richtig/falsch
+    public void ShowPopup(string text)
+    {
+        popupText.text = text;
+        popup.SetActive(true);
+    }
+
+    public void HidePopup()
+    {
+        popup.SetActive(false);
+        // und Frage schliessen
+        CloseQuestion();
     }
 
     // beantwortet die Frage
@@ -72,7 +136,7 @@ public class ScriptQuestionDialog : MonoBehaviour
             usedTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
             Debug.Log("Frage korrekt beantwortet!");
             // Popup anzeigen
-
+            ShowPopup("Frage korrekt beantwortet!");
 
             // Punkte addieren
             switch (q.Difficulty)
@@ -94,6 +158,7 @@ public class ScriptQuestionDialog : MonoBehaviour
         }
         else
         {
+            ShowPopup("Frage wurde falsch beantwortet!");
             Debug.Log("Frage wurde falsch beantwortet!");
             Debug.Log("Leben - 1");
             // gameManager.Leben--
@@ -129,11 +194,9 @@ public class ScriptQuestionDialog : MonoBehaviour
             tippsShowed++;
             // gameManager.Hintsteine--
 
-            Text lblTipp = GameObject.Find("lblTipp" + tippsShowed).GetComponent<Text>();
-            Text outTipp = GameObject.Find("outTipp" + tippsShowed).GetComponent<Text>();
             // Tipp anzeigen
-            lblTipp.enabled = true;
-            outTipp.enabled = true;
+            lblTipp[tippsShowed - 1].enabled = true;
+            outTipp[tippsShowed - 1].enabled = true;
 
             Debug.Log("Hintstein eingesetzt!");
             Debug.Log("Tipp" + tippsShowed + " wurde angezeigt");
@@ -147,7 +210,7 @@ public class ScriptQuestionDialog : MonoBehaviour
         popupController.usedQuestion = q;
         if (index > 0)
         {
-            popupController.SetUpImagePopupAnswer(tippsShowed,index-1);
+            popupController.SetUpImagePopupAnswer(tippsShowed, index - 1);
         }
         else
         {
@@ -159,45 +222,44 @@ public class ScriptQuestionDialog : MonoBehaviour
     // Frage und Antworten in den Dialog laden
     void LoadQuestion()
     {
-        //q = QuestionController.GetInstance().GetQuestionNotInUse();
-        q = new Question
-        {
-            QuestionText = "Was ist das Internet?",
-            Difficulty = Difficulties.Easy,
-            Level = 1,
-            ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
-            Answers =
-                new List<Question.Answer>()
-                {
-                        new Question.Answer()
-                        {
-                            AnswerText = "Ein Netz",
-                            ImagePath = ""
-                        },
-                        new Question.Answer()
-                        {
-                            AnswerText = "Nur physikalisch vorhanden",
-                            ImagePath = "Assets/Samples+Placeholder/Bild2.png"
-                        },
-                        new Question.Answer()
-                        {
-                            AnswerText = "Ein Netz von Netzen",
-                            ImagePath = ""
-                        },
-                },
-            CorrectAnswer = 3,
-            Hints = new List<string> { "inter", "connected", "networks" }
-        };
+        //q = new Question
+        //{
+        //    QuestionText = "Was ist das Internet?",
+        //    Difficulty = Difficulties.Easy,
+        //    Level = 1,
+        //    ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
+        //    Answers =
+        //        new List<Question.Answer>()
+        //        {
+        //                new Question.Answer()
+        //                {
+        //                    AnswerText = "Ein Netz",
+        //                    ImagePath = ""
+        //                },
+        //                new Question.Answer()
+        //                {
+        //                    AnswerText = "Nur physikalisch vorhanden",
+        //                    ImagePath = "Assets/Samples+Placeholder/Bild2.png"
+        //                },
+        //                new Question.Answer()
+        //                {
+        //                    AnswerText = "Ein Netz von Netzen",
+        //                    ImagePath = ""
+        //                },
+        //        },
+        //    CorrectAnswer = 3,
+        //    Hints = new List<string> { "inter", "connected", "networks" }
+        //};
 
         // Frage laden
-        GameObject.Find("outQuestion").GetComponent<Text>().text = q.QuestionText;
+        outQuestion.text = q.QuestionText;
 
 
         imagePaths = new string[q.Answers.Count + 1];
 
         // Bildpfad zu Frage
         imagePaths[0] = q.ImagePath;
-        
+
         // Bild vorhanden?
         if (!string.IsNullOrEmpty(imagePaths[0]) && File.Exists(Path.GetFullPath(imagePaths[0])))
         {
@@ -207,11 +269,9 @@ public class ScriptQuestionDialog : MonoBehaviour
 
         // Antworten laden
         int i = 1;
-        Text outAnswer;
         foreach (var answer in q.Answers)
         {
-            outAnswer = GameObject.Find("outAnswer" + i).GetComponent<Text>();
-            outAnswer.text = answer.AnswerText;
+            outAnswer[i - 1].text = answer.AnswerText;
             imagePaths[i] = answer.ImagePath;
             // Bild vorhanden?
             if (!string.IsNullOrEmpty(imagePaths[i]) && File.Exists(Path.GetFullPath(imagePaths[i])))
@@ -224,12 +284,10 @@ public class ScriptQuestionDialog : MonoBehaviour
         }
 
         // Tipps laden
-        i = 1;
-        Text outTipp;
+        i = 0;
         foreach (var tipp in q.Hints)
         {
-            outTipp = GameObject.Find("outTipp" + i).GetComponent<Text>();
-            outTipp.text = tipp;
+            outTipp[i].text = tipp;
             i++;
         }
 
