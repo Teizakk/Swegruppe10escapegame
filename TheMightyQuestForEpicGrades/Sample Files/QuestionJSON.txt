@@ -1,18 +1,44 @@
-﻿{
-  "Answers": {
-    "Answer1": "ImagePath1",
-    "Answer2": "ImagePath2",
-    "Answer3": "ImagePath3"
-  },
-  "QuestionText": "Test",
-  "ImagePath": "Test",
-  "Hints": [
-    "Hint 1",
-    "Hint 2",
-    "Hint 3"
-  ],
-  "Difficulty": 0,
-  "Modul": "ADS",
-  "inUse"": "true",
-  "Level": "5"
-}
+﻿[
+	{
+	  "Answers": {
+		"Answer1": "ImagePath1",
+		"Answer2": "ImagePath2",
+		"Answer3": "ImagePath3"
+	  },
+	  "QuestionText": "Test",
+	  "ImagePath": "Test",
+	  "Hints": [
+		"Hint 1",
+		"Hint 2",
+		"Hint 3"
+	  ],
+	  "Difficulty": 0,
+	  "Modul": "ADS",
+	  "inUse": true,
+	  "Level": 5
+	},
+	{
+	  "QuestionText" : "Was ist das Internet?",
+	  "ImagePath" : "Assets/Samples+Placeholder/Beispielbild.png",
+	  "Difficulty" : 1,
+	  "Level" : 1,
+	  "inUse" : false,
+	  "Modul" : "DNIS",
+	  "Anwers" : [
+		  {
+			"AnswerText" : "Ein Netz",
+			"ImagePath" : ""
+		  },
+		  {
+			"AnswerText" : "Nur physikalisch vorhanden",
+			"ImagePath" : "Assets/Samples+Placeholder/Bild2.png"
+		  },
+		  {
+			"AnswerText" : "Ein Netz von Netzen",
+			"ImagePath" : ""
+		  }
+	  ],
+	  "CorrectAnswer" : 3,
+	  "Hints" : ["inter","connected","networks"]
+	}
+]

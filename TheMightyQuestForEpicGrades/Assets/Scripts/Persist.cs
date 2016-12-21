@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -57,5 +58,18 @@ namespace Assets.Scripts
             return new List<string>();
         }
 
+        public static List<Question> LoadQuestions(string fileName)
+        {
+            var _path = Path.GetFullPath("Sample Files");
+            try
+            {
+                return JsonConvert.DeserializeObject<List<Question>>(_path + fileName + ".txt");
+            }
+            catch (FileNotFoundException e)
+            {
+                Debug.Log("Datei '" + _path + fileName + "nicht gefunden!");
+            }
+            return null;
+        }
     }
 }

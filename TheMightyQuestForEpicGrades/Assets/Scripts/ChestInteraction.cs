@@ -6,26 +6,30 @@ using UnityEngine.SceneManagement;
 
 public class ChestInteraction : MonoBehaviour
 {
-    private bool ChestIsOpen = false;
+    //private bool ChestIsOpen = false;
     private bool ChestIsLocked = false;
 
-    public void OnTriggerStay(Collider col)
+    public bool IsLocked()
     {
-        if (Input.GetKeyDown("e") && !ChestIsLocked) //col.gameObject.tag == "Player")
-        {
+        return ChestIsLocked;
+    }
+    //public void OnTriggerStay(Collider col)
+    //{
+    //    if (Input.GetKeyDown("e") && !ChestIsLocked) //col.gameObject.tag == "Player")
+    //    {
             
-            ChestIsOpen = true;
-            OpenChest();
-            ChestIsLocked = true; //Truhe abschließen
-            Destroy(gameObject);//Lässt Truhe verschwinden
-        }
-    }
+    //        ChestIsOpen = true;
+    //        OpenChest();
+    //        ChestIsLocked = true; //Truhe abschließen
+    //        Destroy(gameObject);//Lässt Truhe verschwinden
+    //    }
+    //}
 
-    public void OpenChest()
-    {
-        SceneManager.LoadScene("NewQuestion");
-        //Fragemenü aufrufen
-        ChestIsOpen = false;
-    }
+    //public void OpenChest()
+    //{
+    //    SceneManager.LoadScene("NewQuestion");
+    //    //Fragemenü aufrufen
+    //    ChestIsOpen = false;
+    //}
 
 }

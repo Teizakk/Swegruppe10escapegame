@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.CompilerServices;
 using Assets.Scripts;
 
 public class PlayerController : MonoBehaviour
@@ -72,39 +69,18 @@ public class PlayerController : MonoBehaviour
             {
                 //öffnen der Truhe,Fragen laden
                 Debug.Log("Truhe öffnen (" + DebugLogVar + ")");
-
-                var questionDialog = ScriptQuestionDialog.Instance();
-
-                Question question = new Question
+                var chest = other.gameObject.GetComponent<ChestInteraction>();
+                Debug.Log("Chest:" + chest.IsLocked());
+                var qc = QuestionController.GetInstance();
+                Debug.Log("qc: " + qc);
+                var question = qc.GetQuestionNotInUse(1);
+                Debug.Log(question.QuestionText);
+                // letzte Frage falsch beantwortet?
+                if (!chest.IsLocked())
                 {
-                    QuestionText = "Was ist das Internet?",
-                    Difficulty = Difficulties.Easy,
-                    Level = 1,
-                    ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
-                    Answers =
-                new List<Question.Answer>()
-                {
-                        new Question.Answer()
-                        {
-                            AnswerText = "Ein Netz",
-                            ImagePath = ""
-                        },
-                        new Question.Answer()
-                        {
-                            AnswerText = "Nur physikalisch vorhanden",
-                            ImagePath = "Assets/Samples+Placeholder/Bild2.png"
-                        },
-                        new Question.Answer()
-                        {
-                            AnswerText = "Ein Netz von Netzen",
-                            ImagePath = ""
-                        },
-                },
-                    CorrectAnswer = 3,
-                    Hints = new List<string> { "inter", "connected", "networks" }
-                };
-
-                questionDialog.ShowQuestion(question);
+                    var questionDialog = ScriptQuestionDialog.Instance();
+                    questionDialog.ShowQuestion(question);
+                }
             }
             else if (other.gameObject.CompareTag("PinkPortal") && Input.GetKeyDown(KeyCode.E))// && Portalstein vorhanden)
             {

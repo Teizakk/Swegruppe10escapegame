@@ -13,7 +13,7 @@ namespace Assets.Scripts
         // Use this for initialization
         private QuestionController()
         {
-
+            Questions = Persist.LoadQuestions("QuestionJSON");
         }
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
         public static QuestionController GetInstance()
