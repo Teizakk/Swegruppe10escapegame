@@ -1,10 +1,8 @@
 ﻿using Assets.Models;
 using UnityEngine;
 
-namespace Assets.Scripts.FeatureScripts
-{
-    public class GameStateHolder : MonoBehaviour
-    {
+namespace Assets.Scripts.FeatureScripts {
+    public class GameStateHolder : MonoBehaviour {
         //Singleton instance
         private static GameStateHolder gameStateHolderObject;
 
@@ -12,14 +10,11 @@ namespace Assets.Scripts.FeatureScripts
         public GameState GameStateObject;
 
         //Sollte im Hauptmenü initialisiert werden.
-        public void Start()
-        {
-            if (gameStateHolderObject == null)
-            {
+        public void Start() {
+            if (gameStateHolderObject == null) {
                 gameStateHolderObject = this;
             }
-            else if (gameStateHolderObject != this)
-            {
+            else if (gameStateHolderObject != this) {
                 Destroy(gameObject);
                 return; //um sicher zu gehen, dass nicht weiter ausgeführt wird...
             }
@@ -35,10 +30,8 @@ namespace Assets.Scripts.FeatureScripts
         }
 
         //modifiziertes Singleton-Pattern (um von außen leicht an das GameState Objekt zu kommen)
-        public static GameStateHolder Instance()
-        {
-            if (!gameStateHolderObject)
-            {
+        public static GameStateHolder Instance() {
+            if (!gameStateHolderObject) {
                 gameStateHolderObject = FindObjectOfType(typeof(GameStateHolder)) as GameStateHolder;
                 if (!gameStateHolderObject)
                     Debug.LogError(

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Controller;
 using UnityEngine;
 
-namespace Assets.Scripts.FeatureScripts
-{
-    public class BoardBuilderScript : MonoBehaviour
-    {
+namespace Assets.Scripts.FeatureScripts {
+    public class BoardBuilderScript : MonoBehaviour {
+
+        // TODO Überlegen, ob man die gridPositions tatsächlich braucht?
+        private readonly List<Vector3> gridPositions = new List<Vector3>();
         private Transform boardHolder;
         public GameObject ChestBlock;
         public GameObject EndBlock;
@@ -13,8 +15,6 @@ namespace Assets.Scripts.FeatureScripts
         [HideInInspector] public Vector3 EndPosition;
 
         public GameObject FloorBlock;
-        // TODO Überlegen, ob man die gridPositions tatsächlich braucht?
-        private readonly List<Vector3> gridPositions = new List<Vector3>();
         private char[,] levelData;
         private int max_x;
         private int max_z;
@@ -26,8 +26,7 @@ namespace Assets.Scripts.FeatureScripts
         public GameObject WallBlock;
 
         // Initialisiere die Liste mit den möglichen Positionen
-        private void InitializeList()
-        {
+        private void InitializeList() {
             gridPositions.Clear();
 
             for (var x = 0; x < max_x; ++x)
@@ -36,8 +35,7 @@ namespace Assets.Scripts.FeatureScripts
         }
 
         // Erstelle die Spielfläche
-        private void BoardSetup()
-        {
+        private void BoardSetup() {
             // Um eine schöne Struktur zu wahren, werden alle Boardobjekte den Parent "Board" erhalten (boardHolder)
             boardHolder = new GameObject("Board").transform;
 
@@ -46,11 +44,9 @@ namespace Assets.Scripts.FeatureScripts
             var portalNumber = 0;
 
             for (var x = 0; x < max_x; ++x)
-                for (var z = 0; z < max_z; ++z)
-                {
+                for (var z = 0; z < max_z; ++z) {
                     var height = 1.0f;
-                    switch (levelData[x, z])
-                    {
+                    switch (levelData[x, z]) {
                         case '#': // Wall
                             toInstantiate = WallBlock;
                             break;
@@ -67,7 +63,7 @@ namespace Assets.Scripts.FeatureScripts
                             StartPosition = new Vector3(x, height, z);
                             toInstantiate = StartBlock;
                             var startInst =
-                                Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject;
+                                    Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject;
                             startInst.transform.SetParent(boardHolder);
                             break;
                         case 'f':
@@ -80,7 +76,7 @@ namespace Assets.Scripts.FeatureScripts
                             EndPosition = new Vector3(x, height, z);
                             toInstantiate = EndBlock;
                             var endInst =
-                                Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject;
+                                    Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject;
                             endInst.transform.SetParent(boardHolder);
                             break;
                         default: // Sollte niemals aufgerufen werden
@@ -88,10 +84,9 @@ namespace Assets.Scripts.FeatureScripts
                             break;
                     }
 
-                    if (toInstantiate != null)
-                    {
+                    if (toInstantiate != null) {
                         var instance =
-                            Instantiate(toInstantiate, new Vector3(x, height, z), Quaternion.identity) as GameObject;
+                                Instantiate(toInstantiate, new Vector3(x, height, z), Quaternion.identity) as GameObject;
                         instance.transform.SetParent(boardHolder);
                     }
                     else
@@ -101,13 +96,11 @@ namespace Assets.Scripts.FeatureScripts
         }
 
         // Erstelle die Szene
-        public void SetupScene(int level)
-        {
-            levelData = GetComponent<LevelController>().loadLevel(level);
+        public void SetupScene(int level) {
+            levelData = GetComponent<LevelManager>().loadLevel(level);
 
             // Die LevelDaten müssen gesetzt sein, sodass man die möglichen Positionen zum Spawnen setzen kann.
-            if (levelData != null)
-            {
+            if (levelData != null) {
                 // GetLength(int x) ist dazu da, die Anzahl der möglichen Elemente innerhalb der "x."-Dimension zu erhalten
                 max_x = levelData.GetLength(0);
                 max_z = levelData.GetLength(1);

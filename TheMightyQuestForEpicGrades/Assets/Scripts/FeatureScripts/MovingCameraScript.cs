@@ -3,17 +3,14 @@
 // Skript "bindet" die Bewegung der Kamera an die des Spielers
 // Daher muss das Skript auf der Kamera ausgeführt werden
 
-namespace Assets.Scripts.FeatureScripts
-{
-    public class MovingCameraScript : MonoBehaviour
-    {
+namespace Assets.Scripts.FeatureScripts {
+    public class MovingCameraScript : MonoBehaviour {
         // Reference zum Player gameobject
         public static GameObject player;
         // Offset Variable (= Distanz zwischen Spielfigur und Kamera)
         private Vector3 offset;
 
-        private void Start()
-        {
+        private void Start() {
             // Player gameobject finden
             player = GameObject.Find("PlayerTicTac(Clone)");
             // Debug und Sicherheit
@@ -26,8 +23,7 @@ namespace Assets.Scripts.FeatureScripts
         // LateUpdate is called after Update each frame
         // => um sicher zu stellen, dass es immer nach der Spielerbewegung
         // aufgerufen wird.
-        private void LateUpdate()
-        {
+        private void LateUpdate() {
             // Setzt die Position der Kamera auf die des Spielers +/- Offset
             transform.position = player.transform.position + offset;
         }

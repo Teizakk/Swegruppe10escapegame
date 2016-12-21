@@ -3,15 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Models {
-
     [Serializable]
     public class GameState {
+        //Konstruktor
+        public GameState() {
+            GameOptions = new Preselectives();
+            LevelState = new CurrentLevelState();
+            //LevelState.PlayerPosition wird beim ersten Speichern gesetzt
+            LevelState.Chests = new[] {false};
+            LevelState.Questions = new List<Question>();
+            LevelState.BluePortalStone = new PortalStone();
+            LevelState.GreenPortalStone = new PortalStone();
+            LevelState.PinkPortalStone = new PortalStone();
+            //TODO weitere Werte initialisieren?
+        }
 
         #region Interne Klassendefinitionen
+
         [Serializable]
         public class Preselectives { //Vorausgewählte Einstellungen
             public Difficulties Difficulty { get; set; } //Ausgewählter Schwierigkeitsgrad
-            public string Modul { get; set; } //imo fehleranfällig, mal gucken ob wir damit durchkommen (sollte aber ok sein, weil in der Frage das Modul auch als String gespeichert ist)
+            public string Modul { get; set; }
+            //imo fehleranfällig, mal gucken ob wir damit durchkommen (sollte aber ok sein, weil in der Frage das Modul auch als String gespeichert ist)
             public string PlayerName { get; set; }
         }
 
@@ -37,27 +50,17 @@ namespace Assets.Models {
             public bool InPossession { get; set; } //Ob der Portalstein 'gewonnen' wurde
             public bool Used { get; set; } //Ob der Portalstein in das Portal eingesetzt wurde
         }
+
         #endregion
 
-        #region Zu speichernde Werte
+        #region Zu speichernde Werte / Attribute
+
         // V O R E I N G E S T E L L T E   W E R T E 
         public Preselectives GameOptions;
 
         // W E R T E   D E S   A K T U E L L E N   L E V E L S 
         public CurrentLevelState LevelState;
-        #endregion
 
-        //Konstruktor
-        public GameState() {
-            GameOptions = new Preselectives();
-            LevelState = new CurrentLevelState();
-            //LevelState.PlayerPosition wird beim ersten Speichern gesetzt
-            LevelState.Chests = new[] {false};
-            LevelState.Questions = new List<Question>();
-            LevelState.BluePortalStone = new PortalStone();
-            LevelState.GreenPortalStone = new PortalStone();
-            LevelState.PinkPortalStone = new PortalStone();
-            //TODO weitere Werte initialisieren?
-        }
+        #endregion
     }
 }

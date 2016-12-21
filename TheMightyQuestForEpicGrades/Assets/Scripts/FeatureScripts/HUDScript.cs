@@ -3,10 +3,8 @@ using Assets.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.FeatureScripts
-{
-    public class HUDScript : MonoBehaviour
-    {
+namespace Assets.Scripts.FeatureScripts {
+    public class HUDScript : MonoBehaviour {
         private int maxLives;
         private int numberOfHints;
         private int numberOfLives;
@@ -16,11 +14,9 @@ namespace Assets.Scripts.FeatureScripts
         //oder direkt durch die Anzahl der Leben...
         //aktulle Lösung ist über 1,2,3 mit "Übersetzung" durch das enum
         //TODO je nach Art des Szenenwechselns muss hier dann noch der Score übergeben werden
-        public void FirstSetUpHUD(int difficulty)
-        {
+        public void FirstSetUpHUD(int difficulty) {
             //Je nach Schwierigkeit die Werte setzen
-            switch (difficulty)
-            {
+            switch (difficulty) {
                 case (int) Difficulties.Easy:
                     numberOfLives = maxLives = 7;
                     break;
@@ -34,8 +30,7 @@ namespace Assets.Scripts.FeatureScripts
                     throw new InvalidEnumArgumentException("Ungültiger Schwierigkeitsgrad angegeben...bricht ab....");
             }
             //kleiner missbrauch von numberOfLives
-            foreach (var heart in hearts)
-            {
+            foreach (var heart in hearts) {
                 if (numberOfLives > 0) heart.enabled = true;
                 else heart.enabled = false;
                 numberOfLives--;
@@ -55,10 +50,8 @@ namespace Assets.Scripts.FeatureScripts
             scoreDisplay.text = points.ToString().PadLeft(6, '0');
         }
 
-        public void AddHintStone()
-        {
-            if (numberOfHints > 4)
-            {
+        public void AddHintStone() {
+            if (numberOfHints > 4) {
                 Debug.LogError("Fehler im einem Controller - maximale Anzahl an Hints würde überschritten werden!");
                 return;
             }
@@ -66,10 +59,8 @@ namespace Assets.Scripts.FeatureScripts
             hints[numberOfHints - 1].enabled = true; //sollte ja so klappen, nich?
         }
 
-        public void RemoveHintStone()
-        {
-            if (numberOfHints == 0)
-            {
+        public void RemoveHintStone() {
+            if (numberOfHints == 0) {
                 Debug.LogError("Fehler im einem Controller - Anzahl Hints würde unter 0 fallen!");
                 return;
             }
@@ -78,13 +69,11 @@ namespace Assets.Scripts.FeatureScripts
             numberOfHints--;
         }
 
-        public void RemoveHeart()
-        {
+        public void RemoveHeart() {
             if (numberOfLives == 1)
                 Debug.Log(
                     "Laut HUD gibt es nun keine Leben/Herzen mehr... jetzt sollte das Game eigentlich GAME OVER sein...");
-            if (numberOfLives == 0)
-            {
+            if (numberOfLives == 0) {
                 Debug.LogError(
                     "Fehler im einem Controller - Spiel sollte längst GAME OVER sein, Anzahl an Leben in HUD == 0!");
                 return;
@@ -94,12 +83,10 @@ namespace Assets.Scripts.FeatureScripts
         }
 
         //machen wir das so? Gedacht für Levelwechsel - falls nicht gerbraucht -> Löschen TODO
-        public void ResetHearts()
-        {
+        public void ResetHearts() {
             //gleicher numberOfLives Missbrauch wie im SetUp
             numberOfLives = maxLives;
-            foreach (var heart in hearts)
-            {
+            foreach (var heart in hearts) {
                 if (numberOfLives > 0) heart.enabled = true;
                 else heart.enabled = false;
                 numberOfLives--;
@@ -108,31 +95,25 @@ namespace Assets.Scripts.FeatureScripts
             //Hints bleiben erhalten
         }
 
-        public void ReceivePortalStone(string colorOfPortalStone)
-        {
-            if (colorOfPortalStone.Equals("Blue") || colorOfPortalStone.Equals("blue"))
-            {
+        public void ReceivePortalStone(string colorOfPortalStone) {
+            if (colorOfPortalStone.Equals("Blue") || colorOfPortalStone.Equals("blue")) {
                 bluePortalStone.enabled = true;
                 bluePortalStone.color = new Color(1, 1, 1, 1);
             }
-            else if (colorOfPortalStone.Equals("Green") || colorOfPortalStone.Equals("green"))
-            {
+            else if (colorOfPortalStone.Equals("Green") || colorOfPortalStone.Equals("green")) {
                 greenPortalStone.enabled = true;
                 greenPortalStone.color = new Color(1, 1, 1, 1);
             }
-            else if (colorOfPortalStone.Equals("Pink") || colorOfPortalStone.Equals("pink"))
-            {
+            else if (colorOfPortalStone.Equals("Pink") || colorOfPortalStone.Equals("pink")) {
                 pinkPortalStone.enabled = true;
                 pinkPortalStone.color = new Color(1, 1, 1, 1);
             }
-            else
-            {
+            else {
                 Debug.LogError("Falscher Farbcode für Portalstein übergeben! Gültig: [B/b]lue, [G/g]reen, [P/p]ink");
             }
         }
 
-        public void UsePortalStone(string colorOfPortalStone)
-        {
+        public void UsePortalStone(string colorOfPortalStone) {
             if (colorOfPortalStone.Equals("Blue") || colorOfPortalStone.Equals("blue"))
                 bluePortalStone.color = new Color(1, 1, 1, 0.4f); //nur alpha runter setzen
             else if (colorOfPortalStone.Equals("Green") || colorOfPortalStone.Equals("green"))
@@ -142,15 +123,13 @@ namespace Assets.Scripts.FeatureScripts
             else Debug.LogError("Falscher Farbcode für Portalstein übergeben! Gültig: [B/b]lue, [G/g]reen, [P/p]ink");
         }
 
-        public void UpdateScore(int pointsToAdd)
-        {
+        public void UpdateScore(int pointsToAdd) {
             points += pointsToAdd;
             scoreDisplay.text = points.ToString().PadLeft(6, '0');
         }
 
         // Use this for initialization
-        private void Start()
-        {
+        private void Start() {
             //Werte initialisieren (-1 um sicher zu stellen, dass firstSetUp aufgerufen wurde)
             numberOfLives = -1;
             numberOfHints = -1;
@@ -165,8 +144,7 @@ namespace Assets.Scripts.FeatureScripts
         }
 
         // Update is called once per frame
-        private void Update()
-        {
+        private void Update() {
             //Anzeige Logik hier hin verschieben? oder ist das gut so, weil es Abfragen spart?
         }
 

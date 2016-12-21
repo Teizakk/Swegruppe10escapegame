@@ -2,10 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.FeatureScripts
-{
-    public class PauseMenuScript : MonoBehaviour
-    {
+namespace Assets.Scripts.FeatureScripts {
+    public class PauseMenuScript : MonoBehaviour {
         private const float _FADE_FACTOR = 0.04f;
 
         #region variablen
@@ -34,19 +32,16 @@ namespace Assets.Scripts.FeatureScripts
         #region Sonstige Funktionen
 
         //Funktion um von außen zu fragen, ob das Spiel pausiert ist (für die Controls zb)
-        public bool IsGamePaused()
-        {
+        public bool IsGamePaused() {
             return _gamePaused;
         }
 
         //"Nachrichten"-Funktion an PlayerScript
-        public void blockAndUnblockMovement()
-        {
+        public void blockAndUnblockMovement() {
             PlayerScript.instance.switchControlBlock();
         }
 
-        public void ContinueGame()
-        {
+        public void ContinueGame() {
             _fadingOut = true;
             //Trick um das gedrückte Aussehen des Buttons zu beheben, wenn man erneut ins Pausenmenü geht (und in der Zwischenzeit nichts "gedrückt" wurde)
             SpielFortsetzenButton.enabled = false;
@@ -58,16 +53,14 @@ namespace Assets.Scripts.FeatureScripts
         #region show&hide submenus
 
         //Speichermenü anzeigen / ausblenden
-        public void ShowSaveMenu()
-        {
+        public void ShowSaveMenu() {
             SaveMenu.SetActive(true);
             _saveMenuCanvasGroup.alpha = 1.0f;
             _saveMenuCanvasGroup.interactable = true;
             _inSubWindow = true;
         }
 
-        public void HideSaveMenu()
-        {
+        public void HideSaveMenu() {
             _saveMenuCanvasGroup.alpha = 0.0f;
             _saveMenuCanvasGroup.interactable = false;
             _inSubWindow = false;
@@ -75,16 +68,14 @@ namespace Assets.Scripts.FeatureScripts
         }
 
         //Lademenü anzeigen / ausblenden
-        public void ShowLoadMenu()
-        {
+        public void ShowLoadMenu() {
             LoadMenu.SetActive(true);
             _loadMenuCanvasGroup.alpha = 1.0f;
             _loadMenuCanvasGroup.interactable = true;
             _inSubWindow = true;
         }
 
-        public void HideLoadMenu()
-        {
+        public void HideLoadMenu() {
             _loadMenuCanvasGroup.alpha = 0.0f;
             _loadMenuCanvasGroup.interactable = false;
             _inSubWindow = false;
@@ -92,16 +83,14 @@ namespace Assets.Scripts.FeatureScripts
         }
 
         //Schließwarnung anzeigen / ausblenden
-        public void ShowCloseWarning()
-        {
+        public void ShowCloseWarning() {
             CloseWarning.SetActive(true);
             _closeWarningCanvasGroup.alpha = 1.0f;
             _closeWarningCanvasGroup.interactable = true;
             _inSubWindow = true;
         }
 
-        public void HideCloseWarning()
-        {
+        public void HideCloseWarning() {
             _closeWarningCanvasGroup.alpha = 0.0f;
             _closeWarningCanvasGroup.interactable = false;
             _inSubWindow = false;
@@ -113,8 +102,7 @@ namespace Assets.Scripts.FeatureScripts
         #region Unity Call-Backs
 
         // Use this for initialization
-        private void Start()
-        {
+        private void Start() {
             //Das Pausenmenü selbst
             gameObject.SetActive(true);
             _pauseMenuCanvasGroup = gameObject.GetComponent<CanvasGroup>();
@@ -138,7 +126,7 @@ namespace Assets.Scripts.FeatureScripts
             //Der eine Button den man für den kleinen Trick in der ContinueGame Funktion braucht
             var buttonList = FindObjectsOfType<Button>().ToList();
             SpielFortsetzenButton = buttonList.FindLast(button => button.name.Equals("ContinueGameButton"));
-                //evtl. Fehleranfällig
+            //evtl. Fehleranfällig
             if (SpielFortsetzenButton == null)
                 Debug.LogError(
                     "Der Spielfortsetzen Button wurde nicht unter dem Namen 'ContinueGameButton' gefunden - falsch benannt?");
@@ -146,26 +134,21 @@ namespace Assets.Scripts.FeatureScripts
         }
 
         // Update is called once per frame
-        private void Update()
-        {
+        private void Update() {
             //Wenn ESC gedrückt wurde und es noch nicht gerade erscheint oder verschwindet
-            if (Input.GetKeyDown(KeyCode.Escape) && !_fadingIn && !_fadingOut && !_inSubWindow)
-            {
+            if (Input.GetKeyDown(KeyCode.Escape) && !_fadingIn && !_fadingOut && !_inSubWindow) {
                 //Und das Pausenmenu nicht angezeigt wird
                 if (!_visible) _fadingIn = true;
                 //Oder gerade angezeigt wird
                 else if (_visible) _fadingOut = true;
             }
             //Wenn es gerade dabei ist zu erscheinen oder zu verschwinden
-            else if (_fadingIn || _fadingOut)
-            {
+            else if (_fadingIn || _fadingOut) {
                 var mainCanvasGroup = GetComponent<CanvasGroup>();
                 //Wenn wir gerade einblenden
-                if (_fadingIn)
-                {
+                if (_fadingIn) {
                     //Wenn es die volle Sichtbarkeit erreicht hat
-                    if (mainCanvasGroup.alpha.Equals(1.0f))
-                    {
+                    if (mainCanvasGroup.alpha.Equals(1.0f)) {
                         //... sonst Verlust der Genauigkeit? ist das hässlich...
                         _visible = true;
                         mainCanvasGroup.interactable = true; //lässt Button beim reinfaden verblassen
@@ -175,17 +158,14 @@ namespace Assets.Scripts.FeatureScripts
                         Debug.Log("Spiel ist nun pausiert");
                     }
                     //Wenn es noch nicht voll sichtbar ist
-                    else
-                    {
+                    else {
                         GetComponent<CanvasGroup>().alpha += _FADE_FACTOR;
                     }
                 }
                 //Wenn wir gerade ausblenden
-                else
-                {
+                else {
                     //Wenn es komplett unsichtbar geworden ist
-                    if (mainCanvasGroup.alpha.Equals(0.0f))
-                    {
+                    if (mainCanvasGroup.alpha.Equals(0.0f)) {
                         _visible = false;
                         mainCanvasGroup.interactable = false;
                         _fadingOut = false;
@@ -194,8 +174,7 @@ namespace Assets.Scripts.FeatureScripts
                         Debug.Log("Spiel wird fortgesetzt");
                     }
                     //Wenn es noch nicht voll sichtbar ist
-                    else
-                    {
+                    else {
                         GetComponent<CanvasGroup>().alpha -= _FADE_FACTOR;
                     }
                 }

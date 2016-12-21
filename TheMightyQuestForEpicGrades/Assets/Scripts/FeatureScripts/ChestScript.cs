@@ -1,16 +1,12 @@
-﻿using Assets.Models;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts.FeatureScripts
-{
-    public class ChestScript : MonoBehaviour
-    {
+namespace Assets.Scripts.FeatureScripts {
+    public class ChestScript : MonoBehaviour {
         private bool ChestIsLocked;
         private bool ChestIsOpen; //TODO diese Information ist redundant, weil sie sich aus ChestIsLocked ableiten lässt
 
-        public void OnTriggerStay(Collider col)
-        {
+        public void OnTriggerStay(Collider col) {
             if (Input.GetKeyDown("e") && !ChestIsLocked) //col.gameObject.tag == "Player")
             {
                 ChestIsOpen = true;
@@ -20,9 +16,8 @@ namespace Assets.Scripts.FeatureScripts
             }
         }
 
-        public void OpenChest()
-        {
-            SceneManager.LoadScene(/*QuestionDialog?*/ null);
+        public void OpenChest() {
+            SceneManager.LoadScene( /*QuestionDialog?*/ null);
             //Fragemenü aufrufen
             ChestIsOpen = false;
         }

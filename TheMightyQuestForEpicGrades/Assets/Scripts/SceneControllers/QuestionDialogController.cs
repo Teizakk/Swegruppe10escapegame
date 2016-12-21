@@ -6,16 +6,13 @@ using Assets.Scripts.FeatureScripts;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.SceneManagerScripts
-{
-    public class ScriptQuestionDialog : MonoBehaviour
-    {
+namespace Assets.Scripts.SceneControllers {
+    public class ScriptQuestionDialog : MonoBehaviour {
         private int punkte;
 
 
         // Use this for initialization
-        private void Start()
-        {
+        private void Start() {
             // Werte initialisieren
             tippsShowed = 0;
             chosenAnswerIndex = 1;
@@ -26,8 +23,7 @@ namespace Assets.Scripts.SceneManagerScripts
         }
 
         //Update is called once per frame
-        private void Update()
-        {
+        private void Update() {
             usedTime = TimeSpan.FromTicks(DateTime.Now.Ticks - startTime.Ticks);
             TimerText.text = string.Format("{0:hh\\:mm\\:ss\\:ff}", usedTime);
             //int mins = (int) timer/60;
@@ -37,10 +33,8 @@ namespace Assets.Scripts.SceneManagerScripts
         }
 
 
-        public static ScriptQuestionDialog Instance()
-        {
-            if (!questionDialog)
-            {
+        public static ScriptQuestionDialog Instance() {
+            if (!questionDialog) {
                 questionDialog = FindObjectOfType(typeof(ScriptQuestionDialog)) as ScriptQuestionDialog;
                 if (!questionDialog)
                     Debug.LogError(
@@ -50,10 +44,8 @@ namespace Assets.Scripts.SceneManagerScripts
         }
 
         // beantwortet die Frage
-        public void AnswerQuestion()
-        {
-            if (AnswerCorrect())
-            {
+        public void AnswerQuestion() {
+            if (AnswerCorrect()) {
                 endTime = DateTime.Now;
                 usedTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
                 Debug.Log("Frage korrekt beantwortet!");
@@ -61,8 +53,7 @@ namespace Assets.Scripts.SceneManagerScripts
 
 
                 // Punkte addieren
-                switch (q.Difficulty)
-                {
+                switch (q.Difficulty) {
                     case Difficulties.Easy:
                         punkte = 1;
                         break;
@@ -78,8 +69,7 @@ namespace Assets.Scripts.SceneManagerScripts
                 Debug.Log("Portalstein erhalten!");
                 Debug.Log(punkte + " Punkt(e) erhalten!");
             }
-            else
-            {
+            else {
                 Debug.Log("Frage wurde falsch beantwortet!");
                 Debug.Log("Leben - 1");
                 // GameController.Leben--
@@ -93,25 +83,21 @@ namespace Assets.Scripts.SceneManagerScripts
         }
 
         // ändert die ausgewählte Antwort
-        public void AnswerChanged(int index)
-        {
+        public void AnswerChanged(int index) {
             chosenAnswerIndex = index;
             Debug.Log(chosenAnswerIndex + ". Antwort ausgewählt!");
         }
 
         // überprüft, ob die Antwort richtig war
-        private bool AnswerCorrect()
-        {
+        private bool AnswerCorrect() {
             return chosenAnswerIndex == q.CorrectAnswer;
         }
 
 
         // Tipp anzeigen
-        public void ShowTipp()
-        {
+        public void ShowTipp() {
             if (tippsShowed < 3
-                /* && GameController.Hintsteine>0*/)
-            {
+                /* && GameController.Hintsteine>0*/) {
                 tippsShowed++;
                 // GameController.Hintsteine--
 
@@ -127,8 +113,7 @@ namespace Assets.Scripts.SceneManagerScripts
         }
 
         // zeigt Bild (ImagePopupScript) an
-        public void ShowPicture(int index)
-        {
+        public void ShowPicture(int index) {
             var popupController = GameObject.Find("PopupController").GetComponent<PopupController>();
             popupController.usedQuestion = q;
             if (index > 0)
@@ -139,8 +124,7 @@ namespace Assets.Scripts.SceneManagerScripts
         }
 
         // Frage und Antworten in den Dialog laden
-        private void LoadQuestion()
-        {
+        private void LoadQuestion() {
             //q = QuestionController.GetInstance().GetQuestionNotInUse();
             q = new Question
             {
@@ -149,24 +133,16 @@ namespace Assets.Scripts.SceneManagerScripts
                 Level = 1,
                 ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
                 Answers =
-                    new List<Question.Answer>
-                    {
-                        new Question.Answer
+                        new List<Question.Answer>
                         {
-                            AnswerText = "Ein Netz",
-                            ImagePath = ""
+                            new Question.Answer {AnswerText = "Ein Netz", ImagePath = ""},
+                            new Question.Answer
+                            {
+                                AnswerText = "Nur physikalisch vorhanden",
+                                ImagePath = "Assets/Samples+Placeholder/Bild2.png"
+                            },
+                            new Question.Answer {AnswerText = "Ein Netz von Netzen", ImagePath = ""}
                         },
-                        new Question.Answer
-                        {
-                            AnswerText = "Nur physikalisch vorhanden",
-                            ImagePath = "Assets/Samples+Placeholder/Bild2.png"
-                        },
-                        new Question.Answer
-                        {
-                            AnswerText = "Ein Netz von Netzen",
-                            ImagePath = ""
-                        }
-                    },
                 CorrectAnswer = 3,
                 Hints = new List<string> {"inter", "connected", "networks"}
             };
@@ -187,8 +163,7 @@ namespace Assets.Scripts.SceneManagerScripts
             // Antworten laden
             var i = 1;
             Text outAnswer;
-            foreach (var answer in q.Answers)
-            {
+            foreach (var answer in q.Answers) {
                 outAnswer = GameObject.Find("outAnswer" + i).GetComponent<Text>();
                 outAnswer.text = answer.AnswerText;
                 imagePaths[i] = answer.ImagePath;
@@ -202,8 +177,7 @@ namespace Assets.Scripts.SceneManagerScripts
             // Tipps laden
             i = 1;
             Text outTipp;
-            foreach (var tipp in q.Hints)
-            {
+            foreach (var tipp in q.Hints) {
                 outTipp = GameObject.Find("outTipp" + i).GetComponent<Text>();
                 outTipp.text = tipp;
                 i++;
@@ -212,8 +186,7 @@ namespace Assets.Scripts.SceneManagerScripts
 
 
         // leitet die Frage weiter
-        public static Question ForwardQuestion()
-        {
+        public static Question ForwardQuestion() {
             return q;
         }
 

@@ -1,20 +1,16 @@
 ﻿using Assets.Scripts.FeatureScripts;
 using UnityEngine;
 
-namespace Assets.Controller
-{
-    public class GameManager : MonoBehaviour
-    {
-
-        public static GameManager instance = null;
+namespace Assets.Controller {
+    public class GameManager : MonoBehaviour {
+        public static GameManager instance;
         public static bool cheat = false;
         public BoardBuilderScript boardManager;
-        private QuestionManager qc { get; set; }
         private int level = 1;
+        private QuestionManager qc { get; set; }
 
         // Use this for initialization
-        void Awake()
-        {
+        private void Awake() {
             if (instance == null)
                 instance = this;
             else if (instance != this)
@@ -25,27 +21,21 @@ namespace Assets.Controller
             InitGame();
         }
 
-        void InitGame()
-        {
+        private void InitGame() {
             //TODO Das muss auch noch differntiert werden...
             boardManager.SetupScene(1);
         }
 
         // Update is called once per frame
-        void Update()
-        {
-
+        private void Update() {
         }
-        void Start()
-        {
+
+        private void Start() {
             qc = QuestionManager.GetInstance();
         }
 
-        public QuestionManager QuestionControllerInstance()
-        {
+        public QuestionManager QuestionControllerInstance() {
             return qc;
         }
-
-
     }
 }

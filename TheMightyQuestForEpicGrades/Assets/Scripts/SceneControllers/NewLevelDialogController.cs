@@ -7,12 +7,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
 
-namespace Assets.Scripts.SceneManagerScripts
-{
-    public class NewLevelHelperScript : MonoBehaviour
-    {
-        private void Start()
-        {
+namespace Assets.Scripts.SceneControllers {
+    public class NewLevelHelperScript : MonoBehaviour {
+        private void Start() {
             executingDirectory = Environment.CurrentDirectory;
             FilePathsAndStatus = new List<FileNameHelper>();
             FilePathsAndStatus.Clear();
@@ -21,47 +18,39 @@ namespace Assets.Scripts.SceneManagerScripts
             FileDisplayContents.Clear();
         }
 
-        public void RefreshSelectedFiles(bool deleteFalseOnes = true)
-        {
+        public void RefreshSelectedFiles(bool deleteFalseOnes = true) {
             //TODO Soll die angezeigten Dateien aktualiseren wenn ungültig -> löschen (könnte man auch aufrufen, nachdem neue hinzugefügt wurden)
             //Anzeige leer machen
             foreach (var displayLine in FileDisplayContents) Destroy(displayLine);
             FileDisplayContents.Clear();
             //Wenn Pfade angezeigt werden...
             if (FilePathsAndStatus.Count != 0)
-                for (var i = 0; i < FilePathsAndStatus.Count; i++)
-                {
+                for (var i = 0; i < FilePathsAndStatus.Count; i++) {
                     var file = FilePathsAndStatus[i];
                     //Debug.Log("Anzahl Elemente in Filepath...: " + FilePathsAndStatus.Count);
                     /*Debug.Log("Gerade behandeltes Objekt: " + file.FullFilePath + " IsValid = " + file.isValid + "\n" +
                            " isChecked = " + file.isChecked + " HasBeenShown = " + file.statusHasBeenShown + " Index: " + i
                            ); */
                     //alle die noch nicht gezeigt wurden anzeigen
-                    if (!file.statusHasBeenShown)
-                    {
+                    if (!file.statusHasBeenShown) {
                         AddToFileDisplay(file.FullFilePath, file.isChecked, file.isValid);
                         file.statusHasBeenShown = true;
                         //Debug.Log("Bisher nicht gezeigte Datei wird gezeigt: " + file.FullFilePath);
                     }
-                    else
-                    {
+                    else {
                         //alle validen weiterhin anzeigen
-                        if (file.isValid)
-                        {
+                        if (file.isValid) {
                             AddToFileDisplay(file.FullFilePath, file.isChecked, file.isValid);
                             //Debug.Log("Richtige Datei, die bereits gezeigt wurde wird gezeigt: " + file.FullFilePath);
                         }
                         //invalide löschen, die bereits 1x angezeigt wurden.
-                        else
-                        {
-                            if (deleteFalseOnes)
-                            {
+                        else {
+                            if (deleteFalseOnes) {
                                 FilePathsAndStatus.RemoveAt(i); //müsste so passen...ich mag diese Syntax nicht..
                                 i--; //Index zurücksetzen, weil sonst letztes Element überschlagen wird....
                                 //Debug.Log("Ungültige Datei wird gelöscht und nicht gezeigt: " + file.FullFilePath);
                             }
-                            else
-                            {
+                            else {
                                 AddToFileDisplay(file.FullFilePath, file.isChecked, file.isValid);
                                 //Debug.Log("Falsche Datei, die bereits gezeigt wurde wird gezeigt: " + file.FullFilePath);
                             }
@@ -70,17 +59,14 @@ namespace Assets.Scripts.SceneManagerScripts
                 }
         }
 
-        public void checkFiles()
-        {
+        public void checkFiles() {
             //TODO falls wir das wollen, sollte das hier implementiert werden (Tobis Weihnachtsaufgabe?)
             //wenn File korrekt bool auf true -> Anzeige im Scroll View ändern
-            for (var i = 0; i < FilePathsAndStatus.Count; i++)
-            {
+            for (var i = 0; i < FilePathsAndStatus.Count; i++) {
                 var file = FilePathsAndStatus[i];
 
                 //Bereits geprüfte muss man nicht nochmals prüfen
-                if (!file.isChecked)
-                {
+                if (!file.isChecked) {
                     var isValid = i%2 == 0; //checkLevelFile(file); //Gerade ist einfach jede zweite Datei richtig...
                     if (isValid)
                         FilePathsAndStatus[i].isValid = true;
@@ -94,8 +80,7 @@ namespace Assets.Scripts.SceneManagerScripts
             Debug.LogError("DIESE FUNKTION GIBT ES NOCH NICHT - PSEUDO-FUNKTIONALITÄT");
         }
 
-        public void FileDialogOpener()
-        {
+        public void FileDialogOpener() {
             //Wenn der FolderBrowser noch nie geöffnet wurde
             if (fbd == null)
                 fbd = new FolderBrowserDialog
@@ -108,8 +93,7 @@ namespace Assets.Scripts.SceneManagerScripts
             var fbdDialogResult = fbd.ShowDialog();
 
             //Nur wenn erfolgreich abgeschlossen gehts weiter, sonst abbruch
-            if (fbdDialogResult != DialogResult.OK)
-            {
+            if (fbdDialogResult != DialogResult.OK) {
                 //Resettet die Optik des Buttons (wird nicht mehr als gedrückt angezeigt)
                 BrowseButton.enabled = false;
                 BrowseButton.enabled = true;
@@ -136,8 +120,7 @@ namespace Assets.Scripts.SceneManagerScripts
             var ofdDialogResult = ofd.ShowDialog();
 
             //Auch hier muss man abbrechen, weil man sonst nachdem man einen Ordner falsch ausgewählt hat dies nicht mehr korrigieren kann
-            if (ofdDialogResult != DialogResult.OK)
-            {
+            if (ofdDialogResult != DialogResult.OK) {
                 BrowseButton.enabled = false;
                 BrowseButton.enabled = true;
                 return;
@@ -150,14 +133,12 @@ namespace Assets.Scripts.SceneManagerScripts
             //Wenn Dateien ausgewählt wurden
             if (fileNames.Length != 0)
                 foreach (var file in fileNames)
-                    if (FileNameHelper.filePathList.Contains(PreselectedFolderPath + "\\" + file))
-                    {
+                    if (FileNameHelper.filePathList.Contains(PreselectedFolderPath + "\\" + file)) {
                         //Wenn Pfad bereits vorhanden
                         AddToFileDisplay(PreselectedFolderPath + "\\" + file, true, false, true);
                         //Debug.Log("Bereits vorhandene Datei hinzugefügt");
                     }
-                    else
-                    {
+                    else {
                         var fileNameHelperObject = new FileNameHelper(PreselectedFolderPath + "\\" + file, false, false);
                         //Der Liste der gespeicherten Pfade hinzufügen
                         FilePathsAndStatus.Add(fileNameHelperObject);
@@ -168,12 +149,10 @@ namespace Assets.Scripts.SceneManagerScripts
             BrowseButton.enabled = true;
         }
 
-        public void CopyFilesToLevelFolder()
-        {
+        public void CopyFilesToLevelFolder() {
             var levelNumberToAdd = findNextFileName();
 
-            foreach (var file in FilePathsAndStatus)
-            {
+            foreach (var file in FilePathsAndStatus) {
                 File.Copy(file.FullFilePath, executingDirectory + "\\Level\\Level_" + levelNumberToAdd + ".txt");
                 levelNumberToAdd++;
                 Debug.Log(
@@ -183,8 +162,7 @@ namespace Assets.Scripts.SceneManagerScripts
         }
 
         // K L E I N E   H E L P E R   F U N K T I O N E N 
-        private int findNextFileName()
-        {
+        private int findNextFileName() {
             var levelNumberToAdd = 1;
             for (var i = 1; i < 200; i++)
                 if (File.Exists(executingDirectory + "\\Level\\Level_" + i + ".txt"))
@@ -195,31 +173,25 @@ namespace Assets.Scripts.SceneManagerScripts
             return levelNumberToAdd;
         }
 
-        private void AddToFileDisplay(string path, bool isChecked, bool valid = false, bool duplicate = false)
-        {
+        private void AddToFileDisplay(string path, bool isChecked, bool valid = false, bool duplicate = false) {
             //Instanziere neue Textline nach prefab Vorlage mit FileDisplayContentWindow als Parent
             var displayLine = Instantiate(FileTextPrefab);
             FileDisplayContents.Add(displayLine);
             displayLine.transform.SetParent(FileDisplayContentWindow.transform, false);
             var textfields = displayLine.GetComponentsInChildren<Text>();
-            if (textfields.Length == 2)
-            {
+            if (textfields.Length == 2) {
                 textfields[0].text = path;
                 if (isChecked)
-                    if (valid)
-                    {
+                    if (valid) {
                         textfields[1].text = "(OK)";
                         textfields[1].color = Color.green;
                     }
-                    else
-                    {
-                        if (duplicate)
-                        {
+                    else {
+                        if (duplicate) {
                             textfields[1].text = "(Duplikat)";
                             textfields[1].color = new Color(1.0f, 0.6f, 0.0f);
                         }
-                        else
-                        {
+                        else {
                             textfields[1].text = "(Fehler)";
                             textfields[1].color = Color.red;
                         }
@@ -230,16 +202,14 @@ namespace Assets.Scripts.SceneManagerScripts
 
         #region Helper Klasse(n)
 
-        private class FileNameHelper
-        {
+        private class FileNameHelper {
             public static readonly List<string> filePathList = new List<string>();
             public readonly string FullFilePath;
             public bool isChecked;
             public bool isValid;
             public bool statusHasBeenShown;
 
-            public FileNameHelper(string path, bool check, bool displayed)
-            {
+            public FileNameHelper(string path, bool check, bool displayed) {
                 FullFilePath = path;
                 isChecked = check;
                 statusHasBeenShown = displayed;
