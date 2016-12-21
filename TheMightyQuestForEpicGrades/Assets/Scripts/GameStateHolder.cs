@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts;
 using UnityEditor;
 
 public class GameStateHolder : MonoBehaviour {
