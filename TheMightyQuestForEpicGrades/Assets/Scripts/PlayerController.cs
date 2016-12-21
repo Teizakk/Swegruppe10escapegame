@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,8 +10,10 @@ public class PlayerController : MonoBehaviour
 
     public float speed;
 
-    [HideInInspector] public float position_X;
-    [HideInInspector] public float position_Z;
+    [HideInInspector]
+    public float position_X;
+    [HideInInspector]
+    public float position_Z;
 
     private Rigidbody rb;
 
@@ -41,7 +44,8 @@ public class PlayerController : MonoBehaviour
         return instance;
     }
 
-    public void switchControlBlock() {
+    public void switchControlBlock()
+    {
         controlsBlocked = !controlsBlocked;
         //Debug Ausgabe
         Debug.Log(controlsBlocked ? "Controls are now blocked" : "Controls are now enabled");
@@ -59,11 +63,24 @@ public class PlayerController : MonoBehaviour
     void OnCollisionStay(Collision other)
     {
         DebugLogVar++;
-        if (!controlsBlocked) {
+        if (!controlsBlocked)
+        {
             if (other.gameObject.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E))
             {
                 //öffnen der Truhe,Fragen laden
                 Debug.Log("Truhe öffnen (" + DebugLogVar + ")");
+                var chest = other.gameObject.GetComponent<ChestInteraction>();
+                Debug.Log("Chest:" + chest.IsLocked());
+                var qc = QuestionController.GetInstance();
+                Debug.Log("qc: " + qc);
+                var question = qc.GetQuestionNotInUse(1);
+                Debug.Log(question.QuestionText);
+                // letzte Frage falsch beantwortet?
+                if (!chest.IsLocked())
+                {
+                    var questionDialog = ScriptQuestionDialog.Instance();
+                    questionDialog.ShowQuestion(question);
+                }
             }
             else if (other.gameObject.CompareTag("PinkPortal") && Input.GetKeyDown(KeyCode.E))// && Portalstein vorhanden)
             {
@@ -85,7 +102,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!controlsBlocked) {
+        if (!controlsBlocked)
+        {
             //Movement
             float moveHorizontal = Input.GetAxis("Vertical") * (-1);
             float moveVertical = Input.GetAxis("Horizontal");
