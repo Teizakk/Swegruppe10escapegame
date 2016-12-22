@@ -5,7 +5,8 @@ using UnityEngine;
 //TODO Singleton benötigt?
 
 namespace Assets.Code.Controller {
-    public class GameManager {
+    public class GameManager : MonoBehaviour {
+        private static short _numOfInstances;
         public static GameManager instance;
         public static bool cheat = false;
         public BoardBuilderScript boardManager;
@@ -31,9 +32,19 @@ namespace Assets.Code.Controller {
             boardManager.SetupScene(1);
         }
 
-        //private void Start() {
-        //    qc = QuestionManager.GetInstance();
-        //}
+        //TODO billig-singleton-check ohne singleton idee
+        public short GetNumberOfInstances() {
+            return _numOfInstances;
+        }
+
+        private void Awake() {
+            _numOfInstances++;
+            //qc = QuestionManager.GetInstance();
+        }
+
+        public void OnDestroy() {
+            _numOfInstances--;
+        }
 
         //public QuestionManager QuestionControllerInstance() {
         //    return qc;

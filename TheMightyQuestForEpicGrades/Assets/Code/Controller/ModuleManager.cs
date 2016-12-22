@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 
 namespace Assets.Code.Controller {
-    public class ModuleManager {
+    public class ModuleManager : MonoBehaviour {
         private readonly List<string> module = new List<string>();
 
         public ModuleManager(string dateiname) {

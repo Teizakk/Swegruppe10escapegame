@@ -1,8 +1,7 @@
-﻿using Assets.Code.Controller;
-using Assets.Code.Models;
+﻿using Assets.Code.Models;
 using UnityEngine;
 
-namespace Assets.Code.Scripts.FeatureScripts {
+namespace Assets.Code.Controller {
     public class GameStateHolder : MonoBehaviour {
         //Singleton instance
         private static GameStateHolder gameStateHolderObject;
@@ -14,9 +13,10 @@ namespace Assets.Code.Scripts.FeatureScripts {
         #endregion
 
         #region Zur Verfügung gestellte Manager
-        //TODO kappa
+        //TODO kappa-kapseln und nur über getter erreichbar machen?
         public GameManager MyGameManager;
         public LevelManager MyLevelManager;
+        public ModuleManager MyModuleManager;
         public QuestionManager MyQuestionManager;
         #endregion
 
@@ -40,10 +40,14 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
             if (GameStateObject != null) Debug.Log("GameState Objekt existiert");
 
-            //TODO Manager initialisieren
-            MyGameManager = new GameManager();
-            MyLevelManager = new LevelManager();
-            MyQuestionManager = new QuestionManager();
+            //TODO Manager direkt zu Beginn initialisieren?
+            MyGameManager = gameObject.AddComponent<GameManager>();
+            MyLevelManager = gameObject.AddComponent<LevelManager>();
+            MyModuleManager = gameObject.AddComponent<ModuleManager>();
+            MyQuestionManager = gameObject.AddComponent<QuestionManager>();
+            //TODO sind die Referenzen jetzt wieder Kurzschlüsse auf das gleiche Objekt?
+            //-> anscheinend nur auf die Componenten, weil man diese direkt ansprechen kann.
+            
         }
 
         //modifiziertes Singleton-Pattern (um von außen leicht an das GameState Objekt zu kommen)

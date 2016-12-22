@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37356392, g: 0.38112, b: 0.35887662, a: 1}
+  m_IndirectSpecularColor: {r: 0.37356448, g: 0.3811204, b: 0.35887685, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -417,7 +417,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 939537505}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e33f7f0f2e9f4f74fa18441e1c61b947, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d3d1561b8d5a574ab42e430d8f29d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &939537507
@@ -660,6 +660,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameStateObject: {}
+  MyGameManager: {fileID: 0}
+  MyLevelManager: {fileID: 0}
+  MyModuleManager: {fileID: 0}
+  MyQuestionManager: {fileID: 0}
 --- !u!4 &1233521067
 Transform:
   m_ObjectHideFlags: 0

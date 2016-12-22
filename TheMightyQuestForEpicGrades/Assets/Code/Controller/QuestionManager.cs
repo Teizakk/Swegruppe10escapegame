@@ -3,25 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.Code.GLOBALS;
 using Assets.Code.Models;
+using UnityEngine;
+using Random = System.Random;
 
 namespace Assets.Code.Controller {
-    public class QuestionManager {
+    public class QuestionManager : MonoBehaviour{
         private List<Question> Questions { get; set; }
-        private static readonly QuestionManager qc = new QuestionManager();
+        // static readonly QuestionManager qc = new QuestionManager();
 
         // Use this for initialization
         public QuestionManager() {
         }
 
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
-        public static QuestionManager GetInstance() {
-            try {
-                return qc;
-            }
-            catch (NullReferenceException e) {
-                throw new Exception("Das Objekt wurde nicht instanziert.", e);
-            }
-        }
+        //public static QuestionManager GetInstance() {
+        //    try {
+        //        return qc;
+        //    }
+        //    catch (NullReferenceException e) {
+        //        throw new Exception("Das Objekt wurde nicht instanziert.", e);
+        //    }
+        //}
 
         private void Start() {
             Questions = new List<Question>();

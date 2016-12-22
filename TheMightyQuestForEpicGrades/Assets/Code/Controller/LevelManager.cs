@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 
 namespace Assets.Code.Controller {
-    public class LevelManager {
+    public class LevelManager : MonoBehaviour {
         public string Dateiendung = ".txt";
 
         private string Dateiname;
@@ -33,6 +34,13 @@ namespace Assets.Code.Controller {
                     charArray2d[i, j] = list[i][j];
 
             return charArray2d;
+        }
+
+        public void Awake() {
+            Debug.Log("Awake called bei Component LevelManager");
+        }
+        public void Start() {
+            Debug.Log("Start called bei Component LevelManager");
         }
     }
 }
