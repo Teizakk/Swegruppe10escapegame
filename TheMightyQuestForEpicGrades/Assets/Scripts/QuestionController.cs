@@ -140,6 +140,26 @@ namespace Assets.Scripts
                 throw new Exception("Es wurde keine Frage gefunden.", e);
             }
         }
+
+        public Question GetQuestionNotInUse(int level, string module, Difficulties d)
+        {
+            try
+            {
+                System.Random rand = new System.Random();
+                var q = Questions.Where(x => !x.inUse && x.Level == level && x.Difficulty == d && x.Modul == module).ToList()[rand.Next(Questions.Count)];
+                q.inUse = true;
+                return q;
+            }
+            catch (IndexOutOfRangeException e)
+            {
+
+                throw new Exception("Es wurde keine unbenutze Frage gefunden, aus dem entsprechenden level, von diesem Modul und der entsprechenden Difficulty gefunden.", e);
+            }
+            catch (NullReferenceException e)
+            {
+                throw new Exception("Das Objekt wurde nicht instanziert.", e);
+            }
+        }
         /// <exception cref="IndexOutOfRangeException">Es wurde keine Fragen gefunden mit angegebenem Index</exception>
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
         public Question GetQuestion(int index)
