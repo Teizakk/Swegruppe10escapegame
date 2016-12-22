@@ -172,7 +172,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 163976728}
-  - 114: {fileID: 163976727}
   m_Layer: 0
   m_Name: ButtonController
   m_TagString: Untagged
@@ -180,17 +179,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &163976727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 163976726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e33f7f0f2e9f4f74fa18441e1c61b947, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &163976728
 Transform:
   m_ObjectHideFlags: 0
@@ -494,7 +482,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1243762629}
+      - m_Target: {fileID: 0}
         m_MethodName: NextWindowOnClick
         m_Mode: 3
         m_Arguments:
@@ -776,8 +764,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1243762628}
-  - 114: {fileID: 1243762627}
-  - 114: {fileID: 1243762629}
   m_Layer: 0
   m_Name: "Hinzuf\xFCgeController"
   m_TagString: Untagged
@@ -785,17 +771,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1243762627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1243762626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a7e7ffc651a66b40912ef8292603229, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1243762628
 Transform:
   m_ObjectHideFlags: 0
@@ -809,30 +784,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
---- !u!114 &1243762629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1243762626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0f309b330f963e43934f68451f54cb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: {fileID: 413462544}
-  zeit: {fileID: 768306055}
-  playerName: {fileID: 0}
-  p1: {fileID: 0}
-  p2: {fileID: 0}
-  p3: {fileID: 0}
-  p4: {fileID: 0}
-  p5: {fileID: 0}
-  p6: {fileID: 0}
-  p7: {fileID: 0}
-  p8: {fileID: 0}
-  p9: {fileID: 0}
-  p10: {fileID: 0}
 --- !u!1001 &1410087629
 Prefab:
   m_ObjectHideFlags: 0
@@ -958,7 +909,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 163976727}
+      objectReference: {fileID: 0}
     - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
