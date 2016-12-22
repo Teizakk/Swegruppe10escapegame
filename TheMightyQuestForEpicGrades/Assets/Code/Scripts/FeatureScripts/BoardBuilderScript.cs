@@ -9,21 +9,19 @@ namespace Assets.Scripts.FeatureScripts {
         // TODO Überlegen, ob man die gridPositions tatsächlich braucht?
         private readonly List<Vector3> gridPositions = new List<Vector3>();
         private Transform boardHolder;
-        public GameObject ChestBlock;
-        public GameObject EndBlock;
-
-        [HideInInspector] public Vector3 EndPosition;
-
-        public GameObject FloorBlock;
         private char[,] levelData;
         private int max_x;
         private int max_z;
-        public GameObject[] PortalBlock;
-        public GameObject StartBlock;
-
-        [HideInInspector] public Vector3 StartPosition;
 
         public GameObject WallBlock;
+        public GameObject FloorBlock;
+        public GameObject ChestBlock;        
+        public GameObject[] PortalBlock;
+        public GameObject StartBlock;
+        public GameObject EndBlock;
+
+        [HideInInspector] public Vector3 StartPosition;
+        [HideInInspector] public Vector3 EndPosition;
 
         // Initialisiere die Liste mit den möglichen Positionen
         private void InitializeList() {

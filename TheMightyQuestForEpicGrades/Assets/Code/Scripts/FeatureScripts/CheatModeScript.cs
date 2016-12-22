@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Assets.Scripts.FeatureScripts {
     public class CheatModeScript : MonoBehaviour {
-        private bool a;
-
+        
         private GameStateHolder GameStateHolderInstance;
 
         private bool h;
+        private bool a;
 
         private bool HaxActivated; //TODO Ausweichlösung - bis wir uns unten geeinigt haben
 

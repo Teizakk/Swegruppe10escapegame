@@ -9,21 +9,38 @@ namespace Assets.Scripts.FeatureScripts {
         private int numberOfHints;
         private int numberOfLives;
 
+        #region HUDIcons
+
+        public RawImage[] hearts = new RawImage[7];
+        public RawImage[] hints = new RawImage[5];
+        public RawImage bluePortalStone;
+        public RawImage greenPortalStone;
+        public RawImage pinkPortalStone;
+
+        #endregion
+
+        #region HUDPoints
+
+        private int points;
+        public Text scoreDisplay;
+
+        #endregion
+
         //hier muss man sich einigen wie man den Schwierigkeitsgrade übergibt
         //entweder easy = 1, medium = 2....
         //oder direkt durch die Anzahl der Leben...
-        //aktulle Lösung ist über 1,2,3 mit "Übersetzung" durch das enum
+        //aktuelle Lösung ist duch das Enum
         //TODO je nach Art des Szenenwechselns muss hier dann noch der Score übergeben werden
-        public void FirstSetUpHUD(int difficulty) {
+        public void FirstSetUpHUD(Difficulties difficulty) {
             //Je nach Schwierigkeit die Werte setzen
             switch (difficulty) {
-                case (int) Difficulties.Easy:
+                case Difficulties.Easy:
                     numberOfLives = maxLives = 7;
                     break;
-                case (int) Difficulties.Medium:
+                case Difficulties.Medium:
                     numberOfLives = maxLives = 5;
                     break;
-                case (int) Difficulties.Hard:
+                case Difficulties.Hard:
                     numberOfLives = maxLives = 3;
                     break;
                 default:
@@ -147,22 +164,5 @@ namespace Assets.Scripts.FeatureScripts {
         private void Update() {
             //Anzeige Logik hier hin verschieben? oder ist das gut so, weil es Abfragen spart?
         }
-
-        #region HUDIcons
-
-        public RawImage[] hearts = new RawImage[7];
-        public RawImage[] hints = new RawImage[5];
-        public RawImage bluePortalStone;
-        public RawImage greenPortalStone;
-        public RawImage pinkPortalStone;
-
-        #endregion
-
-        #region HUDPoints
-
-        private int points;
-        public Text scoreDisplay;
-
-        #endregion
     }
 }
