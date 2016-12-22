@@ -2,54 +2,83 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
-using Newtonsoft.Json;
+using UnityEngine;
 
-namespace Assets.Scripts.UtilityScripts {
-    public class Persist {
-        public static string path = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-
-        public static void saveOld<T>(T state) {
-            var s = new JsonSerializerSettings();
-            s.TypeNameHandling = TypeNameHandling.Auto;
-            File.WriteAllText("~" + DateTime.Now.Ticks, JsonConvert.SerializeObject(state, Formatting.Indented, s));
+namespace Assets.Code.Scripts.UtilityScripts
+{
+    internal class Persist
+    {
+        static Persist()
+        {
+            ExecuteablePath = Application.persistentDataPath;
+            FExt = ".dat";
+            AssureDirectoryAndFilesExists();
         }
 
-        public static T loadOld<T>(string name, string path) {
-            var deserializer = new JsonSerializer();
-            deserializer.TypeNameHandling = TypeNameHandling.Auto;
-            if (!File.Exists(path + "\\SavedStates\\" + name))
-                throw new FileNotFoundException("The given File does not Exist!");
+        public static string ExecuteablePath { get; set; }
+        public static string FExt { get; set; }
 
-            return JsonConvert.DeserializeObject<T>(File.ReadAllText(path + "\\" + name));
+        // Highscores/highscores
+        // SavedStates
+        private static void AssureDirectoryAndFilesExists()
+        {
+            var st = ExecuteablePath + "\\SavedStates";
+            var hs = ExecuteablePath + "\\Highscores";
+            if (!Directory.Exists(st))
+                Directory.CreateDirectory(st);
+            if (!Directory.Exists(hs))
+                Directory.CreateDirectory(hs);
         }
 
-        public static void save<T>(T state, string fileName) {
-            var bf = new BinaryFormatter();
-            var file = File.Open(path + "\\SavedStates\\" + fileName + ".dat", FileMode.OpenOrCreate);
-            bf.Serialize(file, state);
-            file.Close();
-        }
-
-        public static T load<T>(string fileName) {
-            if (File.Exists(path + "\\SavedStates\\" + fileName + ".dat")) {
+        public static void save<T>(T state, string fileName)
+        {
+            try
+            {
                 var bf = new BinaryFormatter();
-                var file = File.Open(path + "\\" + "SavedStates" + "\\" + fileName + ".dat", FileMode.Open);
-                var state = (T) bf.Deserialize(file);
-                return state;
+                using (var file = File.Open(ExecuteablePath + "\\" + fileName + ".dat", FileMode.OpenOrCreate))
+                {
+                    bf.Serialize(file, state);
+                    file.Close();
+                }
             }
-            return default(T);
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
-        public static List<string> savedStates() {
-            if (Directory.Exists(path + "\\SavedStates"))
-                return Directory.GetFiles(path + "\\SavedStates").ToList().Select(
-                                     x => {
-                                         x = Path.GetFileNameWithoutExtension(x);
-                                         return x;
-                                     }).ToList();
-            Directory.CreateDirectory(path + "\\SavedStates");
+        public static T load<T>(string fileName) where T : new()
+        {
+            try
+            {
+                if (File.Exists(ExecuteablePath + "\\" + fileName + ".dat"))
+                {
+                    var bf = new BinaryFormatter();
+                    using (var file = File.Open(ExecuteablePath + "\\" + fileName + ".dat", FileMode.Open))
+                    {
+                        var state = (T) bf.Deserialize(file);
+                        file.Close();
+                        return state;
+                    }
+                }
+                return default(T);
+            }
+            catch (Exception e)
+            {
+                return new T();
+            }
+        }
+
+        public static List<string> savedStates()
+        {
+            if (Directory.Exists(ExecuteablePath + "\\SavedStates"))
+                return Directory.GetFiles(ExecuteablePath + "\\SavedStates").ToList().Select(x =>
+                {
+                    x = Path.GetFileNameWithoutExtension(x);
+                    return x;
+                }).ToList();
+            Directory.CreateDirectory(ExecuteablePath + "\\SavedStates");
             return new List<string>();
         }
     }

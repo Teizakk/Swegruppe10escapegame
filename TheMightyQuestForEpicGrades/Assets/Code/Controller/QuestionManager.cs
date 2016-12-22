@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using Assets.Models;
 
 namespace Assets.Scripts
 {
-    public class QuestionController
+    public class QuestionManager
     {
         private List<Question> Questions { get; set; }
-        private static readonly QuestionController qc = new QuestionController();
+        private static readonly QuestionManager qc = new QuestionManager();
         // Use this for initialization
-        private QuestionController()
+        private QuestionManager()
         {
 
         }
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
-        public static QuestionController GetInstance()
+        public static QuestionManager GetInstance()
         {
             try
             {
@@ -50,8 +51,8 @@ namespace Assets.Scripts
             try
             {
                 System.Random rand = new System.Random();
-                var q = Questions.Where(x => !x.inUse).ToList()[rand.Next(Questions.Count)];
-                q.inUse = true;
+                var q = Questions.Where(x => !x.Used).ToList()[rand.Next(Questions.Count)];
+                q.Used = true;
                 return q;
             }
             catch (IndexOutOfRangeException e)
@@ -70,8 +71,8 @@ namespace Assets.Scripts
             try
             {
                 System.Random rand = new System.Random();
-                var q = Questions.Where(x => !x.inUse && x.Difficulty == d).ToList()[rand.Next(Questions.Count)];
-                q.inUse = true;
+                var q = Questions.Where(x => !x.Used && x.Difficulty == d).ToList()[rand.Next(Questions.Count)];
+                q.Used = true;
                 return q;
             }
             catch (IndexOutOfRangeException e)
@@ -90,8 +91,8 @@ namespace Assets.Scripts
             try
             {
                 System.Random rand = new System.Random();
-                var q = Questions.Where(x => !x.inUse && x.Level == level).ToList()[rand.Next(Questions.Count)];
-                q.inUse = true;
+                var q = Questions.Where(x => !x.Used && x.Level == level).ToList()[rand.Next(Questions.Count)];
+                q.Used = true;
                 return q;
             }
 
@@ -111,8 +112,8 @@ namespace Assets.Scripts
             try
             {
                 System.Random rand = new System.Random();
-                var q = Questions.Where(x => !x.inUse && x.Level == level && x.Difficulty == d).ToList()[rand.Next(Questions.Count)];
-                q.inUse = true;
+                var q = Questions.Where(x => !x.Used && x.Level == level && x.Difficulty == d).ToList()[rand.Next(Questions.Count)];
+                q.Used = true;
                 return q;
             }
             catch (IndexOutOfRangeException e)
@@ -146,8 +147,8 @@ namespace Assets.Scripts
             try
             {
                 System.Random rand = new System.Random();
-                var q = Questions.Where(x => !x.inUse && x.Level == level && x.Difficulty == d && x.Modul == module).ToList()[rand.Next(Questions.Count)];
-                q.inUse = true;
+                var q = Questions.Where(x => !x.Used && x.Level == level && x.Difficulty == d && x.Modul == module).ToList()[rand.Next(Questions.Count)];
+                q.Used = true;
                 return q;
             }
             catch (IndexOutOfRangeException e)

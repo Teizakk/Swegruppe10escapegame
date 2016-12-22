@@ -125,7 +125,7 @@ namespace Assets.Scripts.SceneControllers {
 
         // Frage und Antworten in den Dialog laden
         private void LoadQuestion() {
-            //q = QuestionController.GetInstance().GetQuestionNotInUse();
+            //q = QuestionManager.GetInstance().GetQuestionNotInUse();
             q = new Question
             {
                 QuestionText = "Was ist das Internet?",

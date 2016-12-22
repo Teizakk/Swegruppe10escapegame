@@ -3,10 +3,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-//TODO Zuordnung schwierig...
-
-namespace Assets.Scripts.FeatureScripts {
-    public class HighscoreController : MonoBehaviour {
+namespace Assets.Code.Scripts.FeatureScripts
+{
+    public class HighscoreController : MonoBehaviour
+    {
         private List<Highscore> highscoreliste = new List<Highscore>();
 
         //Für laden
@@ -27,16 +27,18 @@ namespace Assets.Scripts.FeatureScripts {
         public Text zeit;
 
         // Use this for initialization
-        //Start ruft on Gui auf wenn man im Highscoreboard ist (hoffentlich :S)
-        private void Start() {
-            //if(Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory()) != null)
-            //        {
-            //highscoreliste = Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory());
-            //        }
+        //nur beim Highscoreboard genutzt
+        private void Start()
+        {
+            //if (Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory()) != null)
+            //{
+            //    highscoreliste = Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory());
+            //}
 
 
             if (Application.loadedLevelName == "Highscore")
-                if (highscoreliste.Count >= 10) {
+                if (highscoreliste.Count >= 10)
+                {
                     p1.text = "1. " + highscoreliste[0].name + "\t" + highscoreliste[0].score + "\t" +
                               highscoreliste[0].zeit;
                     p2.text = "2. " + highscoreliste[1].name + "\t" + highscoreliste[1].score + "\t" +
@@ -59,10 +61,12 @@ namespace Assets.Scripts.FeatureScripts {
                                highscoreliste[9].zeit;
                 }
                 //Es git Einträge Liste ist aber nicht voll
-                else if (highscoreliste.Count > 0) {
+                else if (highscoreliste.Count > 0)
+                {
                     var anzahl = highscoreliste.Count;
                     var i = 0;
-                    for (; i < anzahl; i++) {
+                    for (; i < anzahl; i++)
+                    {
                         if (i == 0)
                             p1.text = "1. " + highscoreliste[0].name + "\t" + highscoreliste[0].score + "\t" +
                                       highscoreliste[0].zeit;
@@ -95,7 +99,8 @@ namespace Assets.Scripts.FeatureScripts {
                                        highscoreliste[9].zeit;
                     }
                     //Liste ist leer, es gibt keien Einträge
-                    for (; i < 10; i++) {
+                    for (; i < 10; i++)
+                    {
                         if (i == 0)
                             p1.text = "1. XX\t\tXX\t\tXX";
                         if (i == 1)
@@ -118,7 +123,8 @@ namespace Assets.Scripts.FeatureScripts {
                             p10.text = "10. XX\t\tXX\t\tXX";
                     }
                 }
-                else {
+                else
+                {
                     p1.text = "1. XX\t\tXX\t\tXX";
                     p2.text = "2. XX\t\tXX\t\tXX";
                     p3.text = "3. XX\t\tXX\t\tXX";
@@ -133,87 +139,50 @@ namespace Assets.Scripts.FeatureScripts {
         }
 
         //Speichern eines Highscores EndOFGame
-        public void NextWindowOnClick(int level) {
-            var neu = new Highscore();
+        //beim klicken auf Hinzufügen 
+        public void NextWindowOnClick(int level)
+        {
+            if (Application.loadedLevelName == "InsertHighscoreEndOFGame")
+            {
+                //if (Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory()) != null)
+                //{
+                //    highscoreliste = Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory());
+                //}
+                //else fall kommt jetzt
+                //{
+                highscoreliste = new List<Highscore>();
+                //}
 
-            //Felder haben den entsprechenden Tag bekommen
-            neu.name = playerName.text;
-            neu.zeit = zeit.text;
-            neu.score = score.text;
+                var neu = new Highscore();
+
+                //Felder haben den entsprechenden Tag bekommen
+                neu.name = playerName.text;            
+                neu.zeit = zeit.text;
+                neu.score = score.text;
 
 
-            highscoreliste = InsertInto(highscoreliste, neu);
-
-            //Persist.save<List<Highscore>>(highscoreliste);
-            SceneManager.LoadScene(level);
+                highscoreliste = InsertInto(highscoreliste, neu);
+                //Persist.save<List<Highscore>>(highscoreliste);
+                SceneManager.LoadScene(level);
+            }
         }
 
-        //<<<<<<< HEAD
-        //Labels auf Gui Highscoreboard
-        //void OnGUI()
-        //{
-        //    if (highscoreliste.Count >= 10)
-        //    {
-        //        int x = 17;
-        //        int y = 138;
-        //        int height = 20;
-        //        int width = 505;
-        //        int platz = 1;
 
-        //        //erzeuge Labels an der stelle wo immoment die Textfelder stehen
-        //        for (int i = 0; i < 10; i++)
-        //        {
-        //            string str = platz + ". " + highscoreliste[i].playerName + "\t" + highscoreliste[i].score + "\t" + highscoreliste[i].zeit;
-        //            GUI.Label(new Rect(x, y, width, height), str);
-        //            platz++;
-        //            y -= 28;
-        //        }
-
-        //    }
-        //    else
-        //    {
-        //        int anzahl = highscoreliste.Count;
-        //        int j = 10 - anzahl;
-
-        //        int x = 17;
-        //        int y = 138;
-        //        int height = 20;
-        //        int width = 505;
-        //        int platz = 1;
-
-        //        //erzeuge Labels an der stelle wo immoment die Textfelder stehen
-        //        for (int i = 0; i < anzahl; i++)
-        //        {
-        //            string str = platz + ". " + highscoreliste[i].playerName + "\t" + highscoreliste[i].score + "\t" + highscoreliste[i].zeit;
-        //            GUI.Label(new Rect(x, y, width, height), str);
-        //            platz++;
-        //            y -= 28;
-        //        }
-
-        //        for (int k = 0; k < anzahl; k++)
-        //        {
-        //            string str = platz + ". ";
-        //            GUI.Label(new Rect(x, y, width, height), str);
-        //            platz++;
-        //            y -= 28;
-        //        }
-
-        //    }
-        //}
-        //=======
-        private List<Highscore> InsertInto(List<Highscore> old, Highscore neu) {
+        private List<Highscore> InsertInto(List<Highscore> old, Highscore neu)
+        {
             var stelle = 0;
 
-            if (old.Count == 0) {
+            if (old.Count == 0)
+            {
                 old.Add(neu);
                 return old;
             }
-            //>>>>>>> origin/Highscore2
 
             int wert;
             int.TryParse(neu.score, out wert);
 
-            for (var i = 0; i < old.Count; i++) {
+            for (var i = 0; i < old.Count; i++)
+            {
                 int vergleichswert;
                 int.TryParse(old[i].score, out vergleichswert);
 
@@ -230,7 +199,8 @@ namespace Assets.Scripts.FeatureScripts {
             return neueListe;
         }
 
-        public class Highscore {
+        public class Highscore
+        {
             public string score { get; set; }
             public string zeit { get; set; }
             public string name { get; set; }

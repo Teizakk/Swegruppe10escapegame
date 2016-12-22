@@ -1,4 +1,6 @@
-﻿using Assets.Scripts.FeatureScripts;
+﻿using Assets.Controller;
+using Assets.Scripts;
+using Assets.Scripts.FeatureScripts;
 using UnityEngine;
 
 namespace Assets.Controller {
@@ -24,10 +26,6 @@ namespace Assets.Controller {
         private void InitGame() {
             //TODO Das muss auch noch differntiert werden...
             boardManager.SetupScene(1);
-        }
-
-        // Update is called once per frame
-        private void Update() {
         }
 
         private void Start() {
