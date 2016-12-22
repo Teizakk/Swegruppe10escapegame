@@ -3,57 +3,79 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Newtonsoft.Json;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
     class Persist
     {
-
-        public static void saveOld<T>(T state)
+        public static String ExecuteablePath { get; set; }
+        public static String FExt { get; set; }
+        
+        static Persist()
         {
-            JsonSerializerSettings s = new JsonSerializerSettings();
-            s.TypeNameHandling = TypeNameHandling.Auto;
-            File.WriteAllText("~" + DateTime.Now.Ticks, JsonConvert.SerializeObject(state, Formatting.Indented, s));
+            ExecuteablePath = Application.persistentDataPath;
+            FExt = ".dat";
+            AssureDirectoryAndFilesExists();
         }
 
-        public static T loadOld<T>(string name, string path)
+        // Highscores/highscores
+        // SavedStates
+        private static void AssureDirectoryAndFilesExists()
         {
-            JsonSerializer deserializer = new JsonSerializer();
-            deserializer.TypeNameHandling = TypeNameHandling.Auto;
-            if (!File.Exists(path + "\\SavedStates\\" + name))
-                throw new FileNotFoundException("The given File does not Exist!");
-
-            return JsonConvert.DeserializeObject<T>(File.ReadAllText(path + "\\" + name));
+            String st = ExecuteablePath + "\\SavedStates";
+            String hs = ExecuteablePath + "\\Highscores";
+            if (!Directory.Exists(st))
+                Directory.CreateDirectory(st);
+            if (!Directory.Exists(hs))
+                Directory.CreateDirectory(hs);            
         }
-
-        public static string path = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
         public static void save<T>(T state, string fileName)
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(path + "\\SavedStates\\" + fileName + ".dat", FileMode.OpenOrCreate);
-            bf.Serialize(file, state);
-            file.Close();
-        }
-
-        public static T load<T>(string fileName)
-        {
-            if (File.Exists(path + "\\SavedStates\\" + fileName + ".dat"))
+            try
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Open(path + "\\" + "SavedStates" + "\\" + fileName + ".dat", FileMode.Open);
-                T state = (T)bf.Deserialize(file);
-                return state;
+                using (FileStream file = File.Open(ExecuteablePath + "\\" + fileName + ".dat", FileMode.OpenOrCreate))
+                {
+                    bf.Serialize(file, state);
+                    file.Close();
+                }
             }
-            return default(T);
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public static T load<T>(string fileName) where T : new()
+        {
+            try
+            {
+                if (File.Exists(ExecuteablePath + "\\" + fileName + ".dat"))
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    using (FileStream file = File.Open(ExecuteablePath + "\\" + fileName + ".dat", FileMode.Open))
+                    {
+                        T state = (T)bf.Deserialize(file);
+                        file.Close();
+                        return state;
+                    }
+
+                }
+                return default(T);
+            }
+            catch (Exception e)
+            {
+                return new T();
+            }
         }
         public static List<string> savedStates()
         {
-            if (Directory.Exists(path + "\\SavedStates"))
-                return Directory.GetFiles(path + "\\SavedStates").ToList().Select(x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
+            if (Directory.Exists(ExecuteablePath + "\\SavedStates"))
+                return Directory.GetFiles(ExecuteablePath + "\\SavedStates").ToList().Select(x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
             else
-                Directory.CreateDirectory(path + "\\SavedStates");
+                Directory.CreateDirectory(ExecuteablePath + "\\SavedStates");
             return new List<string>();
         }
 
