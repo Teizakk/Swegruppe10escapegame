@@ -1,9 +1,7 @@
-﻿using Assets.Controller;
-using Assets.Scripts;
-using Assets.Scripts.FeatureScripts;
+﻿using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
 
-namespace Assets.Controller {
+namespace Assets.Code.Controller {
     public class GameManager : MonoBehaviour {
         public static GameManager instance;
         public static bool cheat = false;

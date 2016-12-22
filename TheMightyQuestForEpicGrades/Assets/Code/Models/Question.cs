@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Assets.Models {
+namespace Assets.Code.Models {
     public enum Difficulties {
         Easy = 1,
         Medium = 2,

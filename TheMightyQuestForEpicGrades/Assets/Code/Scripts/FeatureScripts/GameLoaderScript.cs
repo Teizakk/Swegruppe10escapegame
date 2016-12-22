@@ -1,7 +1,7 @@
-﻿using Assets.Controller;
+﻿using Assets.Code.Controller;
 using UnityEngine;
 
-namespace Assets.Scripts.FeatureScripts {
+namespace Assets.Code.Scripts.FeatureScripts {
     public class GameLoaderScript : MonoBehaviour {
         public GameManager gameManager;
         public PlayerScript player;

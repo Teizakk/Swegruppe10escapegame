@@ -1,10 +1,10 @@
-﻿using Assets.Controller;
-using Assets.Models;
-using Assets.Scripts.FeatureScripts;
+﻿using Assets.Code.Controller;
+using Assets.Code.Models;
+using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.SceneControllers {
+namespace Assets.Code.Scripts.SceneControllers {
     public class NewGameViewScript : MonoBehaviour {
         private ModuleManager _myModuleController;
 
@@ -60,16 +60,16 @@ namespace Assets.Scripts.SceneControllers {
                     Dateiname);
         }
 
-        //TODO geht jetzt so auch nicht mehr
+        //TODO geht jetzt so auch nicht mehr ist aber auch besser so xD
 
-        public void KeepAModuleControllerAlive() {
-            var controllerObj = FindObjectOfType<ModuleManager>();
-            DontDestroyOnLoad(controllerObj);
-        }
+//        public void KeepAModuleControllerAlive() {
+//            var controllerObj = FindObjectOfType<ModuleManager>();
+//            DontDestroyOnLoad(controllerObj);
+//        }
 
-        public void KillAModuleController() {
-            var controllerObj = FindObjectOfType<ModuleManager>();
-            Destroy(controllerObj.gameObject);
-        }
+//        public void KillAModuleController() {
+//            var controllerObj = FindObjectOfType<ModuleManager>();
+//            Destroy(controllerObj.gameObject);
+//        }
     }
 }

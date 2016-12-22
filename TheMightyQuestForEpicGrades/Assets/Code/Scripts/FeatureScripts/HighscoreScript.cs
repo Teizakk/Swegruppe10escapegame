@@ -3,10 +3,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Assets.Code.Scripts.FeatureScripts
-{
-    public class HighscoreController : MonoBehaviour
-    {
+namespace Assets.Code.Scripts.FeatureScripts {
+    public class HighscoreController : MonoBehaviour {
         private List<Highscore> highscoreliste = new List<Highscore>();
 
         //Für laden
@@ -28,17 +26,15 @@ namespace Assets.Code.Scripts.FeatureScripts
 
         // Use this for initialization
         //nur beim Highscoreboard genutzt
-        private void Start()
-        {
+        private void Start() {
             //if (Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory()) != null)
             //{
             //    highscoreliste = Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory());
             //}
 
-
-            if (Application.loadedLevelName == "Highscore")
-                if (highscoreliste.Count >= 10)
-                {
+            if (SceneManager.GetActiveScene().name == "Highscore")
+                    //TODO fix gegen Compilerwarnung braucht Funktionstest
+                if (highscoreliste.Count >= 10) {
                     p1.text = "1. " + highscoreliste[0].name + "\t" + highscoreliste[0].score + "\t" +
                               highscoreliste[0].zeit;
                     p2.text = "2. " + highscoreliste[1].name + "\t" + highscoreliste[1].score + "\t" +
@@ -61,12 +57,10 @@ namespace Assets.Code.Scripts.FeatureScripts
                                highscoreliste[9].zeit;
                 }
                 //Es git Einträge Liste ist aber nicht voll
-                else if (highscoreliste.Count > 0)
-                {
+                else if (highscoreliste.Count > 0) {
                     var anzahl = highscoreliste.Count;
                     var i = 0;
-                    for (; i < anzahl; i++)
-                    {
+                    for (; i < anzahl; i++) {
                         if (i == 0)
                             p1.text = "1. " + highscoreliste[0].name + "\t" + highscoreliste[0].score + "\t" +
                                       highscoreliste[0].zeit;
@@ -99,8 +93,7 @@ namespace Assets.Code.Scripts.FeatureScripts
                                        highscoreliste[9].zeit;
                     }
                     //Liste ist leer, es gibt keien Einträge
-                    for (; i < 10; i++)
-                    {
+                    for (; i < 10; i++) {
                         if (i == 0)
                             p1.text = "1. XX\t\tXX\t\tXX";
                         if (i == 1)
@@ -123,8 +116,7 @@ namespace Assets.Code.Scripts.FeatureScripts
                             p10.text = "10. XX\t\tXX\t\tXX";
                     }
                 }
-                else
-                {
+                else {
                     p1.text = "1. XX\t\tXX\t\tXX";
                     p2.text = "2. XX\t\tXX\t\tXX";
                     p3.text = "3. XX\t\tXX\t\tXX";
@@ -140,10 +132,8 @@ namespace Assets.Code.Scripts.FeatureScripts
 
         //Speichern eines Highscores EndOFGame
         //beim klicken auf Hinzufügen 
-        public void NextWindowOnClick(int level)
-        {
-            if (Application.loadedLevelName == "InsertHighscoreEndOFGame")
-            {
+        public void NextWindowOnClick(int level) {
+            if (SceneManager.GetActiveScene().name == "InsertHighscoreEndOFGame") {
                 //if (Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory()) != null)
                 //{
                 //    highscoreliste = Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory());
@@ -156,7 +146,7 @@ namespace Assets.Code.Scripts.FeatureScripts
                 var neu = new Highscore();
 
                 //Felder haben den entsprechenden Tag bekommen
-                neu.name = playerName.text;            
+                neu.name = playerName.text;
                 neu.zeit = zeit.text;
                 neu.score = score.text;
 
@@ -168,12 +158,10 @@ namespace Assets.Code.Scripts.FeatureScripts
         }
 
 
-        private List<Highscore> InsertInto(List<Highscore> old, Highscore neu)
-        {
+        private List<Highscore> InsertInto(List<Highscore> old, Highscore neu) {
             var stelle = 0;
 
-            if (old.Count == 0)
-            {
+            if (old.Count == 0) {
                 old.Add(neu);
                 return old;
             }
@@ -181,8 +169,7 @@ namespace Assets.Code.Scripts.FeatureScripts
             int wert;
             int.TryParse(neu.score, out wert);
 
-            for (var i = 0; i < old.Count; i++)
-            {
+            for (var i = 0; i < old.Count; i++) {
                 int vergleichswert;
                 int.TryParse(old[i].score, out vergleichswert);
 
@@ -199,8 +186,7 @@ namespace Assets.Code.Scripts.FeatureScripts
             return neueListe;
         }
 
-        public class Highscore
-        {
+        public class Highscore {
             public string score { get; set; }
             public string zeit { get; set; }
             public string name { get; set; }

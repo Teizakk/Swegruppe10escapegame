@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.Controller;
+using Assets.Code.Controller;
 using UnityEngine;
 
-namespace Assets.Scripts.FeatureScripts {
+namespace Assets.Code.Scripts.FeatureScripts {
     public class BoardBuilderScript : MonoBehaviour {
 
         // TODO Überlegen, ob man die gridPositions tatsächlich braucht?

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.FeatureScripts {
+namespace Assets.Code.Scripts.FeatureScripts {
     public class PauseMenuScript : MonoBehaviour {
         private const float _FADE_FACTOR = 0.04f;
 

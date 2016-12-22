@@ -1,7 +1,7 @@
-﻿using Assets.Models;
+﻿using Assets.Code.Models;
 using UnityEngine;
 
-namespace Assets.Scripts.FeatureScripts {
+namespace Assets.Code.Scripts.FeatureScripts {
     public class GameStateHolder : MonoBehaviour {
         //Singleton instance
         private static GameStateHolder gameStateHolderObject;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace Assets.Controller {
+namespace Assets.Code.Controller {
     public class LevelManager {
         public string Dateiendung = ".txt";
 

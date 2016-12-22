@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Models {
+namespace Assets.Code.Models {
     [Serializable]
     public class GameState {
         //Konstruktor

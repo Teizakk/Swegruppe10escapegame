@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Assets.Models;
-using Assets.Scripts.FeatureScripts;
+using Assets.Code.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.SceneControllers {
+namespace Assets.Code.Scripts.SceneControllers {
     public class ScriptQuestionDialog : MonoBehaviour {
         private int punkte;
 
@@ -113,14 +112,15 @@ namespace Assets.Scripts.SceneControllers {
         }
 
         // zeigt Bild (ImagePopupScript) an
+        //TODO von Tobias PopupController überarbeiten
         public void ShowPicture(int index) {
-            var popupController = GameObject.Find("PopupController").GetComponent<PopupController>();
-            popupController.usedQuestion = q;
-            if (index > 0)
-                popupController.SetUpImagePopupAnswer(tippsShowed, index - 1);
-            else
-                popupController.SetUpImagePopupQuestion(tippsShowed);
-            Debug.Log("Bild '" + imagePaths[index] + "' anzeigen!");
+            //var popupController = GameObject.Find("PopupController").GetComponent<PopupController>();
+            //popupController.usedQuestion = q;
+            //if (index > 0)
+            //    popupController.SetUpImagePopupAnswer(tippsShowed, index - 1);
+            //else
+            //    popupController.SetUpImagePopupQuestion(tippsShowed);
+            //Debug.Log("Bild '" + imagePaths[index] + "' anzeigen!");
         }
 
         // Frage und Antworten in den Dialog laden

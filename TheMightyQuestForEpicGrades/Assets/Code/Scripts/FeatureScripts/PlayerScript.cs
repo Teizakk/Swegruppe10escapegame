@@ -1,9 +1,9 @@
-﻿using Assets.Controller;
+﻿using Assets.Code.Controller;
 using UnityEngine;
 
 //TODO auch hier muss man nochmal genau gucken, ob man den Singleton braucht
 
-namespace Assets.Scripts.FeatureScripts {
+namespace Assets.Code.Scripts.FeatureScripts {
     public class PlayerScript : MonoBehaviour {
         public static PlayerScript instance;
 

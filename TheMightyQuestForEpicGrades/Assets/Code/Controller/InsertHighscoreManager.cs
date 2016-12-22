@@ -1,55 +1,58 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System.Linq;
-using System;
+using Assets.Code.Models;
 using Assets.Code.Scripts.UtilityScripts;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class InsertHighscoreManager : MonoBehaviour {
+namespace Assets.Code.Controller {
+    public class InsertHighscoreManager : MonoBehaviour {
 
-    List<Highscore> highscoreliste = new List<Highscore>();
-    private static string Name = @"Highscores\highscores"; //"/Speicher/Highscores/highscoreliste";
+        List<Highscore> highscoreliste = new List<Highscore>();
+        private static string Name = @"Highscores\highscores"; //"/Speicher/Highscores/highscoreliste";
 
-    public Text score;
-    public Text zeit;
-    public Text playerName;
+        public Text score;
+        public Text zeit;
+        public Text playerName;
 
-    public void NextWindowOnClick(int level)
-    {
-        if (Application.loadedLevelName == "InsertHighscoreEndOFGame")
+        public void NextWindowOnClick(int level)
         {
-
-            try
+            if (SceneManager.GetActiveScene().name == "InsertHighscoreEndOFGame")
             {
 
-                highscoreliste = new List<Highscore>();
-                highscoreliste = Persist.load<List<Highscore>>(Name);
+                try
+                {
+
+                    highscoreliste = new List<Highscore>();
+                    highscoreliste = Persist.Load<List<Highscore>>(Name);
 
 
+                }
+                catch (Exception e)
+                {
+
+                    highscoreliste = new List<Highscore>();
+                }
+
+                Highscore neu = new Highscore();
+
+                neu.PlayerName = playerName.text;
+                neu.Zeit = zeit.text;
+                string scorString = score.text;
+                int scoreAsInt = -1;
+                int.TryParse(scorString, out scoreAsInt);
+                neu.Score = scoreAsInt;
+
+
+                highscoreliste.Add(neu);
+                highscoreliste.OrderBy(x => Convert.ToInt32(x.Score)).Take(10).ToList();
+                Persist.Save<List<Highscore>>(highscoreliste, Name);
+
+                SceneManager.LoadScene(level);
             }
-            catch (Exception e)
-            {
-
-                highscoreliste = new List<Highscore>();
-            }
-
-            Highscore neu = new Highscore();
-
-            neu.name = playerName.text;
-            neu.zeit = zeit.text;
-            string scorString = score.text;
-            int scoreAsInt = -1;
-            int.TryParse(scorString, out scoreAsInt);
-            neu.score = scoreAsInt;
-
-
-            highscoreliste.Add(neu);
-            highscoreliste.OrderBy(x => Convert.ToInt32(x.score)).Take(10).ToList();
-            Persist.save<List<Highscore>>(highscoreliste, Name);
-
-            SceneManager.LoadScene(level);
         }
-    }
 
+    }
 }

@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
-using Assets.Models;
+using Assets.Code.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.FeatureScripts {
+namespace Assets.Code.Scripts.FeatureScripts {
     public class HUDScript : MonoBehaviour {
         private int maxLives;
         private int numberOfHints;

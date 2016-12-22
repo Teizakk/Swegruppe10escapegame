@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
 
-namespace Assets.Scripts.SceneControllers {
+namespace Assets.Code.Scripts.SceneControllers {
     public class NewLevelHelperScript : MonoBehaviour {
         private void Start() {
             executingDirectory = Environment.CurrentDirectory;

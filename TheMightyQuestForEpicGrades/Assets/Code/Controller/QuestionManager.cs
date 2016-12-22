@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using Assets.Models;
+using Assets.Code.Models;
 
-namespace Assets.Scripts
+namespace Assets.Code.Controller
 {
     public class QuestionManager
     {
