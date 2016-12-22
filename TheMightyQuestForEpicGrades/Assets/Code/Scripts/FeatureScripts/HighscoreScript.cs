@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Assets.Code.Models;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Assets.Code.Scripts.FeatureScripts {
-    public class HighscoreController : MonoBehaviour {
+    public class HighscoreScript : MonoBehaviour {
         private List<Highscore> highscoreliste = new List<Highscore>();
 
         //Für laden
@@ -35,26 +37,26 @@ namespace Assets.Code.Scripts.FeatureScripts {
             if (SceneManager.GetActiveScene().name == "Highscore")
                     //TODO fix gegen Compilerwarnung braucht Funktionstest
                 if (highscoreliste.Count >= 10) {
-                    p1.text = "1. " + highscoreliste[0].name + "\t" + highscoreliste[0].score + "\t" +
-                              highscoreliste[0].zeit;
-                    p2.text = "2. " + highscoreliste[1].name + "\t" + highscoreliste[1].score + "\t" +
-                              highscoreliste[1].zeit;
-                    p3.text = "3. " + highscoreliste[2].name + "\t" + highscoreliste[2].score + "\t" +
-                              highscoreliste[2].zeit;
-                    p4.text = "4. " + highscoreliste[3].name + "\t" + highscoreliste[3].score + "\t" +
-                              highscoreliste[3].zeit;
-                    p5.text = "5. " + highscoreliste[4].name + "\t" + highscoreliste[4].score + "\t" +
-                              highscoreliste[4].zeit;
-                    p6.text = "6. " + highscoreliste[5].name + "\t" + highscoreliste[5].score + "\t" +
-                              highscoreliste[5].zeit;
-                    p7.text = "7. " + highscoreliste[6].name + "\t" + highscoreliste[6].score + "\t" +
-                              highscoreliste[6].zeit;
-                    p8.text = "8. " + highscoreliste[7].name + "\t" + highscoreliste[7].score + "\t" +
-                              highscoreliste[7].zeit;
-                    p9.text = "9. " + highscoreliste[8].name + "\t" + highscoreliste[8].score + "\t" +
-                              highscoreliste[8].zeit;
-                    p10.text = "10. " + highscoreliste[9].name + "\t" + highscoreliste[9].score + "\t" +
-                               highscoreliste[9].zeit;
+                    p1.text = "1. " + highscoreliste[0].PlayerName + "\t" + highscoreliste[0].Score + "\t" +
+                              highscoreliste[0].Zeit;
+                    p2.text = "2. " + highscoreliste[1].PlayerName + "\t" + highscoreliste[1].Score + "\t" +
+                              highscoreliste[1].Zeit;
+                    p3.text = "3. " + highscoreliste[2].PlayerName + "\t" + highscoreliste[2].Score + "\t" +
+                              highscoreliste[2].Zeit;
+                    p4.text = "4. " + highscoreliste[3].PlayerName + "\t" + highscoreliste[3].Score + "\t" +
+                              highscoreliste[3].Zeit;
+                    p5.text = "5. " + highscoreliste[4].PlayerName + "\t" + highscoreliste[4].Score + "\t" +
+                              highscoreliste[4].Zeit;
+                    p6.text = "6. " + highscoreliste[5].PlayerName + "\t" + highscoreliste[5].Score + "\t" +
+                              highscoreliste[5].Zeit;
+                    p7.text = "7. " + highscoreliste[6].PlayerName + "\t" + highscoreliste[6].Score + "\t" +
+                              highscoreliste[6].Zeit;
+                    p8.text = "8. " + highscoreliste[7].PlayerName + "\t" + highscoreliste[7].Score + "\t" +
+                              highscoreliste[7].Zeit;
+                    p9.text = "9. " + highscoreliste[8].PlayerName + "\t" + highscoreliste[8].Score + "\t" +
+                              highscoreliste[8].Zeit;
+                    p10.text = "10. " + highscoreliste[9].PlayerName + "\t" + highscoreliste[9].Score + "\t" +
+                               highscoreliste[9].Zeit;
                 }
                 //Es git Einträge Liste ist aber nicht voll
                 else if (highscoreliste.Count > 0) {
@@ -62,35 +64,35 @@ namespace Assets.Code.Scripts.FeatureScripts {
                     var i = 0;
                     for (; i < anzahl; i++) {
                         if (i == 0)
-                            p1.text = "1. " + highscoreliste[0].name + "\t" + highscoreliste[0].score + "\t" +
-                                      highscoreliste[0].zeit;
+                            p1.text = "1. " + highscoreliste[0].PlayerName + "\t" + highscoreliste[0].Score + "\t" +
+                                      highscoreliste[0].Zeit;
                         if (i == 1)
-                            p2.text = "2. " + highscoreliste[1].name + "\t" + highscoreliste[1].score + "\t" +
-                                      highscoreliste[1].zeit;
+                            p2.text = "2. " + highscoreliste[1].PlayerName + "\t" + highscoreliste[1].Score + "\t" +
+                                      highscoreliste[1].Zeit;
                         if (i == 2)
-                            p3.text = "3. " + highscoreliste[2].name + "\t" + highscoreliste[2].score + "\t" +
-                                      highscoreliste[2].zeit;
+                            p3.text = "3. " + highscoreliste[2].PlayerName + "\t" + highscoreliste[2].Score + "\t" +
+                                      highscoreliste[2].Zeit;
                         if (i == 3)
-                            p4.text = "4. " + highscoreliste[3].name + "\t" + highscoreliste[3].score + "\t" +
-                                      highscoreliste[3].zeit;
+                            p4.text = "4. " + highscoreliste[3].PlayerName + "\t" + highscoreliste[3].Score + "\t" +
+                                      highscoreliste[3].Zeit;
                         if (i == 4)
-                            p5.text = "5. " + highscoreliste[4].name + "\t" + highscoreliste[4].score + "\t" +
-                                      highscoreliste[4].zeit;
+                            p5.text = "5. " + highscoreliste[4].PlayerName + "\t" + highscoreliste[4].Score + "\t" +
+                                      highscoreliste[4].Zeit;
                         if (i == 5)
-                            p6.text = "6. " + highscoreliste[5].name + "\t" + highscoreliste[5].score + "\t" +
-                                      highscoreliste[5].zeit;
+                            p6.text = "6. " + highscoreliste[5].PlayerName + "\t" + highscoreliste[5].Score + "\t" +
+                                      highscoreliste[5].Zeit;
                         if (i == 6)
-                            p7.text = "7. " + highscoreliste[6].name + "\t" + highscoreliste[6].score + "\t" +
-                                      highscoreliste[6].zeit;
+                            p7.text = "7. " + highscoreliste[6].PlayerName + "\t" + highscoreliste[6].Score + "\t" +
+                                      highscoreliste[6].Zeit;
                         if (i == 7)
-                            p8.text = "8. " + highscoreliste[7].name + "\t" + highscoreliste[7].score + "\t" +
-                                      highscoreliste[7].zeit;
+                            p8.text = "8. " + highscoreliste[7].PlayerName + "\t" + highscoreliste[7].Score + "\t" +
+                                      highscoreliste[7].Zeit;
                         if (i == 8)
-                            p9.text = "9. " + highscoreliste[8].name + "\t" + highscoreliste[8].score + "\t" +
-                                      highscoreliste[8].zeit;
+                            p9.text = "9. " + highscoreliste[8].PlayerName + "\t" + highscoreliste[8].Score + "\t" +
+                                      highscoreliste[8].Zeit;
                         if (i == 9)
-                            p10.text = "10. " + highscoreliste[9].name + "\t" + highscoreliste[9].score + "\t" +
-                                       highscoreliste[9].zeit;
+                            p10.text = "10. " + highscoreliste[9].PlayerName + "\t" + highscoreliste[9].Score + "\t" +
+                                       highscoreliste[9].Zeit;
                     }
                     //Liste ist leer, es gibt keien Einträge
                     for (; i < 10; i++) {
@@ -146,9 +148,13 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 var neu = new Highscore();
 
                 //Felder haben den entsprechenden Tag bekommen
-                neu.name = playerName.text;
-                neu.zeit = zeit.text;
-                neu.score = score.text;
+                neu.PlayerName = playerName.text;
+                neu.Zeit = zeit.text;
+                int _score = -1;
+                if (!Int32.TryParse(score.text, out _score)) {
+                    Debug.LogError("Fehler beim Konvertieren des Score Strings zu int");
+                }
+                neu.Score = _score;
 
 
                 highscoreliste = InsertInto(highscoreliste, neu);
@@ -166,14 +172,13 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 return old;
             }
 
-            int wert;
-            int.TryParse(neu.score, out wert);
+            //int wert;
+            //TODO Überprüfen ob die kleinen Änderungen das Verhalten geändert haben...
+            //int.TryParse(neu.Score, out wert);
+            
 
             for (var i = 0; i < old.Count; i++) {
-                int vergleichswert;
-                int.TryParse(old[i].score, out vergleichswert);
-
-                if (wert > vergleichswert)
+                if (neu.Score > old[i].Score)
                     stelle = i;
             }
             var neueListe = new List<Highscore>();
@@ -184,12 +189,6 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 else
                     neueListe.Add(neu);
             return neueListe;
-        }
-
-        public class Highscore {
-            public string score { get; set; }
-            public string zeit { get; set; }
-            public string name { get; set; }
         }
     }
 }

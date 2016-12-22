@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Code.Scripts.SceneControllers {
-    public class NewModuleHelperScript : MonoBehaviour {
+    public class NewModuleDialogController : MonoBehaviour {
         
         //TODO reparieren
 

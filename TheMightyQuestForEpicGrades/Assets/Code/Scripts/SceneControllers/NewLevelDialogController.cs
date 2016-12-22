@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
 
 namespace Assets.Code.Scripts.SceneControllers {
-    public class NewLevelHelperScript : MonoBehaviour {
+    public class NewLevelDialogController : MonoBehaviour {
         private void Start() {
             executingDirectory = Environment.CurrentDirectory;
             FilePathsAndStatus = new List<FileNameHelper>();

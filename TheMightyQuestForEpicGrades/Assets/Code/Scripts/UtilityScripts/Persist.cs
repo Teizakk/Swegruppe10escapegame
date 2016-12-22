@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+
 namespace Assets.Code.Scripts.UtilityScripts {
     internal class Persist {
         static Persist() {
@@ -53,6 +54,7 @@ namespace Assets.Code.Scripts.UtilityScripts {
                 return default(T);
             }
             catch (Exception e) {
+                Debug.LogError(e);
                 return new T();
             }
         }

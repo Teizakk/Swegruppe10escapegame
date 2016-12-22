@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Assets.Code.GLOBALS;
 
 namespace Assets.Code.Models {
-    public enum Difficulties {
-        Easy = 1,
-        Medium = 2,
-        Hard = 3
-    }
 
     [Serializable]
     public class Question {

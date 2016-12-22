@@ -1,4 +1,5 @@
-﻿using Assets.Code.Models;
+﻿using Assets.Code.Controller;
+using Assets.Code.Models;
 using UnityEngine;
 
 namespace Assets.Code.Scripts.FeatureScripts {
@@ -6,8 +7,19 @@ namespace Assets.Code.Scripts.FeatureScripts {
         //Singleton instance
         private static GameStateHolder gameStateHolderObject;
 
+
+        #region "Speicherplatz"
         //Darf an keiner anderen Stelle implementiert sein
         public GameState GameStateObject;
+        #endregion
+
+        #region Zur Verfügung gestellte Manager
+        //TODO kappa
+        public GameManager MyGameManager;
+        public LevelManager MyLevelManager;
+        public QuestionManager MyQuestionManager;
+        #endregion
+
 
         //Sollte im Hauptmenü initialisiert werden.
         public void Start() {
@@ -27,6 +39,11 @@ namespace Assets.Code.Scripts.FeatureScripts {
             GameStateObject = new GameState();
 
             if (GameStateObject != null) Debug.Log("GameState Objekt existiert");
+
+            //TODO Manager initialisieren
+            MyGameManager = new GameManager();
+            MyLevelManager = new LevelManager();
+            MyQuestionManager = new QuestionManager();
         }
 
         //modifiziertes Singleton-Pattern (um von außen leicht an das GameState Objekt zu kommen)

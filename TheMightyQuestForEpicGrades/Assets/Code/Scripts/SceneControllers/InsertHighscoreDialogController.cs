@@ -7,8 +7,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Assets.Code.Controller {
-    public class InsertHighscoreManager : MonoBehaviour {
+namespace Assets.Code.Scripts.SceneControllers {
+    public class InsertHighscoreDialogController : MonoBehaviour {
 
         List<Highscore> highscoreliste = new List<Highscore>();
         private static string Name = @"Highscores\highscores"; //"/Speicher/Highscores/highscoreliste";
@@ -32,7 +32,7 @@ namespace Assets.Code.Controller {
                 }
                 catch (Exception e)
                 {
-
+                    Debug.LogError(e);
                     highscoreliste = new List<Highscore>();
                 }
 

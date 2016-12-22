@@ -1,11 +1,12 @@
 ﻿using Assets.Code.Controller;
+using Assets.Code.GLOBALS;
 using Assets.Code.Models;
 using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Code.Scripts.SceneControllers {
-    public class NewGameViewScript : MonoBehaviour {
+    public class NewGameDialogController : MonoBehaviour {
         private ModuleManager _myModuleController;
 
         public string Dateiname;

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Assets.Code.GLOBALS;
 using Assets.Code.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Code.Scripts.SceneControllers {
-    public class ScriptQuestionDialog : MonoBehaviour {
+    public class QuestionDialogController : MonoBehaviour {
         private int punkte;
 
 
@@ -32,9 +33,9 @@ namespace Assets.Code.Scripts.SceneControllers {
         }
 
 
-        public static ScriptQuestionDialog Instance() {
+        public static QuestionDialogController Instance() {
             if (!questionDialog) {
-                questionDialog = FindObjectOfType(typeof(ScriptQuestionDialog)) as ScriptQuestionDialog;
+                questionDialog = FindObjectOfType(typeof(QuestionDialogController)) as QuestionDialogController;
                 if (!questionDialog)
                     Debug.LogError(
                         "Es muss ein aktives ScriptQuestionDialog Skript auf einem GameObject in der Scene existieren");
@@ -199,7 +200,7 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         #region Properties
 
-        private static ScriptQuestionDialog questionDialog;
+        private static QuestionDialogController questionDialog;
         private int tippsShowed;
         private int chosenAnswerIndex;
         private DateTime startTime;

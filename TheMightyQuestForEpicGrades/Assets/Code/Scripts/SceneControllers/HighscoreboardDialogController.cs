@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Assets.Code.Controller {
-    public class HighscoreboardManager : MonoBehaviour {
+namespace Assets.Code.Scripts.SceneControllers {
+    public class HighscoreboardDialogController : MonoBehaviour {
         public Text p1;
         public Text p2;
         public Text p3;

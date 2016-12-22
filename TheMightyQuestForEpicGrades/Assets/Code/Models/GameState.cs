@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Code.GLOBALS;
 using UnityEngine;
 
 namespace Assets.Code.Models {
