@@ -25,10 +25,13 @@ namespace Assets.Code.Scripts.UtilityScripts
         {
             var st = ExecuteablePath + "\\SavedStates";
             var hs = ExecuteablePath + "\\Highscores";
+            var q = ExecuteablePath + "\\Module";
             if (!Directory.Exists(st))
                 Directory.CreateDirectory(st);
             if (!Directory.Exists(hs))
                 Directory.CreateDirectory(hs);
+            if (!Directory.Exists(q))
+                Directory.CreateDirectory(q);
         }
 
         public static void save<T>(T state, string fileName)
