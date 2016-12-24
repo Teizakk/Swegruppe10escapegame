@@ -232,10 +232,9 @@ namespace Assets.Scripts.SceneController
             //    CorrectAnswer = 3,
             //    Hints = new List<string> { "inter", "connected", "networks" }
             //};
-            // TODO : Frage aus der Datenhaltung holen
-            var gs = GameStateHolderScript.Instance().GameStateObject;
-            q = QuestionManager.GetInstance()
-                .GetQuestionNotInUse(gs.LevelState.Level, gs.GameOptions.Modul, gs.GameOptions.Difficulty);
+            // TODO : Frage mit Abhängigkeit von GameState holen
+//            var gs = GameStateHolderScript.Instance().GameStateObject;
+            q = QuestionManager.GetInstance().GetQuestion(0);
 
             // Fragentext laden
             outQuestion.text = q.QuestionText;

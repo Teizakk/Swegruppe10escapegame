@@ -56,7 +56,8 @@ namespace Assets.Controller {
         {
             try
             {
-                string json = File.ReadAllText(Persist.ExecuteablePath + "Module\\" + modul);
+				Debug.Log(Persist.ExecuteablePath + "/Module/" + modul + ".txt");
+				string json = File.ReadAllText(Persist.ExecuteablePath + "/Module/" + modul + ".txt");
                 return JsonConvert.DeserializeObject<List<Question>>(json);
             }
             catch (FileNotFoundException e)

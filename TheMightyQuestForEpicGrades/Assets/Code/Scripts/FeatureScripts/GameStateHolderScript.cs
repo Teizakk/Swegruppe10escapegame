@@ -2,9 +2,9 @@
 using UnityEngine;
 
 namespace Assets.Scripts.FeatureScripts {
-    public class GameStateHolder : MonoBehaviour {
+    public class GameStateHolderScript : MonoBehaviour {
         //Singleton instance
-        private static GameStateHolder gameStateHolderObject;
+        private static GameStateHolderScript gameStateHolderObject;
 
         //Darf an keiner anderen Stelle implementiert sein
         public GameState GameStateObject;
@@ -30,9 +30,9 @@ namespace Assets.Scripts.FeatureScripts {
         }
 
         //modifiziertes Singleton-Pattern (um von außen leicht an das GameState Objekt zu kommen)
-        public static GameStateHolder Instance() {
+        public static GameStateHolderScript Instance() {
             if (!gameStateHolderObject) {
-                gameStateHolderObject = FindObjectOfType(typeof(GameStateHolder)) as GameStateHolder;
+                gameStateHolderObject = FindObjectOfType(typeof(GameStateHolderScript)) as GameStateHolderScript;
                 if (!gameStateHolderObject)
                     Debug.LogError(
                         "Es muss ein aktives GameStateHolder Skript auf einem GameObject in der Szene existieren");
