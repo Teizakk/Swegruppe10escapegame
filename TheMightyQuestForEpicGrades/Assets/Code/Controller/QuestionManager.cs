@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using Assets.Controller;
 using Assets.Models;
+using Assets.Scripts.FeatureScripts;
 
 namespace Assets.Scripts
 {
@@ -14,7 +16,7 @@ namespace Assets.Scripts
         // Use this for initialization
         private QuestionManager()
         {
-
+            Questions = ModuleManager.LoadQuestionsFromModul(GameStateHolderScript.Instance().GameStateObject.GameOptions.Modul);
         }
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
         public static QuestionManager GetInstance()

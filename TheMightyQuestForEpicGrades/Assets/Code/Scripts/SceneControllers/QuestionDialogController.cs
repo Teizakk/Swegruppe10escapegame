@@ -40,7 +40,7 @@ namespace Assets.Scripts.SceneController
         private TimeSpan usedTime;
         private String[] imagePaths;
         private static Question q;
-        private int punkte;
+        private bool _answerCorrect = false;
         #endregion
 
         #region Popup Variablen
@@ -70,12 +70,11 @@ namespace Assets.Scripts.SceneController
         }
 
         // zeigt die Frage an
-        public void ShowQuestion(Question question)
+        public void ShowQuestion()
         {
             blockAndUnblockMovement();
 
             Debug.Log("Frage anzeigen");
-            q = question;
 
             // Werte initialisieren
             tippsShowed = 0;
@@ -87,6 +86,12 @@ namespace Assets.Scripts.SceneController
 
             // QuestionDialog anzeigen
             questionDialogPopup.SetActive(true);
+        }
+
+        // überprüft, ob die Antwort richtig war
+        public bool AnswerCorrect()
+        {
+            return _answerCorrect;
         }
 
         // leitet die Frage weiter (eventuel unnötig)
@@ -103,6 +108,8 @@ namespace Assets.Scripts.SceneController
         {
             // ToggleGroup initialisieren
             toggleGroup.RegisterToggle(tglAnswer1);
+
+            LoadQuestion();
         }
 
         //Update is called once per frame
@@ -112,18 +119,33 @@ namespace Assets.Scripts.SceneController
             TimerText.text = String.Format("{0:hh\\:mm\\:ss\\:ff}", usedTime);
         }
 
+        // ändert die ausgewählte Antwort
+        public void AnswerChanged(int index)
+        {
+            chosenAnswerIndex = index;
+            Debug.Log(chosenAnswerIndex + ". Antwort ausgewählt!");
+        }
+
         // beantwortet die Frage
         public void AnswerQuestion()
         {
-            if (AnswerCorrect())
+            // in beiden Fällen Zeit zur Gesamtzeit addieren
+            endTime = DateTime.Now;
+            usedTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
+
+            var gs = GameStateHolderScript.Instance().GameStateObject.LevelState;
+            gs.Time += usedTime;
+            Debug.Log("Zeit zur Gesamtzeit addieren");
+
+            if (chosenAnswerIndex == q.CorrectAnswer)
             {
-                endTime = DateTime.Now;
-                usedTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
+                _answerCorrect = true;
                 Debug.Log("Frage korrekt beantwortet!");
                 // Popup anzeigen
                 ShowPopup("Frage korrekt beantwortet!");
 
                 // Punkte addieren
+                var punkte = 0;
                 switch (q.Difficulty)
                 {
                     case Difficulties.Easy:
@@ -136,47 +158,37 @@ namespace Assets.Scripts.SceneController
                         punkte = 3;
                         break;
                 }
-                // gameManager.portalsteine++;
-                // gameManager.punkte += punkte;
-                Debug.Log("Portalstein erhalten!");
+
+                gs.Score += punkte;
                 Debug.Log(punkte + " Punkt(e) erhalten!");
             }
             else
             {
-                ShowPopup("Frage wurde falsch beantwortet!");
-                Debug.Log("Frage wurde falsch beantwortet!");
-                Debug.Log("Leben - 1");
-                // gameManager.Leben--
+                _answerCorrect = false;
+                if (gs.Lives > 0)
+                {
+                    ShowPopup("Frage wurde falsch beantwortet!");
+                    Debug.Log("Frage wurde falsch beantwortet!");
+                    Debug.Log("Leben - 1");
+                    gs.Lives--;
+                }
+                else
+                {
+                    ShowPopup("Game Over!");
+                    // TODO : return to Main Menu
+                }
             }
-
-            // in beiden Fällen
-            Debug.Log("Zeit zur Gesamtzeit addieren");
-
-            // gameManager.Time += timer;
-            // Close
-        }
-
-        // ändert die ausgewählte Antwort
-        public void AnswerChanged(int index)
-        {
-            chosenAnswerIndex = index;
-            Debug.Log(chosenAnswerIndex + ". Antwort ausgewählt!");
-        }
-
-        // überprüft, ob die Antwort richtig war
-        private bool AnswerCorrect()
-        {
-            return (chosenAnswerIndex == q.CorrectAnswer);
         }
 
         // Tipp anzeigen
         public void ShowTipp()
         {
+            var gs = GameStateHolderScript.Instance().GameStateObject.LevelState;
             if (tippsShowed < 3
-                /* && gameManager.Hintsteine>0*/)
+                 && gs.HintStones > 0)
             {
                 tippsShowed++;
-                // gameManager.Hintsteine--
+                gs.HintStones--;
 
                 var lblTipp = LabelTipps.GetComponentsInChildren<Text>();
                 var outTipp = OutTipps.GetComponentsInChildren<Text>();
@@ -192,36 +204,37 @@ namespace Assets.Scripts.SceneController
         // Frage und Antworten in den Dialog laden
         void LoadQuestion()
         {
-            q = new Question
-            {
-                QuestionText = "Was ist das Internet?",
-                Difficulty = Difficulties.Easy,
-                Level = 1,
-                ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
-                Answers =
-                    new List<Question.Answer>()
-                    {
-                            new Question.Answer()
-                            {
-                                AnswerText = "Ein Netz",
-                                ImagePath = ""
-                            },
-                            new Question.Answer()
-                            {
-                                AnswerText = "Nur physikalisch vorhanden",
-                                ImagePath = "Assets/Samples+Placeholder/Bild2.png"
-                            },
-                            new Question.Answer()
-                            {
-                                AnswerText = "Ein Netz von Netzen",
-                                ImagePath = ""
-                            },
-                    },
-                CorrectAnswer = 3,
-                Hints = new List<string> { "inter", "connected", "networks" }
-            };
-            // TODO : Frage aus der Datenhaltung holen
-            //q = QuestionManager.GetInstance().GetQuestion(0);
+            //q = new Question
+            //{
+            //    QuestionText = "Was ist das Internet?",
+            //    Difficulty = Difficulties.Easy,
+            //    Level = 1,
+            //    ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
+            //    Answers =
+            //        new List<Question.Answer>()
+            //        {
+            //                new Question.Answer()
+            //                {
+            //                    AnswerText = "Ein Netz",
+            //                    ImagePath = ""
+            //                },
+            //                new Question.Answer()
+            //                {
+            //                    AnswerText = "Nur physikalisch vorhanden",
+            //                    ImagePath = "Assets/Samples+Placeholder/Bild2.png"
+            //                },
+            //                new Question.Answer()
+            //                {
+            //                    AnswerText = "Ein Netz von Netzen",
+            //                    ImagePath = ""
+            //                },
+            //        },
+            //    CorrectAnswer = 3,
+            //    Hints = new List<string> { "inter", "connected", "networks" }
+            //};
+            // TODO : Frage mit Abhängigkeit von GameState holen
+//            var gs = GameStateHolderScript.Instance().GameStateObject;
+            q = QuestionManager.GetInstance().GetQuestion(0);
 
             // Fragentext laden
             outQuestion.text = q.QuestionText;
