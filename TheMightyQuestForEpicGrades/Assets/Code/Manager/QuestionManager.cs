@@ -11,10 +11,6 @@ namespace Assets.Code.Manager {
         private List<Question> Questions { get; set; }
         // static readonly QuestionManager qc = new QuestionManager();
 
-        // Use this for initialization
-        public QuestionManager() {
-        }
-
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
         //public static QuestionManager GetInstance() {
         //    try {

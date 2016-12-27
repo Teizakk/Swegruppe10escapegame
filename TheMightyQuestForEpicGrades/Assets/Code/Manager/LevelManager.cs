@@ -4,14 +4,16 @@ using UnityEngine;
 
 namespace Assets.Code.Manager {
     public class LevelManager : MonoBehaviour {
-        public string Dateiendung = ".txt";
 
-        private string Dateiname;
+        private char[,] _levelData = null;
 
-        public string Dateipfad = "./Level/";
-        public string Dateiprefix = "Level_";
+        #region Dateinamen-Konfiguration
+        private readonly string Dateiendung = ".txt";
+        private readonly string Dateipfad = "./Level/";
+        private readonly string Dateiprefix = "Level_";
+        #endregion
 
-        public char[,] loadLevel(int level) {
+        public char[,] LoadFromFile(int level) {
             var Dateiname = Dateiprefix + level + Dateiendung;
             var levelData = new List<string>();
             levelData.Clear();
@@ -26,6 +28,7 @@ namespace Assets.Code.Manager {
             return to2dCharArray(levelData);
         }
 
+        //Hilfsfunktion
         private char[,] to2dCharArray(List<string> list) {
             var charArray2d = new char[list.Count, list[0].Length];
 
@@ -34,13 +37,6 @@ namespace Assets.Code.Manager {
                     charArray2d[i, j] = list[i][j];
 
             return charArray2d;
-        }
-
-        public void Awake() {
-            Debug.Log("Awake called bei Component LevelManager");
-        }
-        public void Start() {
-            Debug.Log("Start called bei Component LevelManager");
         }
     }
 }

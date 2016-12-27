@@ -5,9 +5,12 @@ using UnityEngine;
 
 namespace Assets.Code.Manager {
     public class ModuleManager : MonoBehaviour {
+        //Sollte man von außen den Dateinamen ändern wollen
+        public static string dateiname = "Module.txt";
+
         private readonly List<string> module = new List<string>();
 
-        public ModuleManager(string dateiname) {
+        public void LoadFromFile() {
             module.Clear();
             try {
                 if (dateiname != null)
@@ -23,11 +26,11 @@ namespace Assets.Code.Manager {
             }
         }
 
-        public string[] getModules() {
+        public string[] GetModulesAsArray() {
             return module.ToArray();
         }
 
-        public bool SaveNewModule(string dateiname, string newModuleName) {
+        public bool SaveToFile(string newModuleName) {
             try {
                 if (File.Exists(dateiname)) {
                     using (var myStreamWriter = new StreamWriter(dateiname, true)) { //true = append

@@ -50,8 +50,8 @@ namespace Assets.Code.Scripts.FeatureScripts {
         }
 
         public void SetStartPosition() {
-            position_X = GameManager.instance.boardManager.StartPosition.x;
-            position_Z = GameManager.instance.boardManager.StartPosition.z;
+            position_X = GameStateManager.instance.boardManager.StartPosition.x;
+            position_Z = GameStateManager.instance.boardManager.StartPosition.z;
 
             rb.MovePosition(new Vector3(position_X, 1.0f, position_Z));
         }

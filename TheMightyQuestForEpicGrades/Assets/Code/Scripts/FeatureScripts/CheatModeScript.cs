@@ -34,13 +34,13 @@ namespace Assets.Code.Scripts.FeatureScripts {
                     if (HaxActivated) {
                         Debug.Log("Cheatmode deactivated");
                         HaxActivated = false;
-                        GameManager.cheat = false;
+                        GameStateManager.cheat = false;
                         GameStateHolderInstance.GameStateObject.LevelState.Cheatmode = false;
                     }
                     else {
                         Debug.Log("Cheatmode activated");
                         HaxActivated = true;
-                        GameManager.cheat = true;
+                        GameStateManager.cheat = true;
                         GameStateHolderInstance.GameStateObject.LevelState.Cheatmode = true;
                     }
                     h = false;
