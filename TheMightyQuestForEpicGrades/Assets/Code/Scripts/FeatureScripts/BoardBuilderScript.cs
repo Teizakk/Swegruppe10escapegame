@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.Code.Controller;
+using Assets.Code.Manager;
 using UnityEngine;
 
 namespace Assets.Code.Scripts.FeatureScripts {

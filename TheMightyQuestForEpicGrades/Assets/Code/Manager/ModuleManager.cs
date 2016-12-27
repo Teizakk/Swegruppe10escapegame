@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace Assets.Code.Controller {
+namespace Assets.Code.Manager {
     public class ModuleManager : MonoBehaviour {
         private readonly List<string> module = new List<string>();
 

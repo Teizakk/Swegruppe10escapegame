@@ -1,4 +1,5 @@
-﻿using Assets.Code.Controller;
+﻿using Assets.Code.Manager;
+using Assets.Code.Scripts.SceneControllers;
 using UnityEngine;
 
 namespace Assets.Code.Scripts.FeatureScripts {

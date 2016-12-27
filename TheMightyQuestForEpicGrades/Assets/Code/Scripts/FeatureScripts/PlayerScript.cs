@@ -1,4 +1,5 @@
-﻿using Assets.Code.Controller;
+﻿using Assets.Code.Manager;
+using Assets.Code.Scripts.SceneControllers;
 using UnityEngine;
 
 //TODO auch hier muss man nochmal genau gucken, ob man den Singleton braucht

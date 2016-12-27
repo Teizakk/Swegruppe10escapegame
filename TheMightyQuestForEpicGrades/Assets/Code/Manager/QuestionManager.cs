@@ -6,7 +6,7 @@ using Assets.Code.Models;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Assets.Code.Controller {
+namespace Assets.Code.Manager {
     public class QuestionManager : MonoBehaviour{
         private List<Question> Questions { get; set; }
         // static readonly QuestionManager qc = new QuestionManager();

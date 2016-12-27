@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace Assets.Code.Controller {
+namespace Assets.Code.Manager {
     public class LevelManager : MonoBehaviour {
         public string Dateiendung = ".txt";
 

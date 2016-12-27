@@ -1,4 +1,4 @@
-﻿using Assets.Code.Controller;
+﻿using Assets.Code.Manager;
 using UnityEngine;
 using UnityEngine.UI;
 

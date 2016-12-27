@@ -1,10 +1,9 @@
 ﻿using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
 
-
 //TODO Singleton benötigt?
 
-namespace Assets.Code.Controller {
+namespace Assets.Code.Manager {
     public class GameManager : MonoBehaviour {
         private static short _numOfInstances;
         public static GameManager instance;

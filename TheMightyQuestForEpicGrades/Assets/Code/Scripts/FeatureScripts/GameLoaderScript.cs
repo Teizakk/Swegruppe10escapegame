@@ -1,5 +1,4 @@
-﻿using Assets.Code.Controller;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Code.Scripts.FeatureScripts {
     public class GameLoaderScript : MonoBehaviour {
