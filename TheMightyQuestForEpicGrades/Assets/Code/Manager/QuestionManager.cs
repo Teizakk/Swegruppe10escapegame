@@ -7,7 +7,10 @@ using UnityEngine;
 using Random = System.Random;
 
 namespace Assets.Code.Manager {
-    public class QuestionManager : MonoBehaviour{
+    public class QuestionManager : MonoBehaviour {
+
+        //TODO REWORK
+
         private List<Question> Questions { get; set; }
         // static readonly QuestionManager qc = new QuestionManager();
 

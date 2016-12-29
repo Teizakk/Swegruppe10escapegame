@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using UnityEngine;
 
 namespace Assets.Code.Manager {
     public class LevelManager : MonoBehaviour {
 
-        private char[,] _levelData = null;
+        private char[,] _levelData;
+        private string _loadedLevel;
 
         #region Dateinamen-Konfiguration
         private readonly string Dateiendung = ".txt";
@@ -13,8 +15,8 @@ namespace Assets.Code.Manager {
         private readonly string Dateiprefix = "Level_";
         #endregion
 
-        public char[,] LoadFromFile(int level) {
-            var Dateiname = Dateiprefix + level + Dateiendung;
+        public void LoadFromFile(int index) {
+            var Dateiname = Dateiprefix + index + Dateiendung;
             var levelData = new List<string>();
             levelData.Clear();
 
@@ -24,8 +26,8 @@ namespace Assets.Code.Manager {
                 while ((data = Datei.ReadLine()) != null)
                     levelData.Add(data);
             }
-
-            return to2dCharArray(levelData);
+            _loadedLevel = Dateiname;
+            _levelData = to2dCharArray(levelData);
         }
 
         //Hilfsfunktion
@@ -37,6 +39,14 @@ namespace Assets.Code.Manager {
                     charArray2d[i, j] = list[i][j];
 
             return charArray2d;
+        }
+
+        public string GetLoadedLevel() {
+            return _loadedLevel;
+        }
+
+        public char[,] GetLevelData() {
+            return _levelData;
         }
     }
 }

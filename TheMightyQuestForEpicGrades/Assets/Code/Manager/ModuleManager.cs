@@ -19,7 +19,7 @@ namespace Assets.Code.Manager {
                         while ((line = streamReader.ReadLine()) != null)
                             module.Add(line);
                     }
-                else Debug.LogError("Dateiname muss gesetzt werden!");
+                else Debug.LogError("Dateiname muss gesetzt werden!"); //Überbleibsel aber hey, was solls man kann nie auf zu viele Fehler checken... :D
             }
             catch (Exception e) {
                 Debug.LogError(e);

@@ -5,20 +5,14 @@ using UnityEngine;
 namespace Assets.Code.Scripts.FeatureScripts {
     public class CheatModeScript : MonoBehaviour {
         
-        private GameStateHolder GameStateHolderInstance;
-
         private bool h;
         private bool a;
 
         private bool HaxActivated; //TODO Ausweichlösung - bis wir uns unten geeinigt haben
 
-        public void Start() {
-            GameStateHolderInstance = GameStateHolder.Instance();
-        }
-
         // Update is called once per frame
         private void Update() {
-            if (Input.anyKey)
+            if (Input.anyKey) {
                 if (Input.GetKey("h")) {
                     h = true;
                     Debug.Log("h");
@@ -51,6 +45,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
                     h = false;
                     a = false;
                 }
+            }
         }
     }
 }

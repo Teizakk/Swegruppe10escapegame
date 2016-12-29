@@ -94,6 +94,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
             if (numberOfLives == 0) {
                 Debug.LogError(
                     "Fehler im einem Controller - Spiel sollte längst GAME OVER sein, Anzahl an Leben in HUD == 0!");
+                Debug.Break();
                 return;
             }
             hearts[numberOfLives - 1].enabled = false;

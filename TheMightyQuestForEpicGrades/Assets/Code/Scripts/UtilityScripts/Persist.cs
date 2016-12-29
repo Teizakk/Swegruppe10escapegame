@@ -14,17 +14,20 @@ namespace Assets.Code.Scripts.UtilityScripts {
             AssureDirectoryAndFilesExists();
         }
 
-        public static string ExecuteablePath { get; set; }
-        public static string FExt { get; set; }
+        private static string ExecuteablePath { get; set; }
+        private static string FExt { get; set; }
 
         // Highscores/highscores
         // SavedStates
         private static void AssureDirectoryAndFilesExists() {
             var st = ExecuteablePath + "\\SavedStates";
             var hs = ExecuteablePath + "\\Highscores";
+            var sg = ExecuteablePath + "\\SaveGames";
             if (!Directory.Exists(st))
                 Directory.CreateDirectory(st);
             if (!Directory.Exists(hs))
+                Directory.CreateDirectory(hs);
+            if (!Directory.Exists(sg))
                 Directory.CreateDirectory(hs);
         }
 
@@ -37,7 +40,7 @@ namespace Assets.Code.Scripts.UtilityScripts {
                 }
             }
             catch (Exception e) {
-                throw e;
+                Debug.LogError(e);
             }
         }
 
@@ -62,7 +65,14 @@ namespace Assets.Code.Scripts.UtilityScripts {
         public static List<string> GetSavedStates() {
             if (Directory.Exists(ExecuteablePath + "\\SavedStates"))
                 return Directory.GetFiles(ExecuteablePath + "\\SavedStates").ToList().Select( x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
-            Directory.CreateDirectory(ExecuteablePath + "\\SavedStates");
+            Directory.CreateDirectory(ExecuteablePath + "\\SavedStates"); //eigentlich unnötig, da dies oben im Konstruktor schon gemacht wird.
+            return new List<string>();
+        }
+
+        public static List<string> GetSavedGames() {
+            if (Directory.Exists(ExecuteablePath + "\\SaveGames"))
+                return Directory.GetFiles(ExecuteablePath + "\\SaveGames").ToList().Select(x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
+            Directory.CreateDirectory(ExecuteablePath + "\\SaveGames"); //eigentlich unnötig, da dies oben im Konstruktor schon gemacht wird.
             return new List<string>();
         }
     }

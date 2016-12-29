@@ -13,12 +13,15 @@ namespace Assets.Code.Scripts.FeatureScripts {
         private int max_x;
         private int max_z;
 
+        #region Prefabs
+        [Header("BoardBuilder Prefabs")]
         public GameObject WallBlock;
         public GameObject FloorBlock;
-        public GameObject ChestBlock;        
-        public GameObject[] PortalBlock;
+        public GameObject ChestBlock;
+        public GameObject[] PortalBlock = new GameObject[3];
         public GameObject StartBlock;
         public GameObject EndBlock;
+        #endregion
 
         [HideInInspector] public Vector3 StartPosition;
         [HideInInspector] public Vector3 EndPosition;
@@ -95,7 +98,8 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
         // Erstelle die Szene
         public void SetupScene(int level) {
-            levelData = GetComponent<LevelManager>().loadLevel(level);
+            levelData = Master.Instance().MyLevel.GetLevelData();
+            //levelData = GetComponent<LevelManager>().loadLevel(level);
 
             // Die LevelDaten müssen gesetzt sein, sodass man die möglichen Positionen zum Spawnen setzen kann.
             if (levelData != null) {
