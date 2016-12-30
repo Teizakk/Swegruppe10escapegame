@@ -50,8 +50,8 @@ namespace Assets.Code.Scripts.FeatureScripts {
         }
 
         public void SetStartPosition() {
-            position_X = GameStateManager.instance.boardManager.StartPosition.x;
-            position_Z = GameStateManager.instance.boardManager.StartPosition.z;
+            //TODO position_X = boardManager.StartPosition.x;
+            //TODO position_Z = boardManager.StartPosition.z;
 
             rb.MovePosition(new Vector3(position_X, 1.0f, position_Z));
         }
@@ -66,26 +66,20 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 else if (other.gameObject.CompareTag("PinkPortal") && Input.GetKeyDown(KeyCode.E))
                         // && Portalstein vorhanden)
                 {
-                    GameStateHolder.Instance().GameStateObject.LevelState.PinkPortalStone.Used = true;
-                    Debug.Log(
-                        "PinkPortalSkript.Activated = " + GameStateHolder.Instance().GameStateObject.LevelState.PinkPortalStone.Used.ToString() + " (" + DebugLogVar +
-                        ")");
+                    //TODO Master.Instance().MyGameState. PINK PORTAL 
+                    //Debug.Log("PinkPortalSkript.Activated = " + GameStateHolder.Instance().GameStateObject.LevelState.PinkPortalStone.Used.ToString() + " (" + DebugLogVar +")");
                 }
                 else if (other.gameObject.CompareTag("GreenPortal") && Input.GetKeyDown(KeyCode.E))
                         // && Portalstein vorhanden)
                 {
-                    GameStateHolder.Instance().GameStateObject.LevelState.GreenPortalStone.Used = true;
-                    Debug.Log(
-                        "GreenPortalSkript.Activated = " + GameStateHolder.Instance().GameStateObject.LevelState.GreenPortalStone.Used.ToString() + " (" + DebugLogVar +
-                        ")");
+                    //TODO Master.Instance().MyGameState. GREEN PORTAL 
+                    //Debug.Log("GreenPortalSkript.Activated = " + GameStateHolder.Instance().GameStateObject.LevelState.GreenPortalStone.Used.ToString() + " (" + DebugLogVar +")");
                 }
                 else if (other.gameObject.CompareTag("BluePortal") && Input.GetKeyDown(KeyCode.E))
                         // && Portalstein vorhanden)
                 {
-                    GameStateHolder.Instance().GameStateObject.LevelState.GreenPortalStone.Used = true;
-                    Debug.Log(
-                        "BluePortalSkript.Activated = " + GameStateHolder.Instance().GameStateObject.LevelState.GreenPortalStone.Used.ToString() + " (" + DebugLogVar +
-                        ")");
+                    //TODO Master.Instance().MyGameState. BLUE PORTAL 
+                    //Debug.Log("BluePortalSkript.Activated = " + GameStateHolder.Instance().GameStateObject.LevelState.GreenPortalStone.Used.ToString() + " (" + DebugLogVar +")");
                 }
         }
 

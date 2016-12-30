@@ -426,7 +426,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 939537505}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -120}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -614,6 +614,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4105208a9de804d86b14a9dfa3c298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CheatInfoPrefab: {fileID: 223000012415890316, guid: c1a9fc9c90ded754b8c72d76c2eb943e,
+    type: 2}
 --- !u!4 &1052604056
 Transform:
   m_ObjectHideFlags: 0
@@ -626,7 +628,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!224 &1152215856 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224000012847632332, guid: 6d29f56592784b94da6ed44ea2462178,
@@ -642,7 +644,7 @@ GameObject:
   - 4: {fileID: 1233521067}
   - 114: {fileID: 1233521066}
   m_Layer: 0
-  m_Name: GameStateHolder
+  m_Name: MASTER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -656,14 +658,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1233521065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d408ea851513d0f4ea75ececef8a0587, type: 3}
+  m_Script: {fileID: 11500000, guid: c4122365ce275ea4c99ba770b6e12344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameStateObject: {}
-  MyGameManager: {fileID: 0}
-  MyLevelManager: {fileID: 0}
-  MyModuleManager: {fileID: 0}
-  MyQuestionManager: {fileID: 0}
+  MyGameState: {fileID: 0}
+  MyLevel: {fileID: 0}
+  MyModule: {fileID: 0}
+  MyQuestion: {fileID: 0}
 --- !u!4 &1233521067
 Transform:
   m_ObjectHideFlags: 0
@@ -676,7 +677,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!1 &1256560499
 GameObject:
   m_ObjectHideFlags: 0

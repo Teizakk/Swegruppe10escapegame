@@ -158,5 +158,13 @@ namespace Assets.Code.Manager {
             set { GameStateObject.LevelState.Cheatmode = value; }
         }
         #endregion
+
+        public void Awake() {
+            GameStateObject = new GameState();
+        }
+
+        public void OnDestroy() {
+            Debug.LogWarning("Hier wurde geraden alle Infos vom GameStateObject mit gelöscht... gewollt?");
+        }
     }
 }

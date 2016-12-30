@@ -6,15 +6,15 @@ using UnityEngine;
 namespace Assets.Code.Manager {
     public class ModuleManager : MonoBehaviour {
         //Sollte man von außen den Dateinamen ändern wollen
-        public static string dateiname = "Module.txt";
+        public readonly string _Dateiname = "Module.txt";
 
         private readonly List<string> module = new List<string>();
 
         public void LoadFromFile() {
             module.Clear();
             try {
-                if (dateiname != null)
-                    using (var streamReader = new StreamReader(dateiname)) {
+                if (_Dateiname != null)
+                    using (var streamReader = new StreamReader(_Dateiname)) {
                         string line;
                         while ((line = streamReader.ReadLine()) != null)
                             module.Add(line);
@@ -32,8 +32,8 @@ namespace Assets.Code.Manager {
 
         public bool SaveToFile(string newModuleName) {
             try {
-                if (File.Exists(dateiname)) {
-                    using (var myStreamWriter = new StreamWriter(dateiname, true)) { //true = append
+                if (File.Exists(_Dateiname)) {
+                    using (var myStreamWriter = new StreamWriter(_Dateiname, true)) { //true = append
                         myStreamWriter.WriteLine(newModuleName);
                     }
                     return true;
