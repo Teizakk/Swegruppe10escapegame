@@ -60,6 +60,8 @@ namespace Assets.Code.Manager {
                     using (var myStreamWriter = new StreamWriter(_Dateiname, true)) { //true = append
                         myStreamWriter.WriteLine(newModuleName);
                     }
+                    //Refresh nach update
+                    LoadFromFile();
                     return true;
                 }
                 Debug.LogError("Module Savefile existiert nicht!");

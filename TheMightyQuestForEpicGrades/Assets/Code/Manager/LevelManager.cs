@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using UnityEngine;
 
 namespace Assets.Code.Manager {
     public class LevelManager : MonoBehaviour {
+
+        public readonly string ExecutingDirectory = Environment.CurrentDirectory;
 
         private char[,] _levelData;
         private string _loadedLevel;
@@ -30,7 +33,27 @@ namespace Assets.Code.Manager {
             _levelData = to2dCharArray(levelData);
         }
 
-        //Hilfsfunktion
+        public void CopyFileToLevelFolder(string filePathToAdd) {
+            var levelNumberToAdd = findNextFileName();
+            
+            File.Copy(filePathToAdd, Master.Instance().MyLevel.ExecutingDirectory + "\\Level\\Level_" + levelNumberToAdd + ".txt");
+            levelNumberToAdd++;
+            Debug.Log("Datei: " + filePathToAdd + "\n" + "Kopiert in Level-Ordner als:" + "Level_" + (levelNumberToAdd - 1) +
+                ".txt");
+        }
+        
+        //Hilfsfunktionen
+        private int findNextFileName() {
+            var levelNumberToAdd = 1;
+            for (var i = 1; i < 200; i++)
+                if (File.Exists(Master.Instance().MyLevel.ExecutingDirectory + "\\Level\\Level_" + i + ".txt"))
+                    levelNumberToAdd++;
+                else
+                    break;
+            //Debug.Log("Letztes gefundenes Level: " + (levelNumberToAdd - 1));
+            return levelNumberToAdd;
+        }
+
         private char[,] to2dCharArray(List<string> list) {
             var charArray2d = new char[list.Count, list[0].Length];
 

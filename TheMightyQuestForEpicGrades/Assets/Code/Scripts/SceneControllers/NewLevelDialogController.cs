@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Assets.Code.Manager;
 using UnityEngine;
 using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
@@ -10,7 +11,6 @@ using Button = UnityEngine.UI.Button;
 namespace Assets.Code.Scripts.SceneControllers {
     public class NewLevelDialogController : MonoBehaviour {
         private void Start() {
-            executingDirectory = Environment.CurrentDirectory;
             FilePathsAndStatus = new List<FileNameHelper>();
             FilePathsAndStatus.Clear();
             PreselectedFolderPath = "";
@@ -150,29 +150,15 @@ namespace Assets.Code.Scripts.SceneControllers {
         }
 
         public void CopyFilesToLevelFolder() {
-            var levelNumberToAdd = findNextFileName();
-
+            var counter = 0;
             foreach (var file in FilePathsAndStatus) {
-                File.Copy(file.FullFilePath, executingDirectory + "\\Level\\Level_" + levelNumberToAdd + ".txt");
-                levelNumberToAdd++;
-                Debug.Log(
-                    "Datei: " + file + "\n" + "Kopiert in Level-Ordner als:" + "Level_" + (levelNumberToAdd - 1) +
-                    ".txt");
+                Master.Instance().MyLevel.CopyFileToLevelFolder(file.FullFilePath);
+                counter++;
             }
+            Debug.Log("Insgesamt "  + counter + " Files zum Levelordner hinzugefügt");
         }
 
         // K L E I N E   H E L P E R   F U N K T I O N E N 
-        private int findNextFileName() {
-            var levelNumberToAdd = 1;
-            for (var i = 1; i < 200; i++)
-                if (File.Exists(executingDirectory + "\\Level\\Level_" + i + ".txt"))
-                    levelNumberToAdd++;
-                else
-                    break;
-            //Debug.Log("Letztes gefundenes Level: " + (levelNumberToAdd - 1));
-            return levelNumberToAdd;
-        }
-
         private void AddToFileDisplay(string path, bool isChecked, bool valid = false, bool duplicate = false) {
             //Instanziere neue Textline nach prefab Vorlage mit FileDisplayContentWindow als Parent
             var displayLine = Instantiate(FileTextPrefab);
@@ -233,8 +219,6 @@ namespace Assets.Code.Scripts.SceneControllers {
         #endregion
 
         #region File/Folder Browser specifics
-
-        private string executingDirectory;
 
         private string PreselectedFolderPath;
 

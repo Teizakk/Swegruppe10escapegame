@@ -290,7 +290,7 @@ Prefab:
     - target: {fileID: 224000013935865080, guid: a046fa37893c93344ab8216d652393ea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -194
+      value: -240
       objectReference: {fileID: 0}
     - target: {fileID: 224000013935865080, guid: a046fa37893c93344ab8216d652393ea,
         type: 2}
@@ -471,7 +471,7 @@ Prefab:
     - target: {fileID: 224000012847632332, guid: 6d29f56592784b94da6ed44ea2462178,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 167
+      value: 226
       objectReference: {fileID: 0}
     - target: {fileID: 224000012847632332, guid: 6d29f56592784b94da6ed44ea2462178,
         type: 2}
@@ -481,12 +481,12 @@ Prefab:
     - target: {fileID: 224000012847632332, guid: 6d29f56592784b94da6ed44ea2462178,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 123
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 224000012847632332, guid: 6d29f56592784b94da6ed44ea2462178,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 38
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 224000012847632332, guid: 6d29f56592784b94da6ed44ea2462178,
         type: 2}
@@ -541,11 +541,11 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2102120376}
+      objectReference: {fileID: 2102120378}
     - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: SubmitNewModule
       objectReference: {fileID: 0}
     - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
         type: 2}
@@ -560,6 +560,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224000012847632332, guid: 6d29f56592784b94da6ed44ea2462178,
     type: 2}
   m_PrefabInternal: {fileID: 929981029}
+--- !u!114 &929981031 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+    type: 2}
+  m_PrefabInternal: {fileID: 929981029}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &956258041
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,7 +627,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 0
@@ -669,8 +675,8 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6, y: 100}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -0.0000038146973, y: 100}
+  m_SizeDelta: {x: 244.5, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &976123561
 MonoBehaviour:
@@ -1099,7 +1105,7 @@ GameObject:
   - 4: {fileID: 2102120377}
   - 114: {fileID: 2102120378}
   m_Layer: 0
-  m_Name: NewModuleHelper
+  m_Name: NewModuleDialogController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1129,6 +1135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1948ba25992c27549b5e539ce3e323c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ModuleNameField: {fileID: 976123561}
+  SubmitButton: {fileID: 929981031}
 --- !u!1 &2115456586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,13 +1198,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Modul
+  m_Text: Modulname hier eintragen
 --- !u!222 &2115456589
 CanvasRenderer:
   m_ObjectHideFlags: 0
