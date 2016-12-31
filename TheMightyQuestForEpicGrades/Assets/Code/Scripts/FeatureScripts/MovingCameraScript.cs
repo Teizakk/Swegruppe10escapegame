@@ -3,7 +3,7 @@
 // Skript "bindet" die Bewegung der Kamera an die des Spielers
 // Daher muss das Skript auf der Kamera ausgeführt werden
 
-namespace Assets.Scripts.FeatureScripts {
+namespace Assets.Code.Scripts.FeatureScripts {
     public class MovingCameraScript : MonoBehaviour {
         // Reference zum Player gameobject
         public static GameObject player;

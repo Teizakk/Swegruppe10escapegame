@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel;
-using Assets.Models;
+using Assets.Code.GLOBALS;
+using Assets.Code.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.FeatureScripts {
+namespace Assets.Code.Scripts.FeatureScripts {
     public class HUDScript : MonoBehaviour {
         private int maxLives;
         private int numberOfHints;
@@ -93,6 +94,7 @@ namespace Assets.Scripts.FeatureScripts {
             if (numberOfLives == 0) {
                 Debug.LogError(
                     "Fehler im einem Controller - Spiel sollte längst GAME OVER sein, Anzahl an Leben in HUD == 0!");
+                Debug.Break();
                 return;
             }
             hearts[numberOfLives - 1].enabled = false;

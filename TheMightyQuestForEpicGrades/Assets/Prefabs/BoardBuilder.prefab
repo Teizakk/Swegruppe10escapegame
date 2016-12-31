@@ -9,45 +9,43 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1000013527367390}
+  m_RootGameObject: {fileID: 1000010386908538}
   m_IsPrefabParent: 1
---- !u!1 &1000013527367390
+--- !u!1 &1000010386908538
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 4000013880004250}
-  - 114: {fileID: 114000013148426976}
-  - 114: {fileID: 114000011448183994}
-  - 114: {fileID: 114000010226860328}
+  - 4: {fileID: 4000012411207012}
+  - 114: {fileID: 114000012091873176}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: BoardBuilder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4000013880004250
+--- !u!4 &4000012411207012
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013527367390}
+  m_GameObject: {fileID: 1000010386908538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -51.051685, y: -24.116983, z: -38.118687}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &114000010226860328
+--- !u!114 &114000012091873176
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013527367390}
+  m_GameObject: {fileID: 1000010386908538}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0612a7c17720cc14091ac7cc0bc5874a, type: 3}
@@ -64,30 +62,3 @@ MonoBehaviour:
   EndBlock: {fileID: 1000010201025734, guid: b2f56e2e30e988642bdae2de456aa972, type: 2}
   StartPosition: {x: 0, y: 0, z: 0}
   EndPosition: {x: 0, y: 0, z: 0}
---- !u!114 &114000011448183994
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013527367390}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 835aba457042a634ea74593402b8fadc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Dateipfad: ./Level/
-  Dateiprefix: Level_
-  Dateiendung: .txt
---- !u!114 &114000013148426976
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013527367390}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6353ede53f7c344b8eb58e1aa4c2899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boardManager: {fileID: 0}
-  level: 1
