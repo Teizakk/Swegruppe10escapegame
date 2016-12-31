@@ -1,7 +1,8 @@
 ﻿using Assets.Code.Manager;
+using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
 
-namespace Assets.Code.Scripts.FeatureScripts {
+namespace Assets.Code.Scripts.SceneControllers {
     public class MainGameDialogController : MonoBehaviour {
 
         //TODO DAS BRAUCHT NOCH EINE LOGISCHE KOMPLETT ÜBERARBEITUNG
