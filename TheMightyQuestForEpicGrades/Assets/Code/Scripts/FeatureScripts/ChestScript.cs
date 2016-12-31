@@ -8,7 +8,7 @@ namespace Assets.Scripts.FeatureScripts {
         private bool ChestIsLocked = false;
         //private bool ChestIsOpen; //TODO diese Information ist redundant, weil sie sich aus ChestIsLocked ableiten lässt
 
-        public void OnCollisionStay(Collider col) {
+        public void OnCollisionStay(Collision col) {
             if (Input.GetKeyDown("e") && !ChestIsLocked && col.gameObject.CompareTag("Player"))
             {
                 QuestionDialogController.Instance().ShowQuestion();

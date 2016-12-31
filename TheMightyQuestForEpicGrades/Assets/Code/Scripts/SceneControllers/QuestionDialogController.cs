@@ -1,16 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Assets.Scripts;
+using Assets.Code.GLOBALS;
+using Assets.Code.Models;
+using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using Assets.Controller;
-using Assets.Models;
-using Assets.Scripts.FeatureScripts;
-using UnityEngine.Networking;
 
-namespace Assets.Scripts.SceneController
+namespace Assets.Code.Scripts.SceneControllers
 {
     public class QuestionDialogController : MonoBehaviour
     {
@@ -108,8 +106,6 @@ namespace Assets.Scripts.SceneController
         {
             // ToggleGroup initialisieren
             toggleGroup.RegisterToggle(tglAnswer1);
-
-            LoadQuestion();
         }
 
         //Update is called once per frame
@@ -204,37 +200,36 @@ namespace Assets.Scripts.SceneController
         // Frage und Antworten in den Dialog laden
         void LoadQuestion()
         {
-            //q = new Question
-            //{
-            //    QuestionText = "Was ist das Internet?",
-            //    Difficulty = Difficulties.Easy,
-            //    Level = 1,
-            //    ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
-            //    Answers =
-            //        new List<Question.Answer>()
-            //        {
-            //                new Question.Answer()
-            //                {
-            //                    AnswerText = "Ein Netz",
-            //                    ImagePath = ""
-            //                },
-            //                new Question.Answer()
-            //                {
-            //                    AnswerText = "Nur physikalisch vorhanden",
-            //                    ImagePath = "Assets/Samples+Placeholder/Bild2.png"
-            //                },
-            //                new Question.Answer()
-            //                {
-            //                    AnswerText = "Ein Netz von Netzen",
-            //                    ImagePath = ""
-            //                },
-            //        },
-            //    CorrectAnswer = 3,
-            //    Hints = new List<string> { "inter", "connected", "networks" }
-            //};
-            // TODO : Frage mit Abhängigkeit von GameState holen
-//            var gs = GameStateHolderScript.Instance().GameStateObject;
-            q = QuestionManager.GetInstance().GetQuestion(0);
+            q = new Question
+            {
+                QuestionText = "Was ist das Internet?",
+                Difficulty = Difficulties.Easy,
+                Chapter = "Einstieg",
+                ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
+                Answers =
+                    new List<Question.Answer>()
+                    {
+                            new Question.Answer()
+                            {
+                                AnswerText = "Ein Netz",
+                                ImagePath = ""
+                            },
+                            new Question.Answer()
+                            {
+                                AnswerText = "Nur physikalisch vorhanden",
+                                ImagePath = "Assets/Samples+Placeholder/Bild2.png"
+                            },
+                            new Question.Answer()
+                            {
+                                AnswerText = "Ein Netz von Netzen",
+                                ImagePath = ""
+                            },
+                    },
+                CorrectAnswer = 3,
+                Hints = new List<string> { "inter", "connected", "networks" }
+            };
+            // TODO : Frage aus der Datenhaltung holen
+ 			q = QuestionManager.GetInstance().GetQuestion(0);
 
             // Fragentext laden
             outQuestion.text = q.QuestionText;
@@ -276,7 +271,6 @@ namespace Assets.Scripts.SceneController
                 outTipp[i].text = tipp;
                 i++;
             }
-
         }
 
         #region Popups
