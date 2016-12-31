@@ -13,6 +13,7 @@ namespace Assets.Code.Scripts.SceneControllers {
         public InputField playerName;
 
         private void Start() {
+            Master.Instance().MyModule.LoadFromFile(); //Falls zwischenzeitlich aktualisiert
             var modules = Master.Instance().MyModule.GetModulesAsArray();
 
             foreach (var str in modules)
@@ -34,27 +35,5 @@ namespace Assets.Code.Scripts.SceneControllers {
             //wenn nicht gesetzt = Anonymus
             Master.Instance().MyGameState.PlayerName = setPlayerName;
         }
-
-        public void SaveNewModule(string newModuleName) {
-            Master.Instance().MyModule.SaveToFile(newModuleName);
-            if (Master.Instance().MyModule.SaveToFile(newModuleName))
-                Debug.Log("Modul: " + newModuleName + " gespeichert!");
-            else
-                Debug.LogError(
-                    "Modul: " + newModuleName + " konnte nicht gespeichert werden, Fehler beim Schreiben in die Datei: " +
-                    Master.Instance().MyModule._Dateiname);
-        }
-
-        //TODO geht jetzt so auch nicht mehr ist aber auch besser so xD
-
-//        public void KeepAModuleControllerAlive() {
-//            var controllerObj = FindObjectOfType<ModuleManager>();
-//            DontDestroyOnLoad(controllerObj);
-//        }
-
-//        public void KillAModuleController() {
-//            var controllerObj = FindObjectOfType<ModuleManager>();
-//            Destroy(controllerObj.gameObject);
-//        }
     }
 }

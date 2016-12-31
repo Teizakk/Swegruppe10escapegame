@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1000010386908538}
+  m_IsPrefabParent: 1
+--- !u!1 &1000010386908538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 4000012411207012}
+  - 114: {fileID: 114000012091873176}
+  m_Layer: 0
+  m_Name: BoardBuilder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4000012411207012
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010386908538}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &114000012091873176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010386908538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0612a7c17720cc14091ac7cc0bc5874a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WallBlock: {fileID: 1000010234473194, guid: 01e118575226cc740bc65b97dbba11cf, type: 2}
+  FloorBlock: {fileID: 1000014227828250, guid: aef0c7a6bd80a2f409fa63c63bc706e9, type: 2}
+  ChestBlock: {fileID: 1000012791200902, guid: 49550a0a1bc6b2a4399d3f7b5ff63f7b, type: 2}
+  PortalBlock:
+  - {fileID: 1000014181535220, guid: 23c4296eedaa69744b57307eae42e134, type: 2}
+  - {fileID: 1000012686282368, guid: 92b25693d5e24b04889065785e890e61, type: 2}
+  - {fileID: 1000010668390076, guid: eb879fc2a63785a49ae8ff87c4e33821, type: 2}
+  StartBlock: {fileID: 1000010980092512, guid: 82c0c1c8a9703c346aaf17574ac33c46, type: 2}
+  EndBlock: {fileID: 1000010201025734, guid: b2f56e2e30e988642bdae2de456aa972, type: 2}
+  StartPosition: {x: 0, y: 0, z: 0}
+  EndPosition: {x: 0, y: 0, z: 0}

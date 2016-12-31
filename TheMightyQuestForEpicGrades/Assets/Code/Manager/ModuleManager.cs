@@ -72,5 +72,10 @@ namespace Assets.Code.Manager {
                 return false;
             }
         }
+
+        private void Start() {
+            //Initiales Laden der Module
+            LoadFromFile();
+        }
     }
 }

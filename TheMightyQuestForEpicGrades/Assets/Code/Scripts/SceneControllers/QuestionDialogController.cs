@@ -131,7 +131,7 @@ namespace Assets.Code.Scripts.SceneControllers {
             {
                 QuestionText = "Was ist das Internet?",
                 Difficulty = Difficulties.Easy,
-                Level = 1,
+                Chapter = "Einstieg",
                 ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
                 Answers =
                         new List<Question.Answer>

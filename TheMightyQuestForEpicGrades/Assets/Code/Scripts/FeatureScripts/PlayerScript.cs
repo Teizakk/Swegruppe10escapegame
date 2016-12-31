@@ -37,6 +37,9 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
             //Standardmäßig sind die Kontrollen natürlich an...
             controlsBlocked = false;
+
+            //Setzen des Speeds
+            speed = GLOBALS.CONSTANTS.PLAYER_SPEED;
         }
 
         public PlayerScript GetInstance() {
@@ -50,8 +53,8 @@ namespace Assets.Code.Scripts.FeatureScripts {
         }
 
         public void SetStartPosition() {
-            //TODO position_X = boardManager.StartPosition.x;
-            //TODO position_Z = boardManager.StartPosition.z;
+            position_X = Master.Instance().MyLevel.BoardBuilder_TMP.StartPosition.x;
+            position_Z = Master.Instance().MyLevel.BoardBuilder_TMP.StartPosition.z;
 
             rb.MovePosition(new Vector3(position_X, 1.0f, position_Z));
         }

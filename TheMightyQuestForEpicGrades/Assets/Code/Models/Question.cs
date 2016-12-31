@@ -24,7 +24,7 @@ namespace Assets.Code.Models {
         public Difficulties Difficulty { get; set; }
         public string Modul { get; set; }
         public bool Used { get; set; }
-        public int Level { get; set; }
+        public string Chapter { get; set; }
         public int CorrectAnswer { get; set; }
         public TimeSpan QuestionDuration { get; set; }
 

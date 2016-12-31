@@ -72,7 +72,8 @@ namespace Assets.Code.Manager {
         public Question GetQuestionNotInUse(int level) {
             try {
                 var rand = new Random();
-                var q = Questions.Where(x => !x.Used && (x.Level == level)).ToList()[rand.Next(Questions.Count)];
+                //TODO FIX var q = Questions.Where(x => !x.Used && (x.Chapter == level)).ToList()[rand.Next(Questions.Count)];
+                Question q = new Question(); //BULLSHIT COMPILER FIX
                 q.Used = true;
                 return q;
             }
@@ -90,9 +91,8 @@ namespace Assets.Code.Manager {
         public Question GetQuestionNotInUse(int level, Difficulties d) {
             try {
                 var rand = new Random();
-                var q =
-                        Questions.Where(x => !x.Used && (x.Level == level) && (x.Difficulty == d)).ToList()[
-                                      rand.Next(Questions.Count)];
+                //TODO FIX var q = Questions.Where(x => !x.Used && (x.Chapter == level) && (x.Difficulty == d)).ToList()[rand.Next(Questions.Count)];
+                Question q = new Question(); //BULLSHIT COMPILER FIX
                 q.Used = true;
                 return q;
             }
@@ -121,10 +121,8 @@ namespace Assets.Code.Manager {
         public Question GetQuestionNotInUse(int level, string module, Difficulties d) {
             try {
                 var rand = new Random();
-                var q =
-                        Questions.Where(
-                                      x => !x.Used && (x.Level == level) && (x.Difficulty == d) && (x.Modul == module)).
-                                  ToList()[rand.Next(Questions.Count)];
+                //TODO FIX var q = Questions.Where(x => !x.Used && (x.Chapter == level) && (x.Difficulty == d) && (x.Modul == module)).ToList()[rand.Next(Questions.Count)];
+                Question q = new Question(); //BULLSHIT COMPILER FIX
                 q.Used = true;
                 return q;
             }

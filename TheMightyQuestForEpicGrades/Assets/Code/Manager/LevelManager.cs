@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
 
 namespace Assets.Code.Manager {
     public class LevelManager : MonoBehaviour {
 
         public readonly string ExecutingDirectory = Environment.CurrentDirectory;
+
+        //Temporärer Link
+        public BoardBuilderScript BoardBuilder_TMP;
 
         private char[,] _levelData;
         private string _loadedLevel;

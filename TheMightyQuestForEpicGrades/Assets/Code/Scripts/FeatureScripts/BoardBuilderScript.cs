@@ -97,9 +97,8 @@ namespace Assets.Code.Scripts.FeatureScripts {
         }
 
         // Erstelle die Szene
-        public void SetupScene(int level) {
+        public void SetupScene() {
             levelData = Master.Instance().MyLevel.GetLevelData();
-            //levelData = GetComponent<LevelManager>().loadLevel(level);
 
             // Die LevelDaten müssen gesetzt sein, sodass man die möglichen Positionen zum Spawnen setzen kann.
             if (levelData != null) {

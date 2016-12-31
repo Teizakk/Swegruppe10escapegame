@@ -190,10 +190,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5609672dca338d4cbce0dcb9d545a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 114000013148426976, guid: 8f5dd9e30899ae64da4ff6f576f18a63,
+  BoardBuilder: {fileID: 114000012091873176, guid: 10786a57f0b634640a44250d71b61e7d,
     type: 2}
-  playerController: {fileID: 114000013135823970, guid: 1cd905b46974115458093773dc83a6bf,
-    type: 2}
+  Player: {fileID: 114000013135823970, guid: 1cd905b46974115458093773dc83a6bf, type: 2}
 --- !u!114 &1515118816
 MonoBehaviour:
   m_ObjectHideFlags: 0
