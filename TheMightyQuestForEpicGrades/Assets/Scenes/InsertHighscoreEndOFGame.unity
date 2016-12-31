@@ -172,6 +172,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 163976728}
+  - 114: {fileID: 163976727}
   m_Layer: 0
   m_Name: ButtonController
   m_TagString: Untagged
@@ -179,6 +180,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &163976727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 163976726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3d1561b8d5a574ab42e430d8f29d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &163976728
 Transform:
   m_ObjectHideFlags: 0
@@ -322,7 +334,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PlaceHolder Score
+  m_Text: 83
 --- !u!222 &413462545
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -482,7 +494,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1243762627}
         m_MethodName: NextWindowOnClick
         m_Mode: 3
         m_Arguments:
@@ -764,6 +776,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1243762628}
+  - 114: {fileID: 1243762627}
   m_Layer: 0
   m_Name: "Hinzuf\xFCgeController"
   m_TagString: Untagged
@@ -771,6 +784,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1243762627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1243762626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294f3ffe7a410084fbadb48752732adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 413462544}
+  zeit: {fileID: 768306055}
+  playerName: {fileID: 593248638}
 --- !u!4 &1243762628
 Transform:
   m_ObjectHideFlags: 0
@@ -909,7 +936,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 163976727}
     - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName

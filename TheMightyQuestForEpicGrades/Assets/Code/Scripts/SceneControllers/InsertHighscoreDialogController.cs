@@ -25,9 +25,16 @@ namespace Assets.Code.Scripts.SceneControllers {
                 try
                 {
 
-                    highscoreliste = new List<Highscore>();
-                    highscoreliste = Persist.Load<List<Highscore>>(Name);
-
+                    
+                    if(Persist.Load<List<Highscore>>(Name)==null)
+                    {
+                        highscoreliste = new List<Highscore>();
+                    }
+                    else
+                    {
+                        highscoreliste = Persist.Load<List<Highscore>>(Name);
+                    }
+                    
 
                 }
                 catch (Exception e)
@@ -47,12 +54,66 @@ namespace Assets.Code.Scripts.SceneControllers {
 
 
                 highscoreliste.Add(neu);
-                highscoreliste.OrderBy(x => Convert.ToInt32(x.Score)).Take(10).ToList();
+                //highscoreliste.OrderBy(x => Convert.ToInt32(x.Score)).Take(10).ToList();
+                highscoreliste = Order(highscoreliste);
                 Persist.Save<List<Highscore>>(highscoreliste, Name);
 
                 SceneManager.LoadScene(level);
             }
         }
 
+        public List<Highscore> Order(List<Highscore> unsortiert)
+        {
+            List<Highscore> neu = new List<Highscore>();
+            
+            if(unsortiert.Count>10)
+            {
+                int niedrigste = 0;
+                for (int i = 1; i < 11; i++)
+                {
+                    if(unsortiert[i].Score <= unsortiert[niedrigste].Score)
+                    {
+                        niedrigste = i;
+                    }
+                }
+
+                for(int i=0;i<10;i++)
+                {
+                    if(i!=niedrigste)
+                    {
+                        neu.Add(unsortiert[i]);
+                    }
+                }
+            }
+            else
+            {
+                neu = unsortiert;
+            }
+
+            neu = insertionSort(neu);
+
+            return neu;
+        }
+
+        List<Highscore> insertionSort(List<Highscore> input)
+        {
+
+            int i = 1;
+            while (i < input.Count)
+            {
+                Highscore tmp = input[i];
+                int j = i;
+
+                while (j > 0 && tmp.Score > input[j - 1].Score)
+                {
+                    input[j] = input[j - 1];
+                    j--;
+                }
+                input[j] = tmp;
+
+                i++;
+            }
+            return input;
+        }
     }
 }
