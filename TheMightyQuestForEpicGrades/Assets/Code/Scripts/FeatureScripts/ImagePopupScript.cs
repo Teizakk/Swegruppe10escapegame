@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 //TODO ich glaube hier kann man das Singleton-Pattern entfernen
 
-namespace Assets.Scripts.FeatureScripts {
+namespace Assets.Code.Scripts.FeatureScripts {
     public class ImagePopupScript : MonoBehaviour {
         private static ImagePopupScript _imagePopupScript;
         public Button BackButton;

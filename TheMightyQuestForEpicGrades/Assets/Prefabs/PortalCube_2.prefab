@@ -22,7 +22,6 @@ GameObject:
   - 33: {fileID: 33000013897011082}
   - 65: {fileID: 65000012785025602}
   - 23: {fileID: 23000011202141814}
-  - 114: {fileID: 114000011348194544}
   m_Layer: 0
   m_Name: PortalCube_2
   m_TagString: BluePortal
@@ -91,15 +90,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114000011348194544
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012686282368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 979798fb824f2bb45a5d80d531486b7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelIndex: 0

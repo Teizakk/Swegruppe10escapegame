@@ -1,11 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿using System;
+using UnityEngine;
 
-[Serializable]
-public class Highscore : MonoBehaviour {
-
-    public int score { get; set; }
-    public string zeit { get; set; }
-    public string name { get; set; }
+namespace Assets.Code.Models {
+    [Serializable]
+    public class Highscore {
+        public int Score { get; set; }
+        public string Zeit { get; set; }
+        public string PlayerName { get; set; }
+    }
 }

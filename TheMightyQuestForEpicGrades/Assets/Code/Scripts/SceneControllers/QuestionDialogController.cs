@@ -1,16 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Assets.Scripts;
+using Assets.Code.GLOBALS;
+using Assets.Code.Models;
+using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using Assets.Controller;
-using Assets.Models;
-using Assets.Scripts.FeatureScripts;
-using UnityEngine.Networking;
 
-namespace Assets.Scripts.SceneController
+namespace Assets.Code.Scripts.SceneControllers
 {
     public class QuestionDialogController : MonoBehaviour
     {
@@ -196,7 +194,7 @@ namespace Assets.Scripts.SceneController
             {
                 QuestionText = "Was ist das Internet?",
                 Difficulty = Difficulties.Easy,
-                Level = 1,
+                Chapter = "Einstieg",
                 ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
                 Answers =
                     new List<Question.Answer>()
