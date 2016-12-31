@@ -1,59 +1,131 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using Assets.Code.GLOBALS;
-using Assets.Code.Models;
+using System.Linq;
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using Assets.Controller;
+using Assets.Models;
+using Assets.Scripts.FeatureScripts;
+using UnityEngine.Networking;
 
-namespace Assets.Code.Scripts.SceneControllers {
-    public class QuestionDialogController : MonoBehaviour {
+namespace Assets.Scripts.SceneController
+{
+    public class QuestionDialogController : MonoBehaviour
+    {
+        #region UnityObjects
+
+        public Text TimerText;
+        public GameObject popup;
+        public GameObject questionDialogPopup;
+        public Text popupText;
+        public Text outQuestion;
+        public Toggle tglAnswer1;
+        public ToggleGroup toggleGroup;
+        public GameObject Answers;
+        public GameObject LabelTipps;
+        public GameObject OutTipps;
+        public List<GameObject> btnPictures;
+
+        #endregion
+
+        #region Properties
+
+        private static QuestionDialogController _questionDialogController;
+        private int tippsShowed;
+        private int chosenAnswerIndex;
+        private DateTime startTime;
+        private DateTime endTime;
+        private TimeSpan usedTime;
+        private String[] imagePaths;
+        private static Question q;
         private int punkte;
+        #endregion
 
+        #region Popup Variablen
 
-        // Use this for initialization
-        private void Start() {
+        private CanvasGroup _questionDialogCanvasGroup;
+        private CanvasGroup _popupCanvasGroup;
+
+        #endregion
+
+        private QuestionDialogController()
+        {
+
+        }
+
+        #region public Funktionen
+
+        public static QuestionDialogController Instance()
+        {
+            if (!_questionDialogController)
+            {
+                _questionDialogController = GameObject.Find("QuestionDialogController").GetComponent<QuestionDialogController>();
+                if (!_questionDialogController)
+                    Debug.LogError(
+                        "Es muss ein aktives QuestionDialogController Skript auf einem GameObject in der Scene existieren");
+            }
+            return _questionDialogController;
+        }
+
+        // zeigt die Frage an
+        public void ShowQuestion(Question question)
+        {
+            blockAndUnblockMovement();
+
+            Debug.Log("Frage anzeigen");
+            q = question;
+
             // Werte initialisieren
             tippsShowed = 0;
             chosenAnswerIndex = 1;
             startTime = DateTime.Now;
 
-            // Frage laden
+            // Frage in die Felder laden
             LoadQuestion();
+
+            // QuestionDialog anzeigen
+            questionDialogPopup.SetActive(true);
+        }
+
+        // leitet die Frage weiter (eventuel unnötig)
+        public static Question ForwardQuestion()
+        {
+            return q;
+        }
+        #endregion
+
+        #region Scenefunktionen
+
+        // Use this for initialization
+        void Start()
+        {
+            // ToggleGroup initialisieren
+            toggleGroup.RegisterToggle(tglAnswer1);
         }
 
         //Update is called once per frame
-        private void Update() {
+        void Update()
+        {
             usedTime = TimeSpan.FromTicks(DateTime.Now.Ticks - startTime.Ticks);
-            TimerText.text = string.Format("{0:hh\\:mm\\:ss\\:ff}", usedTime);
-            //int mins = (int) timer/60;
-            //string minutes = (mins < 10 ? "0" : "") + mins;
-            //string seconds = ((timer % 60)).ToString("f0").PadLeft(2,'0');
-            //TimerText.text = minutes + ":" + seconds;
-        }
-
-
-        public static QuestionDialogController Instance() {
-            if (!questionDialog) {
-                questionDialog = FindObjectOfType(typeof(QuestionDialogController)) as QuestionDialogController;
-                if (!questionDialog)
-                    Debug.LogError(
-                        "Es muss ein aktives ScriptQuestionDialog Skript auf einem GameObject in der Scene existieren");
-            }
-            return questionDialog;
+            TimerText.text = String.Format("{0:hh\\:mm\\:ss\\:ff}", usedTime);
         }
 
         // beantwortet die Frage
-        public void AnswerQuestion() {
-            if (AnswerCorrect()) {
+        public void AnswerQuestion()
+        {
+            if (AnswerCorrect())
+            {
                 endTime = DateTime.Now;
                 usedTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
                 Debug.Log("Frage korrekt beantwortet!");
                 // Popup anzeigen
-
+                ShowPopup("Frage korrekt beantwortet!");
 
                 // Punkte addieren
-                switch (q.Difficulty) {
+                switch (q.Difficulty)
+                {
                     case Difficulties.Easy:
                         punkte = 1;
                         break;
@@ -64,93 +136,95 @@ namespace Assets.Code.Scripts.SceneControllers {
                         punkte = 3;
                         break;
                 }
-                // GameController.portalsteine++;
-                // GameController.punkte += punkte;
+                // gameManager.portalsteine++;
+                // gameManager.punkte += punkte;
                 Debug.Log("Portalstein erhalten!");
                 Debug.Log(punkte + " Punkt(e) erhalten!");
             }
-            else {
+            else
+            {
+                ShowPopup("Frage wurde falsch beantwortet!");
                 Debug.Log("Frage wurde falsch beantwortet!");
                 Debug.Log("Leben - 1");
-                // GameController.Leben--
+                // gameManager.Leben--
             }
 
             // in beiden Fällen
             Debug.Log("Zeit zur Gesamtzeit addieren");
 
-            // GameController.Time += timer;
+            // gameManager.Time += timer;
             // Close
         }
 
         // ändert die ausgewählte Antwort
-        public void AnswerChanged(int index) {
+        public void AnswerChanged(int index)
+        {
             chosenAnswerIndex = index;
             Debug.Log(chosenAnswerIndex + ". Antwort ausgewählt!");
         }
 
         // überprüft, ob die Antwort richtig war
-        private bool AnswerCorrect() {
-            return chosenAnswerIndex == q.CorrectAnswer;
+        private bool AnswerCorrect()
+        {
+            return (chosenAnswerIndex == q.CorrectAnswer);
         }
 
-
         // Tipp anzeigen
-        public void ShowTipp() {
+        public void ShowTipp()
+        {
             if (tippsShowed < 3
-                /* && GameController.Hintsteine>0*/) {
+                /* && gameManager.Hintsteine>0*/)
+            {
                 tippsShowed++;
-                // GameController.Hintsteine--
+                // gameManager.Hintsteine--
 
-                var lblTipp = GameObject.Find("lblTipp" + tippsShowed).GetComponent<Text>();
-                var outTipp = GameObject.Find("outTipp" + tippsShowed).GetComponent<Text>();
+                var lblTipp = LabelTipps.GetComponentsInChildren<Text>();
+                var outTipp = OutTipps.GetComponentsInChildren<Text>();
                 // Tipp anzeigen
-                lblTipp.enabled = true;
-                outTipp.enabled = true;
+                lblTipp[tippsShowed - 1].enabled = true;
+                outTipp[tippsShowed - 1].enabled = true;
 
                 Debug.Log("Hintstein eingesetzt!");
                 Debug.Log("Tipp" + tippsShowed + " wurde angezeigt");
             }
         }
-
-        // zeigt Bild (ImagePopupScript) an
-        //TODO von Tobias PopupController überarbeiten
-        public void ShowPicture(int index) {
-            //var popupController = GameObject.Find("PopupController").GetComponent<PopupController>();
-            //popupController.usedQuestion = q;
-            //if (index > 0)
-            //    popupController.SetUpImagePopupAnswer(tippsShowed, index - 1);
-            //else
-            //    popupController.SetUpImagePopupQuestion(tippsShowed);
-            //Debug.Log("Bild '" + imagePaths[index] + "' anzeigen!");
-        }
-
+        
         // Frage und Antworten in den Dialog laden
-        private void LoadQuestion() {
-            //q = QuestionManager.GetInstance().GetQuestionNotInUse();
+        void LoadQuestion()
+        {
             q = new Question
             {
                 QuestionText = "Was ist das Internet?",
                 Difficulty = Difficulties.Easy,
-                Chapter = "Einstieg",
+                Level = 1,
                 ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
                 Answers =
-                        new List<Question.Answer>
-                        {
-                            new Question.Answer {AnswerText = "Ein Netz", ImagePath = ""},
-                            new Question.Answer
+                    new List<Question.Answer>()
+                    {
+                            new Question.Answer()
+                            {
+                                AnswerText = "Ein Netz",
+                                ImagePath = ""
+                            },
+                            new Question.Answer()
                             {
                                 AnswerText = "Nur physikalisch vorhanden",
                                 ImagePath = "Assets/Samples+Placeholder/Bild2.png"
                             },
-                            new Question.Answer {AnswerText = "Ein Netz von Netzen", ImagePath = ""}
-                        },
+                            new Question.Answer()
+                            {
+                                AnswerText = "Ein Netz von Netzen",
+                                ImagePath = ""
+                            },
+                    },
                 CorrectAnswer = 3,
-                Hints = new List<string> {"inter", "connected", "networks"}
+                Hints = new List<string> { "inter", "connected", "networks" }
             };
+            // TODO : Frage aus der Datenhaltung holen
+            //q = QuestionManager.GetInstance().GetQuestion(0);
 
-            // Frage laden
-            GameObject.Find("outQuestion").GetComponent<Text>().text = q.QuestionText;
-
+            // Fragentext laden
+            outQuestion.text = q.QuestionText;
 
             imagePaths = new string[q.Answers.Count + 1];
 
@@ -159,55 +233,104 @@ namespace Assets.Code.Scripts.SceneControllers {
 
             // Bild vorhanden?
             if (!string.IsNullOrEmpty(imagePaths[0]) && File.Exists(Path.GetFullPath(imagePaths[0])))
+            {
+                // Button anzeigen
                 btnPictures[0].SetActive(true);
+            }
 
             // Antworten laden
-            var i = 1;
-            Text outAnswer;
-            foreach (var answer in q.Answers) {
-                outAnswer = GameObject.Find("outAnswer" + i).GetComponent<Text>();
-                outAnswer.text = answer.AnswerText;
+            int i = 1;
+            var outAnswer = Answers.GetComponentsInChildren<Text>().Where(x => !x.name.Equals("Text")).ToArray(); // alle Antworten holen (ohne Button-Text)
+            foreach (var answer in q.Answers)
+            {
+                outAnswer[i - 1].text = answer.AnswerText;
                 imagePaths[i] = answer.ImagePath;
                 // Bild vorhanden?
                 if (!string.IsNullOrEmpty(imagePaths[i]) && File.Exists(Path.GetFullPath(imagePaths[i])))
+                {
+                    // Button anzeigen
                     btnPictures[i].SetActive(true);
+                }
 
                 i++;
             }
 
             // Tipps laden
-            i = 1;
-            Text outTipp;
-            foreach (var tipp in q.Hints) {
-                outTipp = GameObject.Find("outTipp" + i).GetComponent<Text>();
-                outTipp.text = tipp;
+            i = 0;
+            var outTipp = OutTipps.GetComponentsInChildren<Text>();
+            foreach (var tipp in q.Hints)
+            {
+                outTipp[i].text = tipp;
                 i++;
             }
+
         }
 
+        #region Popups
+        // TODO : update PopupController -> ?
+        // zeigt Bild (ImagePopup) an
+        //public void ShowPicture(int index)
+        //{
+        //    var popupController = GameObject.Find("PopupController").GetComponent<PopupController>();
+        //    popupController.usedQuestion = q;
+        //    if (index > 0)
+        //    {
+        //        popupController.SetUpImagePopupAnswer(tippsShowed, index - 1);
+        //    }
+        //    else
+        //    {
+        //        popupController.SetUpImagePopupQuestion(tippsShowed);
+        //    }
+        //    Debug.Log("Bild '" + imagePaths[index] + "' anzeigen!");
+        //}
 
-        // leitet die Frage weiter
-        public static Question ForwardQuestion() {
-            return q;
+        // zeigt PopUp mit Text an für Frage richtig/falsch
+        public void ShowPopup(string text)
+        {
+            popupText.text = text;
+            popup.SetActive(true);
         }
 
-        #region UnityObjects
+        public void HidePopup()
+        {
+            popup.SetActive(false);
+            // und Frage schliessen
+            CloseQuestion();
+        }
 
-        public Text TimerText;
-        public List<GameObject> btnPictures;
+        private void CloseQuestion()
+        {
+            // die erste Antwort auswählen
+            toggleGroup.ActiveToggles().FirstOrDefault().isOn = false;
+            tglAnswer1.isOn = true;
+            toggleGroup.NotifyToggleOn(tglAnswer1);
+
+            // QuestionDialog schliessen
+            questionDialogPopup.SetActive(false);
+
+            var lblTipp = LabelTipps.GetComponentsInChildren<Text>();
+            var outTipp = OutTipps.GetComponentsInChildren<Text>();
+
+            // Tipps zurücksetzen
+            for (int i = 0; i < lblTipp.Length; i++)
+            {
+                lblTipp[i].enabled = false;
+                outTipp[i].enabled = false;
+            }
+
+            blockAndUnblockMovement();
+        }
+        #endregion
 
         #endregion
 
-        #region Properties
+        #region Helper
 
-        private static QuestionDialogController questionDialog;
-        private int tippsShowed;
-        private int chosenAnswerIndex;
-        private DateTime startTime;
-        private DateTime endTime;
-        private TimeSpan usedTime;
-        private string[] imagePaths;
-        private static Question q;
+        //"Nachrichten"-Funktion an PlayerController
+        private void blockAndUnblockMovement()
+        {
+            PlayerScript.instance.switchControlBlock();
+        }
 
         #endregion
     }
