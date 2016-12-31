@@ -1,23 +1,29 @@
-﻿using Assets.Controller;
+﻿using System.Security.Policy;
+using Assets.Code.Manager;
+using Assets.Code.Scripts.SceneControllers;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace Assets.Scripts.FeatureScripts {
+namespace Assets.Code.Scripts.FeatureScripts {
     public class CheatModeScript : MonoBehaviour {
         
-        private GameStateHolder GameStateHolderInstance;
-
         private bool h;
         private bool a;
 
+        public Canvas CheatInfoPrefab;
+        private Canvas CheatInfo;
+
         private bool HaxActivated; //TODO Ausweichlösung - bis wir uns unten geeinigt haben
 
-        public void Start() {
-            GameStateHolderInstance = GameStateHolder.Instance();
+        //Nur für Fehlermeldung falls nicht gesetzt
+        public void Awake() {
+            if (CheatInfoPrefab == null) {
+                Debug.LogError("CheatInfo-Text-Prefab muss gesetzt sein!");
+            }
         }
-
         // Update is called once per frame
         private void Update() {
-            if (Input.anyKey)
+            if (Input.anyKey) {
                 if (Input.GetKey("h")) {
                     h = true;
                     Debug.Log("h");
@@ -29,27 +35,34 @@ namespace Assets.Scripts.FeatureScripts {
                 else if (Input.GetKey("x") && h && a) {
                     Debug.Log("x");
 
-                    //TODO hier folgt der TripleKill...
                     if (HaxActivated) {
-                        Debug.Log("Cheatmode deactivated");
                         HaxActivated = false;
-                        GameManager.cheat = false;
-                        GameStateHolderInstance.GameStateObject.LevelState.Cheatmode = false;
+                        Master.Instance().MyGameState.CheatmodeActive = false;
+                        if (!Master.Instance().MyGameState.CheatmodeActive) {
+                            Debug.Log("Cheatmode deactivated");
+                        }
+                        CheatInfo.enabled = false;
+                        Destroy(CheatInfo.gameObject);
                     }
                     else {
-                        Debug.Log("Cheatmode activated");
                         HaxActivated = true;
-                        GameManager.cheat = true;
-                        GameStateHolderInstance.GameStateObject.LevelState.Cheatmode = true;
+                        Master.Instance().MyGameState.CheatmodeActive = true;
+                        if (Master.Instance().MyGameState.CheatmodeActive) {
+                            Debug.Log("Cheatmode activated");
+                        }
+                        CheatInfo = Instantiate(CheatInfoPrefab);
+                        DontDestroyOnLoad(CheatInfo.gameObject);
+                        CheatInfo.enabled = true;
                     }
                     h = false;
                     a = false;
                 }
                 else {
-                    Debug.Log("false Key");
+                    //Debug.Log("false Key"); //sollte auskommentiert sein, spammt sonst zu viel :)
                     h = false;
                     a = false;
                 }
+            }
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assets.Controller;
+using Assets.Code.Manager;
 using UnityEngine;
 
-namespace Assets.Scripts.FeatureScripts {
+namespace Assets.Code.Scripts.FeatureScripts {
     public class BoardBuilderScript : MonoBehaviour {
 
         // TODO Überlegen, ob man die gridPositions tatsächlich braucht?
@@ -13,12 +13,15 @@ namespace Assets.Scripts.FeatureScripts {
         private int max_x;
         private int max_z;
 
+        #region Prefabs
+        [Header("BoardBuilder Prefabs")]
         public GameObject WallBlock;
         public GameObject FloorBlock;
-        public GameObject ChestBlock;        
-        public GameObject[] PortalBlock;
+        public GameObject ChestBlock;
+        public GameObject[] PortalBlock = new GameObject[3];
         public GameObject StartBlock;
         public GameObject EndBlock;
+        #endregion
 
         [HideInInspector] public Vector3 StartPosition;
         [HideInInspector] public Vector3 EndPosition;
@@ -94,8 +97,8 @@ namespace Assets.Scripts.FeatureScripts {
         }
 
         // Erstelle die Szene
-        public void SetupScene(int level) {
-            levelData = GetComponent<LevelManager>().loadLevel(level);
+        public void SetupScene() {
+            levelData = Master.Instance().MyLevel.GetLevelData();
 
             // Die LevelDaten müssen gesetzt sein, sodass man die möglichen Positionen zum Spawnen setzen kann.
             if (levelData != null) {

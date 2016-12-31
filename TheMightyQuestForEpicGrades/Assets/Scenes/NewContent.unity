@@ -198,7 +198,7 @@ GameObject:
   - 4: {fileID: 718018945}
   - 114: {fileID: 718018944}
   m_Layer: 0
-  m_Name: ModuleController
+  m_Name: NewContentDialogController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,12 +212,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 718018943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf277b20889fde54193f4174e38657f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 5941eeb216f0bad46b65251e9660e4f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficultyDropdown: {fileID: 0}
-  moduleDropdown: {fileID: 1095878963}
-  Dateiname: Module.txt
+  ModuleDropdown: {fileID: 1095878963}
 --- !u!4 &718018945
 Transform:
   m_ObjectHideFlags: 0
@@ -517,7 +515,7 @@ Prefab:
     - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224000012847632332, guid: 6d29f56592784b94da6ed44ea2462178,
         type: 2}
@@ -647,6 +645,31 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 718018944}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetModuleToEdit
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d29f56592784b94da6ed44ea2462178, type: 2}
@@ -1084,7 +1107,7 @@ Prefab:
     - target: {fileID: 114000010635072064, guid: 6d29f56592784b94da6ed44ea2462178,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224000012847632332, guid: 6d29f56592784b94da6ed44ea2462178,
         type: 2}
@@ -1272,7 +1295,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1565976266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e33f7f0f2e9f4f74fa18441e1c61b947, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d3d1561b8d5a574ab42e430d8f29d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1565976268

@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Assets.Code.Models;
+using Assets.Code.Scripts.UtilityScripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Assets.Code.Scripts.FeatureScripts {
-    public class HighscoreScript : MonoBehaviour {
-        private List<Highscore> highscoreliste = new List<Highscore>();
-
-        //Für laden
+namespace Assets.Code.Scripts.SceneControllers {
+    public class HighscoreboardDialogController : MonoBehaviour {
         public Text p1;
-        public Text p10;
         public Text p2;
         public Text p3;
         public Text p4;
@@ -20,22 +16,25 @@ namespace Assets.Code.Scripts.FeatureScripts {
         public Text p7;
         public Text p8;
         public Text p9;
-        public Text playerName;
+        public Text p10;
 
-        //Für Speichern
-        public Text score;
-        public Text zeit;
+        private List<Highscore> highscoreliste = new List<Highscore>();
+        private static readonly string Name = @"Highscores\highscores"; //"/Speicher/Highscores/highscoreliste";
 
         // Use this for initialization
         //nur beim Highscoreboard genutzt
         private void Start() {
-            //if (Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory()) != null)
-            //{
-            //    highscoreliste = Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory());
-            //}
+            if (SceneManager.GetActiveScene().name == "Highscore") {
+                try {
+                    highscoreliste = new List<Highscore>();
+                    highscoreliste = Persist.Load<List<Highscore>>(Name);
+                }
+                catch {
+                    highscoreliste = new List<Highscore>();
+                }
 
-            if (SceneManager.GetActiveScene().name == "Highscore")
-                    //TODO fix gegen Compilerwarnung braucht Funktionstest
+
+                //Wenn Liste voll ist
                 if (highscoreliste.Count >= 10) {
                     p1.text = "1. " + highscoreliste[0].PlayerName + "\t" + highscoreliste[0].Score + "\t" +
                               highscoreliste[0].Zeit;
@@ -130,65 +129,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
                     p9.text = "9. XX\t\tXX\t\tXX";
                     p10.text = "10. XX\t\tXX\t\tXX";
                 }
-        }
-
-        //Speichern eines Highscores EndOFGame
-        //beim klicken auf Hinzufügen 
-        public void NextWindowOnClick(int level) {
-            if (SceneManager.GetActiveScene().name == "InsertHighscoreEndOFGame") {
-                //if (Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory()) != null)
-                //{
-                //    highscoreliste = Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory());
-                //}
-                //else fall kommt jetzt
-                //{
-                highscoreliste = new List<Highscore>();
-                //}
-
-                var neu = new Highscore();
-
-                //Felder haben den entsprechenden Tag bekommen
-                neu.PlayerName = playerName.text;
-                neu.Zeit = zeit.text;
-                int _score = -1;
-                if (!Int32.TryParse(score.text, out _score)) {
-                    Debug.LogError("Fehler beim Konvertieren des Score Strings zu int");
-                }
-                neu.Score = _score;
-
-
-                highscoreliste = InsertInto(highscoreliste, neu);
-                //Persist.save<List<Highscore>>(highscoreliste);
-                SceneManager.LoadScene(level);
             }
-        }
-
-
-        private List<Highscore> InsertInto(List<Highscore> old, Highscore neu) {
-            var stelle = 0;
-
-            if (old.Count == 0) {
-                old.Add(neu);
-                return old;
-            }
-
-            //int wert;
-            //TODO Überprüfen ob die kleinen Änderungen das Verhalten geändert haben...
-            //int.TryParse(neu.Score, out wert);
-            
-
-            for (var i = 0; i < old.Count; i++) {
-                if (neu.Score > old[i].Score)
-                    stelle = i;
-            }
-            var neueListe = new List<Highscore>();
-
-            for (var i = 0; i < old.Count; i++)
-                if (i != stelle)
-                    neueListe.Add(old[i]);
-                else
-                    neueListe.Add(neu);
-            return neueListe;
         }
     }
 }

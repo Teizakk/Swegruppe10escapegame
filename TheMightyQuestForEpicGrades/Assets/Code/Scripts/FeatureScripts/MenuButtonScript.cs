@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts.FeatureScripts {
+namespace Assets.Code.Scripts.FeatureScripts {
     public class MenuButtonScript : MonoBehaviour {
         public void DebugLogOnClick(string str) {
             Debug.Log(str);

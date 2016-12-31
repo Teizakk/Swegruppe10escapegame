@@ -188,7 +188,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 111498353}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e33f7f0f2e9f4f74fa18441e1c61b947, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d3d1561b8d5a574ab42e430d8f29d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &111498355
@@ -383,7 +383,7 @@ GameObject:
   - 114: {fileID: 753013912}
   - 114: {fileID: 753013911}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: inPlayerName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -520,7 +520,7 @@ GameObject:
   - 4: {fileID: 808857202}
   - 114: {fileID: 808857201}
   m_Layer: 0
-  m_Name: ModuleController
+  m_Name: NewGameDialogController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -534,12 +534,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 808857200}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf277b20889fde54193f4174e38657f9, type: 3}
+  m_Script: {fileID: 11500000, guid: e1d4f8e056c22a24596d336598b8948f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   difficultyDropdown: {fileID: 1735977175}
   moduleDropdown: {fileID: 565261655}
-  Dateiname: Module.txt
+  playerName: {fileID: 753013911}
 --- !u!4 &808857202
 Transform:
   m_ObjectHideFlags: 0

@@ -1,18 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts.FeatureScripts {
+namespace Assets.Code.Scripts.FeatureScripts {
     public class ChestScript : MonoBehaviour {
-        private bool ChestIsLocked;
-        private bool ChestIsOpen; //TODO diese Information ist redundant, weil sie sich aus ChestIsLocked ableiten lässt
+        private bool ChestIsOpen = true;
 
         public void OnTriggerStay(Collider col) {
-            if (Input.GetKeyDown("e") && !ChestIsLocked) //col.gameObject.tag == "Player")
+            if (Input.GetKeyDown("e") && ChestIsOpen) //col.gameObject.tag == "Player")
             {
-                ChestIsOpen = true;
                 OpenChest();
-                ChestIsLocked = true; //Truhe abschließen
-                Destroy(gameObject); //Lässt Truhe verschwinden
+                ChestIsOpen = false; //Truhe abschließen
+                //Destroy(gameObject); //Lässt Truhe verschwinden //...das machen wir nicht, dann ist die nämlich ganz weg.. so ganz ganz
             }
         }
 

@@ -22,7 +22,6 @@ GameObject:
   - 33: {fileID: 33000014179181040}
   - 65: {fileID: 65000010219146098}
   - 23: {fileID: 23000011366420732}
-  - 114: {fileID: 114000011572329662}
   m_Layer: 0
   m_Name: PortalCube_1
   m_TagString: PinkPortal
@@ -91,15 +90,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114000011572329662
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014181535220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56b1e75314606a343b2104d652d7a927, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelIndex: 0
