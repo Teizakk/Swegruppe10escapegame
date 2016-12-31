@@ -82,6 +82,17 @@ namespace Assets.Code.Manager {
         }
         #endregion
 
+        #region Question-related
+        public DateTime TimeUsed { get { return GameStateObject.LevelState.Time; } }
+        public void AddTime(TimeSpan timeTaken) {
+            if (timeTaken.Ticks > 0) {
+                GameStateObject.LevelState.Time += timeTaken;
+                return;
+            }
+            Debug.LogError("Hinzuzufügende Zeit darf nicht kleiner oder gleich 0 sein!");
+        }
+        #endregion
+
         //TODO CHEST FUNCTIONS
 
         #region Lives

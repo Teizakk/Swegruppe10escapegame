@@ -22,13 +22,16 @@ namespace Assets.Code.Scripts.UtilityScripts {
         private static void AssureDirectoryAndFilesExists() {
             var st = ExecuteablePath + "\\SavedStates";
             var hs = ExecuteablePath + "\\Highscores";
-            var sg = ExecuteablePath + "\\SaveGames";
+			var sg = ExecuteablePath + "\\SaveGames";
+            var q = ExecuteablePath + "\\Module";
             if (!Directory.Exists(st))
                 Directory.CreateDirectory(st);
             if (!Directory.Exists(hs))
                 Directory.CreateDirectory(hs);
-            if (!Directory.Exists(sg))
-                Directory.CreateDirectory(hs);
+			if (!Directory.Exists(sg))
+                Directory.CreateDirectory(sg);
+            if (!Directory.Exists(q))
+                Directory.CreateDirectory(q);
         }
 
         public static void Save<T>(T state, string fileName) {

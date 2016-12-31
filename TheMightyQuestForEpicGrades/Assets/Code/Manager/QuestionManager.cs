@@ -12,8 +12,13 @@ namespace Assets.Code.Manager {
         //TODO REWORK
 
         private List<Question> Questions { get; set; }
-        // static readonly QuestionManager qc = new QuestionManager();
-
+        private static readonly QuestionManager qc = new QuestionManager();
+        // Use this for initialization
+        private QuestionManager()
+        {
+            // TODO : wäre das nicht geeignet für Module bzw. Fragen?
+            //Questions = ModuleManager.LoadQuestionsFromModul(GameStateManager.Instance().GameStateObject.GameOptions.Modul);
+        }
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
         //public static QuestionManager GetInstance() {
         //    try {
