@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.SceneController;
+﻿using Assets.Code.Scripts.SceneControllers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

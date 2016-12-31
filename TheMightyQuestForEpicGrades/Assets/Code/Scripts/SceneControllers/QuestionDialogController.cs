@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Assets.Code.GLOBALS;
+using Assets.Code.Manager;
 using Assets.Code.Models;
 using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
@@ -129,8 +130,7 @@ namespace Assets.Code.Scripts.SceneControllers
             endTime = DateTime.Now;
             usedTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
 
-            var gs = GameStateHolderScript.Instance().GameStateObject.LevelState;
-            gs.Time += usedTime;
+            Master.Instance().MyGameState.AddTime(usedTime); //TODO gewünschter Effekt?
             Debug.Log("Zeit zur Gesamtzeit addieren");
 
             if (chosenAnswerIndex == q.CorrectAnswer)
@@ -155,18 +155,18 @@ namespace Assets.Code.Scripts.SceneControllers
                         break;
                 }
 
-                gs.Score += punkte;
+                Master.Instance().MyGameState.AddPointsToScore(punkte);
                 Debug.Log(punkte + " Punkt(e) erhalten!");
             }
             else
             {
                 _answerCorrect = false;
-                if (gs.Lives > 0)
+                if (Master.Instance().MyGameState.LivesRemaining > 0)
                 {
                     ShowPopup("Frage wurde falsch beantwortet!");
                     Debug.Log("Frage wurde falsch beantwortet!");
                     Debug.Log("Leben - 1");
-                    gs.Lives--;
+                    Master.Instance().MyGameState.LoseOneLive();
                 }
                 else
                 {
@@ -179,12 +179,10 @@ namespace Assets.Code.Scripts.SceneControllers
         // Tipp anzeigen
         public void ShowTipp()
         {
-            var gs = GameStateHolderScript.Instance().GameStateObject.LevelState;
-            if (tippsShowed < 3
-                 && gs.HintStones > 0)
+            if (tippsShowed < 3 && Master.Instance().MyGameState.HintstonesRemaining > 0)
             {
                 tippsShowed++;
-                gs.HintStones--;
+                Master.Instance().MyGameState.UseHintStone();
 
                 var lblTipp = LabelTipps.GetComponentsInChildren<Text>();
                 var outTipp = OutTipps.GetComponentsInChildren<Text>();
@@ -229,7 +227,7 @@ namespace Assets.Code.Scripts.SceneControllers
                 Hints = new List<string> { "inter", "connected", "networks" }
             };
             // TODO : Frage aus der Datenhaltung holen
- 			q = QuestionManager.GetInstance().GetQuestion(0);
+ 			q = Master.Instance().MyQuestion.GetQuestion(0);
 
             // Fragentext laden
             outQuestion.text = q.QuestionText;
