@@ -614,7 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4105208a9de804d86b14a9dfa3c298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CheatInfoPrefab: {fileID: 223000012415890316, guid: c1a9fc9c90ded754b8c72d76c2eb943e,
+  CheatInfoPrefab: {fileID: 223000012415890316, guid: 8f4405e16512c4248955239ff31a3ee9,
     type: 2}
 --- !u!4 &1052604056
 Transform:
@@ -658,7 +658,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1233521065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4122365ce275ea4c99ba770b6e12344, type: 3}
+  m_Script: {fileID: 11500000, guid: a357364eae8015c49bfd46bf99e15077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MyGameState: {fileID: 0}

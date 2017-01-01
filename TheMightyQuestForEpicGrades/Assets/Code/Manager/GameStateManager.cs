@@ -175,7 +175,7 @@ namespace Assets.Code.Manager {
         }
 
         public void OnDestroy() {
-            Debug.LogWarning("Hier wurde geraden alle Infos vom GameStateObject mit gelöscht... gewollt?");
+            Debug.LogWarning("Hier wurden geraden alle Infos vom GameStateObject mit gelöscht... gewollt?");
         }
     }
 }

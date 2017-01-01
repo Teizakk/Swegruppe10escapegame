@@ -12,8 +12,6 @@ namespace Assets.Code.Manager {
         //TODO REWORK
 
         private List<Question> Questions { get; set; }
-        private static readonly QuestionManager qc = new QuestionManager();
-        // Use this for initialization
         private QuestionManager()
         {
             // TODO : wäre das nicht geeignet für Module bzw. Fragen?

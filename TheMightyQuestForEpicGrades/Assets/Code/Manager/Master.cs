@@ -20,7 +20,7 @@ namespace Assets.Code.Manager {
                 _masterInstance = FindObjectOfType(typeof(Master)) as Master;
                 if (!_masterInstance) {
                     Debug.LogError(
-                        "Es muss ein aktives GameStateHolder Skript auf einem GameObject in der Szene existieren");
+                        "Es muss ein aktives Master Skript auf einem GameObject in der Szene existieren");
                     Debug.Break();
                 }
             }
