@@ -84,6 +84,10 @@ namespace Assets.Code.Scripts.FeatureScripts {
                     //TODO Master.Instance().MyGameState. BLUE PORTAL 
                     //Debug.Log("BluePortalSkript.Activated = " + GameStateHolder.Instance().GameStateObject.LevelState.GreenPortalStone.Used.ToString() + " (" + DebugLogVar +")");
                 }
+                else if (other.gameObject.CompareTag("Finish") && Input.GetKeyDown(KeyCode.E)) { //Steht vor Endtür
+                    other.gameObject.GetComponent<EndDoorScript>().OpenDoor();
+                    Debug.Log("Türe wird durch den Spieler geöffnet");
+                }
         }
 
         private void FixedUpdate() {

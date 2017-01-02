@@ -93,7 +93,9 @@ namespace Assets.Code.Manager {
         }
         #endregion
 
+        #region Chest
         //TODO CHEST FUNCTIONS
+        #endregion
 
         #region Lives
         public int LivesRemaining {
@@ -160,8 +162,19 @@ namespace Assets.Code.Manager {
             throw new UnityException("Zu addierende Punktezahl muss positiv und größer 0 sein!");
         }
         #endregion
-
+        
+        #region Portalstones
         //TODO PORTALSTONE FUNCTIONS
+        public bool HasUsedAllPortalStones() {
+            //if (GameStateObject.LevelState.PinkPortalStone.Used &&
+            //    GameStateObject.LevelState.GreenPortalStone.Used &&
+            //    GameStateObject.LevelState.BluePortalStone.Used) {
+            //    return true;
+            //}
+            //return false;
+            return true;
+        }
+        #endregion
 
         #region Cheatmode
         public bool CheatmodeActive {
@@ -176,6 +189,10 @@ namespace Assets.Code.Manager {
 
         public void OnDestroy() {
             Debug.LogWarning("Hier wurden geraden alle Infos vom GameStateObject mit gelöscht... gewollt?");
+        }
+
+        public void FinishLevel() {
+            throw new NotImplementedException();
         }
     }
 }

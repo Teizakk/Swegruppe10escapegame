@@ -20,7 +20,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
         public GameObject ChestBlock;
         public GameObject[] PortalBlock = new GameObject[3];
         public GameObject StartBlock;
-        public GameObject EndBlock;
+        public GameObject EndDoor;
         #endregion
 
         [HideInInspector] public Vector3 StartPosition;
@@ -75,10 +75,10 @@ namespace Assets.Code.Scripts.FeatureScripts {
                         case 'e':
                         case 'E': // End
                             EndPosition = new Vector3(x, height, z);
-                            toInstantiate = EndBlock;
-                            var endInst =
-                                    Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject;
-                            endInst.transform.SetParent(boardHolder);
+                            toInstantiate = EndDoor;
+                            //Braucht auch noch Bodenblock
+                            var boden = Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject;
+                            boden.transform.SetParent(boardHolder);
                             break;
                         default: // Sollte niemals aufgerufen werden
                             toInstantiate = null;
@@ -92,7 +92,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
                     }
                     else
                         throw new Exception(
-                            "Unerlaubtes Zeichen innerhalb der Leveldaten gefunden! Erlaubte Zeichen sind: {'#', 'C', 'P', 'S', 'E', 'F'}");
+                            "Unerlaubtes Zeichen innerhalb der Leveldaten gefunden! Erlaubte Zeichen sind: {'#', 'C', 'P', 'S', 'E', 'F'} Zeichen war: " + levelData[x,z]);
                 }
         }
 
