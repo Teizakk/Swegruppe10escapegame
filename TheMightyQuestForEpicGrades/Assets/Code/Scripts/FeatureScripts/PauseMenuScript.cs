@@ -38,7 +38,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
         //"Nachrichten"-Funktion an PlayerScript
         public void blockAndUnblockMovement() {
-            PlayerScript.instance.switchControlBlock();
+            PlayerScript.instance.SwitchControlBlock();
         }
 
         public void ContinueGame() {

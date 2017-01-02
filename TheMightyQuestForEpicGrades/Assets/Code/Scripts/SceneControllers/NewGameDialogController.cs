@@ -12,7 +12,7 @@ namespace Assets.Code.Scripts.SceneControllers {
         public Dropdown moduleDropdown;
         public InputField playerName;
 
-        private void Start() {
+        private void Awake() {
             Master.Instance().MyModule.LoadFromFile(); //Falls zwischenzeitlich aktualisiert
             var modules = Master.Instance().MyModule.GetModulesAsArray();
 
@@ -35,5 +35,15 @@ namespace Assets.Code.Scripts.SceneControllers {
             //wenn nicht gesetzt = Anonymus
             Master.Instance().MyGameState.PlayerName = setPlayerName;
         }
+
+        #region Master-Link
+        private void Start() {
+            Master.Instance().CurrentDialogController = this.gameObject;
+        }
+
+        private void OnDestroy() {
+            Master.Instance().CurrentDialogController = null;
+        }
+        #endregion
     }
 }

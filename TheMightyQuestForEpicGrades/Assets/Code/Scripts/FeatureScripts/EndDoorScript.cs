@@ -6,17 +6,18 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
         private bool _canBeOpened;
         private bool _isOpening;
-        private bool _isOpen;
         private int _cntOfDescends;
 
-        private const float _DESCENDING_RATE = 0.2f;
-
+        private const float _DESCENDING_RATE = 0.01f;
+        private Vector3 _colStartPos;
+        
         // Use this for initialization
         void Start () {
             _canBeOpened = false;
+            _colStartPos = transform.localPosition;
         }
 
-        public void OnTriggerEnter(Collider other) {
+        private void OnTriggerEnter(Collider other) {
             Debug.Log("OnTriggerEnterFunktion");
             if (GetComponent<SphereCollider>().enabled) { //Noch nicht offen - check ob geöffnet werden kann
                 Debug.Log("SphereCollider hat getriggert");
@@ -28,13 +29,14 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 }
             }
             else if (GetComponent<CapsuleCollider>().enabled) { //offen CapsuleCollider bewirkt laden des nächsten Levels
-                Master.Instance().MyGameState.FinishLevel();
+                Debug.Log("EndOfLevel getriggert");
+                Master.Instance().MyGameState.GoToInBetweenLevels();
             }
             else {
                 Debug.LogError("Kein Collider mehr aktiv?!");
             }
         }
-
+        
         public void OpenDoor() {
             if (!_canBeOpened) {
                 throw new UnityException("Türe darf noch nicht geöffnet werden - Aufruf an falscher Stelle?");
@@ -47,16 +49,20 @@ namespace Assets.Code.Scripts.FeatureScripts {
         // Update is called once per frame
         void Update () {
             if (!_isOpening) return;
-            transform.localPosition = transform.localPosition + (Vector3.down * _DESCENDING_RATE);
+            transform.localPosition += (Vector3.down * _DESCENDING_RATE);
+            if (_cntOfDescends % 10 == 0) { //Alle 10 Schritte (weniger speicherintensiv) Position immer wieder auf default zurücksetzen
+                GetComponent<CapsuleCollider>().center = (_colStartPos - transform.localPosition)/3.0f; //wieso der andere sich 3x so schnell bewegt? Keine Ahnung. Scale scheint es nicht zu sein!
+            }
             _cntOfDescends++;
             if (_cntOfDescends < 3*(1/_DESCENDING_RATE)) return;
+            //Ab nun ist das Portal offen
             _isOpening = false;
-            _isOpen = true;
             //Kollision mit Box abschalten
             GetComponent<BoxCollider>().enabled = false;
             //Trigger Collider für LevelEnde anschalten
             GetComponent<CapsuleCollider>().enabled = true;
             Debug.Log("Collider geswitched");
+            //Debug.Log("Unterschied zur Startposition: " + (_colStartPos - transform.localPosition));
         }
     }
 }

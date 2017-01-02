@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using Assets.Code.Manager;
+using UnityEngine;
 
 namespace Assets.Code.Scripts.SceneControllers {
     public class NewQuestionDialogController : MonoBehaviour {
 
         // Use this for initialization
-        void Start () {
+        void Awake () {
 	
         }
 	
@@ -12,5 +13,15 @@ namespace Assets.Code.Scripts.SceneControllers {
         void Update () {
 	
         }
+
+        #region Master-Link
+        private void Start() {
+            Master.Instance().CurrentDialogController = this.gameObject;
+        }
+
+        private void OnDestroy() {
+            Master.Instance().CurrentDialogController = null;
+        }
+        #endregion
     }
 }

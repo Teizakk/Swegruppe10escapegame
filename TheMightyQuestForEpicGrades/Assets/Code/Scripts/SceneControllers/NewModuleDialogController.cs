@@ -37,5 +37,15 @@ namespace Assets.Code.Scripts.SceneControllers {
             //knownModules aktualisieren
             knownModules = Master.Instance().MyModule.GetModulesAsList();
         }
+
+        #region Master-Link
+        private void Start() {
+            Master.Instance().CurrentDialogController = this.gameObject;
+        }
+
+        private void OnDestroy() {
+            Master.Instance().CurrentDialogController = null;
+        }
+        #endregion
     }
 }
