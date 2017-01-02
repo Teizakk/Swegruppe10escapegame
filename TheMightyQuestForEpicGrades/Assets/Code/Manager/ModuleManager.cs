@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Assets.Code.Scripts.UtilityScripts;
+using Assets.Code.Models;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -54,6 +57,12 @@ namespace Assets.Code.Manager {
             return new List<string>(module);
         }
 
+		// listet alle Module im Verzeichnis auf
+        // TODO : wäre das nicht geeignet für Module bzw. Fragen?
+		//public string[] getModules() {
+  //          return Directory.GetFiles(Persist.ExecuteablePath + "\\Module").Select(file => Path.GetFileNameWithoutExtension(file)).ToArray();
+  //      }
+
         public bool SaveToFile(string newModuleName) {
             try {
                 if (File.Exists(_Dateiname)) {
@@ -72,6 +81,19 @@ namespace Assets.Code.Manager {
                 return false;
             }
         }
+
+        // lädt Fragen aus dem modul in "Module" Verzeichnis
+        // TODO : wäre das nicht geieignet für Module bzw. Fragen?
+    //    public static List<Question> LoadQuestionsFromModul(string modul)
+    //    {
+    //        try {
+				//Debug.Log(Persist.ExecuteablePath + "/Module/" + modul + ".txt");
+				//string json = File.ReadAllText(Persist.ExecuteablePath + "/Module/" + modul + ".txt");
+    //            return JsonConvert.DeserializeObject<List<Question>>(json);
+    //        } catch (FileNotFoundException e) {
+    //            return new List<Question>();
+    //        }
+    //    }
 
         private void Start() {
             //Initiales Laden der Module

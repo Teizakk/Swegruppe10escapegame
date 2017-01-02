@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Assets.Code.GLOBALS;
+using Assets.Code.Manager;
 using Assets.Code.Models;
 using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
@@ -38,7 +39,7 @@ namespace Assets.Code.Scripts.SceneControllers
         private TimeSpan usedTime;
         private String[] imagePaths;
         private static Question q;
-        private int punkte;
+        private bool _answerCorrect = false;
         #endregion
 
         #region Popup Variablen
@@ -68,12 +69,11 @@ namespace Assets.Code.Scripts.SceneControllers
         }
 
         // zeigt die Frage an
-        public void ShowQuestion(Question question)
+        public void ShowQuestion()
         {
             blockAndUnblockMovement();
 
             Debug.Log("Frage anzeigen");
-            q = question;
 
             // Werte initialisieren
             tippsShowed = 0;
@@ -85,6 +85,12 @@ namespace Assets.Code.Scripts.SceneControllers
 
             // QuestionDialog anzeigen
             questionDialogPopup.SetActive(true);
+        }
+
+        // überprüft, ob die Antwort richtig war
+        public bool AnswerCorrect()
+        {
+            return _answerCorrect;
         }
 
         // leitet die Frage weiter (eventuel unnötig)
@@ -110,18 +116,32 @@ namespace Assets.Code.Scripts.SceneControllers
             TimerText.text = String.Format("{0:hh\\:mm\\:ss\\:ff}", usedTime);
         }
 
+        // ändert die ausgewählte Antwort
+        public void AnswerChanged(int index)
+        {
+            chosenAnswerIndex = index;
+            Debug.Log(chosenAnswerIndex + ". Antwort ausgewählt!");
+        }
+
         // beantwortet die Frage
         public void AnswerQuestion()
         {
-            if (AnswerCorrect())
+            // in beiden Fällen Zeit zur Gesamtzeit addieren
+            endTime = DateTime.Now;
+            usedTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
+
+            Master.Instance().MyGameState.AddTime(usedTime); //TODO gewünschter Effekt?
+            Debug.Log("Zeit zur Gesamtzeit addieren");
+
+            if (chosenAnswerIndex == q.CorrectAnswer)
             {
-                endTime = DateTime.Now;
-                usedTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
+                _answerCorrect = true;
                 Debug.Log("Frage korrekt beantwortet!");
                 // Popup anzeigen
                 ShowPopup("Frage korrekt beantwortet!");
 
                 // Punkte addieren
+                var punkte = 0;
                 switch (q.Difficulty)
                 {
                     case Difficulties.Easy:
@@ -134,47 +154,35 @@ namespace Assets.Code.Scripts.SceneControllers
                         punkte = 3;
                         break;
                 }
-                // gameManager.portalsteine++;
-                // gameManager.punkte += punkte;
-                Debug.Log("Portalstein erhalten!");
+
+                Master.Instance().MyGameState.AddPointsToScore(punkte);
                 Debug.Log(punkte + " Punkt(e) erhalten!");
             }
             else
             {
-                ShowPopup("Frage wurde falsch beantwortet!");
-                Debug.Log("Frage wurde falsch beantwortet!");
-                Debug.Log("Leben - 1");
-                // gameManager.Leben--
+                _answerCorrect = false;
+                if (Master.Instance().MyGameState.LivesRemaining > 0)
+                {
+                    ShowPopup("Frage wurde falsch beantwortet!");
+                    Debug.Log("Frage wurde falsch beantwortet!");
+                    Debug.Log("Leben - 1");
+                    Master.Instance().MyGameState.LoseOneLive();
+                }
+                else
+                {
+                    ShowPopup("Game Over!");
+                    // TODO : return to Main Menu
+                }
             }
-
-            // in beiden Fällen
-            Debug.Log("Zeit zur Gesamtzeit addieren");
-
-            // gameManager.Time += timer;
-            // Close
-        }
-
-        // ändert die ausgewählte Antwort
-        public void AnswerChanged(int index)
-        {
-            chosenAnswerIndex = index;
-            Debug.Log(chosenAnswerIndex + ". Antwort ausgewählt!");
-        }
-
-        // überprüft, ob die Antwort richtig war
-        private bool AnswerCorrect()
-        {
-            return (chosenAnswerIndex == q.CorrectAnswer);
         }
 
         // Tipp anzeigen
         public void ShowTipp()
         {
-            if (tippsShowed < 3
-                /* && gameManager.Hintsteine>0*/)
+            if (tippsShowed < 3 && Master.Instance().MyGameState.HintstonesRemaining > 0)
             {
                 tippsShowed++;
-                // gameManager.Hintsteine--
+                Master.Instance().MyGameState.UseHintStone();
 
                 var lblTipp = LabelTipps.GetComponentsInChildren<Text>();
                 var outTipp = OutTipps.GetComponentsInChildren<Text>();
@@ -219,7 +227,7 @@ namespace Assets.Code.Scripts.SceneControllers
                 Hints = new List<string> { "inter", "connected", "networks" }
             };
             // TODO : Frage aus der Datenhaltung holen
-            //q = QuestionManager.GetInstance().GetQuestion(0);
+ 			q = Master.Instance().MyQuestion.GetQuestion(0);
 
             // Fragentext laden
             outQuestion.text = q.QuestionText;
@@ -261,7 +269,6 @@ namespace Assets.Code.Scripts.SceneControllers
                 outTipp[i].text = tipp;
                 i++;
             }
-
         }
 
         #region Popups
