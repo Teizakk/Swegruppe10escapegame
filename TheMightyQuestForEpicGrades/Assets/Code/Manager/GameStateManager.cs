@@ -4,6 +4,7 @@ using Assets.Code.Models;
 using Assets.Code.Scripts.FeatureScripts;
 using Assets.Code.Scripts.UtilityScripts;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Code.Manager {
     public class GameStateManager : MonoBehaviour {
@@ -63,23 +64,29 @@ namespace Assets.Code.Manager {
         #endregion
 
         #region Level
-        public int LevelUsed {
+        public int LevelUsed { //Hier geht es um die Level-Datei
             get { return GameStateObject.LevelState.Level; }
         }
 
         //TODO setter für LevelUsed - soll das von einer anderen Funktion gemacht werden?
+        //TODO allgemein
 
-        public int KapitelCurrent {
-            get { return GameStateObject.LevelState.Kapitel; }
+        public int StageCurrent {
+            get { return GameStateObject.LevelState.Stage; }
         }
-        public void MoveToNextChapter() {
-            if (GameStateObject.LevelState.Kapitel < 3) {
-                GameStateObject.LevelState.Kapitel++;
-                Debug.Log("Wir befinden uns nun in Kapitel: " + GameStateObject.LevelState.Kapitel);
-                return;
-            }
-            Debug.Log("Kapitelanzahl würde über 3 gehen - gewollt?");
+
+        public string ChapterCurrent {
+            get { return GameStateObject.LevelState.Chapter; }
         }
+
+        //public void MoveToNextChapter() { if (GameStateObject.LevelState.Chapter < 3)
+        //    {
+        //        GameStateObject.LevelState.Chapter++;
+        //        Debug.Log("Wir befinden uns nun in Chapter: " + GameStateObject.LevelState.Chapter);
+        //        return;
+        //    }
+        //    Debug.Log("Kapitelanzahl würde über 3 gehen - gewollt?");
+        //}
         #endregion
 
         #region Question-related
@@ -93,7 +100,9 @@ namespace Assets.Code.Manager {
         }
         #endregion
 
+        #region Chest
         //TODO CHEST FUNCTIONS
+        #endregion
 
         #region Lives
         public int LivesRemaining {
@@ -160,8 +169,19 @@ namespace Assets.Code.Manager {
             throw new UnityException("Zu addierende Punktezahl muss positiv und größer 0 sein!");
         }
         #endregion
-
+        
+        #region Portalstones
         //TODO PORTALSTONE FUNCTIONS
+        public bool HasUsedAllPortalStones() {
+            //if (GameStateObject.LevelState.PinkPortalStone.Used &&
+            //    GameStateObject.LevelState.GreenPortalStone.Used &&
+            //    GameStateObject.LevelState.BluePortalStone.Used) {
+            //    return true;
+            //}
+            //return false;
+            return true;
+        }
+        #endregion
 
         #region Cheatmode
         public bool CheatmodeActive {
@@ -176,6 +196,16 @@ namespace Assets.Code.Manager {
 
         public void OnDestroy() {
             Debug.LogWarning("Hier wurden geraden alle Infos vom GameStateObject mit gelöscht... gewollt?");
+        }
+
+        public void ProceedToNextLevel() {
+            throw new NotImplementedException();
+        }
+
+        public void GoToInBetweenLevels() {
+            //Altes Kapitel beenden
+            //Nächstes Kapitel wählen, Werte setzen
+            SceneManager.LoadScene("InBetweenLevels");
         }
     }
 }

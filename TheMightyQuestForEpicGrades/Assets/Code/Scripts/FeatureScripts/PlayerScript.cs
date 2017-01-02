@@ -16,7 +16,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
         [HideInInspector] public float position_Z;
 
         private Rigidbody rb;
-
+        
         public float speed;
 
         private void Start() {
@@ -46,45 +46,69 @@ namespace Assets.Code.Scripts.FeatureScripts {
             return instance;
         }
 
-        public void switchControlBlock() {
+        public void SwitchControlBlock() {
             controlsBlocked = !controlsBlocked;
             //Debug Ausgabe
             Debug.Log(controlsBlocked ? "Controls are now blocked" : "Controls are now enabled");
         }
 
-        public void SetStartPosition() {
+        private void SetStartPosition() {
             position_X = Master.Instance().MyLevel.BoardBuilder_TMP.StartPosition.x;
             position_Z = Master.Instance().MyLevel.BoardBuilder_TMP.StartPosition.z;
 
             rb.MovePosition(new Vector3(position_X, 1.0f, position_Z));
         }
 
-        private void OnCollisionStay(Collision other) {
+        private void OnCollisionStay(Collision col) {
             DebugLogVar++;
-            if (!controlsBlocked)
-                if (other.gameObject.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E)) {
-                    //öffnen der Truhe,Fragen laden
-                    Debug.Log("Truhe öffnen (" + DebugLogVar + ")");
-                }
-                else if (other.gameObject.CompareTag("PinkPortal") && Input.GetKeyDown(KeyCode.E))
-                        // && Portalstein vorhanden)
-                {
+            if (controlsBlocked) return; //Dann sowieso nix tun
+            //SOLLTE IMMER IN DER REIHENFOLGE PORTALSTEIN->ENDDOOR->FRAGE(Truhe) erfolgen (EndDoor ist allerdings trigger.. daher andere Funktion siehe unten)
+            if (col.gameObject.CompareTag("PinkPortal")) { // && Portalstein vorhanden)
+                Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Portalstein einsetzen");
+                if (Input.GetKeyDown(KeyCode.E)) {
                     //TODO Master.Instance().MyGameState. PINK PORTAL 
                     //Debug.Log("PinkPortalSkript.Activated = " + GameStateHolder.Instance().GameStateObject.LevelState.PinkPortalStone.Used.ToString() + " (" + DebugLogVar +")");
                 }
-                else if (other.gameObject.CompareTag("GreenPortal") && Input.GetKeyDown(KeyCode.E))
-                        // && Portalstein vorhanden)
-                {
+            }
+            else if (col.gameObject.CompareTag("GreenPortal")) { // && Portalstein vorhanden
+                Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Portalstein einsetzen");
+                if (Input.GetKeyDown(KeyCode.E)) {
                     //TODO Master.Instance().MyGameState. GREEN PORTAL 
                     //Debug.Log("GreenPortalSkript.Activated = " + GameStateHolder.Instance().GameStateObject.LevelState.GreenPortalStone.Used.ToString() + " (" + DebugLogVar +")");
                 }
-                else if (other.gameObject.CompareTag("BluePortal") && Input.GetKeyDown(KeyCode.E))
-                        // && Portalstein vorhanden)
-                {
+            }
+            else if (col.gameObject.CompareTag("BluePortal")) { // && Portalstein vorhanden)
+                Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Portalstein einsetzen");
+                if (Input.GetKeyDown(KeyCode.E)) {
                     //TODO Master.Instance().MyGameState. BLUE PORTAL 
                     //Debug.Log("BluePortalSkript.Activated = " + GameStateHolder.Instance().GameStateObject.LevelState.GreenPortalStone.Used.ToString() + " (" + DebugLogVar +")");
                 }
+            }
+            else if (col.gameObject.CompareTag("Chest")) {
+                Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Truhe oeffnen");
+                if (Input.GetKeyDown(KeyCode.E)) {
+                    //öffnen der Truhe,Fragen laden
+                    Debug.Log("Truhe öffnen (" + DebugLogVar + ")");
+                }
+            }
         }
+
+        private void OnCollisionExit(Collision other) {
+            Master.Instance().CurrentDialogController.SendMessage("DeactivateTooltip");
+        }
+
+        private void OnTriggerStay(Collider other) {
+            if (!other.gameObject.CompareTag("Finish")) return; //Steht vor Endtür
+            Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Portal oeffnen");
+            if (!Input.GetKeyDown(KeyCode.E)) return;
+            other.gameObject.GetComponent<EndDoorScript>().OpenDoor();
+            Debug.Log("Türe wird durch den Spieler geöffnet");
+        }
+
+        //Debug-Funktion
+        //private void OnTriggerEnter(Collider col) {
+        //    Debug.Log(gameObject.name + " has triggered " + other.gameObject.name);
+        //}
 
         private void FixedUpdate() {
             if (!controlsBlocked) {

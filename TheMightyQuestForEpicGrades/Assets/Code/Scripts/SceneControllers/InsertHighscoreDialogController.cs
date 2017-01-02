@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Code.Manager;
 using Assets.Code.Models;
 using Assets.Code.Scripts.UtilityScripts;
 using UnityEngine;
@@ -115,5 +116,15 @@ namespace Assets.Code.Scripts.SceneControllers {
             }
             return input;
         }
+
+        #region Master-Link
+        private void Start() {
+            Master.Instance().CurrentDialogController = this.gameObject;
+        }
+
+        private void OnDestroy() {
+            Master.Instance().CurrentDialogController = null;
+        }
+        #endregion
     }
 }

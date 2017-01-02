@@ -16,6 +16,8 @@ namespace Assets.Code.Models {
             LevelState.BluePortalStone = new PortalStone();
             LevelState.GreenPortalStone = new PortalStone();
             LevelState.PinkPortalStone = new PortalStone();
+            LevelState.UsedChapters = new List<string>();
+            LevelState.UsedChapters.Clear();
             //weitere Werte initialisieren?
         }
 
@@ -24,8 +26,7 @@ namespace Assets.Code.Models {
         [Serializable]
         public class Preselectives { //Vorausgewählte Einstellungen
             public Difficulties Difficulty { get; set; } //Ausgewählter Schwierigkeitsgrad
-            public string Module { get; set; }
-            //imo fehleranfällig, mal gucken ob wir damit durchkommen (sollte aber ok sein, weil in der Frage das Modul auch als String gespeichert ist)
+            public string Module { get; set; } //imo fehleranfällig, mal gucken ob wir damit durchkommen (sollte aber ok sein, weil in der Frage das Modul auch als String gespeichert ist)
             public string PlayerName { get; set; }
         }
 
@@ -33,7 +34,9 @@ namespace Assets.Code.Models {
         public class CurrentLevelState {
             //Der Index müsste reichen, allerdings sind dann Savegames broken, wenn die Leveldateien nicht mehr übereinstimmen
             public int Level { get; set; } //Nach Muster Level_X.txt X = der hier gespeicherte int32-Wert
-            public int Kapitel { get; set; } //Aktuelle Stufe/Kapitel bzw das 'Level' im Spieldurchgang
+            public int Stage { get; set; } //Aktuelle Stufe bzw das 'Level' im Spieldurchgang
+            public string Chapter { get; set; } //Aktuelles Kapitel im Spieldurchgang -> Bestimmt den Fragenpool
+            public List<string> UsedChapters { get; set; } //Bereits benutzte Kapitel in diesem Spieldurchgang (um Duplikate zu verhindern)
             public Vector3 PlayerPosition { get; set; } //Die aktuelle Position des Spielers
             public bool[] Chests { get; set; } //Bool-Array[10] wo an der Stelle der ID der Truhe (in der Truhe gespeichert) steht ob sie locked ist 
             //public List<Question> Questions { get; set; } aktuell in QuestionManager gespeichert //Die Liste aller zum Modul und zum Schwierigkeitsgrad passenden Fragen 
