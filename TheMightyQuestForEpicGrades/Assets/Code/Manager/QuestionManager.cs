@@ -11,7 +11,7 @@ namespace Assets.Code.Manager {
 
         //TODO REWORK
 
-        private List<Question> Questions { get; set; }
+        private List<Question> Questions { get; set; } //Wenn geladen nur enthält dies nur Fragen für das aktuell gewählte Modul
         private QuestionManager()
         {
             // TODO : wäre das nicht geeignet für Module bzw. Fragen?
@@ -139,6 +139,10 @@ namespace Assets.Code.Manager {
             }
         }
 
+        internal void LoadQuestionsByChapter(string chapterInUse) {
+            throw new NotImplementedException();
+        }
+
         /// <exception cref="IndexOutOfRangeException">Es wurde keine Fragen gefunden mit angegebenem Index</exception>
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
         public Question GetQuestion(int index) {
@@ -153,6 +157,11 @@ namespace Assets.Code.Manager {
         /// <exception cref="NullReferenceException">Objekt wurde nicht instanziert.</exception>
         public IList<Question> GetQuestions() {
             return Questions;
+        }
+
+        public string[] GetAllChapters() {
+            //TODO GetAllChapters
+            return new string[] {"Test1", "Test2", "Test3"};
         }
     }
 }

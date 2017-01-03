@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.Code.Manager;
+using Assets.Code.Scripts.FeatureScripts;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InBetweenLevelsDialogController : MonoBehaviour {
@@ -11,6 +13,7 @@ public class InBetweenLevelsDialogController : MonoBehaviour {
     public Text WeiterText;
     #endregion
 
+    private static bool _firstTimeUseOfScript = true;
     private bool _ableToProceed;
 
     private IEnumerator WaitABitThenShowMessage() {
@@ -20,17 +23,35 @@ public class InBetweenLevelsDialogController : MonoBehaviour {
     }
 
     private void Awake () {
-        KapitelNummer.text = Master.Instance().MyLevel.GetLoadedLevelIndex().ToString();
-        KapitelName.text = Master.Instance().MyGameState.ChapterCurrent;
+        //Der Player Clone darf diese Szene nicht überleben =)
+        if (PlayerScript.instance != null) {
+            Destroy(PlayerScript.instance.gameObject);
+        }
+        if (_firstTimeUseOfScript)
+        {
+            Master.Instance().MyGameState.SetUpNextLevel(true);
+            _firstTimeUseOfScript = false;
+        }
+        else
+        {
+            Master.Instance().MyGameState.SetUpNextLevel();
+        }
+        KapitelNummer.text = Master.Instance().MyGameState.StageCurrent.ToString();
+        KapitelName.text = Master.Instance().MyGameState.ChapterInUse;
         WeiterText.enabled = false;
+        
         StartCoroutine(WaitABitThenShowMessage());
     }
 
     private void Update() {
         if (!_ableToProceed) return;
         if (Input.anyKeyDown) {
-            Master.Instance().MyGameState.ProceedToNextLevel();
+            GoToNextStage();
         }
+    }
+
+    private void GoToNextStage() {
+        SceneManager.LoadScene("MainGame");
     }
 	
     #region Master-Link

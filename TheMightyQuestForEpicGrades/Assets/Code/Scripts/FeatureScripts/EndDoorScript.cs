@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Manager;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Code.Scripts.FeatureScripts {
     public class EndDoorScript : MonoBehaviour {
@@ -30,7 +31,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
             }
             else if (GetComponent<CapsuleCollider>().enabled) { //offen CapsuleCollider bewirkt laden des nächsten Levels
                 Debug.Log("EndOfLevel getriggert");
-                Master.Instance().MyGameState.GoToInBetweenLevels();
+                GoToNextScreenPromt();
             }
             else {
                 Debug.LogError("Kein Collider mehr aktiv?!");
@@ -63,6 +64,13 @@ namespace Assets.Code.Scripts.FeatureScripts {
             GetComponent<CapsuleCollider>().enabled = true;
             Debug.Log("Collider geswitched");
             //Debug.Log("Unterschied zur Startposition: " + (_colStartPos - transform.localPosition));
+        }
+
+        private void GoToNextScreenPromt() {
+            if (Master.Instance().MyGameState.StageCurrent == 3) {
+                SceneManager.LoadScene("EndOfGame");
+            }
+            SceneManager.LoadScene("InBetweenLevels");
         }
     }
 }

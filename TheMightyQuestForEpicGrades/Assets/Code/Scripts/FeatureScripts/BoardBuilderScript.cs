@@ -6,8 +6,8 @@ using UnityEngine;
 namespace Assets.Code.Scripts.FeatureScripts {
     public class BoardBuilderScript : MonoBehaviour {
 
-        // TODO Überlegen, ob man die gridPositions tatsächlich braucht?
-        private readonly List<Vector3> gridPositions = new List<Vector3>();
+        // Überlegen, ob man die gridPositions tatsächlich braucht?
+        //private readonly List<Vector3> gridPositions = new List<Vector3>();
         private Transform boardHolder;
         private char[,] levelData;
         private int max_x;
@@ -27,13 +27,13 @@ namespace Assets.Code.Scripts.FeatureScripts {
         [HideInInspector] public Vector3 EndPosition;
 
         // Initialisiere die Liste mit den möglichen Positionen
-        private void InitializeList() {
-            gridPositions.Clear();
+        //private void InitializeList() {
+        //    gridPositions.Clear();
 
-            for (var x = 0; x < max_x; ++x)
-                for (var z = 0; z < max_z; ++z)
-                    gridPositions.Add(new Vector3(x, 1.0f, z));
-        }
+        //    for (var x = 0; x < max_x; ++x)
+        //        for (var z = 0; z < max_z; ++z)
+        //            gridPositions.Add(new Vector3(x, 1.0f, z));
+        //}
 
         // Erstelle die Spielfläche
         private void BoardSetup() {
@@ -110,7 +110,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 throw new Exception("Das Level konnte nicht richtig eingelesen werden. Versuchen Sie es erneut.");
 
             BoardSetup();
-            InitializeList();
+            //InitializeList();
         }
     }
 }

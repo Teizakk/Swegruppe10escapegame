@@ -2,7 +2,7 @@
 using Assets.Code.Scripts.SceneControllers;
 using UnityEngine;
 
-//TODO auch hier muss man nochmal genau gucken, ob man den Singleton braucht
+//Singlton nicht zwingend erforderlich aber Umstellung ist atm zu zeitaufwendig
 
 namespace Assets.Code.Scripts.FeatureScripts {
     public class PlayerScript : MonoBehaviour {
@@ -55,6 +55,10 @@ namespace Assets.Code.Scripts.FeatureScripts {
         private void SetStartPosition() {
             position_X = Master.Instance().MyLevel.BoardBuilder_TMP.StartPosition.x;
             position_Z = Master.Instance().MyLevel.BoardBuilder_TMP.StartPosition.z;
+
+            //BoardBuilder wieder killen, hat genau jetzt seinen Dienst getan
+            Destroy(Master.Instance().MyLevel.BoardBuilder_TMP.gameObject);
+            Master.Instance().MyLevel.BoardBuilder_TMP = null;
 
             rb.MovePosition(new Vector3(position_X, 1.0f, position_Z));
         }

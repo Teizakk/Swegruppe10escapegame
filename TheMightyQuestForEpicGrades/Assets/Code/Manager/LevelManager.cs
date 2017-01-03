@@ -75,5 +75,10 @@ namespace Assets.Code.Manager {
         public char[,] GetLevelData() {
             return _levelData;
         }
+
+        public int[] GetAllUseableLevelIndices() {
+            //TODO GetAllUseableLevelIndices
+            return new[] {1, 2, 3};
+        }
     }
 }

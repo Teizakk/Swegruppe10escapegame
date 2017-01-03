@@ -22,10 +22,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoadGame.unity
   - enabled: 1
-    path: Assets/Scenes/MainGame(MovingCamera).unity
-  - enabled: 1
     path: Assets/Scenes/MainGame.unity
-  - enabled: 0
-    path: Assets/Scenes/MainGameWPauseMenu.unity
   - enabled: 1
     path: Assets/Scenes/InBetweenLevels.unity

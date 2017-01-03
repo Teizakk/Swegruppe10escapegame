@@ -16,8 +16,12 @@ namespace Assets.Code.Models {
             LevelState.BluePortalStone = new PortalStone();
             LevelState.GreenPortalStone = new PortalStone();
             LevelState.PinkPortalStone = new PortalStone();
-            LevelState.UsedChapters = new List<string>();
-            LevelState.UsedChapters.Clear();
+            LevelState.ChaptersUsed = new List<string>();
+            LevelState.ChaptersUsed.Clear();
+            LevelState.LevelsUsed = new List<int>();
+            LevelState.LevelsUsed.Clear();
+            LevelState.Stage = 1;
+            LevelState.Chapter = "EMPTY";
             //weitere Werte initialisieren?
         }
 
@@ -34,9 +38,10 @@ namespace Assets.Code.Models {
         public class CurrentLevelState {
             //Der Index müsste reichen, allerdings sind dann Savegames broken, wenn die Leveldateien nicht mehr übereinstimmen
             public int Level { get; set; } //Nach Muster Level_X.txt X = der hier gespeicherte int32-Wert
-            public int Stage { get; set; } //Aktuelle Stufe bzw das 'Level' im Spieldurchgang
+            public List<int> LevelsUsed { get; set; }
             public string Chapter { get; set; } //Aktuelles Kapitel im Spieldurchgang -> Bestimmt den Fragenpool
-            public List<string> UsedChapters { get; set; } //Bereits benutzte Kapitel in diesem Spieldurchgang (um Duplikate zu verhindern)
+            public List<string> ChaptersUsed { get; set; } //Bereits benutzte Kapitel in diesem Spieldurchgang (um Duplikate zu verhindern)
+            public int Stage { get; set; } //Aktuelle Stufe bzw das 'Level' im Spieldurchgang
             public Vector3 PlayerPosition { get; set; } //Die aktuelle Position des Spielers
             public bool[] Chests { get; set; } //Bool-Array[10] wo an der Stelle der ID der Truhe (in der Truhe gespeichert) steht ob sie locked ist 
             //public List<Question> Questions { get; set; } aktuell in QuestionManager gespeichert //Die Liste aller zum Modul und zum Schwierigkeitsgrad passenden Fragen 

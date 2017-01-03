@@ -13,7 +13,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
         public Canvas CheatInfoPrefab;
         private Canvas CheatInfo;
 
-        private bool HaxActivated; //TODO Ausweichlösung - bis wir uns unten geeinigt haben
+        private bool HaxActivated; //für schnellere Abfragen ohne Master.Instance()... bemühen zu müssen
 
         //Nur für Fehlermeldung falls nicht gesetzt
         public void Awake() {
