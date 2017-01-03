@@ -227,7 +227,7 @@ namespace Assets.Code.Scripts.SceneControllers
                 Hints = new List<string> { "inter", "connected", "networks" }
             };
             // TODO : Frage aus der Datenhaltung holen
- 			q = Master.Instance().MyQuestion.GetQuestion(0);
+            //q = Master.Instance().MyQuestion.GetQuestion(0);
 
             // Fragentext laden
             outQuestion.text = q.QuestionText;
@@ -272,22 +272,21 @@ namespace Assets.Code.Scripts.SceneControllers
         }
 
         #region Popups
-        // TODO : update PopupController -> ?
-        // zeigt Bild (ImagePopup) an
-        //public void ShowPicture(int index)
-        //{
-        //    var popupController = GameObject.Find("PopupController").GetComponent<PopupController>();
-        //    popupController.usedQuestion = q;
-        //    if (index > 0)
-        //    {
-        //        popupController.SetUpImagePopupAnswer(tippsShowed, index - 1);
-        //    }
-        //    else
-        //    {
-        //        popupController.SetUpImagePopupQuestion(tippsShowed);
-        //    }
-        //    Debug.Log("Bild '" + imagePaths[index] + "' anzeigen!");
-        //}
+        //zeigt Bild(ImagePopup) an
+        public void ShowPicture(int index)
+        {
+            var imagePopup = ImagePopupScript.Instance();
+            imagePopup.usedQuestion = q;
+            if (index > 0)
+            {
+                imagePopup.SetUpImagePopupAnswer(tippsShowed, index - 1);
+            }
+            else
+            {
+                imagePopup.SetUpImagePopupQuestion(tippsShowed);
+            }
+            Debug.Log("Bild '" + imagePaths[index] + "' anzeigen!");
+        }
 
         // zeigt PopUp mit Text an für Frage richtig/falsch
         public void ShowPopup(string text)
@@ -334,7 +333,8 @@ namespace Assets.Code.Scripts.SceneControllers
         //"Nachrichten"-Funktion an PlayerController
         private void blockAndUnblockMovement()
         {
-            PlayerScript.instance.SwitchControlBlock();
+            // TODO : Fix Nullreference
+            // PlayerScript.instance.SwitchControlBlock();
         }
 
         #endregion
