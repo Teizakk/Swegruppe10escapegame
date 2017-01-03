@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Assets.Code.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ using UnityEngine.UI;
 namespace Assets.Code.Scripts.FeatureScripts {
     public class ImagePopupScript : MonoBehaviour {
         private static ImagePopupScript _imagePopupScript;
+        public Question usedQuestion { get; set; }
         public Button BackButton;
         public Text Hint1Text;
         public Text Hint2Text;
@@ -87,6 +89,52 @@ namespace Assets.Code.Scripts.FeatureScripts {
             else {
                 Hint3Text.text = "Hinweis 3: " + hint_3_text;
                 Hint3Text.gameObject.SetActive(true);
+            }
+        }
+
+        public void SetUpImagePopupQuestion(int hintsToShow)
+        {
+            switch (hintsToShow)
+            {
+                case 0:
+                    _imagePopupScript.ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath);
+                    break;
+                case 1:
+                    _imagePopupScript.ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath,
+                        usedQuestion.Hints[0]);
+                    break;
+                case 2:
+                    _imagePopupScript.ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath,
+                        usedQuestion.Hints[0], usedQuestion.Hints[1]);
+                    break;
+                case 3:
+                    _imagePopupScript.ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath,
+                        usedQuestion.Hints[0], usedQuestion.Hints[1], usedQuestion.Hints[2]);
+                    break;
+            }
+        }
+
+        public void SetUpImagePopupAnswer(int hintsToShow, int index)
+        {
+            switch (hintsToShow)
+            {
+                case 0:
+                    _imagePopupScript.ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
+                        usedQuestion.Answers[index].ImagePath);
+                    break;
+                case 1:
+                    _imagePopupScript.ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
+                        usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0]);
+                    break;
+                case 2:
+                    _imagePopupScript.ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
+                        usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0], usedQuestion.Hints[1]);
+                    break;
+                case 3:
+                    _imagePopupScript.ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
+                        usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0], usedQuestion.Hints[1],
+                        usedQuestion.Hints[2]);
+                    break;
             }
         }
 
