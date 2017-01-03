@@ -10,7 +10,7 @@ using Button = UnityEngine.UI.Button;
 
 namespace Assets.Code.Scripts.SceneControllers {
     public class NewLevelDialogController : MonoBehaviour {
-        private void Start() {
+        private void Awake() {
             FilePathsAndStatus = new List<FileNameHelper>();
             FilePathsAndStatus.Clear();
             PreselectedFolderPath = "";
@@ -229,6 +229,16 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         private FolderBrowserDialog fbd;
 
+        #endregion
+
+        #region Master-Link
+        private void Start() {
+            Master.Instance().CurrentDialogController = this.gameObject;
+        }
+
+        private void OnDestroy() {
+            Master.Instance().CurrentDialogController = null;
+        }
         #endregion
     }
 }

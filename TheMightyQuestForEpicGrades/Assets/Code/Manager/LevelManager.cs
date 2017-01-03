@@ -14,7 +14,7 @@ namespace Assets.Code.Manager {
         public BoardBuilderScript BoardBuilder_TMP;
 
         private char[,] _levelData;
-        private string _loadedLevel;
+        private int _loadedLevelIndex;
 
         #region Dateinamen-Konfiguration
         private readonly string Dateiendung = ".txt";
@@ -33,7 +33,7 @@ namespace Assets.Code.Manager {
                 while ((data = Datei.ReadLine()) != null)
                     levelData.Add(data);
             }
-            _loadedLevel = Dateiname;
+            _loadedLevelIndex = index;
             _levelData = to2dCharArray(levelData);
         }
 
@@ -68,8 +68,8 @@ namespace Assets.Code.Manager {
             return charArray2d;
         }
 
-        public string GetLoadedLevel() {
-            return _loadedLevel;
+        public int GetLoadedLevelIndex() {
+            return _loadedLevelIndex;
         }
 
         public char[,] GetLevelData() {

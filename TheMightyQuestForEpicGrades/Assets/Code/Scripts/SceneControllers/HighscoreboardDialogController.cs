@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets.Code.Manager;
 using Assets.Code.Models;
 using Assets.Code.Scripts.UtilityScripts;
 using UnityEngine;
@@ -23,7 +24,7 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         // Use this for initialization
         //nur beim Highscoreboard genutzt
-        private void Start() {
+        private void Awake() {
             if (SceneManager.GetActiveScene().name == "Highscore") {
                 try {
                     highscoreliste = new List<Highscore>();
@@ -131,5 +132,15 @@ namespace Assets.Code.Scripts.SceneControllers {
                 }
             }
         }
+
+        #region Master-Link
+        private void Start() {
+            Master.Instance().CurrentDialogController = this.gameObject;
+        }
+
+        private void OnDestroy() {
+            Master.Instance().CurrentDialogController = null;
+        }
+        #endregion
     }
 }

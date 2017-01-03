@@ -10,7 +10,7 @@ namespace Assets.Code.Scripts.SceneControllers {
         #endregion
 
         // Use this for initialization
-        private void Start() {
+        private void Awake() {
             Master.Instance().MyModule.LoadFromFile();
             ModuleDropdown.AddOptions(Master.Instance().MyModule.GetModulesAsList());
         }
@@ -20,5 +20,15 @@ namespace Assets.Code.Scripts.SceneControllers {
             Master.Instance().MyModule.ModuleToEdit = ModuleDropdown.options[ModuleDropdown.value].text;
             Debug.Log("Das zu bearbeitende Modul wurde auf: " + ModuleDropdown.options[ModuleDropdown.value].text + " gesetzt!");
         }
+
+        #region Master-Link
+        private void Start() {
+            Master.Instance().CurrentDialogController = this.gameObject;
+        }
+
+        private void OnDestroy() {
+            Master.Instance().CurrentDialogController = null;
+        }
+        #endregion
     }
 }

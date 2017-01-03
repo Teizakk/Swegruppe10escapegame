@@ -12,6 +12,7 @@ namespace Assets.Code.Manager {
         public LevelManager MyLevel;
         public ModuleManager MyModule;
         public QuestionManager MyQuestion;
+        public GameObject CurrentDialogController;
         #endregion
 
         //modifiziertes Singleton-Pattern (um von außen immer leicht an das Master Objekt zu kommen)
@@ -49,6 +50,7 @@ namespace Assets.Code.Manager {
             MyLevel = gameObject.AddComponent<LevelManager>();
             MyModule = gameObject.AddComponent<ModuleManager>();
             MyQuestion = gameObject.AddComponent<QuestionManager>();
+            CurrentDialogController = null;
         }
     }
 }

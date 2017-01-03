@@ -103,7 +103,7 @@ namespace Assets.Code.Scripts.SceneControllers
         #region Scenefunktionen
 
         // Use this for initialization
-        void Start()
+        void Awake()
         {
             // ToggleGroup initialisieren
             toggleGroup.RegisterToggle(tglAnswer1);
@@ -334,9 +334,19 @@ namespace Assets.Code.Scripts.SceneControllers
         //"Nachrichten"-Funktion an PlayerController
         private void blockAndUnblockMovement()
         {
-            PlayerScript.instance.switchControlBlock();
+            PlayerScript.instance.SwitchControlBlock();
         }
 
+        #endregion
+
+        #region Master-Link
+        private void Start() {
+            Master.Instance().CurrentDialogController = this.gameObject;
+        }
+
+        private void OnDestroy() {
+            Master.Instance().CurrentDialogController = null;
+        }
         #endregion
     }
 }
