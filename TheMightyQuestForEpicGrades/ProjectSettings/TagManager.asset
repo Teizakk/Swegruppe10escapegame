@@ -13,6 +13,7 @@ TagManager:
   - BluePortal
   - GreenPortal
   - PauseMenu
+  - EndOfGameText
   layers:
   - Default
   - TransparentFX
