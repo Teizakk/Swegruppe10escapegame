@@ -28,7 +28,7 @@ namespace Assets.Code.Scripts.SceneControllers {
             //TODO Instance nur einmal aufrufen und zwischenspeichern wäre glaube ich einfacher
             int difficulty = difficultyDropdown.value + 1; //+ 1 weil Easy = 1, Medium = 2, ... usw
             Master.Instance().MyGameState.DifficultyChosen = (Difficulties)difficulty;
-            Master.Instance().MyGameState.ModuleUsed =
+            Master.Instance().MyGameState.ModuleChosen =
                     moduleDropdown.options[moduleDropdown.value].text;
             //Hier könnte man auch mit Value implementieren, allerdings würde dann ein ändern der Modulliste die Savegames schrotten.
             var setPlayerName = playerName.text;

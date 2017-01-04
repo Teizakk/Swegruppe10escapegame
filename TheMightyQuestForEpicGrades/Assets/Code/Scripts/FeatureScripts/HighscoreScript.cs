@@ -35,7 +35,6 @@ namespace Assets.Code.Scripts.FeatureScripts {
             //}
 
             if (SceneManager.GetActiveScene().name == "Highscore")
-                    //TODO fix gegen Compilerwarnung braucht Funktionstest
                 if (highscoreliste.Count >= 10) {
                     p1.text = "1. " + highscoreliste[0].PlayerName + "\t" + highscoreliste[0].Score + "\t" +
                               highscoreliste[0].Zeit;
@@ -171,12 +170,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 old.Add(neu);
                 return old;
             }
-
-            //int wert;
-            //TODO Überprüfen ob die kleinen Änderungen das Verhalten geändert haben...
-            //int.TryParse(neu.Score, out wert);
             
-
             for (var i = 0; i < old.Count; i++) {
                 if (neu.Score > old[i].Score)
                     stelle = i;

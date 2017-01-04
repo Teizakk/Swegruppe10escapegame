@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Manager;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Code.Scripts.FeatureScripts {
     public class EndDoorScript : MonoBehaviour {
@@ -30,7 +31,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
             }
             else if (GetComponent<CapsuleCollider>().enabled) { //offen CapsuleCollider bewirkt laden des nächsten Levels
                 Debug.Log("EndOfLevel getriggert");
-                Master.Instance().MyGameState.GoToInBetweenLevels();
+                GoToNextScreenPromt();
             }
             else {
                 Debug.LogError("Kein Collider mehr aktiv?!");
@@ -54,7 +55,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 GetComponent<CapsuleCollider>().center = (_colStartPos - transform.localPosition)/3.0f; //wieso der andere sich 3x so schnell bewegt? Keine Ahnung. Scale scheint es nicht zu sein!
             }
             _cntOfDescends++;
-            if (_cntOfDescends < 3*(1/_DESCENDING_RATE)) return;
+            if (_cntOfDescends < 2.3f*(1/_DESCENDING_RATE)) return;
             //Ab nun ist das Portal offen
             _isOpening = false;
             //Kollision mit Box abschalten
@@ -63,6 +64,15 @@ namespace Assets.Code.Scripts.FeatureScripts {
             GetComponent<CapsuleCollider>().enabled = true;
             Debug.Log("Collider geswitched");
             //Debug.Log("Unterschied zur Startposition: " + (_colStartPos - transform.localPosition));
+        }
+
+        private void GoToNextScreenPromt() {
+            if (Master.Instance().MyGameState.StageCurrent == 3) {
+                SceneManager.LoadScene("EndOfGame");
+                Master.Instance().MyGameState.SetGameWon();
+                return;
+            }
+            SceneManager.LoadScene("InBetweenLevels");
         }
     }
 }

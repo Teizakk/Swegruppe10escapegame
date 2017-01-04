@@ -59,6 +59,6 @@ MonoBehaviour:
   - {fileID: 1000012686282368, guid: 92b25693d5e24b04889065785e890e61, type: 2}
   - {fileID: 1000010668390076, guid: eb879fc2a63785a49ae8ff87c4e33821, type: 2}
   StartBlock: {fileID: 1000010980092512, guid: 82c0c1c8a9703c346aaf17574ac33c46, type: 2}
-  EndDoor: {fileID: 1000010201025734, guid: b2f56e2e30e988642bdae2de456aa972, type: 2}
+  EndDoor: {fileID: 1000010201025734, guid: ca4676354c06a0a4d8dd744023f421e8, type: 2}
   StartPosition: {x: 0, y: 0, z: 0}
   EndPosition: {x: 0, y: 0, z: 0}

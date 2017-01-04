@@ -7,8 +7,6 @@ using UnityEngine.UI;
 namespace Assets.Code.Scripts.SceneControllers {
     public class MainGameDialogController : MonoBehaviour {
 
-        //TODO DAS BRAUCHT NOCH EINE LOGISCHE KOMPLETT ÜBERARBEITUNG
-
         [Header("BoardBuilder Prefab")]
         public BoardBuilderScript BoardBuilder;
         [Header("Player Prefab")]
@@ -20,11 +18,13 @@ namespace Assets.Code.Scripts.SceneControllers {
         private void Awake() {
             if (PlayerScript.instance == null)
                 Instantiate(Player);
-            if (BoardBuilder != null) { //BS aber jajaja erstmal egal
-                Master.Instance().MyLevel.BoardBuilder_TMP = Instantiate(BoardBuilder);
-                Master.Instance().MyLevel.LoadFromFile(1);
-                Master.Instance().MyLevel.BoardBuilder_TMP.SetupScene();
-            }
+
+            //BoardBuilder initialisieren und Szene bauen lassen
+            Master.Instance().MyLevel.BoardBuilder_TMP = Instantiate(BoardBuilder);
+            Master.Instance().MyLevel.BoardBuilder_TMP.SetupScene();
+            //Danach wird er vom PlayerScript wenn er damit fertig ist gekillt, weil er nicht mehr gebraucht wird.
+            
+            //Tooltip per default auf nicht sichtbar
             TooltipPanel.SetActive(false);
         }
 

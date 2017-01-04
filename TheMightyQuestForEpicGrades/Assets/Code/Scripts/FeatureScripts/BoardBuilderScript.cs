@@ -6,8 +6,8 @@ using UnityEngine;
 namespace Assets.Code.Scripts.FeatureScripts {
     public class BoardBuilderScript : MonoBehaviour {
 
-        // TODO Überlegen, ob man die gridPositions tatsächlich braucht?
-        private readonly List<Vector3> gridPositions = new List<Vector3>();
+        // Überlegen, ob man die gridPositions tatsächlich braucht?
+        //private readonly List<Vector3> gridPositions = new List<Vector3>();
         private Transform boardHolder;
         private char[,] levelData;
         private int max_x;
@@ -27,13 +27,13 @@ namespace Assets.Code.Scripts.FeatureScripts {
         [HideInInspector] public Vector3 EndPosition;
 
         // Initialisiere die Liste mit den möglichen Positionen
-        private void InitializeList() {
-            gridPositions.Clear();
+        //private void InitializeList() {
+        //    gridPositions.Clear();
 
-            for (var x = 0; x < max_x; ++x)
-                for (var z = 0; z < max_z; ++z)
-                    gridPositions.Add(new Vector3(x, 1.0f, z));
-        }
+        //    for (var x = 0; x < max_x; ++x)
+        //        for (var z = 0; z < max_z; ++z)
+        //            gridPositions.Add(new Vector3(x, 1.0f, z));
+        //}
 
         // Erstelle die Spielfläche
         private void BoardSetup() {
@@ -44,7 +44,10 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
             var portalNumber = 0;
 
-            for (var x = 0; x < max_x; ++x)
+            for (var x = 0; x < max_x; ++x) {
+                //Zum Merken was links von dem aktuellen Block platziert wurde - resettet jede Reihe
+                GameObject lastInstatiatedBlock = null;
+
                 for (var z = 0; z < max_z; ++z) {
                     var height = 1.0f;
                     switch (levelData[x, z]) {
@@ -77,7 +80,8 @@ namespace Assets.Code.Scripts.FeatureScripts {
                             EndPosition = new Vector3(x, height, z);
                             toInstantiate = EndDoor;
                             //Braucht auch noch Bodenblock
-                            var boden = Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject;
+                            var boden =
+                                    Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject;
                             boden.transform.SetParent(boardHolder);
                             break;
                         default: // Sollte niemals aufgerufen werden
@@ -86,14 +90,19 @@ namespace Assets.Code.Scripts.FeatureScripts {
                     }
 
                     if (toInstantiate != null) {
-                        var instance =
-                                Instantiate(toInstantiate, new Vector3(x, height, z), Quaternion.identity) as GameObject;
+                        var instance = Instantiate(toInstantiate, new Vector3(x, height, z), Quaternion.identity) as GameObject;
+                        if (toInstantiate == EndDoor && (lastInstatiatedBlock == null || lastInstatiatedBlock == FloorBlock)) { //Prüft vermutlich nur auf Referenzgleichheit sollte aber ok sein
+                            instance.transform.rotation = Quaternion.AngleAxis(90, Vector3.up); //wenn der EndDoor Block in einer vertikalen Wand ist dann um 90° drehen
+                        }
                         instance.transform.SetParent(boardHolder);
+                        lastInstatiatedBlock = toInstantiate;
                     }
                     else
                         throw new Exception(
-                            "Unerlaubtes Zeichen innerhalb der Leveldaten gefunden! Erlaubte Zeichen sind: {'#', 'C', 'P', 'S', 'E', 'F'} Zeichen war: " + levelData[x,z]);
+                            "Unerlaubtes Zeichen innerhalb der Leveldaten gefunden! Erlaubte Zeichen sind: {'#', 'C', 'P', 'S', 'E', 'F'} Zeichen war: " +
+                            levelData[x, z]);
                 }
+            }
         }
 
         // Erstelle die Szene
@@ -110,7 +119,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 throw new Exception("Das Level konnte nicht richtig eingelesen werden. Versuchen Sie es erneut.");
 
             BoardSetup();
-            InitializeList();
+            //InitializeList();
         }
     }
 }
