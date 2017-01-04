@@ -52,5 +52,9 @@ namespace Assets.Code.Manager {
             MyQuestion = gameObject.AddComponent<QuestionManager>();
             CurrentDialogController = null;
         }
+
+        public void KILLME() {
+            Destroy(Instance().gameObject);
+        }
     }
 }

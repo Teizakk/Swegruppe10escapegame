@@ -78,7 +78,7 @@ namespace Assets.Code.Manager {
 
         public int[] GetAllUseableLevelIndices() {
             //TODO GetAllUseableLevelIndices
-            return new[] {1, 2, 3};
+            return new[] {4, 5, 6};
         }
     }
 }

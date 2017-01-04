@@ -52,7 +52,7 @@ PlayerSettings:
   resizableWindow: 0
   useMacAppStoreValidation: 0
   gpuSkinning: 0
-  graphicsJobs: 0
+  graphicsJobs: 1
   xboxPIXTextureCapture: 0
   xboxEnableAvatar: 0
   xboxEnableKinect: 0
