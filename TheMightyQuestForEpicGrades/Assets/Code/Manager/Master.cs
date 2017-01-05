@@ -1,5 +1,4 @@
-﻿using Assets.Code.Scripts.FeatureScripts;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Assets.Code.Manager {
@@ -55,8 +54,11 @@ namespace Assets.Code.Manager {
         }
 
         public static void KILLME() {
-            if (SceneManager.GetActiveScene().name == "EndOfGame" || SceneManager.GetActiveScene().name == "InsertHighscoreEndOfGame") {
+            if (SceneManager.GetActiveScene().name == "MainGame" ||
+                SceneManager.GetActiveScene().name == "EndOfGame" ||
+                SceneManager.GetActiveScene().name == "InsertHighscoreEndOfGame") {
                 DestroyImmediate(Instance().gameObject);
+                Debug.Log("MASTER GEWOLLT GEKILLT - NEUER SPIELDURCHLAUF BEGINNT!");
                 return;
             }
             Debug.Log("Aktuelle Szene: " + SceneManager.GetActiveScene().name);
@@ -64,7 +66,8 @@ namespace Assets.Code.Manager {
         }
 
         private void OnDestroy() {
-            if (SceneManager.GetActiveScene().name == "EndOfGame" ||
+            if (SceneManager.GetActiveScene().name == "MainGame" ||
+                SceneManager.GetActiveScene().name == "EndOfGame" ||
                 SceneManager.GetActiveScene().name == "InsertHighscoreEndOfGame") return;
             Debug.Log("Aktuelle Szene: " + SceneManager.GetActiveScene().name);
             throw new UnityException("Master wurde auf irgendeine verwerfliche Art zum falschen Zeitpunkt gelöscht!");

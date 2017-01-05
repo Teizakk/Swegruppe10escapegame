@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Assets.Code.Manager;
 using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
@@ -12,18 +13,16 @@ namespace Assets.Code.Scripts.SceneControllers {
         public Text KapitelNummer;
         public Text KapitelName;
         public Text WeiterText;
+        public int waitTimeInSeconds = -1;
         #endregion
 
         private static bool _firstTimeUseOfScript = true;
         private bool _ableToProceed;
+        private DateTime startTime;
+        private TimeSpan timeToProceed;
 
-        private IEnumerator WaitABitThenShowMessage() {
-            yield return new WaitForSeconds(2);
-            WeiterText.enabled = true;
-            _ableToProceed = true;
-        }
 
-        private void Awake () {
+       private void Awake () {
             //Der Player Clone darf diese Szene nicht überleben =)
             if (PlayerScript.instance != null) {
                 Destroy(PlayerScript.instance.gameObject);
@@ -40,12 +39,24 @@ namespace Assets.Code.Scripts.SceneControllers {
             KapitelNummer.text = Master.Instance().MyGameState.StageCurrent.ToString();
             KapitelName.text = Master.Instance().MyGameState.ChapterInUse;
             WeiterText.enabled = false;
-        
-            StartCoroutine(WaitABitThenShowMessage());
+
+            startTime = DateTime.Now;
+            timeToProceed = new TimeSpan(0, 0, 0, waitTimeInSeconds, 0);
         }
 
         private void Update() {
-            if (!_ableToProceed) return;
+            if (waitTimeInSeconds == -1) { //Falls Wert nicht über Inspektor gesetzt
+                waitTimeInSeconds = 2;
+                timeToProceed = new TimeSpan(0, 0, 0, waitTimeInSeconds, 0);
+            }
+            if (!_ableToProceed) {
+                Debug.Log(DateTime.Now - startTime <= timeToProceed);
+                if (DateTime.Now - startTime <= timeToProceed) return;
+                WeiterText.enabled = true;
+                _ableToProceed = true;
+                return;
+            }
+
             if (Input.anyKeyDown) {
                 GoToNextStage();
             }

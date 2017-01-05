@@ -1,5 +1,4 @@
 ﻿using Assets.Code.Manager;
-using Assets.Code.Scripts.SceneControllers;
 using UnityEngine;
 
 //Singlton nicht zwingend erforderlich aber Umstellung ist atm zu zeitaufwendig

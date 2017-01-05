@@ -42,6 +42,11 @@ namespace Assets.Code.Scripts.SceneControllers {
                         loseOrWin.text = "Sie haben Gewonnen";
                     }
                 }
+                else {
+                    Debug.LogError("Laden der HighscoreListe fehlgeschlagen!");    
+                    Debug.Break();
+                    nextWindow = 11;
+                }
                 Debug.Log("Jetzt müsste dort eine Meldung stehen");
             }
             else

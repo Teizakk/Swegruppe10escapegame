@@ -1,7 +1,7 @@
 ﻿using Assets.Code.Manager;
 using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Assets.Code.Scripts.SceneControllers {
@@ -35,7 +35,15 @@ namespace Assets.Code.Scripts.SceneControllers {
         private void DeactivateTooltip() {
             TooltipPanel.SetActive(false);
         }
-        
+
+        #region Für das Pausenmenü
+
+        public void LeaveToMainMenu() {
+            Master.KILLME();
+            SceneManager.LoadScene("MainMenu");
+        }
+        #endregion
+
         #region Master-Link
         private void Start() {
             Master.Instance().CurrentDialogController = this.gameObject;
