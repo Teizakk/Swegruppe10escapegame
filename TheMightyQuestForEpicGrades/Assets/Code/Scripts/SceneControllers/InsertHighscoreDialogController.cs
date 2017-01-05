@@ -18,7 +18,7 @@ namespace Assets.Code.Scripts.SceneControllers {
         public Text zeit;
         public Text playerName;
 
-        public void NextWindowOnClick(int level)
+        public void InsertHighscore()
         {
             if (SceneManager.GetActiveScene().name == "InsertHighscoreEndOFGame")
             {
@@ -59,8 +59,13 @@ namespace Assets.Code.Scripts.SceneControllers {
                 highscoreliste = Order(highscoreliste);
                 Persist.Save<List<Highscore>>(highscoreliste, Name);
 
-                SceneManager.LoadScene(level);
+                LeaveWithoutInsert(); //Macht das gleiche
             }
+        }
+
+        public void LeaveWithoutInsert() {
+            Master.KILLME();
+            SceneManager.LoadScene("MainMenu");
         }
 
         public List<Highscore> Order(List<Highscore> unsortiert)
@@ -123,7 +128,8 @@ namespace Assets.Code.Scripts.SceneControllers {
         }
 
         private void OnDestroy() {
-            Master.Instance().CurrentDialogController = null;
+            //Darf hier nicht mehr passieren, weil es Master jetzt nicht mehr gibt.
+            //Master.Instance().CurrentDialogController = null;
         }
         #endregion
     }

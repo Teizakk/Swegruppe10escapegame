@@ -13,29 +13,26 @@ namespace Assets.Code.Scripts.SceneControllers {
         // Use this for initialization
         //Anzeigetext der Scene
         public Text loseOrWin;
-        int score;
 
         List<Highscore> highscoreliste = new List<Highscore>();
         private static string Name = @"Highscores\highscores";
 
-
         //0= Main Menü
         //2= Insert Highscore End OF Game --> muss noch durch richtige ersetzt werden
-        int nextWindow = -1;
+        private int nextWindow = -1;
 
         void Awake () {
             //Wenn wir in dieser Szene sind muss der Player ebenfalls gekillt werden
             Destroy(PlayerScript.instance.gameObject);
-            
-            if(Master.Instance().MyGameState.GameIsWon)
+
+            //Wenn Spiel gewonnen
+            if (Master.Instance().MyGameState.GameIsWon)
             {
                 highscoreliste = Persist.Load<List<Highscore>>(Name);
-                if (highscoreliste != null && highscoreliste.Count != 0)
-                {
-                    Debug.Break();
-                    //Wenn Spiel gewonnen
-                    if(score>highscoreliste[highscoreliste.Count-1].Score)
-                    {
+                if (highscoreliste != null) { //Wenn highscores erfolgreich geladen
+                    Debug.Break(); //
+                    if (highscoreliste.Count == 0 || (Master.Instance().MyGameState.ScoreCurrent > highscoreliste[highscoreliste.Count - 1].Score)) {
+                        //Wenn es noch keine Highscores gibt oder wenn der erreichte Score ein Highscore ist
                         nextWindow = 11;
                         loseOrWin.text = "Sie haben Gewonnen\nund einen Highscore erzielt!";
                     }
@@ -57,7 +54,7 @@ namespace Assets.Code.Scripts.SceneControllers {
         public void NextWindowOnClick()
         {
             if (nextWindow == 0) { //== zurück ins Hauptmenu
-                Master.Instance().KILLME();
+                Master.KILLME();
             }
             SceneManager.LoadScene(nextWindow);
         }
@@ -70,7 +67,8 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         private void OnDestroy()
         {
-            Master.Instance().CurrentDialogController = null;
+            //Sollte hier nicht mehr passieren, weil es Master schon nicht mehr geben kann (außerdem nicht wirklich benötigt)
+            //Master.Instance().CurrentDialogController = null;
         }
         #endregion
     }

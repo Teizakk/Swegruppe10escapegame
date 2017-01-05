@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Code.Manager {
     public class Master : MonoBehaviour {
@@ -53,8 +54,20 @@ namespace Assets.Code.Manager {
             CurrentDialogController = null;
         }
 
-        public void KILLME() {
-            Destroy(Instance().gameObject);
+        public static void KILLME() {
+            if (SceneManager.GetActiveScene().name == "EndOfGame" || SceneManager.GetActiveScene().name == "InsertHighscoreEndOfGame") {
+                DestroyImmediate(Instance().gameObject);
+                return;
+            }
+            Debug.Log("Aktuelle Szene: " + SceneManager.GetActiveScene().name);
+            throw new UnityException("Master darf und sollte zu diesem Zeitpunkt nicht gelöscht werden!");
+        }
+
+        private void OnDestroy() {
+            if (SceneManager.GetActiveScene().name == "EndOfGame" ||
+                SceneManager.GetActiveScene().name == "InsertHighscoreEndOfGame") return;
+            Debug.Log("Aktuelle Szene: " + SceneManager.GetActiveScene().name);
+            throw new UnityException("Master wurde auf irgendeine verwerfliche Art zum falschen Zeitpunkt gelöscht!");
         }
     }
 }

@@ -102,7 +102,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
         }
 
         private void OnTriggerStay(Collider other) {
-            if (!other.gameObject.CompareTag("Finish")) return; //Steht vor Endtür
+            if (!other.gameObject.CompareTag("Finish")) return; //Steht nicht vor Endtür
             Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Portal oeffnen");
             if (!Input.GetKeyDown(KeyCode.E)) return;
             other.gameObject.GetComponent<EndDoorScript>().OpenDoor();
