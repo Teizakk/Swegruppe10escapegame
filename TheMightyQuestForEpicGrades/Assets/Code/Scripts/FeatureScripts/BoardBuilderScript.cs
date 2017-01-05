@@ -6,9 +6,9 @@ using UnityEngine;
 namespace Assets.Code.Scripts.FeatureScripts {
     public class BoardBuilderScript : MonoBehaviour {
 
-        // Überlegen, ob man die gridPositions tatsächlich braucht?
-        //private readonly List<Vector3> gridPositions = new List<Vector3>();
+        private GameObject[,] _instantiatedObjects;
         private Transform boardHolder;
+        
         private char[,] levelData;
         private int max_x;
         private int max_z;
@@ -26,23 +26,14 @@ namespace Assets.Code.Scripts.FeatureScripts {
         [HideInInspector] public Vector3 StartPosition;
         [HideInInspector] public Vector3 EndPosition;
 
-        // Initialisiere die Liste mit den möglichen Positionen
-        //private void InitializeList() {
-        //    gridPositions.Clear();
-
-        //    for (var x = 0; x < max_x; ++x)
-        //        for (var z = 0; z < max_z; ++z)
-        //            gridPositions.Add(new Vector3(x, 1.0f, z));
-        //}
-
         // Erstelle die Spielfläche
-        private void BoardSetup() {
+        private void SetupBoard() {
             // Um eine schöne Struktur zu wahren, werden alle Boardobjekte den Parent "Board" erhalten (boardHolder)
             boardHolder = new GameObject("Board").transform;
-
-            GameObject toInstantiate = null;
+            _instantiatedObjects = new GameObject[max_x,max_z];
 
             var portalNumber = 0;
+            GameObject toInstantiate = null;
 
             for (var x = 0; x < max_x; ++x) {
                 //Zum Merken was links von dem aktuellen Block platziert wurde - resettet jede Reihe
@@ -71,7 +62,9 @@ namespace Assets.Code.Scripts.FeatureScripts {
                             startInst.transform.SetParent(boardHolder);
                             break;
                         case 'f':
-                        case 'F':
+                        case 'F': //Floor
+                        case 'd':
+                        case 'D': //Door
                             height = 0.0f;
                             toInstantiate = FloorBlock;
                             break;
@@ -91,6 +84,14 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
                     if (toInstantiate != null) {
                         var instance = Instantiate(toInstantiate, new Vector3(x, height, z), Quaternion.identity) as GameObject;
+
+                        if (instance == null) {
+                            Debug.LogError("Fehler beim Erstellen des Spielfeldes! Instanzieren von: " + toInstantiate.gameObject.name + " ist fehlgeschlagen!");
+                            throw new NullReferenceException();
+                        }
+                        //Für das spätere Optimieren
+                        _instantiatedObjects[x, z] = instance;
+
                         if (toInstantiate == EndDoor && (lastInstatiatedBlock == null || lastInstatiatedBlock == FloorBlock)) { //Prüft vermutlich nur auf Referenzgleichheit sollte aber ok sein
                             instance.transform.rotation = Quaternion.AngleAxis(90, Vector3.up); //wenn der EndDoor Block in einer vertikalen Wand ist dann um 90° drehen
                         }
@@ -99,7 +100,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
                     }
                     else
                         throw new Exception(
-                            "Unerlaubtes Zeichen innerhalb der Leveldaten gefunden! Erlaubte Zeichen sind: {'#', 'C', 'P', 'S', 'E', 'F'} Zeichen war: " +
+                            "Unerlaubtes Zeichen innerhalb der Leveldaten gefunden! Erlaubte Zeichen sind: {'#', 'C', 'P', 'S', 'E', 'F', 'D'} Zeichen war: " +
                             levelData[x, z]);
                 }
             }
@@ -117,9 +118,62 @@ namespace Assets.Code.Scripts.FeatureScripts {
             }
             else
                 throw new Exception("Das Level konnte nicht richtig eingelesen werden. Versuchen Sie es erneut.");
+            
+            SetupBoard();
+            OptimizeMeshes();
+        }
 
-            BoardSetup();
-            //InitializeList();
+        private void OptimizeMeshes() {
+            //Optimizing the Floor
+            List<GameObject> floorCubesList = new List<GameObject>();
+            List<GameObject> wallCubesList = new List<GameObject>();
+            foreach (var myGameObject in _instantiatedObjects) {
+                switch (myGameObject.name) {
+                    case "FloorCube(Clone)":
+                        floorCubesList.Add(myGameObject);
+                        break;
+                    case "WallCube(Clone)":
+                        wallCubesList.Add(myGameObject);
+                        break;
+                }
+            }
+
+            //Ersten Block zum Parent machen
+            var combinedFloorCube = floorCubesList[0];
+            combinedFloorCube.transform.SetAsFirstSibling();
+            for (int j = 1; j < floorCubesList.Count; j++) {
+                floorCubesList[j].transform.SetParent(combinedFloorCube.transform);
+            }
+            combinedFloorCube.AddComponent<MeshCombinerScript>();
+
+            combinedFloorCube.transform.position = new Vector3(0,0,0);
+
+            for (int i = 1; i < floorCubesList.Count; i++) {
+                Destroy(floorCubesList[i].gameObject);
+            }
+            
+            floorCubesList.Clear();
+            combinedFloorCube.gameObject.name = "CombinedFloorCubes";
+
+            //Ersten Block zum Parent machen
+            var combinedWallBlocks = wallCubesList[0];
+            combinedWallBlocks.transform.SetAsFirstSibling();
+            for (int j = 1; j < wallCubesList.Count; j++)
+            {
+                wallCubesList[j].transform.SetParent(combinedWallBlocks.transform);
+            }
+            combinedWallBlocks.AddComponent<MeshCombinerScript>();
+
+            combinedWallBlocks.transform.position = new Vector3(0, 0, 0);
+
+            for (int i = 1; i < wallCubesList.Count; i++)
+            {
+                Destroy(wallCubesList[i].gameObject);
+            }
+
+            wallCubesList.Clear();
+            combinedWallBlocks.transform.localScale = new Vector3(1,1,1);
+            combinedWallBlocks.gameObject.name = "CombinedWallBlocks";
         }
     }
 }
