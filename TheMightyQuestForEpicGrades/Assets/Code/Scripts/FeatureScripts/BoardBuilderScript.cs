@@ -154,6 +154,10 @@ namespace Assets.Code.Scripts.FeatureScripts {
             
             floorCubesList.Clear();
             combinedFloorCube.gameObject.name = "CombinedFloorCubes";
+            Destroy(combinedFloorCube.GetComponent<BoxCollider>());
+            combinedFloorCube.AddComponent<MeshCollider>();
+            combinedFloorCube.GetComponent<MeshCollider>().sharedMesh =
+                    combinedFloorCube.GetComponent<MeshFilter>().mesh;
 
             //Ersten Block zum Parent machen
             var combinedWallBlocks = wallCubesList[0];
@@ -174,6 +178,11 @@ namespace Assets.Code.Scripts.FeatureScripts {
             wallCubesList.Clear();
             combinedWallBlocks.transform.localScale = new Vector3(1,1,1);
             combinedWallBlocks.gameObject.name = "CombinedWallBlocks";
+
+            Destroy(combinedWallBlocks.GetComponent<BoxCollider>());
+            combinedWallBlocks.AddComponent<MeshCollider>();
+            combinedWallBlocks.GetComponent<MeshCollider>().sharedMesh =
+                    combinedWallBlocks.GetComponent<MeshFilter>().mesh;
         }
     }
 }

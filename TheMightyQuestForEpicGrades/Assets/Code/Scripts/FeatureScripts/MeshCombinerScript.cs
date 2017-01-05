@@ -18,6 +18,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
             }
             transform.GetComponent<MeshFilter>().mesh = new Mesh();
             transform.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
+            transform.GetComponent<MeshFilter>().mesh.name = "combinedmesh";
             transform.gameObject.SetActive(true);
         }
     }
