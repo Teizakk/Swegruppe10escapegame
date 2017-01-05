@@ -28,4 +28,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndOfGame.unity
   - enabled: 1
-    path: Assets/Scenes/InsertHighscoreEndOFGame.unity
+    path: Assets/Scenes/InsertHighscoreEndOfGame.unity

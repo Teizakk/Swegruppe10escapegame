@@ -1,8 +1,5 @@
-﻿using System.Security.Policy;
-using Assets.Code.Manager;
-using Assets.Code.Scripts.SceneControllers;
+﻿using Assets.Code.Manager;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Code.Scripts.FeatureScripts {
     public class CheatModeScript : MonoBehaviour {

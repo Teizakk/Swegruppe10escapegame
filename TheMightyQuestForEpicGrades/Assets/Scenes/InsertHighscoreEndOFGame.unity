@@ -100,7 +100,6 @@ GameObject:
   - 4: {fileID: 95096195}
   - 114: {fileID: 95096194}
   - 114: {fileID: 95096193}
-  - 114: {fileID: 95096192}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -108,17 +107,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &95096192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 95096190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e33f7f0f2e9f4f74fa18441e1c61b947, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &95096193
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,7 +1,5 @@
 ﻿using Assets.Code.GLOBALS;
 using Assets.Code.Manager;
-using Assets.Code.Models;
-using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
 using UnityEngine.UI;
 

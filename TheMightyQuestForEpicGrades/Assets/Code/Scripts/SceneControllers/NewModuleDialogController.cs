@@ -12,7 +12,7 @@ namespace Assets.Code.Scripts.SceneControllers {
         public Button SubmitButton;
 
         private string _textToSubmit { get; set; }
-        private List<string> knownModules = Master.Instance().MyModule.GetModulesAsList();
+        private List<string> knownModules; 
 
         public void SubmitNewModule() {
             if (string.IsNullOrEmpty(_textToSubmit)) {
@@ -36,6 +36,10 @@ namespace Assets.Code.Scripts.SceneControllers {
             _textToSubmit = "";
             //knownModules aktualisieren
             knownModules = Master.Instance().MyModule.GetModulesAsList();
+        }
+
+        public void Awake() {
+            Master.Instance().MyModule.GetModulesAsList();
         }
 
         #region Master-Link
