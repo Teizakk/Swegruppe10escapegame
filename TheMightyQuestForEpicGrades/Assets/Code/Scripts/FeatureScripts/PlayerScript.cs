@@ -5,14 +5,13 @@ using UnityEngine;
 
 namespace Assets.Code.Scripts.FeatureScripts {
     public class PlayerScript : MonoBehaviour {
-        public static PlayerScript instance;
+        private static PlayerScript instance;
 
         private bool controlsBlocked;
 
         private int DebugLogVar;
 
-        [HideInInspector] public float position_X;
-        [HideInInspector] public float position_Z;
+        private Vector3 position;
 
         private Rigidbody rb;
         
@@ -39,10 +38,19 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
             //Setzen des Speeds
             speed = GLOBALS.CONSTANTS.PLAYER_SPEED;
+
+            //Position allokieren und Höhe setzen
+            position = new Vector3( -1.0f, 1.0f, -1.0f);
         }
 
-        public PlayerScript GetInstance() {
+        public static PlayerScript GetInstance() {
             return instance;
+        }
+
+        public Vector3 GetPosition() {
+            //Aktualisiert und returned position
+            position = gameObject.transform.position;
+            return position;
         }
 
         public void SwitchControlBlock() {
@@ -52,14 +60,14 @@ namespace Assets.Code.Scripts.FeatureScripts {
         }
 
         private void SetStartPosition() {
-            position_X = Master.Instance().MyLevel.BoardBuilder_TMP.StartPosition.x;
-            position_Z = Master.Instance().MyLevel.BoardBuilder_TMP.StartPosition.z;
-
+            position.x = Master.Instance().MyLevel.BoardBuilder_TMP.StartPosition.x;
+            position.z = Master.Instance().MyLevel.BoardBuilder_TMP.StartPosition.z;
+            //y bereits in Start() gesetzt
             //BoardBuilder wieder killen, hat genau jetzt seinen Dienst getan
             Destroy(Master.Instance().MyLevel.BoardBuilder_TMP.gameObject);
             Master.Instance().MyLevel.BoardBuilder_TMP = null;
 
-            rb.MovePosition(new Vector3(position_X, 1.0f, position_Z));
+            rb.MovePosition(new Vector3(position.x, 1.0f, position.z));
         }
 
         private void OnCollisionStay(Collision col) {

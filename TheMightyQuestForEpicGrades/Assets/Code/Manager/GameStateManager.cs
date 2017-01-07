@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using Assets.Code.GLOBALS;
 using Assets.Code.Models;
+using Assets.Code.Scripts.FeatureScripts;
+using Assets.Code.Scripts.SceneControllers;
 using Assets.Code.Scripts.UtilityScripts;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,17 +19,58 @@ namespace Assets.Code.Manager {
         #region Savegame Handling
 
         public void SaveGame(string nameOfSavegameFile) {
-            TimeSpan TimeCode = new TimeSpan(DateTime.Now.Ticks);
-            Persist.Save(GameStateObject, "SaveGames\\" + nameOfSavegameFile + "_" + TimeCode.TotalSeconds);
+            //PlayerPos auslesen
+            Debug.Log(PlayerPosCurrent);
+            Debug.Log(PlayerScript.GetInstance().GetPosition());
+            PlayerPosCurrent = PlayerScript.GetInstance().GetPosition();
+            Debug.Log(PlayerPosCurrent);
+            var sgi = new SavegameInfo
+            {
+                ChosenDifficulty = this.DifficultyChosen,
+                ChosenModule = this.ModuleChosen,
+                CustomName = nameOfSavegameFile,
+                PlayerName = this.PlayerName,
+            };
+            var timeCode = new TimeSpan(DateTime.Now.Ticks).Ticks;
+
+            var gsoFileName = "SaveGames\\" + timeCode + "_gso"; //GameStateObject File
+            var sgiFileName = "SaveGames\\" + timeCode + "_sgi"; //SaveGameInfo File
+
+            //in sgi den Link auf sgo speichern & timecode für bessere Erreichbarkeit ablegen
+            sgi.FilenameOfGameStateSave = gsoFileName;
+            sgi.TimeCode = timeCode;
+
+
+            Persist.Save(GameStateObject, gsoFileName);
+            Persist.Save(sgi, sgiFileName);
         }
 
-        public void LoadGame(string nameOfSavegameFile) {
-            var listOfSavegames = Persist.GetSavedGames();
-            foreach (var item in listOfSavegames)
-            {
-                Debug.Log(item);
-            }
+        public void LoadGame(string nameOfSavegameFile)
+        {
             //TODO
+            Debug.Log("MyGameState.Load(" + nameOfSavegameFile + ") aufgerufen");
+            GameStateObject = Persist.Load<GameState>("SaveGames\\" + nameOfSavegameFile);
+            //Weiterleitung zu inbetweenLevels
+            InBetweenLevelsDialogController._firstTimeUseOfScript = false; //Muss resettet werden da sonst falsche Sachen von dem Skript gemacht werden
+
+            SceneManager.LoadScene("InBetweenLevels");
+        }
+        
+        public List<SavegameInfo> GetAllGSIs() {
+            var listOfSGIFileNames = Persist.GetAllSGIFileNames();
+            var listOfSGIs = new List<SavegameInfo>();
+            foreach (var sgiFileName in listOfSGIFileNames)
+            {
+                var sgiFile = Persist.Load<SavegameInfo>("SaveGames\\" + sgiFileName);
+                if (sgiFile != null && sgiFile.GetType() == typeof(SavegameInfo)) {
+                    listOfSGIs.Add(Persist.Load<SavegameInfo>("SaveGames\\" + sgiFileName));
+                }
+                else
+                {
+                    Debug.LogWarning("Fehler beim Laden von: " + sgiFileName);
+                }
+            }
+            return listOfSGIs;
         }
         #endregion
 
@@ -63,10 +109,21 @@ namespace Assets.Code.Manager {
                 GameStateObject.GameOptions.PlayerName = string.IsNullOrEmpty(value) ? "Anonymous" : value;
             }
         }
-
+        //Konvertiert von Vector3_Serializable zu Vector3 und zurück
         public Vector3 PlayerPosCurrent {
-            get { return GameStateObject.LevelState.PlayerPosition; }
-            set { GameStateObject.LevelState.PlayerPosition = value; }
+            get
+            {
+                var x_value = GameStateObject.LevelState.PlayerPosition.x;
+                var y_value = GameStateObject.LevelState.PlayerPosition.y;
+                var z_value = GameStateObject.LevelState.PlayerPosition.z;
+                return new Vector3(x_value, y_value, z_value);
+            }
+            set
+            {
+                GameStateObject.LevelState.PlayerPosition.x = value.x;
+                GameStateObject.LevelState.PlayerPosition.y = value.y;
+                GameStateObject.LevelState.PlayerPosition.z = value.z;
+            }
         }
         #endregion
 

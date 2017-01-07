@@ -40,6 +40,7 @@ namespace Assets.Code.Scripts.UtilityScripts {
                 using (var file = File.Open(ExecuteablePath + "\\" + fileName + ".dat", FileMode.OpenOrCreate)) {
                     bf.Serialize(file, state);
                     file.Close();
+                    Debug.Log("Datei: " + fileName + ".dat\nGespeichert in: " + ExecuteablePath + "\\");
                 }
             }
             catch (Exception e) {
@@ -54,6 +55,7 @@ namespace Assets.Code.Scripts.UtilityScripts {
                     using (var file = File.Open(ExecuteablePath + "\\" + fileName + ".dat", FileMode.Open)) {
                         var state = (T) bf.Deserialize(file);
                         file.Close();
+                        Debug.Log("Datei: " + fileName + ".dat\nGeladen aus: " + ExecuteablePath + "\\");
                         return state;
                     }
                 }
@@ -64,17 +66,20 @@ namespace Assets.Code.Scripts.UtilityScripts {
                 return new T();
             }
         }
-
+        
         public static List<string> GetSavedStates() {
             if (Directory.Exists(ExecuteablePath + "\\SavedStates"))
                 return Directory.GetFiles(ExecuteablePath + "\\SavedStates").ToList().Select( x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
             Directory.CreateDirectory(ExecuteablePath + "\\SavedStates"); //eigentlich unnötig, da dies oben im Konstruktor schon gemacht wird.
             return new List<string>();
         }
-
-        public static List<string> GetSavedGames() {
+        
+        public static List<string> GetAllSGIFileNames() {
             if (Directory.Exists(ExecuteablePath + "\\SaveGames"))
-                return Directory.GetFiles(ExecuteablePath + "\\SaveGames").ToList().Select(x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
+                return Directory.GetFiles(ExecuteablePath + "\\SaveGames").ToList().Select(x => {
+                    x = Path.GetFileNameWithoutExtension(x);
+                    return x;
+                }).Where(x => !string.IsNullOrEmpty(x) && x.Contains("_sgi")).ToList();
             Directory.CreateDirectory(ExecuteablePath + "\\SaveGames"); //eigentlich unnötig, da dies oben im Konstruktor schon gemacht wird.
             return new List<string>();
         }

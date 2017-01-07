@@ -1,5 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using Assets.Code.Manager;
+using Assets.Code.Models;
+using Assets.Code.Scripts.SceneControllers;
+using Assets.Code.Scripts.UtilityScripts;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Assets.Code.Scripts.FeatureScripts {
@@ -15,9 +24,10 @@ namespace Assets.Code.Scripts.FeatureScripts {
         private bool _fadingOut;
         private bool _inSubWindow;
 
-        [Header("Untermenüs")] public GameObject SaveMenu;
-
+        [Header("Untermenüs")]
+        public GameObject SaveMenu;
         public GameObject LoadMenu;
+        public GameObject LoadWarning;
         public GameObject CloseWarning;
 
         private Button SpielFortsetzenButton;
@@ -25,12 +35,74 @@ namespace Assets.Code.Scripts.FeatureScripts {
         private CanvasGroup _pauseMenuCanvasGroup;
         private CanvasGroup _saveMenuCanvasGroup;
         private CanvasGroup _loadMenuCanvasGroup;
+        private CanvasGroup _loadWarningCanvasGroup;
         private CanvasGroup _closeWarningCanvasGroup;
 
         #endregion
 
-        #region Sonstige Funktionen
+        #region Save&Load
+        [Header("Save & Load Fields")]
+        public InputField SaveGameName;
+        public ScrollRect LoadableGames;
+        public GameObject SaveGamePrefab;
+        private List<SavegameInfo> _listOfSavegameDescriptions = new List<SavegameInfo>();
+        private List<GameObject> _saveGameLinks = new List<GameObject>();
+        private int selectedSaveGameLink = -1;
 
+        public void SaveGame() {
+            //Weiterleitung
+            //TODO Konventionen für Namensgebung auf die Seite schreiben
+            Master.Instance().MyGameState.SaveGame(SaveGameName.text);
+            HideSaveMenu();
+        }
+
+        private void RefreshSaveGames() {
+            Debug.Log("Speicherstände werden geladen");
+
+            //alte löschen
+            foreach (var saveGameLink in _saveGameLinks) {
+                Destroy(saveGameLink.gameObject);
+            }
+            _saveGameLinks.Clear();
+
+            //Alle verfügbaren SaveGames anhand deren Infos laden
+            _listOfSavegameDescriptions = Master.Instance().MyGameState.GetAllGSIs();
+
+            for (int index = 0; index < _listOfSavegameDescriptions.Count; index++) {
+
+                var item = _listOfSavegameDescriptions[index];
+
+                //Nur Savegames vom gleichen Spieler anzeigen
+                if (!item.PlayerName.Equals(Master.Instance().MyGameState.PlayerName)) continue;
+
+                var saveGameDisplay = Instantiate(SaveGamePrefab, LoadableGames.content, false) as GameObject;
+                DateTime timeOfSaving = new DateTime(item.TimeCode, DateTimeKind.Local);
+                var ci = CultureInfo.CurrentCulture; //oder "de-DE"
+
+                saveGameDisplay.GetComponentInChildren<Text>().text = item.ToString() +
+                                                                      timeOfSaving.ToString("d", ci) + "\t" + timeOfSaving.TimeOfDay.ToString().Split('.')[0];
+                saveGameDisplay.GetComponent<DataHolderScript>().StoredValues.Add("IndexOfSGI", index);
+                _saveGameLinks.Add(saveGameDisplay);
+            }
+        }
+
+        public void SetSelectedSaveGameLink() {
+            //unboxing
+            selectedSaveGameLink = (int)EventSystem.current.currentSelectedGameObject.GetComponent<DataHolderScript>().StoredValues["IndexOfSGI"];
+            Debug.Log("Das ausgewählte Savegame ist nun Nummer: " + selectedSaveGameLink);
+        }
+
+        public void LoadGame() {
+            //Gucken welches 
+            var fileToLoad = _listOfSavegameDescriptions[selectedSaveGameLink].FilenameOfGameStateSave;
+            
+            //Laden starten
+            Master.Instance().MyGameState.LoadGame(fileToLoad);
+            //TODO
+        }
+        #endregion
+
+        #region Sonstige Funktionen
         //Funktion um von außen zu fragen, ob das Spiel pausiert ist (für die Controls zb)
         public bool IsGamePaused() {
             return _gamePaused;
@@ -38,7 +110,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
         //"Nachrichten"-Funktion an PlayerScript
         public void blockAndUnblockMovement() {
-            PlayerScript.instance.SwitchControlBlock();
+            PlayerScript.GetInstance().SwitchControlBlock();
         }
 
         public void ContinueGame() {
@@ -73,6 +145,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
             _loadMenuCanvasGroup.alpha = 1.0f;
             _loadMenuCanvasGroup.interactable = true;
             _inSubWindow = true;
+            RefreshSaveGames();
         }
 
         public void HideLoadMenu() {
@@ -97,6 +170,20 @@ namespace Assets.Code.Scripts.FeatureScripts {
             CloseWarning.SetActive(false);
         }
 
+        //Ladewarnung
+        public void ShowLoadWarning() {
+            LoadWarning.SetActive(true);
+            _loadWarningCanvasGroup.alpha = 1.0f;
+            _loadWarningCanvasGroup.interactable = true;
+            //_inSubWindow = true;
+        }
+
+        public void HideLoadWarning() {
+            _loadWarningCanvasGroup.alpha = 0.0f;
+            _loadWarningCanvasGroup.interactable = false;
+            //_inSubWindow = true;
+            LoadWarning.SetActive(false);
+        }
         #endregion
 
         #region Unity Call-Backs
@@ -123,6 +210,11 @@ namespace Assets.Code.Scripts.FeatureScripts {
             _closeWarningCanvasGroup = CloseWarning.GetComponent<CanvasGroup>();
             _closeWarningCanvasGroup.alpha = 0;
             _closeWarningCanvasGroup.interactable = false;
+            //Die Lade-Warnung
+            LoadWarning.SetActive(false);
+            _loadWarningCanvasGroup = LoadWarning.GetComponent<CanvasGroup>();
+            _loadWarningCanvasGroup.alpha = 0;
+            _loadWarningCanvasGroup.interactable = false;
             //Der eine Button den man für den kleinen Trick in der ContinueGame Funktion braucht
             var buttonList = FindObjectsOfType<Button>().ToList();
             SpielFortsetzenButton = buttonList.FindLast(button => button.name.Equals("ContinueGameButton"));

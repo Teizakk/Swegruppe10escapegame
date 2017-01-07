@@ -16,7 +16,7 @@ namespace Assets.Code.Scripts.SceneControllers {
         public int waitTimeInSeconds = -1;
         #endregion
 
-        private static bool _firstTimeUseOfScript = true;
+        public static bool _firstTimeUseOfScript = true;
         private bool _ableToProceed;
         private DateTime startTime;
         private TimeSpan timeToProceed;
@@ -24,8 +24,8 @@ namespace Assets.Code.Scripts.SceneControllers {
 
        private void Awake () {
             //Der Player Clone darf diese Szene nicht überleben =)
-            if (PlayerScript.instance != null) {
-                Destroy(PlayerScript.instance.gameObject);
+            if (PlayerScript.GetInstance() != null) {
+                Destroy(PlayerScript.GetInstance().gameObject);
             }
             if (_firstTimeUseOfScript)
             {
@@ -44,13 +44,14 @@ namespace Assets.Code.Scripts.SceneControllers {
             timeToProceed = new TimeSpan(0, 0, 0, waitTimeInSeconds, 0);
         }
 
+
         private void Update() {
             if (waitTimeInSeconds == -1) { //Falls Wert nicht über Inspektor gesetzt
                 waitTimeInSeconds = 2;
                 timeToProceed = new TimeSpan(0, 0, 0, waitTimeInSeconds, 0);
             }
             if (!_ableToProceed) {
-                Debug.Log(DateTime.Now - startTime <= timeToProceed);
+                //Debug.Log(DateTime.Now - startTime <= timeToProceed);
                 if (DateTime.Now - startTime <= timeToProceed) return;
                 WeiterText.enabled = true;
                 _ableToProceed = true;

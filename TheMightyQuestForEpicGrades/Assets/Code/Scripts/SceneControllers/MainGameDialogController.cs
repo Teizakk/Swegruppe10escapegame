@@ -1,4 +1,5 @@
-﻿using Assets.Code.Manager;
+﻿using System;
+using Assets.Code.Manager;
 using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,7 +17,7 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         // Use this for initialization
         private void Awake() {
-            if (PlayerScript.instance == null)
+            if (PlayerScript.GetInstance() == null)
                 Instantiate(Player);
 
             //BoardBuilder initialisieren und Szene bauen lassen
@@ -37,7 +38,7 @@ namespace Assets.Code.Scripts.SceneControllers {
         }
 
         #region Für das Pausenmenü
-
+        //Im Endeffekt nur eine Weiterleitung
         public void LeaveToMainMenu() {
             Master.KILLME();
             SceneManager.LoadScene("MainMenu");
