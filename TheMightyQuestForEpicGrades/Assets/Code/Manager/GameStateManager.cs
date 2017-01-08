@@ -49,10 +49,12 @@ namespace Assets.Code.Manager {
         {
             //TODO
             Debug.Log("MyGameState.Load(" + nameOfSavegameFile + ") aufgerufen");
-            GameStateObject = Persist.Load<GameState>("SaveGames\\" + nameOfSavegameFile);
+            GameStateObject = Persist.Load<GameState>(nameOfSavegameFile);
             //Weiterleitung zu inbetweenLevels
-            InBetweenLevelsDialogController._firstTimeUseOfScript = false; //Muss resettet werden da sonst falsche Sachen von dem Skript gemacht werden
-
+            Debug.Log(GameStateObject != null ? "GSO ist nicht null" : "GSO ist null!");
+            InBetweenLevelsDialogController._firstTimeUseOfScript = true; //Muss resettet werden da sonst falsche Sachen von dem Skript gemacht werden
+            InBetweenLevelsDialogController._loadingASaveGame = true;
+            PlayerScript._loadingASavedGame = true;
             SceneManager.LoadScene("InBetweenLevels");
         }
         
@@ -178,17 +180,20 @@ namespace Assets.Code.Manager {
         }
         
         //Übergang einleiten
-        public void SetUpNextLevel(bool startOfGame = false) {
+        public void SetUpNextLevel(bool changeValues, bool rememberOldChapterAndLevel) {
             // A L T E S   K A P I T E L   B E E N D E N
             //Genutzte Daten merken
-            if (!startOfGame) {
+            Debug.Log("Benutztes Kapitel und Level sollen weggespeichert werden? = " + rememberOldChapterAndLevel);
+            if (rememberOldChapterAndLevel) {
                 GameStateObject.LevelState.ChaptersUsed.Add(GameStateObject.LevelState.Chapter);
                 GameStateObject.LevelState.LevelsUsed.Add(GameStateObject.LevelState.Level);
                 MoveToNextStage();
             }
-            //Wechsel/Übergang durchführen = neue Werte eintragen
-            LevelGetNewRandomly();
-            ChapterGetNewRandomly();
+            //Wechsel/Übergang durchführen = neue Werte eintragen, wenn das spiel nicht geladen wird = changeValues == true
+            if (changeValues) {
+                LevelGetNewRandomly();
+                ChapterGetNewRandomly();
+            }
 
             Debug.Log("Folgendes Level ist jetzt das LevelInUse: " + LevelInUse);
             Debug.Log("Folgendes Kapitel ist jetzt das ChapterInUse: " + ChapterInUse);

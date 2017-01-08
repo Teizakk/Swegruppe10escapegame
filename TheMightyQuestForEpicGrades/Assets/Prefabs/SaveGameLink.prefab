@@ -112,11 +112,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: -1
+  m_MinWidth: 1000
   m_MinHeight: 50
-  m_PreferredWidth: -1
+  m_PreferredWidth: 1500
   m_PreferredHeight: -1
-  m_FlexibleWidth: -1
+  m_FlexibleWidth: 1
   m_FlexibleHeight: -1
 --- !u!114 &114000013612532552
 MonoBehaviour:
@@ -144,11 +144,11 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 0
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "Karl-August Arsch\t24.12.2016\tLevel 2\t50.000 Punkte"
 --- !u!114 &114000013801085860

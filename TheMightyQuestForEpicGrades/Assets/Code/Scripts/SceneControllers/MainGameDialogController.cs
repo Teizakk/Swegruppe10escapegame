@@ -40,8 +40,15 @@ namespace Assets.Code.Scripts.SceneControllers {
         #region Für das Pausenmenü
         //Im Endeffekt nur eine Weiterleitung
         public void LeaveToMainMenu() {
+            //Player weg
+            if (PlayerScript.GetInstance() != null) DestroyImmediate(PlayerScript.GetInstance().gameObject);
+            //Ganzer Master weg 
             Master.KILLME();
             SceneManager.LoadScene("MainMenu");
+        }
+
+        public void QuitApplication() {
+            Application.Quit();
         }
         #endregion
 
@@ -51,7 +58,7 @@ namespace Assets.Code.Scripts.SceneControllers {
         }
 
         private void OnDestroy() {
-            Master.Instance().CurrentDialogController = null;
+            //Master.Instance().CurrentDialogController = null; //nervt immer mit Fehlermeldungen
         }
         #endregion
     }

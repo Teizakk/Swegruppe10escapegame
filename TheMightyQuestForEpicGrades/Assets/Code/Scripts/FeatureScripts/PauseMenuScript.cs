@@ -29,6 +29,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
         public GameObject LoadMenu;
         public GameObject LoadWarning;
         public GameObject CloseWarning;
+        public GameObject QuitWarning;
 
         private Button SpielFortsetzenButton;
 
@@ -37,6 +38,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
         private CanvasGroup _loadMenuCanvasGroup;
         private CanvasGroup _loadWarningCanvasGroup;
         private CanvasGroup _closeWarningCanvasGroup;
+        private CanvasGroup _quitWarningCanvasGroup;
 
         #endregion
 
@@ -51,7 +53,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
         public void SaveGame() {
             //Weiterleitung
-            //TODO Konventionen für Namensgebung auf die Seite schreiben
+            //Konventionen für Namensgebung auf die Seite schreiben? -> egal so wie im Moment gespeichert
             Master.Instance().MyGameState.SaveGame(SaveGameName.text);
             HideSaveMenu();
         }
@@ -73,17 +75,21 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 var item = _listOfSavegameDescriptions[index];
 
                 //Nur Savegames vom gleichen Spieler anzeigen
-                if (!item.PlayerName.Equals(Master.Instance().MyGameState.PlayerName)) continue;
+                //if (!item.PlayerName.Equals(Master.Instance().MyGameState.PlayerName)) continue;
 
                 var saveGameDisplay = Instantiate(SaveGamePrefab, LoadableGames.content, false) as GameObject;
                 DateTime timeOfSaving = new DateTime(item.TimeCode, DateTimeKind.Local);
-                var ci = CultureInfo.CurrentCulture; //oder "de-DE"
+
+                //var ci = CultureInfo.CurrentCulture; //oder "de-DE"
+                var ci = new CultureInfo("de-DE");
 
                 saveGameDisplay.GetComponentInChildren<Text>().text = item.ToString() +
-                                                                      timeOfSaving.ToString("d", ci) + "\t" + timeOfSaving.TimeOfDay.ToString().Split('.')[0];
+                                                                      timeOfSaving.ToString("d", ci) + "\t\t" + timeOfSaving.TimeOfDay.ToString().Split('.')[0];
                 saveGameDisplay.GetComponent<DataHolderScript>().StoredValues.Add("IndexOfSGI", index);
                 _saveGameLinks.Add(saveGameDisplay);
             }
+            EventSystem.current.SetSelectedGameObject(_saveGameLinks[0]);
+            _saveGameLinks[0].GetComponent<Button>().onClick.Invoke();
         }
 
         public void SetSelectedSaveGameLink() {
@@ -95,10 +101,9 @@ namespace Assets.Code.Scripts.FeatureScripts {
         public void LoadGame() {
             //Gucken welches 
             var fileToLoad = _listOfSavegameDescriptions[selectedSaveGameLink].FilenameOfGameStateSave;
-            
+            Debug.Log("Func Load Game von PMS fileToLoad: " + fileToLoad);
             //Laden starten
             Master.Instance().MyGameState.LoadGame(fileToLoad);
-            //TODO
         }
         #endregion
 
@@ -184,6 +189,21 @@ namespace Assets.Code.Scripts.FeatureScripts {
             //_inSubWindow = true;
             LoadWarning.SetActive(false);
         }
+
+        //Ladewarnung
+        public void ShowQuitWarning() {
+            QuitWarning.SetActive(true);
+            _quitWarningCanvasGroup.alpha = 1.0f;
+            _quitWarningCanvasGroup.interactable = true;
+            //_inSubWindow = true;
+        }
+
+        public void HideQuitWarning() {
+            _quitWarningCanvasGroup.alpha = 0.0f;
+            _quitWarningCanvasGroup.interactable = false;
+            //_inSubWindow = true;
+            QuitWarning.SetActive(false);
+        }
         #endregion
 
         #region Unity Call-Backs
@@ -215,6 +235,11 @@ namespace Assets.Code.Scripts.FeatureScripts {
             _loadWarningCanvasGroup = LoadWarning.GetComponent<CanvasGroup>();
             _loadWarningCanvasGroup.alpha = 0;
             _loadWarningCanvasGroup.interactable = false;
+            //Die Beenden-Warnung
+            QuitWarning.SetActive(false);
+            _quitWarningCanvasGroup = LoadWarning.GetComponent<CanvasGroup>();
+            _quitWarningCanvasGroup.alpha = 0;
+            _quitWarningCanvasGroup.interactable = false;
             //Der eine Button den man für den kleinen Trick in der ContinueGame Funktion braucht
             var buttonList = FindObjectsOfType<Button>().ToList();
             SpielFortsetzenButton = buttonList.FindLast(button => button.name.Equals("ContinueGameButton"));

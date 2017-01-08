@@ -23,7 +23,7 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         void Awake () {
             //Wenn wir in dieser Szene sind muss der Player ebenfalls gekillt werden
-            Destroy(PlayerScript.GetInstance().gameObject);
+            if (PlayerScript.GetInstance() != null) Destroy(PlayerScript.GetInstance().gameObject);
 
             //Wenn Spiel gewonnen
             if (Master.Instance().MyGameState.GameIsWon)

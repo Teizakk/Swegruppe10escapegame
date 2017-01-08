@@ -55,14 +55,17 @@ namespace Assets.Code.Scripts.UtilityScripts {
                     using (var file = File.Open(ExecuteablePath + "\\" + fileName + ".dat", FileMode.Open)) {
                         var state = (T) bf.Deserialize(file);
                         file.Close();
-                        Debug.Log("Datei: " + fileName + ".dat\nGeladen aus: " + ExecuteablePath + "\\");
+                        //Debug.Log("Datei: " + fileName + ".dat\nGeladen aus: " + ExecuteablePath + "\\");
                         return state;
                     }
                 }
+                Debug.LogError(ExecuteablePath + "\\" + fileName + " existiert nicht!");
+                Debug.Break();
                 return default(T);
             }
             catch (Exception e) {
                 Debug.LogError(e);
+                Debug.Break();
                 return new T();
             }
         }

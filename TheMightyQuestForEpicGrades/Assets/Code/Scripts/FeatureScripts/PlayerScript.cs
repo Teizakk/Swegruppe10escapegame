@@ -7,6 +7,8 @@ namespace Assets.Code.Scripts.FeatureScripts {
     public class PlayerScript : MonoBehaviour {
         private static PlayerScript instance;
 
+        public static bool _loadingASavedGame = false;
+        
         private bool controlsBlocked;
 
         private int DebugLogVar;
@@ -21,18 +23,21 @@ namespace Assets.Code.Scripts.FeatureScripts {
             if (instance == null) {
                 Debug.Log("Instanz wurde verknuepft");
                 instance = this;
+                Debug.Log("PlayerInstanceID = " + GetInstanceID());
             }
-            else if (instance != null)
-                Destroy(gameObject);
-
+            else if (instance != null) {
+                DestroyImmediate(this.gameObject);
+            }
+                
             rb = GetComponent<Rigidbody>();
 
             DontDestroyOnLoad(instance);
-            SetStartPosition();
-
-            //Setzen der Start-Position
-            //rb.MovePosition(new Vector3(position_X,0,position_Z));
-
+            
+            Debug.Log("Muss der Spieler bewegt werden? " + _loadingASavedGame);
+            
+            SetStartPosition(_loadingASavedGame);
+            _loadingASavedGame = false;
+           
             //Standardmäßig sind die Kontrollen natürlich an...
             controlsBlocked = false;
 
@@ -56,16 +61,24 @@ namespace Assets.Code.Scripts.FeatureScripts {
         public void SwitchControlBlock() {
             controlsBlocked = !controlsBlocked;
             //Debug Ausgabe
-            Debug.Log(controlsBlocked ? "Controls are now blocked" : "Controls are now enabled");
+            //Debug.Log(controlsBlocked ? "Controls are now blocked" : "Controls are now enabled");
         }
 
-        private void SetStartPosition() {
-            position.x = Master.Instance().MyLevel.BoardBuilder_TMP.StartPosition.x;
-            position.z = Master.Instance().MyLevel.BoardBuilder_TMP.StartPosition.z;
+        public void SetStartPosition(bool getPosFromGameState = false) {
+            if (getPosFromGameState) {
+                position.x = Master.Instance().MyGameState.PlayerPosCurrent.x;
+                position.z = Master.Instance().MyGameState.PlayerPosCurrent.z;
+            }
+            else {
+                position.x = Master.Instance().MyLevel.BoardBuilder_TMP.StartPosition.x;
+                position.z = Master.Instance().MyLevel.BoardBuilder_TMP.StartPosition.z;
+            }
             //y bereits in Start() gesetzt
             //BoardBuilder wieder killen, hat genau jetzt seinen Dienst getan
-            Destroy(Master.Instance().MyLevel.BoardBuilder_TMP.gameObject);
-            Master.Instance().MyLevel.BoardBuilder_TMP = null;
+            if (Master.Instance().MyLevel.BoardBuilder_TMP != null) {
+                Destroy(Master.Instance().MyLevel.BoardBuilder_TMP.gameObject);
+                Master.Instance().MyLevel.BoardBuilder_TMP = null;
+            }
 
             rb.MovePosition(new Vector3(position.x, 1.0f, position.z));
         }

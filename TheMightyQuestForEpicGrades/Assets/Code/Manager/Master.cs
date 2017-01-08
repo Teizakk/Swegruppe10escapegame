@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Code.Scripts.FeatureScripts;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Assets.Code.Manager {
@@ -57,7 +58,11 @@ namespace Assets.Code.Manager {
             if (SceneManager.GetActiveScene().name == "MainGame" ||
                 SceneManager.GetActiveScene().name == "EndOfGame" ||
                 SceneManager.GetActiveScene().name == "InsertHighscoreEndOfGame") {
+
+                if (PlayerScript.GetInstance() != null) DestroyImmediate(PlayerScript.GetInstance().gameObject);
                 DestroyImmediate(Instance().gameObject);
+
+                _masterInstance = null;
                 Debug.Log("MASTER GEWOLLT GEKILLT - NEUER SPIELDURCHLAUF BEGINNT!");
                 return;
             }
