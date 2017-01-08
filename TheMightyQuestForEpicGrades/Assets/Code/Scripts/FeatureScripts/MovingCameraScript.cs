@@ -6,7 +6,7 @@
 namespace Assets.Code.Scripts.FeatureScripts {
     public class MovingCameraScript : MonoBehaviour {
         // Reference zum Player gameobject
-        public static GameObject player;
+        private GameObject player;
         // Offset Variable (= Distanz zwischen Spielfigur und Kamera)
         private Vector3 offset;
 
@@ -25,7 +25,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
         // aufgerufen wird.
         private void LateUpdate() {
             // Setzt die Position der Kamera auf die des Spielers +/- Offset
-            transform.position = player.transform.position + offset;
+            if (player != null) transform.position = player.transform.position + offset;
         }
     }
 }

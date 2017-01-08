@@ -237,8 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0408d63dce8c9a4d8f017b24b04a0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position_X: 2
-  position_Z: 2
   speed: 3
 --- !u!136 &136000013736319644
 CapsuleCollider:
@@ -246,7 +244,7 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010211158294}
-  m_Material: {fileID: 13400000, guid: d4058df001799d94aa0ad9f3424b830c, type: 2}
+  m_Material: {fileID: 13400000, guid: 71918ff323ed882428b1ecc48b67eb61, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5

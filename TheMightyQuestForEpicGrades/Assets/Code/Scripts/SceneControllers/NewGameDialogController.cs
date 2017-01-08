@@ -1,5 +1,6 @@
 ﻿using Assets.Code.GLOBALS;
 using Assets.Code.Manager;
+using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         public Dropdown difficultyDropdown;
         public Dropdown moduleDropdown;
-        public InputField playerName;
+       public InputField playerName;
 
         private void Awake() {
             Master.Instance().MyModule.LoadFromFile(); //Falls zwischenzeitlich aktualisiert
@@ -20,6 +21,11 @@ namespace Assets.Code.Scripts.SceneControllers {
             // Damit die neu eingefügten Optionen angezeigt werden können
             moduleDropdown.value = 1;
             moduleDropdown.value = 0;
+
+            //Variablen setzen für neuen Spielanfang
+            PlayerScript._loadingASavedGame = false;
+            InBetweenLevelsDialogController._loadingASaveGame = false;
+            InBetweenLevelsDialogController._firstTimeUseOfScript = true;
         }
 
         public void SetGameOptionsInGameState() {
