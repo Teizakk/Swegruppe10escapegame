@@ -7,12 +7,14 @@ using Assets.Code.Manager;
 using Assets.Code.Models;
 using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Assets.Code.Scripts.SceneControllers
 {
     public class QuestionDialogController : MonoBehaviour
     {
+        private const string correctAnswerColor = "00FF01FF";
         #region UnityObjects
 
         public Text TimerText;
@@ -25,6 +27,7 @@ namespace Assets.Code.Scripts.SceneControllers
         public GameObject Answers;
         public GameObject LabelTipps;
         public GameObject OutTipps;
+        public List<Outline> tglAnswers;
         public List<GameObject> btnPictures;
 
         #endregion
@@ -34,9 +37,9 @@ namespace Assets.Code.Scripts.SceneControllers
         private static QuestionDialogController _questionDialogController;
         private int tippsShowed;
         private int chosenAnswerIndex;
-        private DateTime startTime;
+        public DateTime startTime;
         private DateTime endTime;
-        private TimeSpan usedTime;
+        public TimeSpan usedTime;
         private String[] imagePaths;
         private static Question q;
         private bool _answerCorrect = false;
@@ -60,7 +63,7 @@ namespace Assets.Code.Scripts.SceneControllers
         {
             if (!_questionDialogController)
             {
-                _questionDialogController = GameObject.Find("QuestionDialogController").GetComponent<QuestionDialogController>();
+                _questionDialogController = FindObjectOfType(typeof(QuestionDialogController)) as QuestionDialogController;
                 if (!_questionDialogController)
                     Debug.LogError(
                         "Es muss ein aktives QuestionDialogController Skript auf einem GameObject in der Scene existieren");
@@ -71,6 +74,8 @@ namespace Assets.Code.Scripts.SceneControllers
         // zeigt die Frage an
         public void ShowQuestion()
         {
+            Master.Instance().CurrentDialogController = this.gameObject;
+
             blockAndUnblockMovement();
 
             Debug.Log("Frage anzeigen");
@@ -171,7 +176,7 @@ namespace Assets.Code.Scripts.SceneControllers
                 else
                 {
                     ShowPopup("Game Over!");
-                    // TODO : return to Main Menu
+                    LeaveToMainMenu();
                 }
             }
         }
@@ -258,6 +263,12 @@ namespace Assets.Code.Scripts.SceneControllers
                     btnPictures[i].SetActive(true);
                 }
 
+                // CheatMode : richtige Antwort markieren
+                if (Master.Instance().MyGameState.CheatmodeActive && i == q.CorrectAnswer)
+                {
+                    tglAnswers[i - 1].enabled = true;
+                }
+
                 i++;
             }
 
@@ -337,10 +348,17 @@ namespace Assets.Code.Scripts.SceneControllers
             // PlayerScript.instance.SwitchControlBlock();
         }
 
+        private void LeaveToMainMenu()
+        {
+            Master.KILLME();
+            SceneManager.LoadScene("MainMenu");
+        }
+
         #endregion
 
         #region Master-Link
-        private void Start() {
+        private void Start()
+        {
             Master.Instance().CurrentDialogController = this.gameObject;
         }
 

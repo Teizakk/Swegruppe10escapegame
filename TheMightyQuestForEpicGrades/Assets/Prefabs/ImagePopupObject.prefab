@@ -38,6 +38,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d6421b95a6f214883a09c40e5a6bff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimerText: {fileID: 0}
   BackButton: {fileID: 0}
   Hint1Text: {fileID: 0}
   Hint2Text: {fileID: 0}
