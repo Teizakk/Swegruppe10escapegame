@@ -68,7 +68,7 @@ namespace Assets.Code.Manager {
                     }
                     //Refresh nach update
                     LoadFromFile();
-                    return true;
+                    return Master.Instance().MyQuestion.CreateNewModuleFile(newModuleName);
                 }
                 Debug.LogError("Module Savefile existiert nicht!");
                 return false;
