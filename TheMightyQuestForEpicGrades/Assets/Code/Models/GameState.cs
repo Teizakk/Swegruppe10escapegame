@@ -22,6 +22,7 @@ namespace Assets.Code.Models {
             LevelState.LevelsUsed.Clear();
             LevelState.Stage = 1;
             LevelState.Chapter = "EMPTY";
+            LevelState.PlayerPosition = new Vector3_Serializable(-1,-1,-1);
             //weitere Werte initialisieren?
         }
 
@@ -42,7 +43,7 @@ namespace Assets.Code.Models {
             public string Chapter { get; set; } //Aktuelles Kapitel im Spieldurchgang -> Bestimmt den Fragenpool
             public List<string> ChaptersUsed { get; set; } //Bereits benutzte Kapitel in diesem Spieldurchgang (um Duplikate zu verhindern)
             public int Stage { get; set; } //Aktuelle Stufe bzw das 'Level' im Spieldurchgang
-            public Vector3 PlayerPosition { get; set; } //Die aktuelle Position des Spielers
+            public Vector3_Serializable PlayerPosition { get; set; } //Die aktuelle Position des Spielers
             public bool[] Chests { get; set; } //Bool-Array[10] wo an der Stelle der ID der Truhe (in der Truhe gespeichert) steht ob sie locked ist 
             //public List<Question> Questions { get; set; } aktuell in QuestionManager gespeichert //Die Liste aller zum Modul und zum Schwierigkeitsgrad passenden Fragen 
             public int Lives { get; set; } //Die noch verbleibende Anzahl Leben
@@ -59,6 +60,18 @@ namespace Assets.Code.Models {
         public class PortalStone {
             public bool InPossession { get; set; } //Ob der Portalstein 'gewonnen' wurde
             public bool Used { get; set; } //Ob der Portalstein in das Portal eingesetzt wurde
+        }
+
+        [Serializable]
+        public class Vector3_Serializable {
+            public float x { get; set; }
+            public float y { get; set; }
+            public float z { get; set; }
+            public Vector3_Serializable(float x, float y, float z) {
+                this.x = x;
+                this.y = y;
+                this.z = z;
+            }
         }
 
         #endregion
