@@ -48,6 +48,10 @@ MonoBehaviour:
   Answers: {fileID: 0}
   LabelTipps: {fileID: 0}
   OutTipps: {fileID: 0}
+  tglAnswers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   btnPictures:
   - {fileID: 0}
   - {fileID: 0}

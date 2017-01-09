@@ -14,6 +14,7 @@ namespace Assets.Code.Scripts.SceneControllers
 {
     public class QuestionDialogController : MonoBehaviour
     {
+        private const string correctAnswerColor = "00FF01FF";
         #region UnityObjects
 
         public Text TimerText;
@@ -26,6 +27,7 @@ namespace Assets.Code.Scripts.SceneControllers
         public GameObject Answers;
         public GameObject LabelTipps;
         public GameObject OutTipps;
+        public List<Outline> tglAnswers;
         public List<GameObject> btnPictures;
 
         #endregion
@@ -110,7 +112,6 @@ namespace Assets.Code.Scripts.SceneControllers
         {
             // ToggleGroup initialisieren
             toggleGroup.RegisterToggle(tglAnswer1);
-            Debug.Log("Awake called!");
         }
 
         //Update is called once per frame
@@ -260,6 +261,12 @@ namespace Assets.Code.Scripts.SceneControllers
                 {
                     // Button anzeigen
                     btnPictures[i].SetActive(true);
+                }
+
+                // CheatMode : richtige Antwort markieren
+                if (Master.Instance().MyGameState.CheatmodeActive && i == q.CorrectAnswer)
+                {
+                    tglAnswers[i - 1].enabled = true;
                 }
 
                 i++;
