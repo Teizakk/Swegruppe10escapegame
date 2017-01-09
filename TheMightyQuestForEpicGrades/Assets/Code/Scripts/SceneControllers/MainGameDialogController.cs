@@ -14,6 +14,9 @@ namespace Assets.Code.Scripts.SceneControllers {
         public PlayerScript Player;
         [Header("Tooltip Prompt")]
         public GameObject TooltipPanel;
+        [Header("HUD")]
+        public HUDScript HUD;
+
 
         // Use this for initialization
         private void Awake() {
@@ -27,6 +30,11 @@ namespace Assets.Code.Scripts.SceneControllers {
             
             //Tooltip per default auf nicht sichtbar
             TooltipPanel.SetActive(false);
+
+            //HUD aufsetzen (darf nur aus gespeichterten Werten lesen - sonst probs beim Laden)
+            HUD.gameObject.SetActive(false); //Vorsichts Maßnahme, damit man das ändern der Werte auf keinen Fall sieht.
+            HUD.SetUpHUD();
+            HUD.gameObject.SetActive(true);
         }
 
         private void ActivateTooltip(string message) {

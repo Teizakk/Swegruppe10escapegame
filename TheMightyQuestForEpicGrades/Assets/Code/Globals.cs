@@ -9,6 +9,12 @@ namespace Assets.Code.GLOBALS {
         Hard = 3
     }
 
+    public enum PortalColor {
+        Blue = 0,
+        Green = 1,
+        Pink = 2
+    }
+
     public static class HELPER {
         public static string DifficultyToString(Difficulties difficulty) {
             switch (difficulty) {

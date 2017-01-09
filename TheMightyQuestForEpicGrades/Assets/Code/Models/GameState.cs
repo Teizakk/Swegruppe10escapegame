@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using Assets.Code.GLOBALS;
 using UnityEngine;
 
@@ -23,7 +24,11 @@ namespace Assets.Code.Models {
             LevelState.Stage = 1;
             LevelState.Chapter = "EMPTY";
             LevelState.PlayerPosition = new Vector3_Serializable(-1,-1,-1);
-            //weitere Werte initialisieren?
+            LevelState.Lives = 0;
+            LevelState.HintStones = 0;
+            LevelState.Score = 0;
+            LevelState.Time = new TimeSpan(0);
+            LevelState.Cheatmode = false;
         }
 
         #region Interne Klassendefinitionen
@@ -49,7 +54,7 @@ namespace Assets.Code.Models {
             public int Lives { get; set; } //Die noch verbleibende Anzahl Leben
             public int HintStones { get; set; } //Die noch verbleibende Anzahl an Hinweissteinen
             public int Score { get; set; } //Der bisher erreichte Punktestand
-            public DateTime Time { get; set; } // Die bisher benötigte Zeit
+            public TimeSpan Time { get; set; } // Die bisher benötigte Zeit
             public PortalStone BluePortalStone { get; set; } //'Zustand'des blauen Portalsteins und damit auch Portals
             public PortalStone GreenPortalStone { get; set; } //'Zustand'des grünen Portalsteins und damit auch Portals
             public PortalStone PinkPortalStone { get; set; } //'Zustand'des pinken Portalsteins und damit auch Portals

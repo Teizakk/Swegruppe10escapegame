@@ -180,14 +180,26 @@ namespace Assets.Code.Manager {
         }
         
         //Übergang einleiten
-        public void SetUpNextLevel(bool changeValues, bool rememberOldChapterAndLevel) {
+        public void SetUpNextLevel(bool changeValues, bool switchingLevels) {
             // A L T E S   K A P I T E L   B E E N D E N
             //Genutzte Daten merken
-            Debug.Log("Benutztes Kapitel und Level sollen weggespeichert werden? = " + rememberOldChapterAndLevel);
-            if (rememberOldChapterAndLevel) {
+            Debug.Log("Benutztes Kapitel und Level sollen weggespeichert werden? = " + switchingLevels);
+            if (switchingLevels) {
                 GameStateObject.LevelState.ChaptersUsed.Add(GameStateObject.LevelState.Chapter);
                 GameStateObject.LevelState.LevelsUsed.Add(GameStateObject.LevelState.Level);
                 MoveToNextStage();
+                ResetLivesDependingOnDifficulty(); 
+
+                //Portalsteine zurücksetzen
+                PortalStoneBlueIsInPossession = false;
+                PortalStoneGreenIsInPossession = false;
+                PortalStonePinkIsInPossession = false;
+
+                PortalStoneBlueHasBeenUsed = false;
+                PortalStoneGreenHasBeenUsed = false;
+                PortalStonePinkHasBeenUsed = false;
+                
+                //HUD sollte sich daraus ergeben wenn er refreshed wird
             }
             //Wechsel/Übergang durchführen = neue Werte eintragen, wenn das spiel nicht geladen wird = changeValues == true
             if (changeValues) {
@@ -197,7 +209,7 @@ namespace Assets.Code.Manager {
 
             Debug.Log("Folgendes Level ist jetzt das LevelInUse: " + LevelInUse);
             Debug.Log("Folgendes Kapitel ist jetzt das ChapterInUse: " + ChapterInUse);
-
+            
             //Master.Instance().MyQuestion.LoadQuestionsByChapter(ChapterInUse);
             Master.Instance().MyLevel.LoadFromFile(LevelInUse);
             Debug.Assert(Master.Instance().MyLevel.GetLoadedLevelIndex() == Master.Instance().MyGameState.LevelInUse, "Geladenes Level stimmt nicht überein");
@@ -206,7 +218,7 @@ namespace Assets.Code.Manager {
         #endregion
 
         #region Question-related
-        public DateTime TimeTakenUntilNow { get { return GameStateObject.LevelState.Time; } }
+        public TimeSpan TimeTakenUntilNow { get { return GameStateObject.LevelState.Time; } }
         public void AddTime(TimeSpan timeTaken) {
             if (timeTaken.Ticks > 0) {
                 GameStateObject.LevelState.Time += timeTaken;
@@ -251,13 +263,19 @@ namespace Assets.Code.Manager {
 
         #region Chest
         //TODO CHEST FUNCTIONS
+        public void OpenChest(GameObject chestToOpen) {
+            Debug.Log(chestToOpen.GetInstanceID());
+            LoseOneLive();
+            Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.RemoveHeart();
+            //TODO
+        }
         #endregion
 
         #region Lives
         public int LivesRemaining {
             get { return GameStateObject.LevelState.Lives; }
         }
-        public void ResetLives() {
+        public void ResetLivesDependingOnDifficulty() {
             //In Abhängigkeit vom Schwierigkeitsgrad die Leben zurücksetzen
             switch (GameStateObject.GameOptions.Difficulty) {
                 case Difficulties.Easy:
@@ -269,6 +287,8 @@ namespace Assets.Code.Manager {
                 case Difficulties.Hard:
                     GameStateObject.LevelState.Lives = 3;
                     break;
+                default:
+                    throw new UnityException("Ungültiger Schwierigkeitsgrad angegeben...bricht ab....");
             }
             Debug.Log("Anzahl der Leben auf: " + GameStateObject.LevelState.Lives + " zurückgesetzt.\nDies sollte nie außerhalb des Levelwechsels passieren"); //TODO Durch Cheatmode?
         }
@@ -319,16 +339,70 @@ namespace Assets.Code.Manager {
         }
         #endregion
         
-        #region Portalstones
+        #region Portals & Portalstones
         //TODO PORTALSTONE FUNCTIONS
+        //Einfach nur links atm
+        public bool PortalStoneBlueIsInPossession {
+            get { return GameStateObject.LevelState.BluePortalStone.InPossession; }
+            set { GameStateObject.LevelState.BluePortalStone.InPossession = value; }
+        }
+        public bool PortalStoneBlueHasBeenUsed {
+            get { return GameStateObject.LevelState.BluePortalStone.Used; }
+            set { GameStateObject.LevelState.BluePortalStone.Used = value; }
+        }
+        public bool PortalStoneGreenIsInPossession {
+            get { return GameStateObject.LevelState.GreenPortalStone.InPossession; }
+            set { GameStateObject.LevelState.GreenPortalStone.InPossession = value; }
+        }
+        public bool PortalStoneGreenHasBeenUsed {
+            get { return GameStateObject.LevelState.GreenPortalStone.Used; }
+            set { GameStateObject.LevelState.GreenPortalStone.Used = value; }
+        }
+        public bool PortalStonePinkIsInPossession {
+            get { return GameStateObject.LevelState.PinkPortalStone.InPossession; }
+            set { GameStateObject.LevelState.PinkPortalStone.InPossession = value; }
+        }
+        public bool PortalStonePinkHasBeenUsed {
+            get { return GameStateObject.LevelState.PinkPortalStone.Used; }
+            set { GameStateObject.LevelState.PinkPortalStone.Used = value; }
+        }
+
         public bool HasUsedAllPortalStones() {
-            //if (GameStateObject.LevelState.PinkPortalStone.Used &&
-            //    GameStateObject.LevelState.GreenPortalStone.Used &&
-            //    GameStateObject.LevelState.BluePortalStone.Used) {
-            //    return true;
-            //}
-            //return false;
-            return true;
+            if (GameStateObject.LevelState.PinkPortalStone.Used &&
+                GameStateObject.LevelState.GreenPortalStone.Used &&
+                GameStateObject.LevelState.BluePortalStone.Used) {
+                return true;
+            }
+            return false;
+        }
+
+        public void InsertPortalStone(GameObject portal, PortalColor color) {
+            Debug.Log("Genutzter Portalstein: " + portal.GetInstanceID());
+            //TODO
+            //DEBUG HACK
+            switch (color) {
+                case PortalColor.Blue:
+                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.ReceivePortalStone(PortalColor.Blue);
+                    PortalStoneBlueIsInPossession = true;
+                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.UsePortalStone(PortalColor.Blue);
+                    PortalStoneBlueHasBeenUsed = true;
+                    break;
+                case PortalColor.Green:
+                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.ReceivePortalStone(PortalColor.Green);
+                    PortalStoneGreenIsInPossession = true;
+                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.UsePortalStone(PortalColor.Green);
+                    PortalStoneGreenHasBeenUsed = true;
+                    break;
+                case PortalColor.Pink:
+                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.ReceivePortalStone(PortalColor.Pink);
+                    PortalStonePinkIsInPossession = true;
+                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.UsePortalStone(PortalColor.Pink);
+                    PortalStonePinkHasBeenUsed = true;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("color", color, null);
+            }
+            portal.GetComponent<PortalScript>().Activate();
         }
         #endregion
 
@@ -347,6 +421,20 @@ namespace Assets.Code.Manager {
         } }
         public bool GameIsFinished { get { return _gameisFinished; } }
 
+        public void SetupNewGame(string playerName, string moduleName, Difficulties difficulty) {
+            //Mitgegebene GameOptions setzen
+            PlayerName = playerName;
+            Debug.Log("Gewählter Spielername = " + PlayerName);
+            ModuleChosen = moduleName;
+            DifficultyChosen = difficulty;
+
+            //Abhängig davon Startwerte setzen
+            //Stage ist durch Default-Wert gesetzt
+            ResetLivesDependingOnDifficulty();
+            //Hintstones ist durch Default-Wert gesetzt
+            //TODO - braucht es hier noch was?
+        }
+        
         public void SetGameWon() {
             if (SceneManager.GetActiveScene().name != "MainGame")
                 throw new UnityException(
@@ -366,7 +454,7 @@ namespace Assets.Code.Manager {
 
         public void Awake() {
             GameStateObject = new GameState();
-            //Standardmäßig geblockt - muss im ersten InBetweenLevels ent-locked werden
+            
             _gameisFinished = false;
             _gameIsWon = false;
         }
