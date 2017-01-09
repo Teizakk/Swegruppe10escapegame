@@ -6,26 +6,35 @@ using UnityEngine.SceneManagement;
 namespace Assets.Code.Scripts.FeatureScripts {
     public class ChestScript : MonoBehaviour
     {
-        private bool ChestIsLocked = false;
-        //private bool ChestIsOpen; //TODO diese Information ist redundant, weil sie sich aus ChestIsLocked ableiten lässt
+        //private bool ChestIsLocked = false;
+        //private bool ChestIsOpen; //diese Information ist redundant, weil sie sich aus ChestIsLocked ableiten lässt
 
-        public void OnCollisionStay(Collision col) {
-            if (Input.GetKeyDown("e") && !ChestIsLocked && col.gameObject.CompareTag("Player"))
-            {
-                QuestionDialogController.Instance().ShowQuestion();
-                if (QuestionDialogController.Instance().AnswerCorrect())
-                {
-                    // TODO : Hintstein oder Portalstein geben
-                    Debug.Log("Hintstein oder Portalstein bekommen");
-                    ChestIsLocked = true;
-                }
+        public int Index { get; set; }
 
-                //ChestIsOpen = true;
-                //OpenChest();
-                //ChestIsLocked = true; //Truhe abschließen
-                //Destroy(gameObject); //Lässt Truhe verschwinden
-            }
+        public void Lock() {
+            GetComponentInChildren<Light>().enabled = true;
         }
+
+        private void Awake() {
+            GetComponentInChildren<Light>().enabled = false;
+        }
+
+        //public void OnCollisionStay(Collision col) {
+        //    if (Input.GetKeyDown("e") && !ChestIsLocked && col.gameObject.CompareTag("Player"))
+        //    {
+        //        QuestionDialogController.Instance().ShowQuestion();
+        //        if (QuestionDialogController.Instance().AnswerCorrect()){
+        //            // TO-DO : Hintstein oder Portalstein geben
+        //            Debug.Log("Hintstein oder Portalstein bekommen");
+        //            ChestIsLocked = true;
+        //        }
+
+        //        //ChestIsOpen = true;
+        //        //OpenChest();
+        //        //ChestIsLocked = true; //Truhe abschließen
+        //        //Destroy(gameObject); //Lässt Truhe verschwinden
+        //    }
+        //}
 
         //public void OpenChest() {
         //    SceneManager.LoadScene( /*QuestionDialog?*/ null);

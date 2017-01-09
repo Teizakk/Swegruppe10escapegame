@@ -20,12 +20,9 @@ namespace Assets.Code.Scripts.UtilityScripts {
         // Highscores/highscores
         // SavedStates
         private static void AssureDirectoryAndFilesExists() {
-            var st = ExecuteablePath + "\\SavedStates";
             var hs = ExecuteablePath + "\\Highscores";
 			var sg = ExecuteablePath + "\\SaveGames";
-            var q = ExecuteablePath + "\\Module";
-            if (!Directory.Exists(st))
-                Directory.CreateDirectory(st);
+            var q = ExecuteablePath + "\\Modules";
             if (!Directory.Exists(hs))
                 Directory.CreateDirectory(hs);
 			if (!Directory.Exists(sg))
@@ -69,14 +66,14 @@ namespace Assets.Code.Scripts.UtilityScripts {
                 return new T();
             }
         }
-        
-        public static List<string> GetSavedStates() {
-            if (Directory.Exists(ExecuteablePath + "\\SavedStates"))
-                return Directory.GetFiles(ExecuteablePath + "\\SavedStates").ToList().Select( x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
-            Directory.CreateDirectory(ExecuteablePath + "\\SavedStates"); //eigentlich unnötig, da dies oben im Konstruktor schon gemacht wird.
+
+        public static List<string> GetModuleFiles() {
+            if (Directory.Exists(ExecuteablePath + "\\Modules"))
+                return Directory.GetFiles(ExecuteablePath + "\\Modules").ToList().Select(x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
+            Directory.CreateDirectory(ExecuteablePath + "\\Modules"); //eigentlich unnötig, da dies oben im Konstruktor schon gemacht wird.
             return new List<string>();
         }
-        
+
         public static List<string> GetAllSGIFileNames() {
             if (Directory.Exists(ExecuteablePath + "\\SaveGames"))
                 return Directory.GetFiles(ExecuteablePath + "\\SaveGames").ToList().Select(x => {

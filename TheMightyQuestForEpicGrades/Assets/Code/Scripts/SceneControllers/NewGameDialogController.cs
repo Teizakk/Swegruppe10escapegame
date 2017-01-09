@@ -29,15 +29,15 @@ namespace Assets.Code.Scripts.SceneControllers {
         }
 
         public void SetGameOptionsInGameState() {
-            //TODO Instance nur einmal aufrufen und zwischenspeichern wäre glaube ich einfacher
-            int difficulty = difficultyDropdown.value + 1; //+ 1 weil Easy = 1, Medium = 2, ... usw
-            Master.Instance().MyGameState.DifficultyChosen = (Difficulties)difficulty;
-            Master.Instance().MyGameState.ModuleChosen =
-                    moduleDropdown.options[moduleDropdown.value].text;
-            //Hier könnte man auch mit Value implementieren, allerdings würde dann ein ändern der Modulliste die Savegames schrotten.
-            var setPlayerName = playerName.text;
-            //wenn nicht gesetzt = Anonymus
-            Master.Instance().MyGameState.PlayerName = setPlayerName;
+            Debug.Log("SetUpNewGame wird aufgerufen mit:\n" + 
+                "PlayerName = " + playerName.text + 
+                "\tModuleName = " + moduleDropdown.options[moduleDropdown.value].text + 
+                "\tDifficulty = " + (Difficulties)difficultyDropdown.value + 1);
+            Master.Instance().MyGameState.SetupNewGame(
+               playerName: playerName.text,
+               moduleName: moduleDropdown.options[moduleDropdown.value].text,
+               difficulty: (Difficulties)difficultyDropdown.value + 1
+               );
         }
 
         #region Master-Link

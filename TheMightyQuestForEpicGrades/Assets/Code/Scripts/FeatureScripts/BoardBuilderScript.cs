@@ -57,9 +57,6 @@ namespace Assets.Code.Scripts.FeatureScripts {
                         case 'S': // Start
                             StartPosition = new Vector3(x, height, z);
                             toInstantiate = StartBlock;
-                            var startInst =
-                                    Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject;
-                            startInst.transform.SetParent(boardHolder);
                             break;
                         case 'f':
                         case 'F': //Floor
@@ -72,10 +69,6 @@ namespace Assets.Code.Scripts.FeatureScripts {
                         case 'E': // End
                             EndPosition = new Vector3(x, height, z);
                             toInstantiate = EndDoor;
-                            //Braucht auch noch Bodenblock
-                            var boden =
-                                    Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject;
-                            boden.transform.SetParent(boardHolder);
                             break;
                         default: // Sollte niemals aufgerufen werden
                             toInstantiate = null;
@@ -84,18 +77,32 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
                     if (toInstantiate != null) {
                         var instance = Instantiate(toInstantiate, new Vector3(x, height, z), Quaternion.identity) as GameObject;
+                        
+                        if (toInstantiate == EndDoor && (lastInstatiatedBlock == null || lastInstatiatedBlock == FloorBlock)) { //Prüft vermutlich nur auf Referenzgleichheit sollte aber ok sein
+                            instance.transform.rotation = Quaternion.AngleAxis(90, Vector3.up); //wenn der EndDoor Block in einer vertikalen Wand ist dann um 90° drehen
+                        }
 
                         if (instance == null) {
                             Debug.LogError("Fehler beim Erstellen des Spielfeldes! Instanzieren von: " + toInstantiate.gameObject.name + " ist fehlgeschlagen!");
                             throw new NullReferenceException();
                         }
+
+                        instance.transform.SetParent(boardHolder);
+
+                        //alles außer der Boden und Wände braucht noch einen Boden 
+                        if (toInstantiate != FloorBlock && toInstantiate != WallBlock) {
+                            instance = Instantiate(FloorBlock, new Vector3(x, 0.0f, z), Quaternion.identity) as GameObject; //falls problematisch hier besser differenzieren
+                            if (instance == null) {
+                                Debug.LogError("Fehler beim Erstellen des Spielfeldes! Instanzieren von: " + toInstantiate.gameObject.name + " ist fehlgeschlagen!");
+                                throw new NullReferenceException();
+                            }
+                            instance.transform.SetParent(boardHolder);
+                        }
+                        
+                        
                         //Für das spätere Optimieren
                         _instantiatedObjects[x, z] = instance;
-
-                        if (toInstantiate == EndDoor && (lastInstatiatedBlock == null || lastInstatiatedBlock == FloorBlock)) { //Prüft vermutlich nur auf Referenzgleichheit sollte aber ok sein
-                            instance.transform.rotation = Quaternion.AngleAxis(90, Vector3.up); //wenn der EndDoor Block in einer vertikalen Wand ist dann um 90° drehen
-                        }
-                        instance.transform.SetParent(boardHolder);
+                        
                         lastInstatiatedBlock = toInstantiate;
                     }
                     else

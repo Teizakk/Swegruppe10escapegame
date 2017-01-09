@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using Assets.Code.GLOBALS;
+using Assets.Code.Manager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,39 +32,51 @@ namespace Assets.Code.Scripts.FeatureScripts {
         //oder direkt durch die Anzahl der Leben...
         //aktuelle Lösung ist duch das Enum
         //TODO je nach Art des Szenenwechselns muss hier dann noch der Score übergeben werden
-        public void FirstSetUpHUD(Difficulties difficulty) {
-            //Je nach Schwierigkeit die Werte setzen
-            switch (difficulty) {
-                case Difficulties.Easy:
-                    numberOfLives = maxLives = 7;
-                    break;
-                case Difficulties.Medium:
-                    numberOfLives = maxLives = 5;
-                    break;
-                case Difficulties.Hard:
-                    numberOfLives = maxLives = 3;
-                    break;
-                default:
-                    throw new InvalidEnumArgumentException("Ungültiger Schwierigkeitsgrad angegeben...bricht ab....");
-            }
+        public void SetUpHUD() {
+            //GameStateManager zwischenspeichern für schnelleren Zugriff
+            var gameStateLink = Master.Instance().MyGameState;
+            
+            //ANZEIGE DER LEBEN SETZEN
+            numberOfLives = gameStateLink.LivesRemaining;
+            Debug.Log("Anzahl Leben die gezeigt werden soll: " + numberOfLives);
             //kleiner missbrauch von numberOfLives
             foreach (var heart in hearts) {
-                if (numberOfLives > 0) heart.enabled = true;
+                if (numberOfLives > 0) {
+                    heart.enabled = true;
+                }
                 else heart.enabled = false;
+                Debug.Log("Herz ist: " + heart.enabled);
                 numberOfLives--;
             }
             //missbrauch rückgängig machen :^)
-            numberOfLives = maxLives;
+            numberOfLives = gameStateLink.LivesRemaining;
 
-            numberOfHints = 0;
+            //ANZEIGE DER HINWEISE SETZEN
+            numberOfHints = gameStateLink.HintstonesRemaining;
+            Debug.Log("Anzahl Hints die gezeigt werden soll: " + numberOfHints);
+            //kleiner missbrauch von numberOfHints
+            foreach (var hint in hints) {
+                if (numberOfHints > 0) {
+                    hint.enabled = true;
+                }
+                else hint.enabled = false;
+                numberOfHints--;
+            }
+            //missbrauch rückgängig machen :^)
+            numberOfHints = gameStateLink.HintstonesRemaining;
 
-            //Anzeige der Portalsteine ausschalten
-            bluePortalStone.enabled = false;
-            greenPortalStone.enabled = false;
-            pinkPortalStone.enabled = false;
+            //Anzeige der Portalsteine setzen
+            bluePortalStone.enabled = gameStateLink.PortalStoneBlueIsInPossession;
+            greenPortalStone.enabled = gameStateLink.PortalStoneGreenIsInPossession;
+            pinkPortalStone.enabled = gameStateLink.PortalStonePinkIsInPossession;
 
-            //Points auf 0 setzen
-            points = 0;
+            //Anzeige ob PortalSteine genutzt wurden
+            if (gameStateLink.PortalStoneBlueHasBeenUsed) UsePortalStone(PortalColor.Blue);
+            if (gameStateLink.PortalStoneGreenHasBeenUsed) UsePortalStone(PortalColor.Green);
+            if (gameStateLink.PortalStonePinkHasBeenUsed) UsePortalStone(PortalColor.Pink);
+
+            //Points auf aktuellen Wert setzen
+            points = gameStateLink.ScoreCurrent;
             scoreDisplay.text = points.ToString().PadLeft(6, '0');
         }
 
@@ -82,8 +95,10 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 return;
             }
             //muss hier vorher gemacht werden, oder halt nachher mit [numberOfHints]...
+            //Debug.Log("Anzahl Hints vor Entfernen: " + numberOfHints);
             hints[numberOfHints - 1].enabled = false;
             numberOfHints--;
+            //Debug.Log("Anzahl Hints nach Entfernen: " + numberOfHints);
         }
 
         public void RemoveHeart() {
@@ -96,49 +111,47 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 Debug.Break();
                 return;
             }
+            //Debug.Log("Anzahl Leben vor Entfernen: " + numberOfLives);
             hearts[numberOfLives - 1].enabled = false;
             numberOfLives--;
+            //Debug.Log("Anzahl Leben nach Entfernen: " + numberOfLives);
         }
 
-        //machen wir das so? Gedacht für Levelwechsel - falls nicht gerbraucht -> Löschen TODO
-        public void ResetHearts() {
-            //gleicher numberOfLives Missbrauch wie im SetUp
-            numberOfLives = maxLives;
-            foreach (var heart in hearts) {
-                if (numberOfLives > 0) heart.enabled = true;
-                else heart.enabled = false;
-                numberOfLives--;
-            }
-            numberOfLives = maxLives;
-            //Hints bleiben erhalten
-        }
+       public void ReceivePortalStone(PortalColor color) {
+           switch (color) {
+               case PortalColor.Blue:
+                   bluePortalStone.enabled = true;
+                   bluePortalStone.color = new Color(1, 1, 1, 1);
+                   break;
+               case PortalColor.Green:
+                   greenPortalStone.enabled = true;
+                   greenPortalStone.color = new Color(1, 1, 1, 1);
+                   break;
+               case PortalColor.Pink:
+                   pinkPortalStone.enabled = true;
+                   pinkPortalStone.color = new Color(1, 1, 1, 1);
+                   break;
+               default:
+                   Debug.LogError("Falscher Farbcode für Portalstein übergeben! Gültig: [B/b]lue, [G/g]reen, [P/p]ink");
+                   break;
+           }
+       }
 
-        public void ReceivePortalStone(string colorOfPortalStone) {
-            if (colorOfPortalStone.Equals("Blue") || colorOfPortalStone.Equals("blue")) {
-                bluePortalStone.enabled = true;
-                bluePortalStone.color = new Color(1, 1, 1, 1);
+        public void UsePortalStone(PortalColor color) {
+            switch (color) {
+                case PortalColor.Blue:
+                    bluePortalStone.color = new Color(1, 1, 1, 0.25f); //nur alpha runter setzen
+                    break;
+                case PortalColor.Green:
+                    greenPortalStone.color = new Color(1, 1, 1, 0.25f); //nur alpha runter setzen
+                    break;
+                case PortalColor.Pink:
+                    pinkPortalStone.color = new Color(1, 1, 1, 0.25f); //nur alpha runter setzen
+                    break;
+                default:
+                    Debug.LogError("Falscher Farbcode für Portalstein übergeben! Gültig: [B/b]lue, [G/g]reen, [P/p]ink");
+                    break;
             }
-            else if (colorOfPortalStone.Equals("Green") || colorOfPortalStone.Equals("green")) {
-                greenPortalStone.enabled = true;
-                greenPortalStone.color = new Color(1, 1, 1, 1);
-            }
-            else if (colorOfPortalStone.Equals("Pink") || colorOfPortalStone.Equals("pink")) {
-                pinkPortalStone.enabled = true;
-                pinkPortalStone.color = new Color(1, 1, 1, 1);
-            }
-            else {
-                Debug.LogError("Falscher Farbcode für Portalstein übergeben! Gültig: [B/b]lue, [G/g]reen, [P/p]ink");
-            }
-        }
-
-        public void UsePortalStone(string colorOfPortalStone) {
-            if (colorOfPortalStone.Equals("Blue") || colorOfPortalStone.Equals("blue"))
-                bluePortalStone.color = new Color(1, 1, 1, 0.4f); //nur alpha runter setzen
-            else if (colorOfPortalStone.Equals("Green") || colorOfPortalStone.Equals("green"))
-                greenPortalStone.color = new Color(1, 1, 1, 0.4f); //nur alpha runter setzen
-            else if (colorOfPortalStone.Equals("Pink") || colorOfPortalStone.Equals("pink"))
-                pinkPortalStone.color = new Color(1, 1, 1, 0.4f); //nur alpha runter setzen
-            else Debug.LogError("Falscher Farbcode für Portalstein übergeben! Gültig: [B/b]lue, [G/g]reen, [P/p]ink");
         }
 
         public void UpdateScore(int pointsToAdd) {
@@ -147,19 +160,16 @@ namespace Assets.Code.Scripts.FeatureScripts {
         }
 
         // Use this for initialization
-        private void Start() {
-            //Werte initialisieren (-1 um sicher zu stellen, dass firstSetUp aufgerufen wurde)
-            numberOfLives = -1;
-            numberOfHints = -1;
+        //private void Start() {
+        //    //Werte initialisieren (-1 um sicher zu stellen, dass firstSetUp aufgerufen wurde)
+        //    numberOfLives = -1;
+        //    numberOfHints = -1;
 
-            //Einmal den HUD "leeren"
-            foreach (var hint in hints) hint.enabled = false;
-            foreach (var heart in hearts) heart.enabled = false;
-            scoreDisplay.text = points.ToString().PadLeft(6, '0');
-            bluePortalStone.enabled = false;
-            greenPortalStone.enabled = false;
-            pinkPortalStone.enabled = false;
-        }
+        //    scoreDisplay.text = points.ToString().PadLeft(6, '0');
+        //    bluePortalStone.enabled = false;
+        //    greenPortalStone.enabled = false;
+        //    pinkPortalStone.enabled = false;
+        //}
 
         // Update is called once per frame
         private void Update() {

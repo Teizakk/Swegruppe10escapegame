@@ -24,18 +24,22 @@ namespace Assets.Code.Scripts.SceneControllers {
             }
             //Modul gibt es bereits
             if (knownModules.Contains(_textToSubmit)) {
-                ModuleNameField.placeholder.GetComponent<Text>().text = "! Modul existiert bereits !";
+                ModuleNameField.placeholder.GetComponent<Text>().text = "! Modul existiert bereits !"; //Das verhindert sogar das überschreiben der .dat Datei - HAHA!
                 ModuleNameField.placeholder.GetComponent<Text>().color = new Color(1, 0.25f, 0); //Orange
                 ModuleNameField.text = "";
                 return;
             }
-            Master.Instance().MyModule.SaveToFile(_textToSubmit);
-            ModuleNameField.placeholder.GetComponent<Text>().text = "~Modul gespeichert~";
-            ModuleNameField.placeholder.GetComponent<Text>().color = new Color(0, 0.5f, 0);
-            ModuleNameField.text = "";
-            _textToSubmit = "";
-            //knownModules aktualisieren
-            knownModules = Master.Instance().MyModule.GetModulesAsList();
+            if (Master.Instance().MyModule.SaveToFile(_textToSubmit)) {
+                ModuleNameField.placeholder.GetComponent<Text>().text = "~Modul gespeichert~";
+                ModuleNameField.placeholder.GetComponent<Text>().color = new Color(0, 0.5f, 0);
+                ModuleNameField.text = "";
+                _textToSubmit = "";
+                //knownModules aktualisieren
+                knownModules = Master.Instance().MyModule.GetModulesAsList();
+            }
+            else {
+                throw new UnityException("Erstellen der neuen Modul-Datei fehlgeschlagen!");
+            }
         }
 
         public void Awake() {
