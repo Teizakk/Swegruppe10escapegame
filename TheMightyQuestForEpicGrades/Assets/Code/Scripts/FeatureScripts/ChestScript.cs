@@ -1,5 +1,7 @@
-﻿using Assets.Code.Scripts.SceneControllers;
+﻿using Assets.Code.Manager;
+using Assets.Code.Scripts.SceneControllers;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Code.Scripts.FeatureScripts {
     public class ChestScript : MonoBehaviour
