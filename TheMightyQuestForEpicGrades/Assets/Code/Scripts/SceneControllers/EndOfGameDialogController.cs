@@ -31,7 +31,7 @@ namespace Assets.Code.Scripts.SceneControllers {
                 highscoreliste = Persist.Load<List<Highscore>>(Name);
                 if (highscoreliste != null) { //Wenn highscores erfolgreich geladen
                     Debug.Break(); //
-                    if (highscoreliste.Count == 0 || (Master.Instance().MyGameState.ScoreCurrent > highscoreliste[highscoreliste.Count - 1].Score)) {
+                    if (highscoreliste.Count == 0 || (Master.Instance().MyGameState.ScoreCurrent > highscoreliste[highscoreliste.Count - 1].Score)) { //TODO reicht es Scores zu vergleichen? Was ist mit der Zeit?
                         //Wenn es noch keine Highscores gibt oder wenn der erreichte Score ein Highscore ist
                         nextWindow = 11;
                         loseOrWin.text = "Sie haben Gewonnen\nund einen Highscore erzielt!";
@@ -44,7 +44,7 @@ namespace Assets.Code.Scripts.SceneControllers {
                 }
                 else {
                     Debug.LogError("Laden der HighscoreListe fehlgeschlagen!");    
-                    Debug.Break();
+                    //Debug.Break();
                     nextWindow = 11;
                 }
                 Debug.Log("Jetzt müsste dort eine Meldung stehen");

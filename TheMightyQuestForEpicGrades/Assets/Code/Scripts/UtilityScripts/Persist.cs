@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using Assets.Code.Models;
 using UnityEngine;
 
 
@@ -82,6 +83,39 @@ namespace Assets.Code.Scripts.UtilityScripts {
                 }).Where(x => !string.IsNullOrEmpty(x) && x.Contains("_sgi")).ToList();
             Directory.CreateDirectory(ExecuteablePath + "\\SaveGames"); //eigentlich unnötig, da dies oben im Konstruktor schon gemacht wird.
             return new List<string>();
+        }
+
+        public static bool InitializeHighscoreList() {
+            if (!Directory.Exists(ExecuteablePath + "\\Highscores")) {
+                Debug.LogError("Konstruktor hätte Verzeichnis \\Highscores erstellen sollen?!");
+                return false;
+            }
+            if (File.Exists(ExecuteablePath + "\\Highscores\\" + "highscores" + ".dat")) {
+                return true;
+            }
+            var hsl =  new List<Highscore>()
+            {
+                new Highscore()
+                {
+                    PlayerName = "Hoever",
+                    Score = 50,
+                    Zeit = "Hoever"
+                },
+                new Highscore()
+                {
+                    PlayerName = "Claßen",
+                    Score = 30,
+                    Zeit = "schneller"
+                },
+                new Highscore()
+                {
+                    PlayerName = "Fassbender",
+                    Score = 10,
+                    Zeit = "schnell"
+                }
+            };
+            Save(hsl, "Highscores\\" + "highscores");
+            return true;
         }
     }
 }
