@@ -46,7 +46,7 @@ namespace Assets.Code.Scripts.SceneControllers
         // Use this for initialization
         void Awake()
         {
-            // lblChosenModule.text = Master.Instance().MyModule.ModuleToEdit;  // sollte so klappen
+            lblChosenModule.text = Master.Instance().MyModule.ModuleToEdit;  // sollte so klappen
             
             // ToggleGroup initialisieren
             toggleGroup.RegisterToggle(tglAnswer1);
@@ -69,12 +69,7 @@ namespace Assets.Code.Scripts.SceneControllers
                 }
             }
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        
 
         public void AddQuestion()
         {
@@ -96,8 +91,8 @@ namespace Assets.Code.Scripts.SceneControllers
                 QuestionText = inQuestion.text,
                 ImagePath = _imagePath,
                 Chapter = inChapter.text,
-                //Modul = Master.Instance().MyModule.ModuleToEdit,
-                Modul = "DNIS",
+                Modul = Master.Instance().MyModule.ModuleToEdit,
+                //Modul = "DNIS",
                 Answers = _answers,
                 Hints = _hints,
                 Difficulty = (Difficulties) dpdDifficulty.value + 1,

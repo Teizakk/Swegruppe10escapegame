@@ -6,16 +6,15 @@ using UnityEngine.UI;
 namespace Assets.Code.Scripts.SceneControllers {
     public class NewModuleDialogController : MonoBehaviour {
 
-        private ModuleManager ModuleControllerLeftover;
         public InputField ModuleNameField;
 
         public Button SubmitButton;
 
-        private string _textToSubmit { get; set; }
+        public string TextToSubmit { get; set; }
         private List<string> knownModules; 
 
         public void SubmitNewModule() {
-            if (string.IsNullOrEmpty(_textToSubmit)) {
+            if (string.IsNullOrEmpty(TextToSubmit)) {
                 Debug.LogError("Modulname darf nicht leer sein.");
                 ModuleNameField.placeholder.GetComponent<Text>().text = "! Feld darf nicht leer sein !";
                 ModuleNameField.placeholder.GetComponent<Text>().color = new Color(1,0.25f,0); //Orange
@@ -23,17 +22,18 @@ namespace Assets.Code.Scripts.SceneControllers {
                 return;
             }
             //Modul gibt es bereits
-            if (knownModules.Contains(_textToSubmit)) {
+            if (knownModules.Contains(TextToSubmit)) {
                 ModuleNameField.placeholder.GetComponent<Text>().text = "! Modul existiert bereits !"; //Das verhindert sogar das überschreiben der .dat Datei - HAHA!
                 ModuleNameField.placeholder.GetComponent<Text>().color = new Color(1, 0.25f, 0); //Orange
                 ModuleNameField.text = "";
                 return;
             }
-            if (Master.Instance().MyModule.SaveToFile(_textToSubmit)) {
+
+            if (Master.Instance().MyModule.SaveToFile(TextToSubmit)) {
                 ModuleNameField.placeholder.GetComponent<Text>().text = "~Modul gespeichert~";
                 ModuleNameField.placeholder.GetComponent<Text>().color = new Color(0, 0.5f, 0);
                 ModuleNameField.text = "";
-                _textToSubmit = "";
+                TextToSubmit = "";
                 //knownModules aktualisieren
                 knownModules = Master.Instance().MyModule.GetModulesAsList();
             }
@@ -43,7 +43,8 @@ namespace Assets.Code.Scripts.SceneControllers {
         }
 
         public void Awake() {
-            Master.Instance().MyModule.GetModulesAsList();
+            Master.Instance().MyModule.LoadFromFile();
+            knownModules = Master.Instance().MyModule.GetModulesAsList();
         }
 
         #region Master-Link

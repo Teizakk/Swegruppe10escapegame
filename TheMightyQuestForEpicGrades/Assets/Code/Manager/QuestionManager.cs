@@ -160,6 +160,8 @@ namespace Assets.Code.Manager {
         //    return Questions;
         //}
 
+
+
         public string[] GetAllChapters() {
             //TODO GetAllChapters
             return new string[] {"Test1", "Test2", "Test3"};
@@ -168,9 +170,10 @@ namespace Assets.Code.Manager {
         public bool CreateNewModuleFile(string newModuleName) {
             //.dat Datei zur Speicherung der Fragen anlegen
             var moduleSaveFile = new ModuleQuestions(newModuleName);
-            Persist.Save(moduleSaveFile, "\\Modules" + newModuleName);
-            return Persist.GetModuleFiles().Contains(newModuleName);
+            Persist.Save(moduleSaveFile, "Modules\\" + newModuleName);
+            var success = Persist.GetModuleFiles().Contains(newModuleName);
+            Debug.Log("Erstellen der Modul-Speicher-Datei war erfolgreich? " + success);
+            return success;
         }
-
     }
 }

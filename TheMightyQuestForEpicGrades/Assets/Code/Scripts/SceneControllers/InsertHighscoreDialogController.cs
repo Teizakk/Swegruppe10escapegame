@@ -21,11 +21,8 @@ namespace Assets.Code.Scripts.SceneControllers {
         {
             if (SceneManager.GetActiveScene().name == "InsertHighscoreEndOFGame")
             {
-
                 try
                 {
-
-                    
                     if(Persist.Load<List<Highscore>>(Name)==null)
                     {
                         highscoreliste = new List<Highscore>();
@@ -34,8 +31,6 @@ namespace Assets.Code.Scripts.SceneControllers {
                     {
                         highscoreliste = Persist.Load<List<Highscore>>(Name);
                     }
-                    
-
                 }
                 catch (Exception e)
                 {

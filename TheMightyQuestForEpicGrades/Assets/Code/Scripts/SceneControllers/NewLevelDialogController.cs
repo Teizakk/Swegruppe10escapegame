@@ -67,7 +67,7 @@ namespace Assets.Code.Scripts.SceneControllers {
 
                 //Bereits geprüfte muss man nicht nochmals prüfen
                 if (!file.isChecked) {
-                    var isValid = i%2 == 0; //checkLevelFile(file); //Gerade ist einfach jede zweite Datei richtig...
+                    var isValid = true;// i%2 == 0; //checkLevelFile(file); //Gerade ist einfach jede richtig
                     if (isValid)
                         FilePathsAndStatus[i].isValid = true;
                     else FilePathsAndStatus[i].isValid = false;
@@ -77,7 +77,7 @@ namespace Assets.Code.Scripts.SceneControllers {
             //Anzeige aktualisieren
             RefreshSelectedFiles(false);
 
-            Debug.LogError("DIESE FUNKTION GIBT ES NOCH NICHT - PSEUDO-FUNKTIONALITÄT");
+            Debug.LogWarning("Diese checkFiles Funktion hat leider noch keine richtige Funktionalität");
         }
 
         public void FileDialogOpener() {

@@ -12,13 +12,15 @@ namespace Assets.Code.Models {
         public DateTime DateCreated { get; private set; }
 
         private DateTime _lastUpdated;
+
         public DateTime LastUpdated {
             get { return _lastUpdated; }
             set {
-                if (value > _lastUpdated) {
+                if (value.Ticks >= _lastUpdated.Ticks) {
                     _lastUpdated = value;
                 }
-                throw new ArgumentOutOfRangeException("Das angegebene Datum ist älter als das gespeicherte... ");
+                Debug.LogError("Wert der eingetragen werden soll: " + value + "\nWert der drin steht: " + _lastUpdated);
+                Debug.Break();
             }
         }
 
@@ -34,7 +36,19 @@ namespace Assets.Code.Models {
 
             Name = moduleName;
             DateCreated = DateTime.Now.ToLocalTime();
-            LastUpdated = DateCreated;
+            _lastUpdated = DateCreated;
+        }
+
+        public ModuleQuestions() {
+            // nur benötigt um über Load herein zu laden
+        }
+
+        public int GetCombinedNumberOfQuestions() {
+            return (QuestionsEasy.Count + QuestionsMedium.Count + QuestionsHard.Count);
+        }
+
+        public bool HasEnoughQuestions() {
+            return (GetCombinedNumberOfQuestions() >= 90);
         }
     }
 }

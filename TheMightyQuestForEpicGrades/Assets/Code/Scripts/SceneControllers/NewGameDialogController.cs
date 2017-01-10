@@ -13,10 +13,7 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         private void Awake() {
             Master.Instance().MyModule.LoadFromFile(); //Falls zwischenzeitlich aktualisiert
-            var modules = Master.Instance().MyModule.GetModulesAsArray();
-
-            foreach (var str in modules)
-                moduleDropdown.options.Add(new Dropdown.OptionData {text = str});
+            moduleDropdown.AddOptions(Master.Instance().MyModule.GetModulesWithEnoughQuestionsAsList());
 
             // Damit die neu eingefügten Optionen angezeigt werden können
             moduleDropdown.value = 1;
