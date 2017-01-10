@@ -16,16 +16,21 @@ namespace Assets.Code.Scripts.SceneControllers {
         public Text score;
         public Text zeit;
         public Text playerName;
+        public Text oldPlayerName;
+
+        void Awake()
+        {
+            oldPlayerName.text = Master.Instance().MyGameState.PlayerName;
+            score.text = Master.Instance().MyGameState.ScoreCurrent.ToString();
+            zeit.text = Master.Instance().MyGameState.TimeTakenUntilNow.ToString();
+        }
 
         public void InsertHighscore()
         {
             if (SceneManager.GetActiveScene().name == "InsertHighscoreEndOFGame")
             {
-
                 try
                 {
-
-                    
                     if(Persist.Load<List<Highscore>>(Name)==null)
                     {
                         highscoreliste = new List<Highscore>();
@@ -34,8 +39,6 @@ namespace Assets.Code.Scripts.SceneControllers {
                     {
                         highscoreliste = Persist.Load<List<Highscore>>(Name);
                     }
-                    
-
                 }
                 catch (Exception e)
                 {
@@ -43,15 +46,12 @@ namespace Assets.Code.Scripts.SceneControllers {
                     highscoreliste = new List<Highscore>();
                 }
 
-                Highscore neu = new Highscore();
-
-                neu.PlayerName = playerName.text;
-                neu.Zeit = zeit.text;
-                string scorString = score.text;
-                int scoreAsInt = -1;
-                int.TryParse(scorString, out scoreAsInt);
-                neu.Score = scoreAsInt;
-
+                Highscore neu = new Highscore()
+                {
+                    PlayerName = string.IsNullOrEmpty(playerName.text) ? oldPlayerName.text : playerName.text,
+                    Zeit = Master.Instance().MyGameState.TimeTakenUntilNow.ToString(),
+                    Score = Master.Instance().MyGameState.ScoreCurrent
+                };
 
                 highscoreliste.Add(neu);
                 //highscoreliste.OrderBy(x => Convert.ToInt32(x.Score)).Take(10).ToList();
@@ -102,7 +102,6 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         List<Highscore> insertionSort(List<Highscore> input)
         {
-
             int i = 1;
             while (i < input.Count)
             {
