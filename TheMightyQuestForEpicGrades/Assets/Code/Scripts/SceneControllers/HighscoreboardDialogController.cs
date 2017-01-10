@@ -26,12 +26,9 @@ namespace Assets.Code.Scripts.SceneControllers {
         //nur beim Highscoreboard genutzt
         private void Awake() {
             if (SceneManager.GetActiveScene().name == "Highscore") {
-                try {
-                    highscoreliste = new List<Highscore>();
+                if(Persist.Load<List<Highscore>>(Name)!=null)
+                {
                     highscoreliste = Persist.Load<List<Highscore>>(Name);
-                }
-                catch {
-                    highscoreliste = new List<Highscore>();
                 }
 
 
