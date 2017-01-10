@@ -37,11 +37,11 @@ namespace Assets.Code.Scripts.UtilityScripts {
                 using (var file = File.Open(ExecuteablePath + "\\" + fileName + ".dat", FileMode.OpenOrCreate)) {
                     bf.Serialize(file, state);
                     file.Close();
-                    Debug.Log("Datei: " + fileName + ".dat\nGespeichert in: " + ExecuteablePath + "\\");
+                    //Debug.Log("Datei: " + fileName + ".dat\nGespeichert in: " + ExecuteablePath + "\\");
                 }
             }
             catch (Exception e) {
-                Debug.LogError(e);
+                //Debug.LogError(e);
             }
         }
 
@@ -56,13 +56,13 @@ namespace Assets.Code.Scripts.UtilityScripts {
                         return state;
                     }
                 }
-                Debug.LogError(ExecuteablePath + "\\" + fileName + " existiert nicht!");
-                Debug.Break();
+                //Debug.LogError(ExecuteablePath + "\\" + fileName + " existiert nicht!");
+                //Debug.Break();
                 return default(T);
             }
             catch (Exception e) {
-                Debug.LogError(e);
-                Debug.Break();
+                //Debug.LogError(e);
+                //Debug.Break();
                 return new T();
             }
         }
