@@ -21,7 +21,7 @@ namespace Assets.Code.Manager {
 
         #region Dateinamen-Konfiguration
         private readonly string Dateiendung = ".txt";
-        private readonly string Dateipfad = "./Level/";
+        private readonly string Dateipfad = "./Levels/";
         private readonly string Dateiprefix = "Level_";
         #endregion
 
@@ -43,7 +43,7 @@ namespace Assets.Code.Manager {
         public void CopyFileToLevelFolder(string filePathToAdd) {
             var levelNumberToAdd = findNextFileName();
             
-            File.Copy(filePathToAdd, Master.Instance().MyLevel.ExecutingDirectory + "\\Level\\Level_" + levelNumberToAdd + ".txt");
+            File.Copy(filePathToAdd, Master.Instance().MyLevel.ExecutingDirectory + "\\Levels\\Level_" + levelNumberToAdd + ".txt");
             levelNumberToAdd++;
             Debug.Log("Datei: " + filePathToAdd + "\n" + "Kopiert in Level-Ordner als:" + "Level_" + (levelNumberToAdd - 1) +
                 ".txt");
@@ -53,7 +53,7 @@ namespace Assets.Code.Manager {
         private int findNextFileName() {
             var levelNumberToAdd = 1;
             for (var i = 1; i < 200; i++)
-                if (File.Exists(Master.Instance().MyLevel.ExecutingDirectory + "\\Level\\Level_" + i + ".txt"))
+                if (File.Exists(Master.Instance().MyLevel.ExecutingDirectory + "\\Levels\\Level_" + i + ".txt"))
                     levelNumberToAdd++;
                 else
                     break;
@@ -85,9 +85,11 @@ namespace Assets.Code.Manager {
 
             for (var index = 0; index < allLevelFileNames.Count; index++) {
                 var fileName = allLevelFileNames[index];
-                int indexOfLevel;
-                if (!Int32.TryParse(fileName[fileName.Length - 1].ToString(), out indexOfLevel))
+                var indexOfLevel = -1;
+                if (!int.TryParse(fileName[fileName.Length - 1].ToString(), out indexOfLevel)) {
+                    Debug.LogError("Gelesene Level: " + fileName + "\nIntepretierter Index = " + indexOfLevel);
                     throw new Exception("Parsen oder sonstwas schief gelaufen :o");
+                }
                 levelIndices[index] = indexOfLevel;
             }
 

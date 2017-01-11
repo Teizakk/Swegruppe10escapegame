@@ -13,6 +13,7 @@ namespace Assets.Code.Manager {
         public LevelManager MyLevel;
         public ModuleManager MyModule;
         public QuestionManager MyQuestion;
+        public AudioManager MyAudio;
         public GameObject CurrentDialogController;
         #endregion
 
@@ -50,6 +51,7 @@ namespace Assets.Code.Manager {
             MyLevel = gameObject.AddComponent<LevelManager>();
             MyModule = gameObject.AddComponent<ModuleManager>();
             MyQuestion = gameObject.AddComponent<QuestionManager>();
+            MyAudio = gameObject.AddComponent<AudioManager>();
             CurrentDialogController = null;
         }
 

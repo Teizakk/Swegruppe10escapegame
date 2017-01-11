@@ -131,7 +131,9 @@ public static bool InitializeHighscoreList() {
         }
 
         public static List<string> GetAllLevelFileNames() {
-            return Directory.GetFiles(ExecuteablePath + "\\Levels").ToList();
+            return Directory.GetFiles(ExecuteablePath + "\\Levels").Select(x => {
+                x = Path.GetFileNameWithoutExtension(x);
+                return x;}).ToList();
         }
 
     }

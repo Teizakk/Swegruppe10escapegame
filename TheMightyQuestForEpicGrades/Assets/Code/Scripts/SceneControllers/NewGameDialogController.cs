@@ -26,10 +26,6 @@ namespace Assets.Code.Scripts.SceneControllers {
         }
 
         public void SetGameOptionsInGameState() {
-            Debug.LogWarning("ZWISCHENLÖSUNG BIS FRAGEN HEREINGELADEN!!");
-            //TODO wegmachen wenn es wieder funktioniert
-            Master.Instance().MyGameState.SetupNewGame("TESTER", "TESTMODULE", Difficulties.Easy);
-            /*
             Debug.Log("SetUpNewGame wird aufgerufen mit:\n" + 
                 "PlayerName = " + playerName.text + 
                 "\tModuleName = " + moduleDropdown.options[moduleDropdown.value].text + 
@@ -39,7 +35,6 @@ namespace Assets.Code.Scripts.SceneControllers {
                moduleName: moduleDropdown.options[moduleDropdown.value].text,
                difficulty: (Difficulties)difficultyDropdown.value + 1
                );
-               */
         }
 
         #region Master-Link
