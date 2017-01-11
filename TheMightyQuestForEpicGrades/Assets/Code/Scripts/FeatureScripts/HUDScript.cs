@@ -27,11 +27,6 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
         #endregion
 
-        //hier muss man sich einigen wie man den Schwierigkeitsgrade übergibt
-        //entweder easy = 1, medium = 2....
-        //oder direkt durch die Anzahl der Leben...
-        //aktuelle Lösung ist duch das Enum
-        //TODO je nach Art des Szenenwechselns muss hier dann noch der Score übergeben werden
         public void SetUpHUD() {
             //GameStateManager zwischenspeichern für schnelleren Zugriff
             var gameStateLink = Master.Instance().MyGameState;

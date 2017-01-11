@@ -6,6 +6,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
         public void Activate() { //aka start glowing
             GetComponentInChildren<Light>().enabled = true;
+            GetComponent<SphereCollider>().enabled = false; //Damit keine Tooltips mehr kommen und man es nicht mehr öffnen kann
         }
 
         private void Awake() {

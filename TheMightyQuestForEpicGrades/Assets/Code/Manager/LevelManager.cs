@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Assets.Code.Scripts.FeatureScripts;
+using Assets.Code.Scripts.UtilityScripts;
 using UnityEngine;
+using UnityEngine.WSA;
 
 namespace Assets.Code.Manager {
     public class LevelManager : MonoBehaviour {
@@ -76,8 +80,25 @@ namespace Assets.Code.Manager {
         }
 
         public int[] GetAllUseableLevelIndices() {
-            //TODO GetAllUseableLevelIndices
-            return new[] {4, 5, 6};
+            var allLevelFileNames = Persist.GetAllLevelFileNames();
+            var levelIndices = new int[allLevelFileNames.Count];
+
+            for (var index = 0; index < allLevelFileNames.Count; index++) {
+                var fileName = allLevelFileNames[index];
+                int indexOfLevel;
+                if (!Int32.TryParse(fileName[fileName.Length - 1].ToString(), out indexOfLevel))
+                    throw new Exception("Parsen oder sonstwas schief gelaufen :o");
+                levelIndices[index] = indexOfLevel;
+            }
+
+            return levelIndices;
+
+            //Linq Version
+            //return Persist.GetAllLevelFileNames().Select(
+            //    x => {
+            //        var fileName = Path.GetFileNameWithoutExtension(x);
+            //        return Int32.Parse(fileName[fileName.Length - 1].ToString());
+            //    }).ToArray();
         }
     }
 }

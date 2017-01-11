@@ -93,32 +93,35 @@ namespace Assets.Code.Scripts.FeatureScripts {
             if (other.gameObject.CompareTag("PinkPortal")) { // && Portalstein vorhanden)
                 Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Portalstein einsetzen");
                 if (Input.GetKeyDown(KeyCode.E)) {
-                    Master.Instance().MyGameState.InsertPortalStone(other.gameObject, PortalColor.Pink);
-                    //TODO Master.Instance().MyGameState. PINK PORTAL 
-                    //Debug.Log("PinkPortalSkript.Activated = " + GameStateHolder.Instance().GameStateObject.LevelState.PinkPortalStone.Used.ToString() + " (" + DebugLogVar +")");
+                    if (Master.Instance().MyGameState.PortalStonePinkIsInPossession) {
+                        Master.Instance().MyGameState.InsertPortalStone(other.gameObject, PortalColor.Pink);
+                    }
+                    Debug.Log("Stein in pinkes Portal eingesetzt und es so aktiviert!");
                 }
             }
             else if (other.gameObject.CompareTag("GreenPortal")) { // && Portalstein vorhanden
                 Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Portalstein einsetzen");
                 if (Input.GetKeyDown(KeyCode.E)) {
-                    Master.Instance().MyGameState.InsertPortalStone(other.gameObject, PortalColor.Green);
-                    //TODO Master.Instance().MyGameState. GREEN PORTAL 
-                    //Debug.Log("GreenPortalSkript.Activated = " + GameStateHolder.Instance().GameStateObject.LevelState.GreenPortalStone.Used.ToString() + " (" + DebugLogVar +")");
+                    if (Master.Instance().MyGameState.PortalStoneGreenIsInPossession) {
+                        Master.Instance().MyGameState.InsertPortalStone(other.gameObject, PortalColor.Green);
+                    }
+                    Debug.Log("Stein in grünes Portal eingesetzt und es so aktiviert!");
                 }
             }
             else if (other.gameObject.CompareTag("BluePortal")) { // && Portalstein vorhanden)
                 Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Portalstein einsetzen");
                 if (Input.GetKeyDown(KeyCode.E)) {
-                    Master.Instance().MyGameState.InsertPortalStone(other.gameObject, PortalColor.Blue);
-                    //TODO Master.Instance().MyGameState. BLUE PORTAL 
-                    //Debug.Log("BluePortalSkript.Activated = " + GameStateHolder.Instance().GameStateObject.LevelState.GreenPortalStone.Used.ToString() + " (" + DebugLogVar +")");
+                    if (Master.Instance().MyGameState.PortalStoneBlueIsInPossession) {
+                        Master.Instance().MyGameState.InsertPortalStone(other.gameObject, PortalColor.Blue);
+                    }
+                    Debug.Log("Stein in blaues Portal eingesetzt und es so aktiviert!");
                 }
             }
             else if (other.gameObject.CompareTag("Finish")) { // = steht vor der Endtüre
                 Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Portal oeffnen");
                 if (Input.GetKeyDown(KeyCode.E)) {
                     if (Master.Instance().MyGameState.HasUsedAllPortalStones()) {
-                        other.gameObject.GetComponent<EndDoorScript>().OpenDoor(); //TODO über GameStateManager gehen?
+                        other.gameObject.GetComponent<EndDoorScript>().OpenDoor(); //Über GSM gehen?
                         Debug.Log("Türe wird durch den Spieler geöffnet");
                     }
                 }
@@ -137,12 +140,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
         private void OnTriggerExit(Collider other) {
             Master.Instance().CurrentDialogController.SendMessage("DeactivateTooltip");
         }
-
-        //Debug-Funktion
-        //private void OnTriggerEnter(Collider col) {
-        //    Debug.Log(gameObject.name + " has triggered " + other.gameObject.name);
-        //}
-
+        
         private void FixedUpdate() {
             if (!controlsBlocked) {
                 //Movement

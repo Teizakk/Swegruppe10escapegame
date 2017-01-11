@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 using Assets.Code.GLOBALS;
 using Assets.Code.Models;
 using Assets.Code.Scripts.UtilityScripts;
@@ -106,12 +107,12 @@ namespace Assets.Code.Manager {
         }
         
         //ONLY DEV FUNCTION
-        public void ReadQuestionsFromCSV(string fileName, string modul, Difficulties difficulty, string chapter) {
+        public void ReadQuestionsFromCSV(string fileName, string modul, Difficulties difficulty, string chapter) { //diese werte müssen "händisch" übergeben werden in diesem Fall
             var data = CSVReader.Read(fileName);
+            modul = "DNIS"; //weil es im Moment nur das gibt 
             for (var index = 0; index < data.Count; index++) {
                 var t = data[index]; //wählt Zeile aus
-                var q = new Question
-                {
+                var q = new Question {
                     Modul = modul,
                     Answers = new List<Question.Answer>(),
                     Chapter = chapter,
@@ -124,7 +125,7 @@ namespace Assets.Code.Manager {
                                 t["Hinweis3"].ToString()
                             },
                     QuestionDuration = new TimeSpan(0),
-                    ImagePath = t["AntwortBild"].ToString(),
+                    ImagePath = t["FragenBild"].ToString(),
                     Used = false,
                     QuestionText = t["Frage"].ToString()
                 };
@@ -151,13 +152,46 @@ namespace Assets.Code.Manager {
                     i++;
                 } while (valueIsSet.Contains(false));
 
-                Master.Instance().MyModule.AddQuestionToModule(modul, difficulty, chapter, q);
+                Master.Instance().MyModule.AddQuestionToModule(q);
             }
         }
 
-        private void AddQuestionToModule(string modul, Difficulties difficulty, string chapter, Question question) {
-            //throw new NotImplementedException();
+        public void AddQuestionToModule(Question q) {
+            var moduleFile = Persist.Load<ModuleQuestions>(q.Modul);
+            if (moduleFile == null) {
+                throw new FileNotFoundException("Modulfile konnte nicht geladen/geöffnet werden!");
+            }
 
+            //Das Speichern sollte ab hier funktionieren - es müssen allerdings noch ein paar Werte angepasst werden:
+            //Bilder hereinladen und Pfade ändern
+            if (!string.IsNullOrEmpty(q.ImagePath)) { //Wenn es eine Frage-Bild gibt
+                q.ImagePath = Persist.CopyPictureToResourcesFolder(q.ImagePath); //schreibt direkt den aktuellen Pfad herein
+            }
+
+            foreach (var a in q.Answers) {
+                var answerImagePath = a.ImagePath;
+                if (!string.IsNullOrEmpty(answerImagePath)) { //Wenn es ein Antwort-Bild gibt
+                    a.ImagePath = Persist.CopyPictureToResourcesFolder(answerImagePath); //siehe oben
+                }
+            }
+
+            switch (q.Difficulty) {
+                case Difficulties.Easy:
+                    moduleFile.QuestionsEasy.Add(q);
+                    break;
+                case Difficulties.Medium:
+                    moduleFile.QuestionsMedium.Add(q);
+                    break;
+                case Difficulties.Hard:
+                    moduleFile.QuestionsHard.Add(q);
+                    break;
+                default:
+                    throw new UnityException("Ungültiger Schwierigkeitsgrad mitgegeben");
+            }
+            moduleFile.LastUpdated = DateTime.Now.ToLocalTime();
+            //alle Infos hinzugefügt, jetzt wieder abspeichern
+            Persist.Save(moduleFile, "Modules\\" + q.Modul);
+            Debug.Log("Datei: " + q.Modul + ".dat erfolgreich aktualisiert!");
         }
 
         private void Start() {

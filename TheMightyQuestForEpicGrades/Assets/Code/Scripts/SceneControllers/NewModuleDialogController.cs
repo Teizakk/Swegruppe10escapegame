@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets.Code.GLOBALS;
 using Assets.Code.Manager;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,6 +42,24 @@ namespace Assets.Code.Scripts.SceneControllers {
                 throw new UnityException("Erstellen der neuen Modul-Datei fehlgeschlagen!");
             }
         }
+
+        #region DEVSTUFF
+
+        [Header("DEV STUFF")]
+        public InputField FileName;
+        public InputField ModuleName;
+        public Slider Difficulty;
+        public InputField ChapterName;
+
+        public void InsertCSV() {
+            Master.Instance().MyModule.ReadQuestionsFromCSV(
+                fileName: FileName.text,
+                difficulty: (Difficulties)(int)Difficulty.value,
+                modul: ModuleName.text,
+                chapter: ChapterName.text
+                );
+        }
+        #endregion
 
         public void Awake() {
             Master.Instance().MyModule.LoadFromFile();

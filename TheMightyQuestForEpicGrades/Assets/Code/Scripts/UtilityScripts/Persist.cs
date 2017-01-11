@@ -23,12 +23,15 @@ namespace Assets.Code.Scripts.UtilityScripts {
             var hs = ExecuteablePath + "\\Highscores";
 			var sg = ExecuteablePath + "\\SaveGames";
             var q = ExecuteablePath + "\\Modules";
+            var r = ExecuteablePath + "\\Resources";
             if (!Directory.Exists(hs))
                 Directory.CreateDirectory(hs);
 			if (!Directory.Exists(sg))
                 Directory.CreateDirectory(sg);
             if (!Directory.Exists(q))
                 Directory.CreateDirectory(q);
+            if (!Directory.Exists(r))
+                Directory.CreateDirectory(r);
         }
 
         public static void Save<T>(T state, string fileName) {
@@ -82,6 +85,22 @@ namespace Assets.Code.Scripts.UtilityScripts {
                 }).Where(x => !string.IsNullOrEmpty(x) && x.Contains("_sgi")).ToList();
             Directory.CreateDirectory(ExecuteablePath + "\\SaveGames"); //eigentlich unnötig, da dies oben im Konstruktor schon gemacht wird.
             return new List<string>();
+        }
+
+        public static string CopyPictureToResourcesFolder(string filePathAndName) {
+            if (!File.Exists(filePathAndName)) {
+                throw new FileNotFoundException("Zu kopierendes Bild war unter dem gesetzten Pfad nicht zu finden!");
+            }
+            var desiredFilePathAndNameAfterCopy = ExecuteablePath + "\\Resources\\" + Path.GetFileName(filePathAndName);
+            File.Copy(filePathAndName, desiredFilePathAndNameAfterCopy);
+            if (!File.Exists(desiredFilePathAndNameAfterCopy)) {
+                throw new FileNotFoundException("Kopieren der Bilddatei in den Resources-Ordner gescheitert!");
+            }
+            return desiredFilePathAndNameAfterCopy;
+        }
+
+        public static List<string> GetAllLevelFileNames() {
+            return Directory.GetFiles(ExecuteablePath + "\\Levels").ToList();
         }
     }
 }

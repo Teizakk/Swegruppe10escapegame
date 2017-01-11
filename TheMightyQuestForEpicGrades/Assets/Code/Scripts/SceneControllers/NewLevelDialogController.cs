@@ -19,7 +19,6 @@ namespace Assets.Code.Scripts.SceneControllers {
         }
 
         public void RefreshSelectedFiles(bool deleteFalseOnes = true) {
-            //TODO Soll die angezeigten Dateien aktualiseren wenn ungültig -> löschen (könnte man auch aufrufen, nachdem neue hinzugefügt wurden)
             //Anzeige leer machen
             foreach (var displayLine in FileDisplayContents) Destroy(displayLine);
             FileDisplayContents.Clear();
@@ -60,7 +59,6 @@ namespace Assets.Code.Scripts.SceneControllers {
         }
 
         public void checkFiles() {
-            //TODO falls wir das wollen, sollte das hier implementiert werden (Tobis Weihnachtsaufgabe?)
             //wenn File korrekt bool auf true -> Anzeige im Scroll View ändern
             for (var i = 0; i < FilePathsAndStatus.Count; i++) {
                 var file = FilePathsAndStatus[i];
@@ -78,6 +76,7 @@ namespace Assets.Code.Scripts.SceneControllers {
             RefreshSelectedFiles(false);
 
             Debug.LogWarning("Diese checkFiles Funktion hat leider noch keine richtige Funktionalität");
+            //DIESES FEATURE IST FÜR DEN MOMENT LEIDER ZU ZEITAUFWENDIG BZW WIRD ES NICHT EXPLIZIT GEFORDERT UND DIE ZEIT WIRD ANDERWEITIG GEBRAUCHT
         }
 
         public void FileDialogOpener() {
