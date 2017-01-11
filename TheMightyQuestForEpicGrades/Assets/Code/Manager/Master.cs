@@ -23,7 +23,6 @@ namespace Assets.Code.Manager {
                 if (!_masterInstance) {
                     Debug.LogError(
                         "Es muss ein aktives Master Skript auf einem GameObject in der Szene existieren");
-                    Debug.Break();
                 }
             }
             return _masterInstance;
@@ -73,7 +72,8 @@ namespace Assets.Code.Manager {
         private void OnDestroy() {
             if (SceneManager.GetActiveScene().name == "MainGame" ||
                 SceneManager.GetActiveScene().name == "EndOfGame" ||
-                SceneManager.GetActiveScene().name == "InsertHighscoreEndOfGame") return;
+                SceneManager.GetActiveScene().name == "InsertHighscoreEndOfGame" ||
+                SceneManager.GetActiveScene().name == "MainMenu") return;
             Debug.Log("Aktuelle Szene: " + SceneManager.GetActiveScene().name);
             throw new UnityException("Master wurde auf irgendeine verwerfliche Art zum falschen Zeitpunkt gelöscht!");
         }

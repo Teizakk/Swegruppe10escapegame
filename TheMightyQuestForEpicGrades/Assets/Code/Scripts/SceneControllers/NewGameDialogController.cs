@@ -13,10 +13,7 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         private void Awake() {
             Master.Instance().MyModule.LoadFromFile(); //Falls zwischenzeitlich aktualisiert
-            var modules = Master.Instance().MyModule.GetModulesAsArray();
-
-            foreach (var str in modules)
-                moduleDropdown.options.Add(new Dropdown.OptionData {text = str});
+            moduleDropdown.AddOptions(Master.Instance().MyModule.GetModulesWithEnoughQuestionsAsList());
 
             // Damit die neu eingefügten Optionen angezeigt werden können
             moduleDropdown.value = 1;
@@ -29,6 +26,10 @@ namespace Assets.Code.Scripts.SceneControllers {
         }
 
         public void SetGameOptionsInGameState() {
+            Debug.LogWarning("ZWISCHENLÖSUNG BIS FRAGEN HEREINGELADEN!!");
+            //TODO wegmachen wenn es wieder funktioniert
+            Master.Instance().MyGameState.SetupNewGame("TESTER", "TESTMODULE", Difficulties.Easy);
+            /*
             Debug.Log("SetUpNewGame wird aufgerufen mit:\n" + 
                 "PlayerName = " + playerName.text + 
                 "\tModuleName = " + moduleDropdown.options[moduleDropdown.value].text + 
@@ -38,6 +39,7 @@ namespace Assets.Code.Scripts.SceneControllers {
                moduleName: moduleDropdown.options[moduleDropdown.value].text,
                difficulty: (Difficulties)difficultyDropdown.value + 1
                );
+               */
         }
 
         #region Master-Link

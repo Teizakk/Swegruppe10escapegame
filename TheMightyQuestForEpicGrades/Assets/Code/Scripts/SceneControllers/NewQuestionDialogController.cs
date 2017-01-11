@@ -46,7 +46,7 @@ namespace Assets.Code.Scripts.SceneControllers
         // Use this for initialization
         void Awake()
         {
-            // lblChosenModule.text = Master.Instance().MyModule.ModuleToEdit;  // sollte so klappen
+            lblChosenModule.text = Master.Instance().MyModule.ModuleToEdit;  // sollte so klappen
             
             // ToggleGroup initialisieren
             toggleGroup.RegisterToggle(tglAnswer1);
@@ -69,12 +69,7 @@ namespace Assets.Code.Scripts.SceneControllers
                 }
             }
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        
 
         public void AddQuestion()
         {
@@ -90,14 +85,12 @@ namespace Assets.Code.Scripts.SceneControllers
                 _hints[i] = this.hints[i].text;
             }
 
-            // TODO : Modul aus ModuleToEdit
-            var q = new Question()
+           var q = new Question()
             {
                 QuestionText = inQuestion.text,
                 ImagePath = _imagePath,
                 Chapter = inChapter.text,
-                //Modul = Master.Instance().MyModule.ModuleToEdit,
-                Modul = "DNIS",
+                Modul = Master.Instance().MyModule.ModuleToEdit,
                 Answers = _answers,
                 Hints = _hints,
                 Difficulty = (Difficulties) dpdDifficulty.value + 1,
@@ -106,12 +99,14 @@ namespace Assets.Code.Scripts.SceneControllers
             Debug.Log("ImagePath: " + q.ImagePath);
             Debug.Log("Answer ImagePath: " + q.Answers[0].ImagePath);
 
-            var list = Persist.Load<List<Question>>("Module\\" + q.Modul);
-            if(list == null)
-                list = new List<Question>();
-            list.Add(q);
-            Persist.Save(list, "Module\\" + q.Modul);
+            //var list = Persist.Load<List<Question>>("Module\\" + q.Modul);
+            //if(list == null)
+            //    list = new List<Question>();
+            //list.Add(q);
+            //Persist.Save(list, "Module\\" + q.Modul);
             
+            Master.Instance().MyModule.AddQuestionToModule(q);
+
             MessageBox.Show("Die Frage wurde erfolgreich hinzugefügt.");
             ClearFields();
             // die erste Antwort auswählen

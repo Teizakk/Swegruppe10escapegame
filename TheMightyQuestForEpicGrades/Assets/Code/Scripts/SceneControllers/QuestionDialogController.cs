@@ -150,13 +150,13 @@ namespace Assets.Code.Scripts.SceneControllers
                 switch (q.Difficulty)
                 {
                     case Difficulties.Easy:
-                        punkte = 1;
+                        punkte = 100;
                         break;
                     case Difficulties.Medium:
-                        punkte = 2;
+                        punkte = 300;
                         break;
                     case Difficulties.Hard:
-                        punkte = 3;
+                        punkte = 500;
                         break;
                 }
 
@@ -201,10 +201,8 @@ namespace Assets.Code.Scripts.SceneControllers
         }
         
         // Frage und Antworten in den Dialog laden
-        void LoadQuestion()
-        {
-            q = new Question
-            {
+        void LoadQuestion() {
+          /*q = new Question {
                 QuestionText = "Was ist das Internet?",
                 Difficulty = Difficulties.Easy,
                 Chapter = "Einstieg",
@@ -230,9 +228,10 @@ namespace Assets.Code.Scripts.SceneControllers
                     },
                 CorrectAnswer = 3,
                 Hints = new List<string> { "inter", "connected", "networks" }
-            };
-            // TODO : Frage aus der Datenhaltung holen
-            //q = Master.Instance().MyQuestion.GetQuestion(0);
+            };*/
+
+            //Neue Fragen laden
+            q = Master.Instance().MyQuestion.ProvideUnusedQuestion(Master.Instance().MyGameState.ChapterInUse);
 
             // Fragentext laden
             outQuestion.text = q.QuestionText;
@@ -342,10 +341,8 @@ namespace Assets.Code.Scripts.SceneControllers
         #region Helper
 
         //"Nachrichten"-Funktion an PlayerController
-        private void blockAndUnblockMovement()
-        {
-            // TODO : Fix Nullreference
-            // PlayerScript.instance.SwitchControlBlock();
+        private void blockAndUnblockMovement() {
+            PlayerScript.GetInstance().SwitchControlBlock();
         }
 
         private void LeaveToMainMenu()

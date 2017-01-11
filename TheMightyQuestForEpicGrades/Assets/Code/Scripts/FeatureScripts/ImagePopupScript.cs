@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 
-//TODO ich glaube hier kann man das Singleton-Pattern entfernen
+//NOTE ich glaube hier kann man das Singleton-Pattern entfernen
 
 namespace Assets.Code.Scripts.FeatureScripts
 {

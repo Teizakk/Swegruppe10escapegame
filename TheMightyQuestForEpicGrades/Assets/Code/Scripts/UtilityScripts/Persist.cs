@@ -24,12 +24,15 @@ namespace Assets.Code.Scripts.UtilityScripts {
             var hs = ExecuteablePath + "\\Highscores";
 			var sg = ExecuteablePath + "\\SaveGames";
             var q = ExecuteablePath + "\\Modules";
+            var r = ExecuteablePath + "\\Resources";
             if (!Directory.Exists(hs))
                 Directory.CreateDirectory(hs);
 			if (!Directory.Exists(sg))
                 Directory.CreateDirectory(sg);
             if (!Directory.Exists(q))
                 Directory.CreateDirectory(q);
+            if (!Directory.Exists(r))
+                Directory.CreateDirectory(r);
         }
 
         public static void Save<T>(T state, string fileName) {
@@ -85,7 +88,19 @@ namespace Assets.Code.Scripts.UtilityScripts {
             return new List<string>();
         }
 
-        public static bool InitializeHighscoreList() {
+        public static string CopyPictureToResourcesFolder(string filePathAndName) {
+            if (!File.Exists(filePathAndName)) {
+                throw new FileNotFoundException("Zu kopierendes Bild war unter dem gesetzten Pfad nicht zu finden!");
+            }
+            var desiredFilePathAndNameAfterCopy = ExecuteablePath + "\\Resources\\" + Path.GetFileName(filePathAndName);
+            File.Copy(filePathAndName, desiredFilePathAndNameAfterCopy);
+            if (!File.Exists(desiredFilePathAndNameAfterCopy)) {
+                throw new FileNotFoundException("Kopieren der Bilddatei in den Resources-Ordner gescheitert!");
+            }
+            return desiredFilePathAndNameAfterCopy;
+        }
+
+public static bool InitializeHighscoreList() {
             if (!Directory.Exists(ExecuteablePath + "\\Highscores")) {
                 Debug.LogError("Konstruktor hätte Verzeichnis \\Highscores erstellen sollen?!");
                 return false;
@@ -95,20 +110,17 @@ namespace Assets.Code.Scripts.UtilityScripts {
             }
             var hsl =  new List<Highscore>()
             {
-                new Highscore()
-                {
+                new Highscore() {
                     PlayerName = "Hoever",
                     Score = 50,
                     Zeit = "Hoever"
                 },
-                new Highscore()
-                {
+                new Highscore() {
                     PlayerName = "Claßen",
                     Score = 30,
                     Zeit = "schneller"
                 },
-                new Highscore()
-                {
+                new Highscore() {
                     PlayerName = "Fassbender",
                     Score = 10,
                     Zeit = "schnell"
@@ -117,5 +129,10 @@ namespace Assets.Code.Scripts.UtilityScripts {
             Save(hsl, "Highscores\\" + "highscores");
             return true;
         }
+
+        public static List<string> GetAllLevelFileNames() {
+            return Directory.GetFiles(ExecuteablePath + "\\Levels").ToList();
+        }
+
     }
 }

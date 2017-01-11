@@ -12,13 +12,13 @@ namespace Assets.Code.Scripts.SceneControllers {
         // Use this for initialization
         private void Awake() {
             Master.Instance().MyModule.LoadFromFile();
-            ModuleDropdown.AddOptions(Master.Instance().MyModule.GetModulesAsList());
+            ModuleDropdown.AddOptions(Master.Instance().MyModule.GetModulesWithEnoughQuestionWarningAsList());
         }
 
         public void SetModuleToEdit() {
             //Nimmt den Text der ausgewählten Option und übergibt ihn dem "Zwischenspeicher"
-            Master.Instance().MyModule.ModuleToEdit = ModuleDropdown.options[ModuleDropdown.value].text;
-            Debug.Log("Das zu bearbeitende Modul wurde auf: " + ModuleDropdown.options[ModuleDropdown.value].text + " gesetzt!");
+            Master.Instance().MyModule.ModuleToEdit = ModuleDropdown.options[ModuleDropdown.value].text.Split(' ')[0]; //Darf keine Leerzeichen enthalten.
+            Debug.Log("Das zu bearbeitende Modul wurde auf: " + ModuleDropdown.options[ModuleDropdown.value].text.Split(' ')[0] + " gesetzt!");
         }
 
         #region Master-Link

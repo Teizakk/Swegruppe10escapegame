@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Assets.Code.Scripts.FeatureScripts {
-    public class ChestScript : MonoBehaviour
-    {
+    public class ChestScript : MonoBehaviour {
         //private bool ChestIsLocked = false;
         //private bool ChestIsOpen; //diese Information ist redundant, weil sie sich aus ChestIsLocked ableiten lässt
 
@@ -13,33 +12,11 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
         public void Lock() {
             GetComponentInChildren<Light>().enabled = true;
+            GetComponent<SphereCollider>().enabled = false; //Damit keine Tooltips mehr kommen und man es nicht mehr öffnen kann
         }
 
         private void Awake() {
             GetComponentInChildren<Light>().enabled = false;
         }
-
-        //public void OnCollisionStay(Collision col) {
-        //    if (Input.GetKeyDown("e") && !ChestIsLocked && col.gameObject.CompareTag("Player"))
-        //    {
-        //        QuestionDialogController.Instance().ShowQuestion();
-        //        if (QuestionDialogController.Instance().AnswerCorrect()){
-        //            // TO-DO : Hintstein oder Portalstein geben
-        //            Debug.Log("Hintstein oder Portalstein bekommen");
-        //            ChestIsLocked = true;
-        //        }
-
-        //        //ChestIsOpen = true;
-        //        //OpenChest();
-        //        //ChestIsLocked = true; //Truhe abschließen
-        //        //Destroy(gameObject); //Lässt Truhe verschwinden
-        //    }
-        //}
-
-        //public void OpenChest() {
-        //    SceneManager.LoadScene( /*QuestionDialog?*/ null);
-        //    Fragemenü aufrufen
-        //    ChestIsOpen = false;
-        //}
     }
 }

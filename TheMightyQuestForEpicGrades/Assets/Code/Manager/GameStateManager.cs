@@ -53,7 +53,6 @@ namespace Assets.Code.Manager {
 
         public void LoadGame(string nameOfSavegameFile)
         {
-            //TODO
             Debug.Log("MyGameState.Load(" + nameOfSavegameFile + ") aufgerufen");
             GameStateObject = Persist.Load<GameState>(nameOfSavegameFile);
             //Weiterleitung zu inbetweenLevels
@@ -243,7 +242,7 @@ namespace Assets.Code.Manager {
                 throw new UnityException("Die grundlegenden Leveldaten dürfen zu diesem Zeitpunkt nicht verändert werden");
             }
             var rand = new System.Random();
-            var allChapters = Master.Instance().MyQuestion.GetAllChapters();
+            var allChapters = Master.Instance().MyQuestion.GetAllChaptersInThisModule();
             var checkedChapters = new bool[allChapters.Length];
 
             for (var i = 0; i < checkedChapters.Length; i++) {
@@ -269,8 +268,10 @@ namespace Assets.Code.Manager {
 
         #region Chest
         //TODO CHEST FUNCTIONS
-        public void OpenChest(GameObject chestToOpen) {
+        public void OpenChest(GameObject chestToOpen) { //chestToOpen nicht zwingend erforderlich weil es eine bestimmte Instanz des ChestScripts sein sollte
             Debug.Log(chestToOpen.GetInstanceID());
+
+
             LoseOneLive();
             Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.RemoveHeart();
             //TODO
@@ -296,7 +297,7 @@ namespace Assets.Code.Manager {
                 default:
                     throw new UnityException("Ungültiger Schwierigkeitsgrad angegeben...bricht ab....");
             }
-            Debug.Log("Anzahl der Leben auf: " + GameStateObject.LevelState.Lives + " zurückgesetzt.\nDies sollte nie außerhalb des Levelwechsels passieren"); //TODO Durch Cheatmode?
+            Debug.Log("Anzahl der Leben auf: " + GameStateObject.LevelState.Lives + " zurückgesetzt.\nDies sollte nie außerhalb des Levelwechsels passieren");
         }
         public void LoseOneLive() {
             if (GameStateObject.LevelState.Lives > 1) {
@@ -306,7 +307,10 @@ namespace Assets.Code.Manager {
             if (GameStateObject.LevelState.Lives == 1) {
                 GameStateObject.LevelState.Lives--;
                 Debug.Log("Spiel ist nun game over");
-                //TODO weitere Aktionen einleiten?
+                //TODO noch mehr zu tun?
+                SetGameLost();
+                SceneManager.LoadScene("EndOfGame");
+                return;
             }
             throw new UnityException("Leben kann nicht entfernt werden - Spieler sollte längst GameOver sein!!!");
         }
@@ -346,7 +350,6 @@ namespace Assets.Code.Manager {
         #endregion
         
         #region Portals & Portalstones
-        //TODO PORTALSTONE FUNCTIONS
         //Einfach nur links atm
         public bool PortalStoneBlueIsInPossession {
             get { return GameStateObject.LevelState.BluePortalStone.InPossession; }
@@ -384,24 +387,20 @@ namespace Assets.Code.Manager {
 
         public void InsertPortalStone(GameObject portal, PortalColor color) {
             Debug.Log("Genutzter Portalstein: " + portal.GetInstanceID());
-            //TODO
-            //DEBUG HACK
+            //Stein einsetzen und Portal damit aktivieren
             switch (color) {
                 case PortalColor.Blue:
-                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.ReceivePortalStone(PortalColor.Blue);
-                    PortalStoneBlueIsInPossession = true;
+                    PortalStoneBlueIsInPossession = false;
                     Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.UsePortalStone(PortalColor.Blue);
                     PortalStoneBlueHasBeenUsed = true;
                     break;
                 case PortalColor.Green:
-                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.ReceivePortalStone(PortalColor.Green);
-                    PortalStoneGreenIsInPossession = true;
+                    PortalStoneGreenIsInPossession = false;
                     Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.UsePortalStone(PortalColor.Green);
                     PortalStoneGreenHasBeenUsed = true;
                     break;
                 case PortalColor.Pink:
-                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.ReceivePortalStone(PortalColor.Pink);
-                    PortalStonePinkIsInPossession = true;
+                    PortalStonePinkIsInPossession = false;
                     Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.UsePortalStone(PortalColor.Pink);
                     PortalStonePinkHasBeenUsed = true;
                     break;
@@ -409,6 +408,7 @@ namespace Assets.Code.Manager {
                     throw new ArgumentOutOfRangeException("color", color, null);
             }
             portal.GetComponent<PortalScript>().Activate();
+            
         }
         #endregion
 
