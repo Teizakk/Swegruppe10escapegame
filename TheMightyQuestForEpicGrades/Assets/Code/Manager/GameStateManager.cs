@@ -15,9 +15,15 @@ namespace Assets.Code.Manager {
       
         //Quasi ein riesiges Backingfield
         private GameState GameStateObject;
-
+        private AudioSource music;
         #region Savegame Handling
-
+        private void Start()
+        {
+            music = gameObject.AddComponent<AudioSource>();
+            music.clip = Resources.Load("Audio/BackgroundMusic") as AudioClip;
+            music.Play();
+            music.loop = true;
+        }
         public void SaveGame(string nameOfSavegameFile) {
             //PlayerPos auslesen
             Debug.Log(PlayerPosCurrent);
