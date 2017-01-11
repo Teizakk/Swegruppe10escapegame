@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Assets.Code.GLOBALS;
 using Assets.Code.Models;
 using Assets.Code.Scripts.UtilityScripts;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -105,56 +106,80 @@ namespace Assets.Code.Manager {
                 return false;
             }
         }
-        
+        #region DEV-ONLY
+
+        private Queue<Question> QueueToAdd = new Queue<Question>();
         //ONLY DEV FUNCTION
         public void ReadQuestionsFromCSV(string fileName, string modul, Difficulties difficulty, string chapter) { //diese werte müssen "händisch" übergeben werden in diesem Fall
             var data = CSVReader.Read(fileName);
             modul = "DNIS"; //weil es im Moment nur das gibt 
-            for (var index = 0; index < data.Count; index++) {
-                var t = data[index]; //wählt Zeile aus
-                var q = new Question {
-                    Modul = modul,
-                    Answers = new List<Question.Answer>(),
-                    Chapter = chapter,
-                    Difficulty = difficulty,
-                    Hints =
-                            new List<string>
-                            {
-                                t["Hinweis1"].ToString(),
-                                t["Hinweis2"].ToString(),
-                                t["Hinweis3"].ToString()
-                            },
-                    QuestionDuration = new TimeSpan(0),
-                    ImagePath = t["FragenBild"].ToString(),
-                    Used = false,
-                    QuestionText = t["Frage"].ToString()
-                };
+            for (var index = 0; index < data.Count; index++)
+            {
+                try
+                {
+                    var t = data[index]; //wählt Zeile aus
+                    var q = new Question();
+                    q.Modul = modul;
+                    q.Answers = new List<Question.Answer>();
+                    q.Chapter = chapter;
+                    q.Difficulty = difficulty;
+                    Debug.Break();
+                    q.Hints = new List<string>
+                    {
+                        t["Hinweis1"].ToString(),
+                        t["Hinweis2"].ToString(),
+                        t["Hinweis3"].ToString()
+                    };
+                    Debug.Break();
+                    q.QuestionDuration = new TimeSpan(0);
+                    q.ImagePath = "\\Bilder\\" + t["FragenBild"].ToString();
+                    Debug.Break();
+                    q.Used = false;
+                    q.QuestionText = t["Frage"].ToString();
+                    Debug.Break();
 
-                q.Answers.Capacity = 3; //Oder muss das mit .Add gemacht werden?
+                    q.Answers = new List<Question.Answer>(3) {new Question.Answer(), new Question.Answer(), new Question.Answer()};
+                    q.Answers[0].AnswerText = null;
+                    q.Answers[1].AnswerText = null;
+                    q.Answers[2].AnswerText = null;
 
-                q.Answers[0].AnswerText = null;
-                q.Answers[1].AnswerText = null;
-                q.Answers[2].AnswerText = null;
+                    //Antworten Mixer
+                    var valueIsSet = new bool[3];
+                    var randomizer = new System.Random();
+                    var i = 1;
+                    do
+                    {
+                        var rdmInt = randomizer.Next(0, 2);
+                        if (valueIsSet[rdmInt]) continue;
+                        q.Answers[rdmInt].AnswerText = t["Antwort" + i].ToString();
+                        q.Answers[rdmInt].ImagePath = "\\Bilder\\" + t["Antwort" + i + "Bild"].ToString();
+                        if (i == 3)
+                        {
+                            q.CorrectAnswer = rdmInt;
+                        }
+                        valueIsSet[rdmInt] = true;
+                        i++;
+                    } while (valueIsSet.Contains(false));
 
-                //Antworten Mixer
-                var valueIsSet = new bool[3];
-                var randomizer = new System.Random();
-                var i = 1;
-                do {
-                    var rdmInt = randomizer.Next(0, 2);
-                    if (valueIsSet[rdmInt]) continue;
-                    q.Answers[rdmInt].AnswerText = t["Antwort" + i].ToString();
-                    q.Answers[rdmInt].ImagePath = t["Antwort" + i + "Bild"].ToString();
-                    if (i == 3) {
-                        q.CorrectAnswer = rdmInt;
-                    }
-                    valueIsSet[rdmInt] = true;
-                    i++;
-                } while (valueIsSet.Contains(false));
-
-                Master.Instance().MyModule.AddQuestionToModule(q);
+                    Master.Instance().MyModule.AddQuestionToModule(q);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e.Source + e.StackTrace + e.Data);
+                    Debug.Break();
+                    throw;
+                }
             }
         }
+
+        private void Update() {
+            if (QueueToAdd.Count != 0) {
+                Master.Instance().MyModule.AddQuestionToModule(QueueToAdd.Dequeue());
+                if(QueueToAdd.Count == 0)
+                Debug.LogWarning("ALLE ELEMENTE EINGEFÜGT!");
+            }
+        }
+        #endregion
 
         public void AddQuestionToModule(Question q) {
             var moduleFile = Persist.Load<ModuleQuestions>(q.Modul);

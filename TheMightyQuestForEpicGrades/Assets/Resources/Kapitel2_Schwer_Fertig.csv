@@ -1,0 +1,16 @@
+Frage;FragenBild;Antwort1;Antwort1Bild;Antwort2;Antwort2Bild;Antwort3;Antwort3Bild;Hinweis1;Hinweis2;Hinweis3
+Welchen Port benutzt POP3?;;110/990;;100/995;;110/995;;Port 100 ist nicht vergeben;Port 109 ist für POP2;Port 990 ist für FTP reserviert
+Welchen Port nutzt IMAP?;;140/993;;143/990;;143/993;;Port 140 ist für den EMFIS Data Service;Port 990 ist für FTPS ;Port 993 ist für IMAP reserviert
+Welchen Port benutzt Gopher?;;75;;80;;70;;Port 75 ist für Wählservices vorbehalten;Port 80 ist für HTTP;Port 70 ist für Gopher reserviert
+Wofür steht JPEG?;;Joint Picture Experts Group;;Joint Photographic Elation Group;;Joint Photographic Experts Group;;Von Experten für Bilder;Von Experten für fotografierte Bilder;"Gruppe von ""photographic Experts"""
+"Welcher HTTP-Code bedeutet ""HTTP Version Not Supported""?";;500;;510;;505;;"Code 500 steht für ""Internal Server Error""";"Code 510 steht für ""Not Extended""";Code 505 ist richtig
+Was ist keine von Email genutzte Hauptkomponente?;email.jpg;User Agent;;SMTP;;Webbrowser;;Die Email benötigt ein Transfer Protocol;Zusätzlich benötigt man einen User Agent zum Zugriff auf den Server;Ein Browser ist nicht unbedingt nötig
+Was steht im Header, wenn MIME verwendet wird?;;Multipart;;Mixed;;Multipart-Mixed;;MIME definiert das Datenformat von Emails ;Schafft Kompatibilität für zusätzliche Zeichen wie Umlaute sowie für Multimedia;Es ist sowohl Multipart als auch Mixed
+Was wird auch Default Name Server genannt?;;DNS Root Server;;DNS TLD;;Lokaler DNS Server;;Der Root Server ist der höchste DNS Server in der Rangordnung;Der TLD DNS Server ist der zweithöchste DNS Server;Ein lokaler DNS Server
+Was passt zu rekursivem DNS?;;"""Kenn ich nicht, aber wart' mal""";;"""Kenn ich nicht, aber frag mal den""";;"""Ich mach' das schon, wart' mal!""";;Beim iterativen Ansatz wird die Anfrage weitergeleitet;Beim iterativen Ansatz wird die Anfrage an einen weiteren Server weitergeleitet;Beim rekursiven Ansatz übernimmt der angefragte Server die Anfrage selbst
+Was ist eine TLD?;;amazon;;amazon.com;;com;;TLD steht für Top-Level-Domain;amazon.com ist ein zusammengesetzer Link aus TLD und Adresse;.de ist auch eine TLD
+In welchem ASCII-Format sind Header & Body bei SMTP?;;8-Bit;;16-Bit;;7-Bit;;Kürzer als 16-Bit;Kürzer als 10-Bit;Benötigt nur 7-Bit
+Was bedeutet RFC für Protokolle?;;Request For Change;;Remote Function Call;;Request For Comments;;Den Namen gibt’s schon seit 1969;"Übersetzt: ""Bitte für …""";"Übersetzt: ""Bitte um Kommentare"""
+Was macht HTTP push?;;Client gibt Daten an den Server;;Server oder Client übertragen Daten;;Server initiierte Datenübertragung;;Startet die Übertragung von Daten;Nur eins von beiden, also nur Server oder Client, kann pushen;Nur der Server kann pushen
+Was bedeutet URL?;;Unified Resource Locator;;Uniform Request Locator;;Uniform Resource Locator;;Zeigt auf eine Location …;…hinter der man eine Ressource findet…;…und die immer gleich ist
+Was nutzt Skype?;skype.jpg;Tracker;;keine Server;;Login Server;;Skype ist eigentlich Peer-to-Peer;Verwendet jedoch dennoch einen Server;Dieser Server händelt Login und Verbindungsaufbau

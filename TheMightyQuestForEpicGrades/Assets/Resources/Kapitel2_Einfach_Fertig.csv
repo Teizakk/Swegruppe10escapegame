@@ -1,0 +1,15 @@
+Frage;FragenBild;Antwort1;Antwort1Bild;Antwort2;Antwort2Bild;Antwort3;Antwort3Bild;Hinweis1;Hinweis2;Hinweis3
+Was ist keine verteilte Anwendung?;;Voice Over IP;;Cloud Computing;;The Mighty Quest For Epic Grades;;Eine verteilte Anwedung läuft auf mehreren Rechnern;Die Anwedung tauscht untereinander Informationen aus;Teilprogramme kommunizieren untereinander
+Was ist keine Anwendungsarchitektur?;;Client Server;;Peer-to-Peer;;Client-to-Peer;;Anwendungsarchitekturen sind Strukturen für die Programmierung;Strukturen zur Kommunikation untereinander;Entweder kommunizieren Server und Client miteinander oder Peer und Peer
+Was ist ein Peer-to-Peer?;peer.jpg;Amazon;amazon.jpg;Outlook;outlook.jpg;BitTorrent ;bittorrent.jpg;Anwendung, die gleichzeitig auf mehreren Rechnern läuft;Anwendung, die untereinander kommuniziert;Zwei der Anwendungen kommunizieren mit einem Server
+Was ist ein Internet Transfer Protocol?;;HTTP;;IP;;TCP;;Eines  der Protokolle wird zum Transfer von HyperText verwendet;Eines der Protokolle ist für den Verbindungen im Internet zuständig;Im Gegensatz zu UDP hat das gesuchte Protokoll zuverlässiger Datentransport
+Woraus bestehen Webseiten?;;Adressen;;Zuweisungen;;Objekten;;Webseiten sind heutzutage sehr komplex;Zu komplex für einfache Strukturen;Ähnlich wie bei der Programmierung bestehen Websites aus mehreren …
+Wer hat bei HTTP die Client Rolle?;;Server;;Router;;Webbrowser;;Anfragen werden von Anwendungen verschickt;Der Router kann kein Client für HTTP sein;HTTP Anfragen werden meistens im Browser abgeschickt
+Was passt zu HTTP 1.0?;;persistent;;Peer-to-Peer;;nichtpersistent;;HTTP wird immer von Servern angefragt;HTTP 2.0 kann beides verwenden;Inzwischen gibt es auch persistentes HTTP
+Welche HTTP Nachrichtentypen gibt es?;;Get, Post;;Put, Delete;;Request, Response;;Bei HTTP muss man keine Daten löschen können;Man kann Daten anfordern und der Server antwortet;Anfrage und Antwort
+Was bedeutet der HTTP-Code 404?;;OK;;Moved Permanently;;Not Found ;;Einer der am häufigsten auftrenden Fehler;Es ist ein Fehler-Code;Wird angezeigt, falls es einen Fehler beim Laden gab
+Was ist ein E-Mail Protokoll?;;TCP;;UDP;;SMTP;;Zwei der Protokolle sind für den Datenaustausch im Netz zuständig;UDP ist für den unzuverlässigen Datentransport zuständig;"Auf Deutsch heißt das Protokoll: ""Einfaches Mail Transport Protokoll"""
+Wozu dient ein DNS Server?;;IP Adressen Vergabe;;Routing;;Namensauflösung;;Routing wird von keinem Server vorgenommen;DHCP ist für Vergabe von Adressen zuständig;Für die Umwandlung von IP-Adressen zuständig
+Welche Auflösungsansätze gibt es nicht?;;iterative;;rekursive;;hybride;;Es gibt zwei verschiedene DNS Auflösungsansätze;Diese zwei Ansätze arbeiten mit unterschiedlichen Verfahren;Es gibt keine Mischform
+Wo werden Namensauflösungen gespeichert?;;RAM;;Festplatte;;Cache;;Namensauflösungen werden häufig gebraucht;Die Festplatte ist die langsamte Speicherart der Drei;benötigt schnelle Zugriffe
+Was ist ein BitTorrent?;;Kommunikationssoftware;;Tracker;;Filesharing Anwendung;;Peer-to-Peer;Austausch von Informationen zwischen Peers;Speziell der Austausch von Daten

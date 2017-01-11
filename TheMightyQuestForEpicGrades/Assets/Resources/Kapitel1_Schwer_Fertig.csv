@@ -1,0 +1,16 @@
+Frage;FragenBild;Antwort1;Antwort1Bild;Antwort2;Antwort2Bild;Antwort3;Antwort3Bild;Hinweis1;Hinweis2;Hinweis3
+1 KiB/Kibibyte =;;1000 Bytes;;100 Bytes;;1024 Bytes;;KiB != kB;1000 != 1024;1024
+1 MiB/Mebibyte =;;1000 Kibibytes;;100 Mibibytes;;1024 Mibibytes;;KiB != kB;1000 != 1024;1024
+1 GiB/Gibibyte = ;;1000 Mebibyte;;100 Mebibytes;;1024 Mibibytes;;KiB != kB;1000 != 1024;1024
+Ein Optical Line Terminal wird verwendet bei…;;(Fernseh-) Kabelnetz;;Digital Subscriber Line;;Fiber to the Home.;;Abkürzung = OLT;Auch verwendet Optical Network Terminal;Teuer da oft Neuverkabelung nötig
+UMTS bedeutet;;Universal Mobile Telephone System;;Universal Moderat Telecommunications System;;Universal Mobile Telecommunications System;;Wird von Handys benutzt;Auch von Smartphiones;Dient der Telekommunikation
+Was ist kein Twisted Pair Kabel?;;UTP;;STP;;FTP;;U= unshielded;S = Shielded;M = Multi
+Was passiert bei CDM als erstes? ;;Sender wählt nicht orthogonalen Code.;;Zu sendende Bits werden codiert;;Sender wählen orthogonale Codes;;Orthogonal =Skalarprodukt der Codes ergibt 0; CDM nutzt orthogonale Codes;Vor dem codieren passiert etwas anderes
+Wie viele Leitungspaare hat 1000Base-T Ethernet?;;2;;6;;4;;Doppelt so viele wie 100Base-T;Multiples von zwei;100Base-T hat weniger als 6 Paare
+Wie viele Leitungspaare hat 100Base-T Ethernet?;;6;;4;;2;;Halb so viele wie 1000Base-T;Durch 2 teilbar;1000Base-T mehr als 2 Paare
+Tier 3 ISPs sind;Tier.jpg;kleinere, oft regionale ISPs;;International;;lokal;;Tier ist ein Maximum oder Minumum; Tier 2 sind lokale ISPs;Die größten ISPs sind International
+Packer (Amazon) verpackt 5 Pakete! Zu welcher Schicht passt das?;;Netzwerkschicht;;Anwendungsschicht;;Transportschicht;;TCP;Verpackung = Header; Hat nichts mit dem IP Protokoll zu tun
+Welches ist kein Anwendungsschichtprotokoll;;FTP;;SMTP;;802.11;;Es ist ein Ethernet Protokoll;Eines der Anderen ist ein Mailprotokoll;Das dritte ist auch ein Anwendungsprotokoll
+Was bedeutet LTE?;;Light Transmitted Energy;;Large Territory Ethernet;;Long Term Evolution;;LTE wird zur Datenübertragung genutzt;Es wird kein Licht übertragen;Es hat nichts mit einem Teretorium zu tun
+Wofür wird ein SFTP Kabel verwendet?;;100 Mbit/s Ethernet;;1000 Mbit/s Ethernet;;10 Gbit/s Ethernet;;Ethernet; Hohe Datenrate;Angabe meist in Gbit/s
+Was ist ein typischer Grund für Paketverlust?;;Warteschlangenpuffer Überfüllung beim Server.;;Warteschlangenpuffer Überfüllung beim Switch.;;Warteschlangenpuffer Überfüllung beim Router.;;"Server hat eine ""Empfangsrate""";Switch leitet direkt weiter;Warteschlangenverzögerungen enstehen am Router

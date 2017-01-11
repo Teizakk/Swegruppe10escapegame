@@ -1,0 +1,16 @@
+Frage;FragenBild;Antwort1;Antwort1Bild;Antwort2;Antwort2Bild;Antwort3;Antwort3Bild;Hinweis1;Hinweis2;Hinweis3
+Wofür steht ISN?;;Initial Set Number;;Initial Selected Number;;Initial Sequence Number;;Bei TCP;UDP benutzt es nicht;Nur einmal pro Vervbindung gesendet
+Das ACK-Flag ist in allen TCP-Segmenten des Verbindungsaufbaus gesetzt.;;ja;;wenn Daten übertragen werden;;nein;;3 Way Handshake;ACK ist eine Nummer;ACK dient zur Antwort
+Was ist die UDP-Prüfsumme von: a) 1010011011000010 b) 1101110110110111;;1,11E+14;;1,00E+15;;1,11E+14;;1ner Komplement;Worte addieren;Pseudo Header
+Wie müssen bei Selective Repeat Sequenznummern und Fenstergröße sein, damit das Problem der nicht eindeutigen Pakete verschwindet?;;S=n/2;;s=2*n-1;;s=2*n;;S=Sequenznummer;N=Fenstergröße;Fenstergröße wird in Anzahl von Paketen angegben
+Bei welchem Protokoll ist ein Broadcast möglich?;;SMTP;;TCP;;UDP;;SMTP ist ein E-Mail Protokoll;TCP ist ein Transportprotokoll;UDP ist ein Transportprotokoll
+Wo ist ein Multicast möglich?;;SMTP;;TCP;;UDP;;SMTP ist ein E-Mail Protokoll;TCP ist ein Transportprotokoll;UDP ist ein Transportprotokoll
+Wer benutzt einen Three-Way-Handshake?;;UDP;;beide;;TCP;;Three Way Handshake beim Verbindungsaubau;Synchronisiert Sender und Empfänger;Bei eine zuverlässigen Protokoll benutzt
+Ist das SYN-Flag in allen TCP-Segmenten des Verbindungsaufbaus gesetzt?;;ja;;nur in dem zweiten;;nur in dem ersten;;SYN=Synchronisation;Es gibt 3 Segmente zum Verbindungsaufbau;Zum kumminizieren werden Sender und Empfänger synchronisiert
+Das ACK-Flag (TCP) ist nicht gesetzt bei …;;der letzten Nachricht;;manchen Nachrichten;;der ersten Nachricht;;ACK= eine Nummer;K=Knowledge;ACK dient zur Antwort bei TCP
+Das U-Flag bei TCP wird …;;oft genutzt;;nie genutzt;;selten genutzt;;Es hat einen Sinn;Urgent-Flag;Ist das Urgent-Flag gesetzt, so werden die Daten nach dem Header sofort von der Anwendung bearbeitet
+Das P-Flag bei TCP wird … ;;oft genutzt;;nie genutzt;;selten genutzt;;Es hat einen Sinn;Auch PSH-Flag genannt;Beim Versenden von Daten über das TCP werden zwei Puffer verwendet.
+Wenn ein TCP-Header keine Options enthält, ist er …;TCP.jpg;16 Byte lang;;12 Byte lang;;20 Byte lang;;Options verlängern den Header;Er ist 32 Bit breit;Die ersten beiden Zeilen werden mit Ports und Sequnznummer und ACK befüllt.
+Wenn ein TCP-Header Options enthält, ist er … ;TCP.jpg;20 Byte lang;;24 Byte lang;;variabel;;Options verlängern den Header;Er ist 32 Bit breit;Die ersten beiden Zeilen werden mit Ports und Sequnznummer und ACK befüllt.
+TCP-Ereignis: Ankunft von Segment, dass Lücke teilweise oder komplett füllt. Was macht der Empfänger?;;sende sofort ACK, wenn Lücke gefüllt ist.;;sende sofort ACK, sofern Lücke am oberen Ende gefüllt wird;;sende sofort ACK, sofern Lücke am unteren Ende gefüllt wird.;;Unteres Ende ist das Paket was als erstes ankommen sollte;Oberes Ende ist das Paket das zuletzt Ankommen sollte;Die Enden beziehen sich auf das Empfänger Fenster
+Flusskontrolle wird benötigt, wenn …;;das Netzwerk zu langsam ist.;;eins von beidem gilt.;;wenn Empfangspuffer zu voll ist.;;TCP nutzt Flusskontrolle;TCP hat außderdem noch eine Staukontrolle;"Fluss- und Staukontrolle regelen unterschiedliche ""Staus"""

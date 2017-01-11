@@ -1,0 +1,16 @@
+Frage;FragenBild;Antwort1;Antwort1Bild;Antwort2;Antwort2Bild;Antwort3;Antwort3Bild;Hinweis1;Hinweis2;Hinweis3
+Wo befinden sich die Sockets?;;Zwischen Prozess und Hardware;;Zwischen Transportschicht und Netzwerkschicht;;Zwischen Prozess und Transportschicht;;Sockets dienen einer Verbindung;Die Anwendungsschicht kommuniziert mit den Sockets;Im TCP Header werden Sockets angegeben
+Welchen Port verwendet RIP?;;80;;530;;520;;Egal welche Version von RIP;Es gibt nur einen Port den RIP benutzt.;RIPv1 ist in RFC 1058 definiert.
+Welchen Port verwendet HTTP?;;60;;70;;80;;GET benutzt diesen Port;Ist oft der Zielport beim senden von Daten zu einem Server;Ist oft der Quellport beim empfangen von Daten von einem Server
+Was bietet TCP nicht?;;Flusskontrolle;;Staukontrolle;;Sicherheitsgarantien;;Es kommen alle Pakete beim Empfänger an;Datenraten können angeglichen werden;CongWin
+Wie berechnet sich bei HTTP die Antwortzeit?;;RTT + Übertragungsverzögerung;;(N - 1)* RTT + Übertragungsverzögerung;;2 * RTT + Übertragungsverzögerung;;Es gibt eine Hin- und einen Rückweg;Alles Bytes müssen übertragen werden.;RTT=Round Trip Time
+Was ist eine HTTP Methode?;;PULL;;Return;;PUT;;HTTP dient der Kommunikation;Andere Methoden sind GET und POST;Return ist falsch
+Was steht am Ende einer SMTP Nachricht?;;1 mal <cr> <lf> ;;3 mal <cr> <lf>;;2 mal <cr> <lf>;;<lf>= lien feed;<cr>= carriage;1 mal genügt nicht
+Was gehört nicht zu HTTP/1.0?;;GET;;HEAD;;DELETE;;Eines sieht man in der URL;Eines ist fast identisch zu GET;HTTP versendet Daten
+Wie berechnet sich die minimale Verteilzeit bei Client-Server?;;N * F / Us;;max{F/Us,N*F/(Us+Summe(Ui))};;max{N*F/Us,F/Dmin};;Wer ist Bottelneck?;Client kann Bottelneck sein;Server kann Bottelneck sein
+Welches Protkoll nutzt SMTP?;;UDP;;HTTP;;TCP;;UDP ist unzuverlässig;TCP ist zuverlässig;SMTP ist ein Mailprotokoll
+Wofür wird MIME verwendet?;;Webbrowser;;Anwendungen;;Mails;;Das erste M steht für Multi;Es wird benutzt um verschiedene Datetypen zusammen zu verschicken;Es wird gebraucht um etwas bestimmtes zu verschicken
+Wieviele DNS Root Server gibt es?;;10;;12;;13;;DNS dient der Namensauflösung;ROOT Server ist der Server der zu .com, .de, … rootet;Bevor Anycast eingesetzt wurde, befanden sich 10 in den USA
+Welchen DNS Servertypen gibt es?;;TLC;;TLS;;TLD;;T=Top;L=Level;S=Server
+Wie sehen DNS Einträge aus?;;ttl, value, name, teil;;name, ttl, type, value;;name, value, type, ttl;;ttl=time to live;typ= Legt fest was in Name und was in Value gespeicherrt ist;(n, , ,t)
+Was bedeutet DHT?;DHT.jpg;Distributed Hover Table;;Distribution Hash Task;;Distributed Hash Table;;Hoever beschreibt was passiert wenn man mit der Maus auf etwas zeigt;Wird genutzt um zuwissen wo sich Daten befinden;Bei P2P eingesetzt

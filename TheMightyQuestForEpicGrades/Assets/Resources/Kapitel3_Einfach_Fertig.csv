@@ -1,0 +1,15 @@
+Frage;FragenBild;Antwort1;Antwort1Bild;Antwort2;Antwort2Bild;Antwort3;Antwort3Bild;Hinweis1;Hinweis2;Hinweis3
+Was ist zuverlässig?;;IP;;UDP;;TCP;;IP ist kein Datentransportprotokoll;UDP ist das schnellere Protokoll;TCP ist dafür zuverlässig
+Warum gibt es UDP?;;Sicherheit;;Verlässlichkeit;;Geschwindigkeit;;Sicherheit bietet es nicht;TCP bietet Verlässlichkeit;UDP bietet Geschwindigkeit
+Was ist das Einer-Komplement?;;getauschte Bitfolge;;zufällige Bitfolge;;invertierte Bitfolge;;Wird im Dual-System verwendet;Eine Bitfolge;Aus Nullen werden Einsen gemacht und anders herum
+Wer erwartet ACKs?;;Empfänger;;Sender & Empfänger;;Empfänger;;Nur einer von beiden erwartet die ACK;Der Empfänger sendet die ACK nach den Erhalt des Pakets;Somit erwartet der Sender die ACK für das gesendete Paket
+Was besitzt TCP?;;NAK;;ACK & NAK;;ACK;;Verlässlichkeit;Bestätigungen;"Englisch: ""Acknowlegdements"""
+TCP ist …;;Go-Back-n;;Selective Repeat;;Hybride Form;;Es ist nicht Selective Repeat;Es ist eine besondere Form;Es ist eine Mischform
+Wieviel Bits benötigt TCP zur Speicherung eines Ports?;;32-Bit;;8-Bit;;16-Bit;;Weniger als 32-Bits;Mehr als 6 Bit;16-Bit
+Was ist eine TCP Sequenznummer?;;Antwortnummer;;Nummer des letzten Segment-Daten-Bytes im Gesamt-Bytestrom;;Nummer des ersten Segment-Daten-Bytes;;Ist eine Nummer zur Überprüfung beim Empfänger;Ist die Nummer eines Segment-Daten-Bytes;Ist die Nummer des ersten Segment-Daten-Bytes
+Was benutzt TCP?;;UDP;;HTTP;;IP;;UDP ist eine eigenständige unzuverlässige Transportform;HTTP arbeitet auf einer anderen Ebene;IP wird für den Verbindungsaufbau verwendet
+Was passiert nach einem TCP Timeout?;;Segment wird wiederholt;;Timer wird neugestartet;;beides;;Der Timer wird neugestartet;Aber auch das Segment wird wiederholt;Also beides wird gemacht
+Was trifft auf UDP nicht zu?;;bei Streaming verwendet;;schnell;;zuverlässig;;UDP ist schnell;Wird deswegen für Streaming verwendet;Ist allerdings nicht zuverlässig
+Was befindet sich nicht im UDP Header?;;Ports;;Prüfsumme;;Adressen;;Im Header befindet sich die Prüfsumme;Außerdem befindeen sich darin die Ports;Die Adresse ist allerdings nicht im Header
+Was trifft nicht auf TCP zu?;UDP_Header.jpg;zuverlässig;;bei Mails verwendet;;bei Streaming verwendet;;TCP ist zuverlässig;TCP wird nicht für Mails verwendet;Wird nicht für Streaming verwendet
+TCP und UDP sind …;;Stop-and-Wait Protokolle;;Selective Repeat ;;Pipelining-Protokolle;;TCP und UDP verwenden beide das gleiche Protokoll;Für beides wird das schnelleste der drei Protokolle verwendet;Stop and Wait ist es nicht

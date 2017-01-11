@@ -1,0 +1,15 @@
+Frage;FragenBild;Antwort1;Antwort1Bild;Antwort2;Antwort2Bild;Antwort3;Antwort3Bild;Hinweis1;Hinweis2;Hinweis3
+Was ist das Internet?;;Ein Netz;;Nur physikalisch vorhanden;;Ein Netz von Netzen;;Es gibt verbindende Kabel;Nicht einzeln; Ein multiples von etwas
+Wer kann kein Client sein?;;Laptop;Laptop.jpg;Desktop;Desktop.jpg;Router;Router.jpg;Nicht jeder kann Client sein;Er verbindet;Er hat keine Tastatur
+Welches Kabel gibt es nicht?;;Glasfaserkabel;;Kupferkabel;;Plastikkabel;;Es ist kein Metall;Viele Sachen werden aus diesem Rohstoff produziert;Man kann durch den Rohstoff nicht durchkuken
+Vervollständige: Protokolle..;;sind Nachrichten;;sind Server;;kontrollieren das Senden und Empfangen von Nachrichten.;;Geldabhebung;TCP;Dienen der Kontrolle
+1 kbit/s=;;10 Bit/s;;100 Bit/s;;1000 Bit/s;;nicht * 1024;Bits ist eine Einheit tiefer;000.
+1 Mbit/s=;;1.000.000.000 Bit/s;;10.000 Bit/s;;1.000.000 Bit/s;;nicht * 1024;Zwei Einheiten tiefer;000.000
+1 TB;;1000 KB;;1000 MB;;1000 GB;;nicht * 1024;KB sind 3 Einheiten Tiefer ;000.
+Was bedeutet LAN?;;Local Adress Network;;Large Area Network;;Local Area Network;;Es ist etwas lokales;Ein Netzwerk ist ein einer …;Sie gehören dazu aber nicht zum Namen
+Was passt zu TDM?;;Die Frequenz wird unterteilt.;;Es gibt einen Empfängercode und einen Sendercode.;;Es wird in Zeiteinheiten gesendet.;;D steht für Devision;M steht für multiplexing; Das englische Wort für Zeit
+Übertragungsverzögerung ist:;;Zeit die das Paket im Puffer des Routers auf die Verarbeitung wartet.;;Zeit die das Paket über den Link braucht.;;Zeit die der Router Benötigt um Packet auf den Link zu bringen.;;Abhängig von der Dateigröße;Ensteht beim Router;Unabhängig von der Anzahl wartender Pakete
+Ausbreitungsverzögerung ist:;;Zeit die das Paket im Puffer des Routers auf die Verarbeitung wartet.;;Zeit die der Router Benötigt um Packet auf den Link zu bringen.;;Zeit die das Paket über den Link braucht.;;Unabhängig vom Endgerät;Unabhängig vom Router;Abhängig vom Link
+Verarbeitungsverzögerung ist:;;Zeit die der Router Benötigt um Packet auf den Link zu bringen.;;Zeit die das Paket im Puffer des Routers auf die Verarbeitung wartet.;;Zeit die der Router braucht um ein Paket zu verarbeiten.;;Unabhängig vom Link;Ensteht beim Router;Abhängig vom Router
+Warteschlangenverzögerung ist:;;Zeit die der Router braucht um ein Paket zu verarbeiten.;;Zeit die der Router Benötigt um Packet auf den Link zu bringen.;;Zeit die das Paket im Puffer des Routers auf die Verarbeitung wartet.;;Unabhängig vom Link;Ensteht beim Router;Abhängig von der Anzahl wartender Pakete
+Durchsatz ist;;unabhängig vom Netz;;nur von einem Client abhängig.;;die Rate der Verbindung.;;Errechnet durch eine Division;P2P und Client Server haben einen;Es gibt mehrere Einflüsse

@@ -1,0 +1,16 @@
+Frage;FragenBild;Antwort1;Antwort1Bild;Antwort2;Antwort2Bild;Antwort3;Antwort3Bild;Hinweis1;Hinweis2;Hinweis3
+Was gehört zum Netzwerkrand?;;Anwendungen;;Endsysteme;;Anwendungen und Endsysteme;;Router gehören zum Inneren Netz;Es ist der Start bzw das Ende einer Übertragung;Mehrere Dinge
+Was passt nicht?;;Switch;Switch.jpg;Hub;Hub.jpg;Router;Router.jpg;Es verbindet auf einer anderen Schicht;Es ist kein Vorgänger des Switch;Es ist nicht die erweiterung des Hub
+Wie ist ein Coax Kable Aufgebaut (innen nach außen)?;;Leiter, Leiter, Isolationsschicht, Hülle;;Hülle, Leiter, Isolationsschicht, Leiter;;Leiter, Isolationsschicht, Leiter, Hülle;;Leiter treffen nicht auf Leiter;Man isoliert zwei Leiter von einander;Das gesamte wird von einer Hülle umgeben
+Welche Arten gibt es bei Glasfaserkabeln?;;Singlemode und Anymode?;;Multimode und Anymode;;Singlemode und Multimode;;Es gibt zwei Arten;Einzelmodus;Mehrfachmodus
+Welche Vermittlungsarten gibt es?;;Paketvermittlung und Leistungsvermittlung;;Leistungsvermittlung und Leitungsvermittlung;;Paketvermittlung und Leitungsvermittlung;;Daten werden meist in Stücken übertragen;Sie werden über Leitungen übertragen,aber…;Man kann der übertragung eine feste Bandbreite geben
+Welche Multiplexingverfahren gibt es ?;;TDM, PDM, FDM, Mischformen;;TDM, BDM, FDM, Mischformen;;TDM, CDM, FDM, Mischformen;;T = Time;F= Frequenze;C= Code
+Jedes Paket enthält…;;Daten;;einen Header;;einen Header und Daten;;Daten werden übetragen ;Pakete übertragen etwas;Pakete brauchen etwas um zu wissen wo sie hin sollen
+Bei Paketvermittlung…;;Kann nur ein Benutzer das Netz nutzen.;;Nutzer können das Netz nacheinander Nutzen;;können mehrere Benutzer das Netz nutzen.;;Ein Router nimmt Pakete von mehreren stellen an ;Mehrere Stellen senden ;Gleichzeitig
+Paketvermittlung ist…;;immer besser als Leistungsvermittlung.;;immer schlechter als Leistungsvermittlung.;;besser bei Bursty Traffic.;;Nicht Definierbar;Meistens aber nicht immer ;Mal so mal so
+Wie viele ISP-Tier-Level gibt es?;;1;;2;;3;;Lokal;Regional;International
+Übertragungsverzögerung = ;;R/L;;L/L;;L/R;;Dateigröße durch Übertragung;L steht für Länge;R steht für Rate
+Warteschlangenverzögerung =;;(n-1)* (L/R);;n (L/R);;(n-2)* (L/R);;Abhängig von der Anzahl Wartender Pakete;Sich selbst zählt man nicht mit; (n-x)
+Welche Schichten Fehlen dem Internen Protokollstapel?;;Darstellungs- und Sicherungsschicht;;Darstellungs- und Bitübertragungsschicht;;Darstellungs- und Sitzungsschicht;;Übertragen werden muss unbedingt;Was wurde nicht in der Vorlesung nicht genau besprochen?;Darstellungsschicht ist eine der nicht besprochenen Schichten
+Wie viele OSI Layer gibt es?;;5;;6;;7;;zwei wurden in der Vorlesung nicht genau besprochen;Es gibt 2 Schichten vor den 2 nicht besprochenen;Und mehr als eine danach
+Netzwerkschicht ist verantwortlich für;;Datentransfer zwischen Prozessen der Hosts;;Datentransfer zwischen benachbarten Knoten;;Routet Pakete von Quell-zu Zielhost;;IP arbeitet auf der Netzwerkschicht;Nicht nur zwischen Nachbarn;Findet eine Route
