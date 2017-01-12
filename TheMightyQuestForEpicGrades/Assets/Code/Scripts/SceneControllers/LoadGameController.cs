@@ -23,7 +23,6 @@ namespace Assets.Code.Scripts.SceneControllers
 
         public void LeaveToMainMenu()
         {
-            Master.KILLME();
             SceneManager.LoadScene("MainMenu");
         }
 

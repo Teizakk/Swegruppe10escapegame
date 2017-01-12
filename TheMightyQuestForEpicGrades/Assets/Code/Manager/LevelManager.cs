@@ -6,7 +6,6 @@ using System.Security.Cryptography.X509Certificates;
 using Assets.Code.Scripts.FeatureScripts;
 using Assets.Code.Scripts.UtilityScripts;
 using UnityEngine;
-using UnityEngine.WSA;
 
 namespace Assets.Code.Manager {
     public class LevelManager : MonoBehaviour {
