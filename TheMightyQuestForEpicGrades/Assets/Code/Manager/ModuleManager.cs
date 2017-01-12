@@ -63,9 +63,7 @@ namespace Assets.Code.Manager {
                 if (!loadedModuleFile.HasEnoughQuestions()) {
                     tmpModuleList.RemoveAt(index);
                 }
-                else {
-                    tmpModuleList[index] += " (" + loadedModuleFile.GetCombinedNumberOfQuestions() + " Fragen)";
-                }
+                //else { tmpModuleList[index] += " (" + loadedModuleFile.GetCombinedNumberOfQuestions() + " Fragen)"; }
             }
             return tmpModuleList;
         }
@@ -107,82 +105,91 @@ namespace Assets.Code.Manager {
             }
         }
         #region DEV-ONLY
-
-        private Queue<Question> QueueToAdd = new Queue<Question>();
         //ONLY DEV FUNCTION
-        public void ReadQuestionsFromCSV(string fileName, string modul, Difficulties difficulty, string chapter) { //diese werte müssen "händisch" übergeben werden in diesem Fall
+        public void DEVReadQuestionsFromCSV(string fileName, string modul, Difficulties difficulty, string chapter) {
+            //diese werte müssen "händisch" übergeben werden in diesem Fall
             var data = CSVReader.Read(fileName);
-            modul = "DNIS"; //weil es im Moment nur das gibt 
-            for (var index = 0; index < data.Count; index++)
-            {
+            modul = "DNIS";
+            //weil es im Moment nur das gibt 
+            foreach (var zeile in data) {
                 try
                 {
-                    var t = data[index]; //wählt Zeile aus
                     var q = new Question();
                     q.Modul = modul;
                     q.Answers = new List<Question.Answer>();
                     q.Chapter = chapter;
                     q.Difficulty = difficulty;
-                    Debug.Break();
-                    q.Hints = new List<string>
-                    {
-                        t["Hinweis1"].ToString(),
-                        t["Hinweis2"].ToString(),
-                        t["Hinweis3"].ToString()
-                    };
-                    Debug.Break();
-                    q.QuestionDuration = new TimeSpan(0);
-                    q.ImagePath = "\\Bilder\\" + t["FragenBild"].ToString();
-                    Debug.Break();
-                    q.Used = false;
-                    q.QuestionText = t["Frage"].ToString();
-                    Debug.Break();
+                    q.Hints = new List<string>();
+                    Debug.Log("Hinweise1: " + zeile["Hinweis1"].ToString());
+                    q.Hints.Add(zeile["Hinweis1"].ToString());
+                    Debug.Log("Hinweise2: " + zeile["Hinweis2"].ToString());
+                    q.Hints.Add(zeile["Hinweis2"].ToString());
+                    Debug.Log("Hinweise3: " + zeile["Hinweis3"].ToString());
+                    q.Hints.Add(zeile["Hinweis3"].ToString());
 
-                    q.Answers = new List<Question.Answer>(3) {new Question.Answer(), new Question.Answer(), new Question.Answer()};
+                    q.QuestionDuration = new TimeSpan(0);
+                    //Debug.Log("Bildpfad-Frage: " + zeile["FragenBild"].ToString());
+                    q.ImagePath = null;
+                    if (!string.IsNullOrEmpty(zeile["FragenBild"].ToString()))
+                    {
+                        q.ImagePath = "Assets\\Resources\\Pictures\\" + zeile["FragenBild"].ToString();
+                    }
+
+                    q.Used = false;
+                    //Debug.Log("Fragentext: " + zeile["Frage"].ToString());
+                    q.QuestionText = zeile["Frage"].ToString();
+
+                    q.Answers = new List<Question.Answer>(3)
+                    {
+                        new Question.Answer(),
+                        new Question.Answer(),
+                        new Question.Answer()
+                    };
                     q.Answers[0].AnswerText = null;
                     q.Answers[1].AnswerText = null;
                     q.Answers[2].AnswerText = null;
 
                     //Antworten Mixer
-                    var valueIsSet = new bool[3];
-                    var randomizer = new System.Random();
+                    var valueIsSet = new bool[3] {false, false, false};
+                    var randomizer = new System.Random((int) DateTime.Now.Ticks);
                     var i = 1;
                     do
                     {
-                        var rdmInt = randomizer.Next(0, 2);
-                        if (valueIsSet[rdmInt]) continue;
-                        q.Answers[rdmInt].AnswerText = t["Antwort" + i].ToString();
-                        q.Answers[rdmInt].ImagePath = "\\Bilder\\" + t["Antwort" + i + "Bild"].ToString();
-                        if (i == 3)
+                        var rdmInt = randomizer.Next(0, 3);
+                        //Debug.Log("rdmint = " + rdmInt);
+                        //Debug.Log("ValueIsSet[rdmInt] = " + valueIsSet[rdmInt]);
+                        if (valueIsSet[rdmInt])
                         {
-                            q.CorrectAnswer = rdmInt;
+                            Debug.Log("Wert schon gesetzt nochmal probieren");
+                            continue;
                         }
+                        //Debug.Log("Antwort[" + rdmInt + "]: " + zeile["Antwort" + i.ToString()].ToString());
+                        q.Answers[rdmInt].AnswerText = zeile["Antwort" + i.ToString()].ToString();
+                        //Debug.Log("Antwort" + rdmInt + "Bildpfad: " + zeile["Antwort" + i.ToString() + "Bild"].ToString());
+                        q.Answers[rdmInt].ImagePath = null;
+                        if (!string.IsNullOrEmpty(zeile["Antwort" + i.ToString() + "Bild"].ToString()))
+                        {
+                            q.Answers[rdmInt].ImagePath = "Assets\\Resources\\Pictures\\" +
+                                                          zeile["Antwort" + i.ToString() + "Bild"].ToString();
+                        }
+                        if (i == 3) q.CorrectAnswer = rdmInt;
                         valueIsSet[rdmInt] = true;
                         i++;
                     } while (valueIsSet.Contains(false));
-
+                    Debug.LogWarning("FRAGE ERFOLGREICH ERSTELLT");
+                    Debug.Log(q);
                     Master.Instance().MyModule.AddQuestionToModule(q);
                 }
-                catch (Exception e)
-                {
-                    Debug.LogError(e.Source + e.StackTrace + e.Data);
+                catch (KeyNotFoundException e) {
+                    Debug.LogError(e);
                     Debug.Break();
-                    throw;
                 }
-            }
-        }
-
-        private void Update() {
-            if (QueueToAdd.Count != 0) {
-                Master.Instance().MyModule.AddQuestionToModule(QueueToAdd.Dequeue());
-                if(QueueToAdd.Count == 0)
-                Debug.LogWarning("ALLE ELEMENTE EINGEFÜGT!");
             }
         }
         #endregion
 
         public void AddQuestionToModule(Question q) {
-            var moduleFile = Persist.Load<ModuleQuestions>(q.Modul);
+            var moduleFile = Persist.Load<ModuleQuestions>( "Modules\\" + q.Modul);
             if (moduleFile == null) {
                 throw new FileNotFoundException("Modulfile konnte nicht geladen/geöffnet werden!");
             }

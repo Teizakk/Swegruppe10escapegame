@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using Assets.Code.Scripts.FeatureScripts;
+using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace Assets.Code.Manager {
-    public class AudioManager : MonoBehaviour {
+    public class AudioManager : MonoBehaviour { 
 
-        private AudioSource music;
+        private AudioSource music = null;
 
         // Use this for initialization
         private void Awake() {
@@ -18,12 +21,16 @@ namespace Assets.Code.Manager {
         }
 
         //Müsste immer beim Szenenwechseln, bevor die Kamera rendert aufgerufen werden
-        private void OnPreRender () {
-            if (SceneManager.GetActiveScene().name == "MainGame") {
-                music.clip = Resources.Load("Audio/BackgroundMusic") as AudioClip;
-                music.Play();
-                music.loop = true;
-            }
+        public void ChangeTracks () {
+            music.Stop();
+            music.clip = Resources.Load("Audio/BackgroundMusic") as AudioClip;
+            StartCoroutine(Wait2Seconds());
+        }
+
+        private IEnumerator Wait2Seconds() {
+            yield return new WaitForSeconds(2);
+            music.Play();
+            music.loop = true;
         }
     }
 }

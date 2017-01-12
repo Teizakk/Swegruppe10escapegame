@@ -1,16 +1,16 @@
-Frage;FragenBild;Antwort1;Antwort1Bild;Antwort2;Antwort2Bild;Antwort3;Antwort3Bild;Hinweis1;Hinweis2;Hinweis3
-Durch wie viele Tupel werden UDP-Sockets definiert?;;3;;4;;2;;UDP braucht aufgrund der Unzuverlässigkeit weniger Sockets als TCP;TCP verwendet 2 Sockets mehr;UDP benötigt 2 Sockets
-Durch wie viele Tupel werden TCP-Sockets definiert?;;2;;3;;4;;TCP benötigt augrund der Zuverlässigkeits-Mechanismen 2 Sockets mehr als UDP;TCP verwendet 2 Sockets mehr als UDP;TCP benötigt 4 Sockets
-Nach wie vielen Duplikat-ACKs wird das Segment bei TCP wiederholt?;;4;;6;;3;;Das Segment wird relativ früh wiederholt;6 Duplikate sind zu viel;Nach 3 Duplikaten
-TCP ist …;;nachrichtenorientiert;;verbindungslos;;Bytestromorientiert;;UDP ist verbindungslos;TCP baut über IP eine Verbindung auf;TCP ist bytestromorientiert
-Kann ein Sender einen Empfänger mit TCP-Segmenten überlasten?;;ja;;netzabhängig;;nein;;Mit UDP wäre es möglich;Es gibt eine Staukontrolle;Deshalb ist dies nicht möglich
-TCP benutzt …;TCP_Diagrmm.png;Slow Start;;AIMD;;beides;;TCP nutzt Slow Start;TCP nutzt allerdings auch AIMD;TCP nutzt deshalb beides 
+ï»¿Frage;FragenBild;Antwort1;Antwort1Bild;Antwort2;Antwort2Bild;Antwort3;Antwort3Bild;Hinweis1;Hinweis2;Hinweis3
+Durch wie viele Tupel werden UDP-Sockets definiert?;;3;;4;;2;;UDP braucht aufgrund der UnzuverlÃ¤ssigkeit weniger Sockets als TCP;TCP verwendet 2 Sockets mehr;UDP benÃ¶tigt 2 Sockets
+Durch wie viele Tupel werden TCP-Sockets definiert?;;2;;3;;4;;TCP benÃ¶tigt aufgrund der ZuverlÃ¤ssigkeits-Mechanismen 2 Sockets mehr als UDP;TCP verwendet 2 Sockets mehr als UDP;TCP benÃ¶tigt 4 Sockets
+Nach wie vielen Duplikat-ACKs wird das Segment bei TCP wiederholt?;;4;;6;;3;;Das Segment wird relativ frÃ¼h wiederholt;6 Duplikate sind zu viel;Nach 3 Duplikaten
+TCP ist ...;;nachrichtenorientiert;;verbindungslos;;Bytestromorientiert;;UDP ist verbindungslos;TCP baut Ã¼ber IP eine Verbindung auf;TCP ist bytestromorientiert
+Kann ein Sender einen EmpfÃ¤nger mit TCP-Segmenten Ã¼berlasten?;;ja;;netzabhÃ¤ngig;;nein;;Mit UDP wÃ¤re es mÃ¶glich;Es gibt eine Staukontrolle;Deshalb ist dies nicht mÃ¶glich
+TCP benutzt ...;TCP_Diagramm.png;Slow Start;;AIMD;;beides;;TCP nutzt Slow Start;TCP nutzt allerdings auch AIMD;TCP nutzt deshalb beides 
 Wenn bei Selective Repeat ein Timeout einsetzt, werden wie viele Pakete wiederholt?;;alle;;alle im Sendefenster;;1;;Bei Go-Back-n werden alle des Sendefensters wiederholt;Bei Selective Repeat werden nicht alle des Sendefensters wiederholt;Nur ein Einzelnes wird wiederholt
-Wofür steht MSS?;;Minimum Segment Size;;Maximum Source Segments;;Maximum Segment Size;;Es geht nicht um die Quelle;Es geht um die Segment Größe;Genau genommen um die maximale Segment Größe
-Wie steigert AIMD die Übertragungsrate?;;exponentiell;;logarithmisch;;linear;;Multiple Decrease;Additive Increase;Addition ist linear
+WofÃ¼r steht MSS?;;Minimum Segment Size;;Maximum Source Segments;;Maximum Segment Size;;Es geht nicht um die Quelle;Es geht um die Segment GrÃ¶ÃŸe;Genau genommen um die maximale Segment GrÃ¶ÃŸe
+Wie steigert AIMD die Ãœbertragungsrate?;;exponentiell;;logarithmisch;;linear;;Multiple Decrease;Additive Increase;Addition ist linear
 Was macht TCP Reno bei 3 Duplikaten-ACKs?;;CongWin auf 1 MSS setzen;;CongWin vierteln;;CongWin halbieren;;TCP Tahoe geht damit anders um;TCP Tahoe setzt MSS auf 1;Das CongWin wird halbiert
-Was macht TCP Tahoe bei 3 Duplikaten-ACKs?;;CongWin halbieren;;CongWin vierteln;;CongWin auf 1 MSS setzen;;TCP Reno geht damit anders um;TCP Reno setzt MSS auf die Hälfte des CongWin;Das CongWin wird auf 1 gesetzt
+Was macht TCP Tahoe bei 3 Duplikaten-ACKs?;;CongWin halbieren;;CongWin vierteln;;CongWin auf 1 MSS setzen;;TCP Reno geht damit anders um;TCP Reno setzt MSS auf die HÃ¤lfte des CongWin;Das CongWin wird auf 1 gesetzt
 Was macht TCP Tahoe bei einem Timeout?;;CongWin halbieren;;CongWin vierteln;;CongWin auf 1 MSS setzen;;TCP Reno geht damit anders um;TCP Tahoe geht mit Duplikats-ACKs und Timeouts gleich um;Das CongWin wird auf 1 gesetzt
-Was macht TCP Reno nach einem Timeout?;;linear wachsen;;logarithmisch wachsen;;exponentiell wachsen;;TCP Tahoe geht damit anders um;TCP Reno geht mit Duplikats-ACKS und Timeout anders um;Es wächst nach einem Timeout exponentiell
-Was ist Threshold?;;ein maximal Wert;;ein minimal Wert;;ein Schwellwert;;Ein bestimmter Wert des CongWin;Wird bei bestimmten Events gesetzt;Wird bei Timeouts und Dupliakats-Acks auf den maximalen Wert des Cong-Wins gesetzt
-In welcher Phase befindet sich TCP, wenn CongWin < Threshold?;;Congestion-Avoidance-Phase;;AIMD-Phase;;Slow-Start-Phase;;Sobald der Threshold überschritten wird, geht TCP vorsichtiger vor;;
+Was macht TCP Reno nach einem Timeout?;;linear wachsen;;logarithmisch wachsen;;exponentiell wachsen;;TCP Tahoe geht damit anders um;TCP Reno geht mit Duplikats-ACKS und Timeout anders um;Es wÃ¤chst nach einem Timeout exponentiell
+Was ist Threshold?;;ein maximal Wert;;ein minimal Wert;;ein Schwellwert;;Ein bestimmter Wert des CongWin;Wird bei bestimmten Events gesetzt;Wird bei Timeouts und Duplikat-ACKs auf den maximalen Wert des Cong-Wins gesetzt
+In welcher Phase befindet sich TCP, wenn CongWin < Threshold?;;Congestion-Avoidance-Phase;;AIMD-Phase;;Slow-Start-Phase;;Sobald der Threshold Ã¼berschritten wird, geht TCP vorsichtiger vor;Genauer gesagt versucht TCP nach dem Ãœberschreiten, einen Stau zu verhindern;Vor dem Ãœberschreiten des Tresholds geht TCP im Slow-Start vor

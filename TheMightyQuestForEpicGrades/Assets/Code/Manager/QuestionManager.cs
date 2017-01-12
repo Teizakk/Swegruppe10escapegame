@@ -186,6 +186,17 @@ namespace Assets.Code.Manager {
             Questions = null;
         }
 
+        public List<Question> GetAllQuestions(string moduleName){
+            LoadQuestionsFromFile(moduleName, Difficulties.Easy);
+            var list = new List<Question>(Questions);
+            LoadQuestionsFromFile(moduleName, Difficulties.Medium);
+            if (Questions != null) list.AddRange(Questions);
+            LoadQuestionsFromFile(moduleName, Difficulties.Hard);
+            if (Questions != null) list.AddRange(Questions);
+            Questions = null;
+            return list;
+        }
+
         public bool LoadQuestionsFromFile(string moduleName, Difficulties difficulty) {
             //Moduldatei laden
             var mqObject = Persist.Load<ModuleQuestions>("Modules\\" + moduleName);
@@ -217,7 +228,7 @@ namespace Assets.Code.Manager {
 
         public Question ProvideUnusedQuestion(string chapter) {
             try {
-                var rand = new Random();
+                var rand = new Random((int)DateTime.Now.Ticks);
                 var unusedQuestions = Questions.Where(x => !x.Used && x.Chapter.Equals(chapter)).ToList();
                 var question = unusedQuestions[rand.Next(unusedQuestions.Count)];
                 question.Used = true;

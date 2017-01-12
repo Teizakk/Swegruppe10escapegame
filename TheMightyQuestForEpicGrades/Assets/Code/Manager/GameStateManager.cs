@@ -8,6 +8,7 @@ using Assets.Code.Scripts.SceneControllers;
 using Assets.Code.Scripts.UtilityScripts;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace Assets.Code.Manager {
@@ -15,7 +16,16 @@ namespace Assets.Code.Manager {
       
         //Quasi ein riesiges Backingfield
         private GameState GameStateObject;
-        
+
+        #region Audio
+        private UnityEvent EnterNewGameOrSaveGame;
+
+        private void ChangeTracksOnAudioManager() {
+            Debug.Log("ChangeTracksOnAudioManager invoked");
+            Master.Instance().MyAudio.ChangeTracks();
+        }
+        #endregion
+
         #region Savegame Handling
         public void SaveGame(string nameOfSavegameFile) {
             //PlayerPos auslesen
@@ -54,6 +64,7 @@ namespace Assets.Code.Manager {
             InBetweenLevelsDialogController._loadingASaveGame = true;
             PlayerScript._loadingASavedGame = true;
             SceneManager.LoadScene("InBetweenLevels");
+            EnterNewGameOrSaveGame.Invoke();
         }
         
         public List<SavegameInfo> GetAllGSIs() {
@@ -140,7 +151,7 @@ namespace Assets.Code.Manager {
             //Ja diese Funktion könnte einfacher geschrieben werden, wenn man davon ausgeht, dass
             //die Levelindizes immer nur aufsteigend in dem Ordner zu finden sind, das crashed allerdings
             //dann, wenn man mal nachträglich z.B. Level_3.txt entfernt..
-            var rand = new System.Random();
+            var rand = new System.Random((int)DateTime.Now.Ticks);
             var allLevels = Master.Instance().MyLevel.GetAllUseableLevelIndices();
             var checkedLevels = new bool[allLevels.Length];
 
@@ -234,7 +245,7 @@ namespace Assets.Code.Manager {
                 //Nur dann darf auf die Grundlegenden Leveldaten zugegriffen werden.
                 throw new UnityException("Die grundlegenden Leveldaten dürfen zu diesem Zeitpunkt nicht verändert werden");
             }
-            var rand = new System.Random();
+            var rand = new System.Random((int)DateTime.Now.Ticks);
             var allChapters = Master.Instance().MyQuestion.GetAllChaptersInThisModule();
             var checkedChapters = new bool[allChapters.Length];
 
@@ -266,6 +277,7 @@ namespace Assets.Code.Manager {
 
 
             LoseOneLive();
+
             Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.RemoveHeart();
             //TODO
         }
@@ -346,27 +358,27 @@ namespace Assets.Code.Manager {
         //Einfach nur links atm
         public bool PortalStoneBlueIsInPossession {
             get { return GameStateObject.LevelState.BluePortalStone.InPossession; }
-            set { GameStateObject.LevelState.BluePortalStone.InPossession = value; }
+            private set { GameStateObject.LevelState.BluePortalStone.InPossession = value; }
         }
         public bool PortalStoneBlueHasBeenUsed {
             get { return GameStateObject.LevelState.BluePortalStone.Used; }
-            set { GameStateObject.LevelState.BluePortalStone.Used = value; }
+            private set { GameStateObject.LevelState.BluePortalStone.Used = value; }
         }
         public bool PortalStoneGreenIsInPossession {
             get { return GameStateObject.LevelState.GreenPortalStone.InPossession; }
-            set { GameStateObject.LevelState.GreenPortalStone.InPossession = value; }
+            private set { GameStateObject.LevelState.GreenPortalStone.InPossession = value; }
         }
         public bool PortalStoneGreenHasBeenUsed {
             get { return GameStateObject.LevelState.GreenPortalStone.Used; }
-            set { GameStateObject.LevelState.GreenPortalStone.Used = value; }
+            private set { GameStateObject.LevelState.GreenPortalStone.Used = value; }
         }
         public bool PortalStonePinkIsInPossession {
             get { return GameStateObject.LevelState.PinkPortalStone.InPossession; }
-            set { GameStateObject.LevelState.PinkPortalStone.InPossession = value; }
+            private set { GameStateObject.LevelState.PinkPortalStone.InPossession = value; }
         }
         public bool PortalStonePinkHasBeenUsed {
             get { return GameStateObject.LevelState.PinkPortalStone.Used; }
-            set { GameStateObject.LevelState.PinkPortalStone.Used = value; }
+            private set { GameStateObject.LevelState.PinkPortalStone.Used = value; }
         }
 
         public bool HasUsedAllPortalStones() {
@@ -376,6 +388,27 @@ namespace Assets.Code.Manager {
                 return true;
             }
             return false;
+        }
+
+        public void WinPortalStone(PortalColor color) {
+            Debug.Log("Genutzter Portalstein: " + color);
+            //Stein einsetzen und Portal damit aktivieren
+            switch (color) {
+                case PortalColor.Blue:
+                    PortalStoneBlueIsInPossession = true;
+                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.ReceivePortalStone(PortalColor.Blue);
+                    break;
+                case PortalColor.Green:
+                    PortalStoneGreenIsInPossession = true;
+                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.ReceivePortalStone(PortalColor.Green);
+                    break;
+                case PortalColor.Pink:
+                    PortalStonePinkIsInPossession = true;
+                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.ReceivePortalStone(PortalColor.Pink);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("color", color, null);
+            }
         }
 
         public void InsertPortalStone(GameObject portal, PortalColor color) {
@@ -401,7 +434,6 @@ namespace Assets.Code.Manager {
                     throw new ArgumentOutOfRangeException("color", color, null);
             }
             portal.GetComponent<PortalScript>().Activate();
-            
         }
         #endregion
 
@@ -432,6 +464,7 @@ namespace Assets.Code.Manager {
             ResetLivesDependingOnDifficulty();
             //Hintstones ist durch Default-Wert gesetzt
             //TODO - braucht es hier noch was?
+            EnterNewGameOrSaveGame.Invoke();
             Master.Instance().MyQuestion.LoadQuestionsFromFile(moduleName, difficulty);
         }
         
@@ -454,6 +487,9 @@ namespace Assets.Code.Manager {
 
         public void Awake() {
             GameStateObject = new GameState();
+
+            EnterNewGameOrSaveGame = new UnityEvent();
+            EnterNewGameOrSaveGame.AddListener(ChangeTracksOnAudioManager);
             
             _gameisFinished = false;
             _gameIsWon = false;

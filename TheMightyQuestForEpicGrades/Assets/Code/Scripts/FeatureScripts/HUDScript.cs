@@ -154,6 +154,27 @@ namespace Assets.Code.Scripts.FeatureScripts {
             scoreDisplay.text = points.ToString().PadLeft(6, '0');
         }
 
+        #region DEVTOOLS
+        public void DEVResetHeartsDisplay(){
+            //ANZEIGE DER LEBEN SETZEN
+            numberOfLives = Master.Instance().MyGameState.LivesRemaining;
+            Debug.Log("Anzahl Leben die gezeigt werden soll: " + numberOfLives);
+            //kleiner missbrauch von numberOfLives
+            foreach (var heart in hearts)
+            {
+                if (numberOfLives > 0)
+                {
+                    heart.enabled = true;
+                }
+                else heart.enabled = false;
+                Debug.Log("Herz ist: " + heart.enabled);
+                numberOfLives--;
+            }
+            //missbrauch rückgängig machen :^)
+            numberOfLives = Master.Instance().MyGameState.LivesRemaining;
+        }
+        #endregion
+
         // Use this for initialization
         //private void Start() {
         //    //Werte initialisieren (-1 um sicher zu stellen, dass firstSetUp aufgerufen wurde)
