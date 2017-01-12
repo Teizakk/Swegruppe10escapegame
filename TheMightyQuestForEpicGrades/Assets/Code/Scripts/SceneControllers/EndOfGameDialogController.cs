@@ -68,12 +68,6 @@ namespace Assets.Code.Scripts.SceneControllers {
         {
             Master.Instance().CurrentDialogController = this.gameObject;
         }
-
-        private void OnDestroy()
-        {
-            //Sollte hier nicht mehr passieren, weil es Master schon nicht mehr geben kann (außerdem nicht wirklich benötigt)
-            //Master.Instance().CurrentDialogController = null;
-        }
         #endregion
     }
 }

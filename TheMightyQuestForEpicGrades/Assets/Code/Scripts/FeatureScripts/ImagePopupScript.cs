@@ -17,7 +17,6 @@ namespace Assets.Code.Scripts.FeatureScripts
         private DateTime startTime;
         private TimeSpan usedTime;
 
-        private static ImagePopupScript _imagePopupScript;
         public Question usedQuestion { get; set; }
         public Button BackButton;
         public Text Hint1Text;
@@ -27,19 +26,6 @@ namespace Assets.Code.Scripts.FeatureScripts
         public GameObject imagePopupObject;
         public RawImage QOrAImage;
         public Text QOrAText;
-
-        //modifiziertes Singleton-Pattern
-        public static ImagePopupScript Instance()
-        {
-            if (!_imagePopupScript)
-            {
-                _imagePopupScript = FindObjectOfType(typeof(ImagePopupScript)) as ImagePopupScript;
-                if (!_imagePopupScript)
-                    Debug.LogError(
-                        "Es muss ein aktives ImagePopupScript Skript auf einem GameObject in der Scene existieren");
-            }
-            return _imagePopupScript;
-        }
 
         //Update is called once per frame
         void Update()
@@ -129,18 +115,18 @@ namespace Assets.Code.Scripts.FeatureScripts
             switch (hintsToShow)
             {
                 case 0:
-                    _imagePopupScript.ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath);
+                    ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath);
                     break;
                 case 1:
-                    _imagePopupScript.ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath,
+                    ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath,
                         usedQuestion.Hints[0]);
                     break;
                 case 2:
-                    _imagePopupScript.ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath,
+                    ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath,
                         usedQuestion.Hints[0], usedQuestion.Hints[1]);
                     break;
                 case 3:
-                    _imagePopupScript.ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath,
+                    ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath,
                         usedQuestion.Hints[0], usedQuestion.Hints[1], usedQuestion.Hints[2]);
                     break;
             }
@@ -151,19 +137,19 @@ namespace Assets.Code.Scripts.FeatureScripts
             switch (hintsToShow)
             {
                 case 0:
-                    _imagePopupScript.ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
+                    ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
                         usedQuestion.Answers[index].ImagePath);
                     break;
                 case 1:
-                    _imagePopupScript.ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
+                    ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
                         usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0]);
                     break;
                 case 2:
-                    _imagePopupScript.ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
+                    ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
                         usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0], usedQuestion.Hints[1]);
                     break;
                 case 3:
-                    _imagePopupScript.ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
+                    ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
                         usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0], usedQuestion.Hints[1],
                         usedQuestion.Hints[2]);
                     break;

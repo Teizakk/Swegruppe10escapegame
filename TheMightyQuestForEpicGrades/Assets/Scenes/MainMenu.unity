@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37356448, g: 0.3811204, b: 0.35887685, a: 1}
+  m_IndirectSpecularColor: {r: 0.37356392, g: 0.38112, b: 0.35887662, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -665,6 +665,8 @@ MonoBehaviour:
   MyLevel: {fileID: 0}
   MyModule: {fileID: 0}
   MyQuestion: {fileID: 0}
+  MyAudio: {fileID: 0}
+  CurrentDialogController: {fileID: 0}
 --- !u!4 &1233521067
 Transform:
   m_ObjectHideFlags: 0
@@ -735,7 +737,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 30
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 40

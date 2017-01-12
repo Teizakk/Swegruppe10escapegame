@@ -74,7 +74,7 @@ namespace Assets.Code.Scripts.SceneControllers
         // zeigt die Frage an
         public void ShowQuestion()
         {
-            Master.Instance().CurrentDialogController = this.gameObject;
+            //Master.Instance().CurrentDialogController = this.gameObject;
 
             blockAndUnblockMovement();
 
@@ -286,7 +286,8 @@ namespace Assets.Code.Scripts.SceneControllers
         //zeigt Bild(ImagePopup) an
         public void ShowPicture(int index)
         {
-            var imagePopup = ImagePopupScript.Instance();
+            var imagePopup = Master.Instance().CurrentDialogController.GetComponent<ImagePopupScript>();
+            //var imagePopup = ImagePopupScript.Instance();
             imagePopup.usedQuestion = q;
             if (index > 0)
             {
@@ -355,13 +356,8 @@ namespace Assets.Code.Scripts.SceneControllers
         #endregion
 
         #region Master-Link
-        private void Start()
-        {
+        private void Start() {
             Master.Instance().CurrentDialogController = this.gameObject;
-        }
-
-        private void OnDestroy() {
-            Master.Instance().CurrentDialogController = null;
         }
         #endregion
     }

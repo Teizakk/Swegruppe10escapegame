@@ -41,10 +41,6 @@ namespace Assets.Code.Scripts.SceneControllers {
         private void Start() {
             Master.Instance().CurrentDialogController = this.gameObject;
         }
-
-        private void OnDestroy() {
-            Master.Instance().CurrentDialogController = null;
-        }
         #endregion
     }
 }

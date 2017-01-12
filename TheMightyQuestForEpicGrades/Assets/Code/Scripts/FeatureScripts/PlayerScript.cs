@@ -93,7 +93,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
             if (controlsBlocked) return; //Dann sowieso nix tun 
             //SOLLTE IMMER IN DER REIHENFOLGE PORTALSTEIN->ENDDOOR->FRAGE(Truhe) erfolgen
             if (other.gameObject.CompareTag("PinkPortal")) { // && Portalstein vorhanden)
-                Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Portalstein einsetzen");
+                Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().ActivateTooltip("Portalstein einsetzen");
                 if (Input.GetKeyDown(KeyCode.E)) {
                     if (Master.Instance().MyGameState.PortalStonePinkIsInPossession) {
                         Master.Instance().MyGameState.InsertPortalStone(other.gameObject, PortalColor.Pink);
@@ -102,7 +102,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 }
             }
             else if (other.gameObject.CompareTag("GreenPortal")) { // && Portalstein vorhanden
-                Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Portalstein einsetzen");
+                Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().ActivateTooltip("Portalstein einsetzen");
                 if (Input.GetKeyDown(KeyCode.E)) {
                     if (Master.Instance().MyGameState.PortalStoneGreenIsInPossession) {
                         Master.Instance().MyGameState.InsertPortalStone(other.gameObject, PortalColor.Green);
@@ -111,7 +111,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 }
             }
             else if (other.gameObject.CompareTag("BluePortal")) { // && Portalstein vorhanden)
-                Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Portalstein einsetzen");
+                Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().ActivateTooltip("Portalstein einsetzen");
                 if (Input.GetKeyDown(KeyCode.E)) {
                     if (Master.Instance().MyGameState.PortalStoneBlueIsInPossession) {
                         Master.Instance().MyGameState.InsertPortalStone(other.gameObject, PortalColor.Blue);
@@ -120,7 +120,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 }
             }
             else if (other.gameObject.CompareTag("Finish")) { // = steht vor der Endtüre
-                Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Portal oeffnen");
+                Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().ActivateTooltip("Portal oeffnen");
                 if (Input.GetKeyDown(KeyCode.E)) {
                     if (Master.Instance().MyGameState.HasUsedAllPortalStones()) {
                         other.gameObject.GetComponent<EndDoorScript>().OpenDoor(); //Über GSM gehen?
@@ -129,7 +129,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 }
             }
             else if (other.gameObject.CompareTag("Chest")) {
-                Master.Instance().CurrentDialogController.SendMessage("ActivateTooltip", "Truhe oeffnen");
+                Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().ActivateTooltip("Truhe oeffnen");
                 if (Input.GetKeyDown(KeyCode.E)) {
                     //öffnen der Truhe,Fragen laden
                     Master.Instance().MyGameState.OpenChest(other.gameObject);
@@ -140,7 +140,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
         }
 
         private void OnTriggerExit(Collider other) {
-            Master.Instance().CurrentDialogController.SendMessage("DeactivateTooltip");
+            Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().DeactivateTooltip();
         }
         
         private void FixedUpdate() {

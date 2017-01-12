@@ -39,11 +39,11 @@ namespace Assets.Code.Scripts.SceneControllers {
             HUD.gameObject.SetActive(true);
         }
 
-        private void ActivateTooltip(string message) {
+        public void ActivateTooltip(string message) {
             TooltipPanel.GetComponentInChildren<Text>().text = "Taste 'E': " + message;
             TooltipPanel.SetActive(true);
         }
-        private void DeactivateTooltip() {
+        public void DeactivateTooltip() {
             TooltipPanel.SetActive(false);
         }
 
@@ -65,10 +65,6 @@ namespace Assets.Code.Scripts.SceneControllers {
         #region Master-Link
         private void Start() {
             Master.Instance().CurrentDialogController = this.gameObject;
-        }
-
-        private void OnDestroy() {
-            //Master.Instance().CurrentDialogController = null; //nervt immer mit Fehlermeldungen
         }
         #endregion
 
