@@ -21,7 +21,7 @@ namespace Assets.Code.Models {
         public long TimeCode { get; set; }
         #endregion
         public override string ToString() {
-             return string.Format("{0}\t{1}\t{2}\t\t\t\t\t\t", PlayerName, ChosenModule, HELPER.DifficultyToString(ChosenDifficulty));
+             return string.Format("{0} | {1} | {2} | {3} | ", CustomName, PlayerName, ChosenModule, HELPER.DifficultyToString(ChosenDifficulty));
         }
     }
 }

@@ -12,7 +12,6 @@ namespace Assets.Code.Scripts.SceneControllers {
        public InputField playerName;
 
         private void Awake() {
-            Master.Instance().MyModule.LoadFromFile(); //Falls zwischenzeitlich aktualisiert
             moduleDropdown.AddOptions(Master.Instance().MyModule.GetModulesWithEnoughQuestionsAsList());
 
             // Damit die neu eingefügten Optionen angezeigt werden können

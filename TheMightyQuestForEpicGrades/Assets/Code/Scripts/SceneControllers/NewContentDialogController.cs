@@ -37,7 +37,6 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         // Use this for initialization
         private void Awake() {
-            Master.Instance().MyModule.LoadFromFile();
             ModuleDropdown.AddOptions(Master.Instance().MyModule.GetModulesWithEnoughQuestionWarningAsList());
             // wenn keine Module vorhanden Button deaktivieren
             if (ModuleDropdown.options.Count == 0)
