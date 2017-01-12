@@ -150,13 +150,13 @@ namespace Assets.Code.Scripts.SceneControllers
                 switch (q.Difficulty)
                 {
                     case Difficulties.Easy:
-                        punkte = 100;
+                        punkte = 1;
                         break;
                     case Difficulties.Medium:
-                        punkte = 300;
+                        punkte = 2;
                         break;
                     case Difficulties.Hard:
-                        punkte = 500;
+                        punkte = 3;
                         break;
                 }
 
@@ -187,13 +187,14 @@ namespace Assets.Code.Scripts.SceneControllers
             if (tippsShowed < 3 && Master.Instance().MyGameState.HintstonesRemaining > 0)
             {
                 tippsShowed++;
-                Master.Instance().MyGameState.UseHintStone();
 
                 var lblTipp = LabelTipps.GetComponentsInChildren<Text>();
                 var outTipp = OutTipps.GetComponentsInChildren<Text>();
                 // Tipp anzeigen
                 lblTipp[tippsShowed - 1].enabled = true;
                 outTipp[tippsShowed - 1].enabled = true;
+
+                Master.Instance().MyGameState.UseHintStone();
 
                 Debug.Log("Hintstein eingesetzt!");
                 Debug.Log("Tipp" + tippsShowed + " wurde angezeigt");
