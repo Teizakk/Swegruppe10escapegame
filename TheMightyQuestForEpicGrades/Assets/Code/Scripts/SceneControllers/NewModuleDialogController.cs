@@ -46,22 +46,37 @@ namespace Assets.Code.Scripts.SceneControllers {
         #region DEVSTUFF
 
         [Header("DEV STUFF")]
+        public GameObject DEVTools;
         public InputField FileName;
-        public InputField ModuleName;
+        public InputField ModuleNameDEV;
         public Slider Difficulty;
         public InputField ChapterName;
 
-        public void InsertCSV() {
-            Master.Instance().MyModule.ReadQuestionsFromCSV(
+        public void DEVInsertCSV() {
+            Master.Instance().MyModule.DEVReadQuestionsFromCSV(
                 fileName: FileName.text,
                 difficulty: (Difficulties)(int)Difficulty.value,
-                modul: ModuleName.text,
+                modul: ModuleNameDEV.text,
                 chapter: ChapterName.text
                 );
+        }
+        public void DEVLogAllQuestionsInModule() {
+            var index = 1;
+            Debug.Log("LogAllQuestions aufgerufen mit: " + ModuleNameDEV.text);
+            var list = Master.Instance().MyQuestion.GetAllQuestions(ModuleNameDEV.text);
+            foreach (var item in list) {
+                Debug.Log(index + " " + item.ToString());
+                index++;
+            }
+        }
+
+        private void LateUpdate() {
+            DEVTools.SetActive(Master.IsDEVMode());
         }
         #endregion
 
         public void Awake() {
+            DEVTools.SetActive(Master.IsDEVMode());
             Master.Instance().MyModule.LoadFromFile();
             knownModules = Master.Instance().MyModule.GetModulesAsList();
         }

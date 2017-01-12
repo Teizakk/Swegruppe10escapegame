@@ -1,7 +1,9 @@
-﻿using Assets.Code.GLOBALS;
+﻿using System.IO;
+using Assets.Code.GLOBALS;
 using Assets.Code.Manager;
 using Assets.Code.Scripts.SceneControllers;
 using UnityEngine;
+using UnityEngine.Events;
 
 //Singlton nicht zwingend erforderlich aber Umstellung ist atm zu zeitaufwendig
 
@@ -95,8 +97,8 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 if (Input.GetKeyDown(KeyCode.E)) {
                     if (Master.Instance().MyGameState.PortalStonePinkIsInPossession) {
                         Master.Instance().MyGameState.InsertPortalStone(other.gameObject, PortalColor.Pink);
+                        Debug.Log("Stein in pinkes Portal eingesetzt und es so aktiviert!");
                     }
-                    Debug.Log("Stein in pinkes Portal eingesetzt und es so aktiviert!");
                 }
             }
             else if (other.gameObject.CompareTag("GreenPortal")) { // && Portalstein vorhanden
@@ -104,8 +106,8 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 if (Input.GetKeyDown(KeyCode.E)) {
                     if (Master.Instance().MyGameState.PortalStoneGreenIsInPossession) {
                         Master.Instance().MyGameState.InsertPortalStone(other.gameObject, PortalColor.Green);
+                        Debug.Log("Stein in grünes Portal eingesetzt und es so aktiviert!");
                     }
-                    Debug.Log("Stein in grünes Portal eingesetzt und es so aktiviert!");
                 }
             }
             else if (other.gameObject.CompareTag("BluePortal")) { // && Portalstein vorhanden)
@@ -113,8 +115,8 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 if (Input.GetKeyDown(KeyCode.E)) {
                     if (Master.Instance().MyGameState.PortalStoneBlueIsInPossession) {
                         Master.Instance().MyGameState.InsertPortalStone(other.gameObject, PortalColor.Blue);
+                        Debug.Log("Stein in blaues Portal eingesetzt und es so aktiviert!");
                     }
-                    Debug.Log("Stein in blaues Portal eingesetzt und es so aktiviert!");
                 }
             }
             else if (other.gameObject.CompareTag("Finish")) { // = steht vor der Endtüre

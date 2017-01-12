@@ -1,4 +1,5 @@
 ﻿using System;
+using Assets.Code.GLOBALS;
 using Assets.Code.Manager;
 using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         // Use this for initialization
         private void Awake() {
+            DEVPanel.SetActive(Master.IsDEVMode());
             if (PlayerScript.GetInstance() == null)
                 Instantiate(Player);
 
@@ -68,6 +70,30 @@ namespace Assets.Code.Scripts.SceneControllers {
         private void OnDestroy() {
             //Master.Instance().CurrentDialogController = null; //nervt immer mit Fehlermeldungen
         }
+        #endregion
+
+        #region DEVONLY
+        [Header("DEVONLY PANEL")] public GameObject DEVPanel;
+        public void DEVGetHint() {
+            Master.Instance().MyGameState.WinHintstone();
+            Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.AddHintStone();
+        }
+        public void DEVResetHearts() {
+            Master.Instance().MyGameState.ResetLivesDependingOnDifficulty();
+            Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.DEVResetHeartsDisplay();
+        }
+
+        public void DEVGetAllPortalStones()
+        {
+            Master.Instance().MyGameState.WinPortalStone(PortalColor.Blue);
+            Master.Instance().MyGameState.WinPortalStone(PortalColor.Green);
+            Master.Instance().MyGameState.WinPortalStone(PortalColor.Pink);
+        }
+
+        public void LateUpdate() {
+            DEVPanel.SetActive(Master.IsDEVMode());
+        }
+
         #endregion
     }
 }

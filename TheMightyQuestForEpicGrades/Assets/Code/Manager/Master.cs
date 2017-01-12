@@ -7,6 +7,8 @@ namespace Assets.Code.Manager {
 
         private static Master _masterInstance;
 
+        private static bool _devMode;
+
         #region Zur Verfügung gestellte Manager
         // == ShortCuts für z.B. Master.Instance().GameStateManager.Save(); um das Spiel zu speichern und nicht über getComponent<GameStateManager>(); gehen zu müssen
         public GameStateManager MyGameState;
@@ -71,6 +73,13 @@ namespace Assets.Code.Manager {
             throw new UnityException("Master darf und sollte zu diesem Zeitpunkt nicht gelöscht werden!");
         }
 
+        //TODO sobald wir das auskommentieren gibt es keinen Devmode ingame mehr
+        private void Update() {
+            if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.V)) {
+                _devMode = !_devMode;
+            }
+        }
+
         private void OnDestroy() {
             if (SceneManager.GetActiveScene().name == "MainGame" ||
                 SceneManager.GetActiveScene().name == "EndOfGame" ||
@@ -78,6 +87,10 @@ namespace Assets.Code.Manager {
                 SceneManager.GetActiveScene().name == "MainMenu") return;
             Debug.Log("Aktuelle Szene: " + SceneManager.GetActiveScene().name);
             throw new UnityException("Master wurde auf irgendeine verwerfliche Art zum falschen Zeitpunkt gelöscht!");
+        }
+
+        public static bool IsDEVMode(){
+            return _devMode;
         }
     }
 }

@@ -5,14 +5,14 @@ using UnityEngine;
 namespace Assets.Code.Scripts.UtilityScripts {
     public class CSVReader {
 
-        static string SPLIT_RE = @",(?=(?:[^""]*""[^""]*"")*(?![^""]*""))";
+        static string SPLIT_RE = @";(?=(?:[^""]*""[^""]*"")*(?![^""]*""))"; //; als Trennzeichen...nicht ,
         static string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
         static char[] TRIM_CHARS = { '\"' };
 
         public static List<Dictionary<string, object>> Read(string file) {
             var list = new List<Dictionary<string, object>>();
             TextAsset data = Resources.Load(file) as TextAsset;
-
+            Debug.Log("Datei: " + file + " erfolgreich geladen? " + (data!=null));
             var lines = Regex.Split(data.text, LINE_SPLIT_RE);
 
             if (lines.Length <= 1) return list;
