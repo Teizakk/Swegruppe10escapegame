@@ -24,15 +24,15 @@ namespace Assets.Code.Scripts.UtilityScripts {
             var hs = ExecuteablePath + "\\Highscores";
 			var sg = ExecuteablePath + "\\SaveGames";
             var q = ExecuteablePath + "\\Modules";
-            var r = ExecuteablePath + "\\Resources";
+            var rp = ExecuteablePath + "\\Resources\\Pictures";
             if (!Directory.Exists(hs))
                 Directory.CreateDirectory(hs);
 			if (!Directory.Exists(sg))
                 Directory.CreateDirectory(sg);
             if (!Directory.Exists(q))
                 Directory.CreateDirectory(q);
-            if (!Directory.Exists(r))
-                Directory.CreateDirectory(r);
+            if (!Directory.Exists(rp))
+                Directory.CreateDirectory(rp);
         }
 
         public static void Save<T>(T state, string fileName) {
@@ -90,9 +90,12 @@ namespace Assets.Code.Scripts.UtilityScripts {
 
         public static string CopyPictureToResourcesFolder(string filePathAndName) {
             if (!File.Exists(filePathAndName)) {
-                throw new FileNotFoundException("Zu kopierendes Bild war unter dem gesetzten Pfad nicht zu finden!");
+                throw new FileNotFoundException("Zu kopierendes Bild war unter dem gesetzten Pfad nicht zu finden! PFAD = " + filePathAndName );
             }
-            var desiredFilePathAndNameAfterCopy = ExecuteablePath + "\\Resources\\" + Path.GetFileName(filePathAndName);
+            var desiredFilePathAndNameAfterCopy = ExecuteablePath + "\\Resources\\Pictures\\" + Path.GetFileName(filePathAndName);
+            while (File.Exists(desiredFilePathAndNameAfterCopy)) { //falls Dateiname bereits vorhanden
+                desiredFilePathAndNameAfterCopy = Path.GetFileNameWithoutExtension(desiredFilePathAndNameAfterCopy) + "_alt" + Path.GetExtension(filePathAndName);
+            }
             File.Copy(filePathAndName, desiredFilePathAndNameAfterCopy);
             if (!File.Exists(desiredFilePathAndNameAfterCopy)) {
                 throw new FileNotFoundException("Kopieren der Bilddatei in den Resources-Ordner gescheitert!");
@@ -100,7 +103,7 @@ namespace Assets.Code.Scripts.UtilityScripts {
             return desiredFilePathAndNameAfterCopy;
         }
 
-public static bool InitializeHighscoreList() {
+        public static bool InitializeHighscoreList() {
             if (!Directory.Exists(ExecuteablePath + "\\Highscores")) {
                 Debug.LogError("Konstruktor hätte Verzeichnis \\Highscores erstellen sollen?!");
                 return false;

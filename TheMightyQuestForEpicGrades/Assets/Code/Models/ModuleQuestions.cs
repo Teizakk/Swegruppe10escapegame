@@ -19,8 +19,7 @@ namespace Assets.Code.Models {
                 if (value.Ticks >= _lastUpdated.Ticks) {
                     _lastUpdated = value;
                 }
-                Debug.LogError("Wert der eingetragen werden soll: " + value + "\nWert der drin steht: " + _lastUpdated);
-                Debug.Break();
+                Debug.LogWarning("Wert der eingetragen werden soll: " + value + "\nWert der drin steht: " + _lastUpdated);
             }
         }
 
