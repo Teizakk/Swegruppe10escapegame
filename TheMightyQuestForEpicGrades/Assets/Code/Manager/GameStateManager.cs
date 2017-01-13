@@ -226,6 +226,15 @@ namespace Assets.Code.Manager {
         }
         #endregion
 
+        #region SteineZurVerfügung
+        public int anzahlHinweissteine = 7;
+        public int portalStein1 = 1;
+        public int portalStein2 = 1;
+        public int portalStein3 = 1;
+        public System.Random rnd = new System.Random();
+        #endregion
+
+
         #region Question-related
         public TimeSpan TimeTakenUntilNow { get { return GameStateObject.LevelState.Time; } }
         public void AddTime(TimeSpan timeTaken) {
@@ -283,29 +292,29 @@ namespace Assets.Code.Manager {
                 Debug.Log("Frage korrekt beantwortet");
                 /* Portalstein oder Hintstein bekommen */
                 // wenn noch nicht alle Portalsteine bekommen
-                if (!GotAllPortalStones())
-                {
-                    // zufällig auswählen zwischen Portalstein und Hintstein
-                    var randomizer = new System.Random((int) DateTime.Now.Ticks);
-                    var rdmInt = randomizer.Next(0, 2);
-                    switch (rdmInt)
-                    {
-                        case 0:
-                            WinHintstone();
-                            break;
-                        case 1:
-                            // PortalStein mit zufälliger Farbe vergeben
-                            var color = (PortalColor) randomizer.Next((int) PortalColor.Blue, (int) PortalColor.Pink);
-                            Debug.Log(color + " bekommen");
-                            WinPortalStone(color);
-                            break;
-                    }
-                }
-                else
-                {
-                    // nur Hintsteine ausgeben
-                    WinHintstone();
-                }
+                //if (!GotAllPortalStones())
+                //{
+                //    // zufällig auswählen zwischen Portalstein und Hintstein
+                //    var randomizer = new System.Random((int) DateTime.Now.Ticks);
+                //    var rdmInt = randomizer.Next(0, 2);
+                //    switch (rdmInt)
+                //    {
+                //        case 0:
+                //            WinHintstone();
+                //            break;
+                //        case 1:
+                //            // PortalStein mit zufälliger Farbe vergeben
+                //            var color = (PortalColor) randomizer.Next((int) PortalColor.Blue, (int) PortalColor.Pink);
+                //            Debug.Log(color + " bekommen");
+                //            WinPortalStone(color);
+                //            break;
+                //    }
+                //}
+                //else
+                //{
+                //    // nur Hintsteine ausgeben
+                //    WinHintstone();
+                //}
             }
         }
         #endregion
