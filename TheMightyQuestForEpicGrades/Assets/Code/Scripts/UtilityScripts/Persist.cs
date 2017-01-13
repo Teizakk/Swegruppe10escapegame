@@ -7,9 +7,12 @@ using Assets.Code.Models;
 using UnityEngine;
 
 
-namespace Assets.Code.Scripts.UtilityScripts {
-    internal class Persist {
-        static Persist() {
+namespace Assets.Code.Scripts.UtilityScripts
+{
+    internal class Persist
+    {
+        static Persist()
+        {
             ExecuteablePath = Application.persistentDataPath;
             FExt = ".dat";
             AssureDirectoryAndFilesExists();
@@ -20,14 +23,15 @@ namespace Assets.Code.Scripts.UtilityScripts {
 
         // Highscores/highscores
         // SavedStates
-        private static void AssureDirectoryAndFilesExists() {
+        private static void AssureDirectoryAndFilesExists()
+        {
             var hs = ExecuteablePath + "\\Highscores";
-			var sg = ExecuteablePath + "\\SaveGames";
+            var sg = ExecuteablePath + "\\SaveGames";
             var q = ExecuteablePath + "\\Modules";
             var rp = ExecuteablePath + "\\Resources\\Pictures";
             if (!Directory.Exists(hs))
                 Directory.CreateDirectory(hs);
-			if (!Directory.Exists(sg))
+            if (!Directory.Exists(sg))
                 Directory.CreateDirectory(sg);
             if (!Directory.Exists(q))
                 Directory.CreateDirectory(q);
@@ -35,26 +39,34 @@ namespace Assets.Code.Scripts.UtilityScripts {
                 Directory.CreateDirectory(rp);
         }
 
-        public static void Save<T>(T state, string fileName) {
-            try {
+        public static void Save<T>(T state, string fileName)
+        {
+            try
+            {
                 var bf = new BinaryFormatter();
-                using (var file = File.Open(ExecuteablePath + "\\" + fileName + ".dat", FileMode.OpenOrCreate)) {
+                using (var file = File.Open(ExecuteablePath + "\\" + fileName + ".dat", FileMode.OpenOrCreate))
+                {
                     bf.Serialize(file, state);
                     file.Close();
                     Debug.Log("Datei: " + fileName + ".dat\nGespeichert in: " + ExecuteablePath + "\\");
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Debug.LogError(e);
             }
         }
 
-        public static T Load<T>(string fileName) where T : new() {
-            try {
-                if (File.Exists(ExecuteablePath + "\\" + fileName + ".dat")) {
+        public static T Load<T>(string fileName) where T : new()
+        {
+            try
+            {
+                if (File.Exists(ExecuteablePath + "\\" + fileName + ".dat"))
+                {
                     var bf = new BinaryFormatter();
-                    using (var file = File.Open(ExecuteablePath + "\\" + fileName + ".dat", FileMode.Open)) {
-                        var state = (T) bf.Deserialize(file);
+                    using (var file = File.Open(ExecuteablePath + "\\" + fileName + ".dat", FileMode.Open))
+                    {
+                        var state = (T)bf.Deserialize(file);
                         file.Close();
                         //Debug.Log("Datei: " + fileName + ".dat\nGeladen aus: " + ExecuteablePath + "\\");
                         return state;
@@ -64,23 +76,26 @@ namespace Assets.Code.Scripts.UtilityScripts {
                 Debug.Break();
                 return default(T);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Debug.LogError(e);
                 Debug.Break();
                 return new T();
             }
         }
 
-        public static List<string> GetModuleFiles() {
+        public static List<string> GetModuleFiles()
+        {
             if (Directory.Exists(ExecuteablePath + "\\Modules"))
-                return Directory.GetFiles(ExecuteablePath + "\\Modules").ToList().Select(x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
+                return Directory.GetFiles(ExecuteablePath + "\\Modules").ToList().Where(x => Path.GetExtension(x) == ".dat").Select(x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
             Directory.CreateDirectory(ExecuteablePath + "\\Modules"); //eigentlich unnötig, da dies oben im Konstruktor schon gemacht wird.
             return new List<string>();
         }
 
-        public static List<string> GetAllSGIFileNames() {
+        public static List<string> GetAllSGIFileNames()
+        {
             if (Directory.Exists(ExecuteablePath + "\\SaveGames"))
-                return Directory.GetFiles(ExecuteablePath + "\\SaveGames").ToList().Select(x => {
+                return Directory.GetFiles(ExecuteablePath + "\\SaveGames").Where(x => Path.GetExtension(x) == ".dat").ToList().Select(x => {
                     x = Path.GetFileNameWithoutExtension(x);
                     return x;
                 }).Where(x => !string.IsNullOrEmpty(x) && x.Contains("_sgi")).ToList();
@@ -88,30 +103,37 @@ namespace Assets.Code.Scripts.UtilityScripts {
             return new List<string>();
         }
 
-        public static string CopyPictureToResourcesFolder(string filePathAndName) {
-            if (!File.Exists(filePathAndName)) {
-                throw new FileNotFoundException("Zu kopierendes Bild war unter dem gesetzten Pfad nicht zu finden! PFAD = " + filePathAndName );
+        public static string CopyPictureToResourcesFolder(string filePathAndName)
+        {
+            if (!File.Exists(filePathAndName))
+            {
+                throw new FileNotFoundException("Zu kopierendes Bild war unter dem gesetzten Pfad nicht zu finden! PFAD = " + filePathAndName);
             }
             var desiredFilePathAndNameAfterCopy = ExecuteablePath + "\\Resources\\Pictures\\" + Path.GetFileName(filePathAndName);
-            while (File.Exists(desiredFilePathAndNameAfterCopy)) { //falls Dateiname bereits vorhanden
+            while (File.Exists(desiredFilePathAndNameAfterCopy))
+            { //falls Dateiname bereits vorhanden
                 desiredFilePathAndNameAfterCopy = Path.GetFileNameWithoutExtension(desiredFilePathAndNameAfterCopy) + "_alt" + Path.GetExtension(filePathAndName);
             }
             File.Copy(filePathAndName, desiredFilePathAndNameAfterCopy);
-            if (!File.Exists(desiredFilePathAndNameAfterCopy)) {
+            if (!File.Exists(desiredFilePathAndNameAfterCopy))
+            {
                 throw new FileNotFoundException("Kopieren der Bilddatei in den Resources-Ordner gescheitert!");
             }
             return desiredFilePathAndNameAfterCopy;
         }
 
-        public static bool InitializeHighscoreList() {
-            if (!Directory.Exists(ExecuteablePath + "\\Highscores")) {
+        public static bool InitializeHighscoreList()
+        {
+            if (!Directory.Exists(ExecuteablePath + "\\Highscores"))
+            {
                 Debug.LogError("Konstruktor hätte Verzeichnis \\Highscores erstellen sollen?!");
                 return false;
             }
-            if (File.Exists(ExecuteablePath + "\\Highscores\\" + "highscores" + ".dat")) {
+            if (File.Exists(ExecuteablePath + "\\Highscores\\" + "highscores" + ".dat"))
+            {
                 return true;
             }
-            var hsl =  new List<Highscore>()
+            var hsl = new List<Highscore>()
             {
                 new Highscore() {
                     PlayerName = "Hoever",
@@ -133,10 +155,12 @@ namespace Assets.Code.Scripts.UtilityScripts {
             return true;
         }
 
-        public static List<string> GetAllLevelFileNames() {
-            return Directory.GetFiles(ExecuteablePath + "\\Levels").Select(x => {
+        public static List<string> GetAllLevelFileNames()
+        {
+            return Directory.GetFiles(ExecuteablePath + "\\Levels").Where(x => Path.GetExtension(x) == ".dat").Select(x => {
                 x = Path.GetFileNameWithoutExtension(x);
-                return x;}).ToList();
+                return x;
+            }).ToList();
         }
 
     }
