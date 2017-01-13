@@ -157,10 +157,14 @@ namespace Assets.Code.Scripts.UtilityScripts
 
         public static List<string> GetAllLevelFileNames()
         {
-            return Directory.GetFiles(ExecuteablePath + "\\Levels").Where(x => Path.GetExtension(x) == ".dat").Select(x => {
-                x = Path.GetFileNameWithoutExtension(x);
-                return x;
-            }).ToList();
+            var b = Directory.GetFiles(ExecuteablePath + "\\Levels");
+            var a = b.Where(x => Path.GetExtension(x) == ".txt");
+            var c = a.Select(y => { y = Path.GetFileNameWithoutExtension(y); return y; });
+            return c.ToList();
+            //return Directory.GetFiles(ExecuteablePath + "\\Levels").Where(x => Path.GetExtension(x) == ".dat").Select(x => {
+            //    x = Path.GetFileNameWithoutExtension(x);
+            //    return x;
+            //}).ToList();
         }
 
     }

@@ -286,6 +286,7 @@ namespace Assets.Code.Manager {
                 if (!GotAllPortalStones())
                 {
                     // zufällig auswählen zwischen Portalstein und Hintstein
+
                     var randomizer = new System.Random((int) DateTime.Now.Ticks);
                     var rdmInt = randomizer.Next(0, 2);
                     switch (rdmInt)
@@ -332,14 +333,10 @@ namespace Assets.Code.Manager {
             Debug.Log("Anzahl der Leben auf: " + GameStateObject.LevelState.Lives + " zurückgesetzt.\nDies sollte nie außerhalb des Levelwechsels passieren");
         }
         public void LoseOneLive() {
-            if (GameStateObject.LevelState.Lives > 1) {
+            if (GameStateObject.LevelState.Lives > 1)
+            {
                 GameStateObject.LevelState.Lives--;
-                if (SceneManager.GetActiveScene().name == "MainGame")
-                {
-                    Master.Instance()
-                        .CurrentDialogController.GetComponent<MainGameDialogController>()
-                        .HUD.RemoveHeart();
-                }
+                Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.RemoveHeart();
                 return;
             }
             if (GameStateObject.LevelState.Lives == 1) {
@@ -432,7 +429,7 @@ namespace Assets.Code.Manager {
             get { return GameStateObject.LevelState.PinkPortalStone.Used; }
             private set { GameStateObject.LevelState.PinkPortalStone.Used = value; }
         }
-
+        
         public bool HasUsedAllPortalStones() {
             if (GameStateObject.LevelState.PinkPortalStone.Used &&
                 GameStateObject.LevelState.GreenPortalStone.Used &&
@@ -444,7 +441,7 @@ namespace Assets.Code.Manager {
 
         public bool GotAllPortalStones()
         {
-            return PortalStonePinkIsInPossession && PortalStoneBlueIsInPossession && PortalStoneGreenIsInPossession;
+            return (PortalStonePinkIsInPossession || PortalStonePinkHasBeenUsed) && (PortalStoneBlueIsInPossession || PortalStoneBlueHasBeenUsed) && (PortalStoneGreenIsInPossession || PortalStoneGreenHasBeenUsed);
         }
 
         public void WinPortalStone(PortalColor color) {
