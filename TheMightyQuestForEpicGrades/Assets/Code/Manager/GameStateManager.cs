@@ -311,6 +311,10 @@ namespace Assets.Code.Manager {
             Debug.Log(chestToOpen.GetInstanceID());
             opendChest = chestToOpen;
             var questionDialogController = Master.Instance().CurrentDialogController.GetComponent<QuestionDialogController>();
+            if (Master.Instance().MyQuestion.AllUsed(Master.Instance().MyGameState.ChapterInUse) == true)
+            {
+                Master.Instance().MyQuestion.ResetAllToUnused(Master.Instance().MyGameState.ChapterInUse);
+            }
             questionDialogController.ShowQuestion();
             if (questionDialogController.AnswerCorrect())
             {
