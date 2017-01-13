@@ -77,7 +77,6 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         public void Awake() {
             DEVTools.SetActive(Master.IsDEVMode());
-            Master.Instance().MyModule.LoadFromFile();
             knownModules = Master.Instance().MyModule.GetModulesAsList();
         }
 

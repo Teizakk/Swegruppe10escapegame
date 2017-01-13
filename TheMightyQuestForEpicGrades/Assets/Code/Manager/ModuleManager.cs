@@ -11,8 +11,7 @@ using UnityEngine.SceneManagement;
 
 namespace Assets.Code.Manager {
     public class ModuleManager : MonoBehaviour {
-        //Sollte man von außen den Dateinamen ändern wollen
-        public readonly string _Dateiname = "Module.txt";
+
 
         //Zwischenspeicher für die Auswahl des Moduls, dem eine Frage hinzugefügt werden soll.
         private string _moduleToEdit;
@@ -35,23 +34,8 @@ namespace Assets.Code.Manager {
             }
         }
 
-        private readonly List<string> module = new List<string>();
+        private List<string> module = new List<string>();
 
-        public void LoadFromFile() {
-            module.Clear();
-            try {
-                if (_Dateiname != null)
-                    using (var streamReader = new StreamReader(_Dateiname)) {
-                        string line;
-                        while ((line = streamReader.ReadLine()) != null)
-                            module.Add(line);
-                    }
-                else Debug.LogError("Dateiname muss gesetzt werden!"); //Überbleibsel aber hey, was solls man kann nie auf zu viele Fehler checken... :D
-            }
-            catch (Exception e) {
-                Debug.LogError(e);
-            }
-        }
 
         public List<string> GetModulesWithEnoughQuestionsAsList() {
             var tmpModuleList = new List<string>(module);
@@ -80,29 +64,26 @@ namespace Assets.Code.Manager {
             return tmpModuleList;
         }
 
-        public List<string> GetModulesAsList() {
-            return new List<string>(module);
+        public List<string> GetModulesAsList()
+        {
+            // Refresh
+            module = Persist.GetModuleFiles();
+            return module;
         }
 
         public bool SaveToFile(string newModuleName) {
             try {
-                if (File.Exists(_Dateiname)) {
-                    using (var myStreamWriter = new StreamWriter(_Dateiname, true)) { //true = append
-                        myStreamWriter.WriteLine(newModuleName);
-                    }
-                    //Refresh nach update
-                    LoadFromFile();
+                var sucess = Master.Instance().MyQuestion.CreateNewModuleFile(newModuleName);
+                if(sucess)
                     Debug.Log("Modul erstellt und in Module.txt eingetragen");
-                    return Master.Instance().MyQuestion.CreateNewModuleFile(newModuleName);
-                }
-                Debug.LogError("Module Savefile existiert nicht!");
-                return false;
+                return sucess;
             }
             catch (Exception e) {
                 Debug.LogError(e);
                 return false;
             }
         }
+
         #region DEV-ONLY
         //ONLY DEV FUNCTION
         public void DEVReadQuestionsFromCSV(string fileName, string modul, Difficulties difficulty, string chapter) {
@@ -225,9 +206,10 @@ namespace Assets.Code.Manager {
             Debug.Log("Datei: " + q.Modul + ".dat erfolgreich aktualisiert!");
         }
 
-        private void Start() {
+        private void Start()
+        {
             //Initiales Laden der Module
-            LoadFromFile();
+            module = Persist.GetModuleFiles();
         }
     }
 }

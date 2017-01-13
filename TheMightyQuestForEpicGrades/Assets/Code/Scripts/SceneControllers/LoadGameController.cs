@@ -63,7 +63,7 @@ namespace Assets.Code.Scripts.SceneControllers
                 var ci = new CultureInfo("de-DE");
 
                 saveGameDisplay.GetComponentInChildren<Text>().text = item.ToString() +
-                                                                      timeOfSaving.ToString("d", ci) + "\t\t" + timeOfSaving.TimeOfDay.ToString().Split('.')[0];
+                                                                      timeOfSaving.ToString("d", ci) + " | " + timeOfSaving.TimeOfDay.ToString().Split('.')[0];
                 saveGameDisplay.GetComponent<DataHolderScript>().StoredValues.Add("IndexOfSGI", index);
                 _saveGameLinks.Add(saveGameDisplay);
             }

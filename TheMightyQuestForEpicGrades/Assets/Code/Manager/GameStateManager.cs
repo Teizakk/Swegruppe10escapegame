@@ -271,15 +271,42 @@ namespace Assets.Code.Manager {
         #endregion
 
         #region Chest
-        //TODO CHEST FUNCTIONS
+        //TODO chestToOpen parameter korrekt?
+        // TODO wenn alle Hintsteine bekommen und alle Portalsteine was dann?
         public void OpenChest(GameObject chestToOpen) { //chestToOpen nicht zwingend erforderlich weil es eine bestimmte Instanz des ChestScripts sein sollte
             Debug.Log(chestToOpen.GetInstanceID());
-
-
-            LoseOneLive();
-
-            Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.RemoveHeart();
-            //TODO
+            var questionDialogController = Master.Instance().CurrentDialogController.GetComponent<QuestionDialogController>();
+            questionDialogController.ShowQuestion();
+            if (questionDialogController.AnswerCorrect())
+            {
+                chestToOpen.GetComponent<ChestScript>().Lock();
+                Debug.Log("Frage korrekt beantwortet");
+                /* Portalstein oder Hintstein bekommen */
+                // wenn noch nicht alle Portalsteine bekommen
+                if (!GotAllPortalStones())
+                {
+                    // zufällig auswählen zwischen Portalstein und Hintstein
+                    var randomizer = new System.Random((int) DateTime.Now.Ticks);
+                    var rdmInt = randomizer.Next(0, 2);
+                    switch (rdmInt)
+                    {
+                        case 0:
+                            WinHintstone();
+                            break;
+                        case 1:
+                            // PortalStein mit zufälliger Farbe vergeben
+                            var color = (PortalColor) randomizer.Next((int) PortalColor.Blue, (int) PortalColor.Pink);
+                            Debug.Log(color + " bekommen");
+                            WinPortalStone(color);
+                            break;
+                    }
+                }
+                else
+                {
+                    // nur Hintsteine ausgeben
+                    WinHintstone();
+                }
+            }
         }
         #endregion
 
@@ -307,6 +334,12 @@ namespace Assets.Code.Manager {
         public void LoseOneLive() {
             if (GameStateObject.LevelState.Lives > 1) {
                 GameStateObject.LevelState.Lives--;
+                if (SceneManager.GetActiveScene().name == "MainGame")
+                {
+                    Master.Instance()
+                        .CurrentDialogController.GetComponent<MainGameDialogController>()
+                        .HUD.RemoveHeart();
+                }
                 return;
             }
             if (GameStateObject.LevelState.Lives == 1) {
@@ -328,6 +361,13 @@ namespace Assets.Code.Manager {
         public void WinHintstone() {
             if (GameStateObject.LevelState.HintStones < 5) {
                 GameStateObject.LevelState.HintStones++;
+                if (SceneManager.GetActiveScene().name == "MainGame")
+                {
+                    Master.Instance()
+                        .CurrentDialogController.GetComponent<MainGameDialogController>()
+                        .HUD.AddHintStone();
+                }
+                Debug.Log("Hintstein erhalten");
                 return;
             }
             Debug.Log("HintStone nicht hinzugefügt, bereits Maximum erreicht");
@@ -335,6 +375,12 @@ namespace Assets.Code.Manager {
         public void UseHintStone() {
             if (GameStateObject.LevelState.HintStones > 0) {
                 GameStateObject.LevelState.HintStones--;
+                if (SceneManager.GetActiveScene().name == "MainGame")
+                {
+                    Master.Instance()
+                        .CurrentDialogController.GetComponent<MainGameDialogController>()
+                        .HUD.RemoveHintStone();
+                }
                 return;
             }
             throw new UnityException("HintStone kann nicht genutzt werden - keiner im Inventar");
@@ -348,6 +394,12 @@ namespace Assets.Code.Manager {
         public void AddPointsToScore(int amount) {
             if (amount > 0) {
                 GameStateObject.LevelState.Score += amount;
+                if (SceneManager.GetActiveScene().name == "MainGame")
+                {
+                    Master.Instance()
+                        .CurrentDialogController.GetComponent<MainGameDialogController>()
+                        .HUD.UpdateScore(amount);
+                }
                 return;
             }
             throw new UnityException("Zu addierende Punktezahl muss positiv und größer 0 sein!");
@@ -390,24 +442,33 @@ namespace Assets.Code.Manager {
             return false;
         }
 
+        public bool GotAllPortalStones()
+        {
+            return PortalStonePinkIsInPossession && PortalStoneBlueIsInPossession && PortalStoneGreenIsInPossession;
+        }
+
         public void WinPortalStone(PortalColor color) {
             Debug.Log("Genutzter Portalstein: " + color);
             //Stein einsetzen und Portal damit aktivieren
             switch (color) {
                 case PortalColor.Blue:
                     PortalStoneBlueIsInPossession = true;
-                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.ReceivePortalStone(PortalColor.Blue);
                     break;
                 case PortalColor.Green:
                     PortalStoneGreenIsInPossession = true;
-                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.ReceivePortalStone(PortalColor.Green);
                     break;
                 case PortalColor.Pink:
                     PortalStonePinkIsInPossession = true;
-                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.ReceivePortalStone(PortalColor.Pink);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("color", color, null);
+            }
+            if (SceneManager.GetActiveScene().name == "MainGame")
+            {
+                Master.Instance()
+                    .CurrentDialogController.GetComponent<MainGameDialogController>()
+                    .HUD.ReceivePortalStone(color);
+                Debug.Log(color + " Portalstein erhalten");
             }
         }
 
@@ -417,21 +478,25 @@ namespace Assets.Code.Manager {
             switch (color) {
                 case PortalColor.Blue:
                     PortalStoneBlueIsInPossession = false;
-                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.UsePortalStone(PortalColor.Blue);
+                    
                     PortalStoneBlueHasBeenUsed = true;
                     break;
                 case PortalColor.Green:
                     PortalStoneGreenIsInPossession = false;
-                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.UsePortalStone(PortalColor.Green);
                     PortalStoneGreenHasBeenUsed = true;
                     break;
                 case PortalColor.Pink:
                     PortalStonePinkIsInPossession = false;
-                    Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.UsePortalStone(PortalColor.Pink);
                     PortalStonePinkHasBeenUsed = true;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("color", color, null);
+            }
+            if (SceneManager.GetActiveScene().name == "MainGame")
+            {
+                Master.Instance()
+                    .CurrentDialogController.GetComponent<MainGameDialogController>()
+                    .HUD.UsePortalStone(color);
             }
             portal.GetComponent<PortalScript>().Activate();
         }

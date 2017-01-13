@@ -82,7 +82,7 @@ namespace Assets.Code.Scripts.SceneControllers
 
             // Werte initialisieren
             tippsShowed = 0;
-            chosenAnswerIndex = 1;
+            chosenAnswerIndex = 0;
             startTime = DateTime.Now;
 
             // Frage in die Felder laden
@@ -141,7 +141,6 @@ namespace Assets.Code.Scripts.SceneControllers
             if (chosenAnswerIndex == q.CorrectAnswer)
             {
                 _answerCorrect = true;
-                Debug.Log("Frage korrekt beantwortet!");
                 // Popup anzeigen
                 ShowPopup("Frage korrekt beantwortet!");
 
@@ -175,6 +174,7 @@ namespace Assets.Code.Scripts.SceneControllers
                 }
                 else
                 {
+                     // TODO : eventuel überflüssig
                     ShowPopup("Game Over!");
                     LeaveToMainMenu();
                 }
@@ -200,36 +200,37 @@ namespace Assets.Code.Scripts.SceneControllers
                 Debug.Log("Tipp" + tippsShowed + " wurde angezeigt");
             }
         }
-        
+
         // Frage und Antworten in den Dialog laden
-        void LoadQuestion() {
-          /*q = new Question {
-                QuestionText = "Was ist das Internet?",
-                Difficulty = Difficulties.Easy,
-                Chapter = "Einstieg",
-                ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
-                Answers =
-                    new List<Question.Answer>()
-                    {
-                            new Question.Answer()
-                            {
-                                AnswerText = "Ein Netz",
-                                ImagePath = ""
-                            },
-                            new Question.Answer()
-                            {
-                                AnswerText = "Nur physikalisch vorhanden",
-                                ImagePath = "Assets/Samples+Placeholder/Bild2.png"
-                            },
-                            new Question.Answer()
-                            {
-                                AnswerText = "Ein Netz von Netzen",
-                                ImagePath = ""
-                            },
-                    },
-                CorrectAnswer = 3,
-                Hints = new List<string> { "inter", "connected", "networks" }
-            };*/
+        void LoadQuestion()
+        {
+            /*q = new Question {
+                  QuestionText = "Was ist das Internet?",
+                  Difficulty = Difficulties.Easy,
+                  Chapter = "Einstieg",
+                  ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
+                  Answers =
+                      new List<Question.Answer>()
+                      {
+                              new Question.Answer()
+                              {
+                                  AnswerText = "Ein Netz",
+                                  ImagePath = ""
+                              },
+                              new Question.Answer()
+                              {
+                                  AnswerText = "Nur physikalisch vorhanden",
+                                  ImagePath = "Assets/Samples+Placeholder/Bild2.png"
+                              },
+                              new Question.Answer()
+                              {
+                                  AnswerText = "Ein Netz von Netzen",
+                                  ImagePath = ""
+                              },
+                      },
+                  CorrectAnswer = 3,
+                  Hints = new List<string> { "inter", "connected", "networks" }
+              };*/
 
             //Neue Fragen laden
             q = Master.Instance().MyQuestion.ProvideUnusedQuestion(Master.Instance().MyGameState.ChapterInUse);
@@ -262,14 +263,13 @@ namespace Assets.Code.Scripts.SceneControllers
                     // Button anzeigen
                     btnPictures[i].SetActive(true);
                 }
-
-                // CheatMode : richtige Antwort markieren
-                if (Master.Instance().MyGameState.CheatmodeActive && i == q.CorrectAnswer)
-                {
-                    tglAnswers[i - 1].enabled = true;
-                }
-
                 i++;
+            }
+
+            // CheatMode : richtige Antwort markieren
+            if (Master.Instance().MyGameState.CheatmodeActive)
+            {
+                tglAnswers[q.CorrectAnswer].enabled = true;
             }
 
             // Tipps laden
@@ -321,6 +321,12 @@ namespace Assets.Code.Scripts.SceneControllers
             tglAnswer1.isOn = true;
             toggleGroup.NotifyToggleOn(tglAnswer1);
 
+            // Cheatmodus : zuletzt markierte richtige Antwort deaktivieren
+            if (Master.Instance().MyGameState.CheatmodeActive)
+            {
+                tglAnswers[q.CorrectAnswer].enabled = false;
+            }
+
             // QuestionDialog schliessen
             questionDialogPopup.SetActive(false);
 
@@ -343,7 +349,8 @@ namespace Assets.Code.Scripts.SceneControllers
         #region Helper
 
         //"Nachrichten"-Funktion an PlayerController
-        private void blockAndUnblockMovement() {
+        private void blockAndUnblockMovement()
+        {
             PlayerScript.GetInstance().SwitchControlBlock();
         }
 
@@ -356,7 +363,8 @@ namespace Assets.Code.Scripts.SceneControllers
         #endregion
 
         #region Master-Link
-        private void Start() {
+        private void Start()
+        {
             Master.Instance().CurrentDialogController = this.gameObject;
         }
         #endregion

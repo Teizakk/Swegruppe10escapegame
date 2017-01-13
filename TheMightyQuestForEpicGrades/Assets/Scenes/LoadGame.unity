@@ -1135,6 +1135,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1496314615}
     m_Modifications:
+    - target: {fileID: 114000010348880232, guid: 58a8ca718034e564795d2e550c5ee559,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 224000012376188370, guid: 58a8ca718034e564795d2e550c5ee559,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -1183,7 +1188,7 @@ Prefab:
     - target: {fileID: 224000012376188370, guid: 58a8ca718034e564795d2e550c5ee559,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -672.5
+      value: -147.5
       objectReference: {fileID: 0}
     - target: {fileID: 224000012376188370, guid: 58a8ca718034e564795d2e550c5ee559,
         type: 2}
@@ -1228,14 +1233,50 @@ Prefab:
     - target: {fileID: 114000013612532552, guid: 58a8ca718034e564795d2e550c5ee559,
         type: 2}
       propertyPath: m_Text
-      value: "Name\t\tModul\tSchwierigkeitsgrad\t\tDatum\t\t\tUhrzeit"
+      value: Name | Spieler | Modul | Schwierigkeitsgrad | Datum | Uhrzeit
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114000010348880232, guid: 58a8ca718034e564795d2e550c5ee559,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 747729484}
+    - target: {fileID: 114000010348880232, guid: 58a8ca718034e564795d2e550c5ee559,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SendMessageUpwards
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010348880232, guid: 58a8ca718034e564795d2e550c5ee559,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010348880232, guid: 58a8ca718034e564795d2e550c5ee559,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010348880232, guid: 58a8ca718034e564795d2e550c5ee559,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: SetSelectedSaveGameLink
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010348880232, guid: 58a8ca718034e564795d2e550c5ee559,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114000010348880232, guid: 58a8ca718034e564795d2e550c5ee559, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 58a8ca718034e564795d2e550c5ee559, type: 2}
   m_IsPrefabParent: 0
 --- !u!224 &747729483 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224000012376188370, guid: 58a8ca718034e564795d2e550c5ee559,
+    type: 2}
+  m_PrefabInternal: {fileID: 747729482}
+--- !u!1 &747729484 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012022000506, guid: 58a8ca718034e564795d2e550c5ee559,
     type: 2}
   m_PrefabInternal: {fileID: 747729482}
 --- !u!1001 &858552819
