@@ -71,6 +71,17 @@ namespace Assets.Code.Manager {
             SceneManager.LoadScene("InBetweenLevels");
             EnterNewGameOrSaveGame.Invoke();
         }
+
+        public void OverwriteGame(string nameOfSavegameFile)
+        {
+            //PlayerPos auslesen
+            Debug.Log(PlayerPosCurrent);
+            Debug.Log(PlayerScript.GetInstance().GetPosition());
+            PlayerPosCurrent = PlayerScript.GetInstance().GetPosition();
+            Debug.Log(PlayerPosCurrent);
+
+            Persist.Save(GameStateObject, nameOfSavegameFile);
+        }
         
         public List<SavegameInfo> GetAllGSIs() {
             var listOfSGIFileNames = Persist.GetAllSGIFileNames();

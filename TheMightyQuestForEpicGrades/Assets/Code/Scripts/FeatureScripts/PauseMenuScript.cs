@@ -46,6 +46,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
         [Header("Save & Load Fields")]
         public InputField SaveGameName;
         public ScrollRect LoadableGames;
+        public ScrollRect OverwriteableGames;
         public GameObject SaveGamePrefab;
         private List<SavegameInfo> _listOfSavegameDescriptions = new List<SavegameInfo>();
         private List<GameObject> _saveGameLinks = new List<GameObject>();
@@ -58,7 +59,16 @@ namespace Assets.Code.Scripts.FeatureScripts {
             HideSaveMenu();
         }
 
-        private void RefreshSaveGames() {
+        public void OverwriteGame()
+        {
+            var fileToOverwrite = _listOfSavegameDescriptions[selectedSaveGameLink].FilenameOfGameStateSave;
+            Debug.Log("Overwrite Game von PMS fileToOverwrite: " + fileToOverwrite);
+            //Laden starten
+            Master.Instance().MyGameState.OverwriteGame(fileToOverwrite);
+            HideSaveMenu();
+        }
+
+        private void RefreshSaveGames(bool SaveGame = false) {
             Debug.Log("Speicherstände werden geladen");
 
             //alte löschen
@@ -76,8 +86,19 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
                 //Nur Savegames vom gleichen Spieler anzeigen
                 //if (!item.PlayerName.Equals(Master.Instance().MyGameState.PlayerName)) continue;
+                GameObject saveGameDisplay;
+                // wenn im LoadMenu
+                if (!SaveGame)
+                {
+                    saveGameDisplay = Instantiate(SaveGamePrefab, LoadableGames.content, false) as GameObject;
+                }
+                else
+                {
+                    // wenn im Save Menu
+                    // wegen überlade funktion
+                    saveGameDisplay = Instantiate(SaveGamePrefab, OverwriteableGames.content, false) as GameObject;
+                }
 
-                var saveGameDisplay = Instantiate(SaveGamePrefab, LoadableGames.content, false) as GameObject;
                 DateTime timeOfSaving = new DateTime(item.TimeCode, DateTimeKind.Local);
 
                 //var ci = CultureInfo.CurrentCulture; //oder "de-DE"
@@ -135,6 +156,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
             _saveMenuCanvasGroup.alpha = 1.0f;
             _saveMenuCanvasGroup.interactable = true;
             _inSubWindow = true;
+            RefreshSaveGames(true);
         }
 
         public void HideSaveMenu() {
