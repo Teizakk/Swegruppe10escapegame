@@ -15,7 +15,7 @@ namespace Assets.Code.Manager {
             music.clip = Resources.Load("Audio/Sheltered_Gameplay4") as AudioClip;
             music.Play();
             music.loop = true;
-            music.volume = 0.75f;
+            music.volume = 0.25f;
             music.spatialBlend = 0.123f;
             music.spread = 200;
         }

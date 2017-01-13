@@ -34,6 +34,9 @@ namespace Assets.Code.Scripts.FeatureScripts
             TimerText.text = String.Format("{0:hh\\:mm\\:ss\\:ff}", usedTime);
         }
 
+        private void Awake() {
+            imagePopupObject.SetActive(false);
+        }
         //Funktionen
         public void ConfigureAndShow(
             string q_or_a_text,
@@ -49,9 +52,9 @@ namespace Assets.Code.Scripts.FeatureScripts
             //Fenster aktivieren
             imagePopupObject.SetActive(true);
 
-            //BackButton konfigurieren
-            BackButton.onClick.RemoveAllListeners();
-            BackButton.onClick.AddListener(closePopup); //müsste so gehen
+            ////BackButton konfigurieren
+            //BackButton.onClick.RemoveAllListeners();
+            //BackButton.onClick.AddListener(closePopup); //müsste so gehen
 
             //Elemente setzen / anzeigen lassen
             QOrAText.gameObject.SetActive(false);
@@ -156,7 +159,7 @@ namespace Assets.Code.Scripts.FeatureScripts
             }
         }
 
-        private void closePopup()
+        public void ClosePopup()
         {
             imagePopupObject.SetActive(false);
         }
