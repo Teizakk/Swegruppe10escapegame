@@ -33,6 +33,6 @@ namespace Assets.Code.GLOBALS {
     
     //Globale Konstanten?
     public static class CONSTANTS {
-        public static readonly float PLAYER_SPEED = 3.0f;
+        public static readonly float PLAYER_SPEED = 3.25f;
     }
 }
