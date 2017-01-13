@@ -9,9 +9,13 @@ namespace Assets.Code.Models {
     //ohne den kompletten GameState zu Laden und gleichzeitig um dsa Problem ungültiger
     //Zeichen in Dateinamen etc zu verhindern.
     [Serializable]
-    public class SavegameInfo {
+    public class SavegameInfo
+    {
         #region Dateipfad zum gespeicherten Spielstand
+
         public string FilenameOfGameStateSave { get; set; }
+        public string FilenameOfSaveGameInfo { get; set; }
+
         #endregion
         #region "Meta-Tags"
         public string CustomName { get; set; }
