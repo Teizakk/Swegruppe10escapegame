@@ -434,18 +434,33 @@ namespace Assets.Code.Manager {
         public int ScoreCurrent {
             get { return GameStateObject.LevelState.Score; }
         }
-        public void AddPointsToScore(int amount) {
-            if (amount > 0) {
-                GameStateObject.LevelState.Score += amount;
-                if (SceneManager.GetActiveScene().name == "MainGame")
-                {
-                    Master.Instance()
-                        .CurrentDialogController.GetComponent<MainGameDialogController>()
-                        .HUD.UpdateScore(amount);
-                }
-                return;
+        public int AddPointsToScore(TimeSpan timeUsed) {
+            var amount = 1.0;
+            switch (DifficultyChosen) {
+                case Difficulties.Easy:
+                    amount *= 1000;
+                    break;
+                case Difficulties.Medium:
+                    amount *= 2000;
+                    break;
+                case Difficulties.Hard:
+                    amount *= 5000;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("difficulty");
             }
-            throw new UnityException("Zu addierende Punktezahl muss positiv und größer 0 sein!");
+            amount /= timeUsed.TotalSeconds;
+            amount = Math.Round(amount);
+            amount %= 10;
+            var finalAmount = Convert.ToInt32(amount);
+            GameStateObject.LevelState.Score += finalAmount;
+            if (SceneManager.GetActiveScene().name == "MainGame")
+            {
+                Master.Instance()
+                    .CurrentDialogController.GetComponent<MainGameDialogController>()
+                    .HUD.UpdateScore(finalAmount);
+            }
+            return finalAmount;
         }
         #endregion
         

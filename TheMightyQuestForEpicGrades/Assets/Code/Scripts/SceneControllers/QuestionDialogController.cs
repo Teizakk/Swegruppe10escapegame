@@ -143,24 +143,8 @@ namespace Assets.Code.Scripts.SceneControllers
                 _answerCorrect = true;
                 // Popup anzeigen
                 ShowPopup("Frage korrekt beantwortet!");
-
-                // Punkte addieren
-                var punkte = 0;
-                switch (q.Difficulty)
-                {
-                    case Difficulties.Easy:
-                        punkte = 1;
-                        break;
-                    case Difficulties.Medium:
-                        punkte = 2;
-                        break;
-                    case Difficulties.Hard:
-                        punkte = 3;
-                        break;
-                }
-
-                Master.Instance().MyGameState.AddPointsToScore(punkte);
-                Debug.Log(punkte + " Punkt(e) erhalten!");
+             
+                Debug.Log(Master.Instance().MyGameState.AddPointsToScore(usedTime) + " Punkt(e) erhalten!");
 
                 //Stein vergeben
                 var AnzahlHints = Master.Instance().MyGameState.anzahlHinweissteine;
