@@ -61,10 +61,10 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
         public void OverwriteGame()
         {
-            var fileToOverwrite = _listOfSavegameDescriptions[selectedSaveGameLink].FilenameOfGameStateSave;
-            Debug.Log("Overwrite Game von PMS fileToOverwrite: " + fileToOverwrite);
+            var saveGameToOverwrite = _listOfSavegameDescriptions[selectedSaveGameLink];
+            Debug.Log("Overwrite Game von PMS fileToOverwrite: " + saveGameToOverwrite.FilenameOfGameStateSave);
             //Laden starten
-            Master.Instance().MyGameState.OverwriteGame(fileToOverwrite);
+            Master.Instance().MyGameState.OverwriteGame(saveGameToOverwrite);
             HideSaveMenu();
         }
 

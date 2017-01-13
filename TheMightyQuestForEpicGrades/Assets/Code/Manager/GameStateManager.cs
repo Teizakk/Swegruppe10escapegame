@@ -51,8 +51,8 @@ namespace Assets.Code.Manager {
 
             //in sgi den Link auf sgo speichern & timecode für bessere Erreichbarkeit ablegen
             sgi.FilenameOfGameStateSave = gsoFileName;
+            sgi.FilenameOfSaveGameInfo = sgiFileName;
             sgi.TimeCode = timeCode;
-
 
             Persist.Save(GameStateObject, gsoFileName);
             Persist.Save(sgi, sgiFileName);
@@ -72,15 +72,22 @@ namespace Assets.Code.Manager {
             EnterNewGameOrSaveGame.Invoke();
         }
 
-        public void OverwriteGame(string nameOfSavegameFile)
+        public void OverwriteGame(SavegameInfo sgi)
         {
             //PlayerPos auslesen
             Debug.Log(PlayerPosCurrent);
             Debug.Log(PlayerScript.GetInstance().GetPosition());
             PlayerPosCurrent = PlayerScript.GetInstance().GetPosition();
             Debug.Log(PlayerPosCurrent);
+            
+            //Fragen abspeichern
+            GameStateObject.LevelState.Questions = Master.Instance().MyQuestion.GetQuestionField();
 
-            Persist.Save(GameStateObject, nameOfSavegameFile);
+            // Zeit abspeichern
+             sgi.TimeCode = new TimeSpan(DateTime.Now.Ticks).Ticks;
+
+            Persist.Save(GameStateObject, sgi.FilenameOfGameStateSave);
+            Persist.Save(sgi,sgi.FilenameOfSaveGameInfo);
         }
         
         public List<SavegameInfo> GetAllGSIs() {
