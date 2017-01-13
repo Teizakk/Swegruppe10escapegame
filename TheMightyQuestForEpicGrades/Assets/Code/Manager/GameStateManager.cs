@@ -433,6 +433,12 @@ namespace Assets.Code.Manager {
         #region Score
         public int ScoreCurrent {
             get { return GameStateObject.LevelState.Score; }
+            set { }
+        }
+
+        public void SetScore(int wert)
+        {
+            
         }
         public void AddPointsToScore(int amount) {
             if (amount > 0) {
