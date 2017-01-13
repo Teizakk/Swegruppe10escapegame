@@ -451,7 +451,7 @@ namespace Assets.Code.Manager {
             }
             amount /= timeUsed.TotalSeconds;
             amount = Math.Round(amount);
-            amount %= 10;
+            //amount -= amount % 10;
             var finalAmount = Convert.ToInt32(amount);
             GameStateObject.LevelState.Score += finalAmount;
             if (SceneManager.GetActiveScene().name == "MainGame")
