@@ -141,6 +141,9 @@ namespace Assets.Code.Scripts.SceneControllers
             if (chosenAnswerIndex == q.CorrectAnswer)
             {
                 _answerCorrect = true;
+
+                // Success Sound
+                System.Media.SystemSounds.Beep.Play();
                 // Popup anzeigen
                 ShowPopup("Frage korrekt beantwortet!");
              
@@ -273,6 +276,8 @@ namespace Assets.Code.Scripts.SceneControllers
             else
             {
                 _answerCorrect = false;
+                // Error Sound
+                System.Media.SystemSounds.Hand.Play();
                 if (Master.Instance().MyGameState.LivesRemaining > 0)
                 {
                     ShowPopup("Frage wurde falsch beantwortet!");
@@ -280,12 +285,6 @@ namespace Assets.Code.Scripts.SceneControllers
                     Debug.Log("Leben - 1");
                     Master.Instance().MyGameState.LoseOneLive();
                     Master.Instance().MyGameState.CloseChest(_answerCorrect);
-                }
-                else
-                {
-                     // TODO : eventuel überflüssig
-                    ShowPopup("Game Over!");
-                    LeaveToMainMenu();
                 }
             }
         }
