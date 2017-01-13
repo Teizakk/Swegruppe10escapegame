@@ -169,9 +169,9 @@ namespace Assets.Code.Scripts.SceneControllers
                 var portal3 = Master.Instance().MyGameState.portalStein3;
                 System.Random rnd = Master.Instance().MyGameState.rnd;
 
-                int zahl = rnd.Next(1, 11);
+                int zahl = rnd.Next(1, 12);
                 //Hintstone
-                if (zahl >= 1 && zahl <= 9)
+                if (zahl !=5 && zahl != 10)
                 {
                     if (AnzahlHints > 0)
                     {
