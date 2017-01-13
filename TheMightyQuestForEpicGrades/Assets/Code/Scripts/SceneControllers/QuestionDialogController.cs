@@ -161,6 +161,7 @@ namespace Assets.Code.Scripts.SceneControllers
 
                 Master.Instance().MyGameState.AddPointsToScore(punkte);
                 Debug.Log(punkte + " Punkt(e) erhalten!");
+                Master.Instance().MyGameState.CloseChest(_answerCorrect);
             }
             else
             {
@@ -171,6 +172,7 @@ namespace Assets.Code.Scripts.SceneControllers
                     Debug.Log("Frage wurde falsch beantwortet!");
                     Debug.Log("Leben - 1");
                     Master.Instance().MyGameState.LoseOneLive();
+                    Master.Instance().MyGameState.CloseChest(_answerCorrect);
                 }
                 else
                 {
