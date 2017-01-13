@@ -72,6 +72,10 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 Master.Instance().MyGameState.SetGameWon();
                 return;
             }
+            Master.Instance().MyGameState.anzahlHinweissteine = 7;
+            Master.Instance().MyGameState.portalStein1 = 1;
+            Master.Instance().MyGameState.portalStein2 = 1;
+            Master.Instance().MyGameState.portalStein3 = 1;
             SceneManager.LoadScene("InBetweenLevels");
         }
     }

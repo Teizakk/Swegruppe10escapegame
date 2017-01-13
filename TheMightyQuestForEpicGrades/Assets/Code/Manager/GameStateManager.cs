@@ -242,6 +242,15 @@ namespace Assets.Code.Manager {
         }
         #endregion
 
+        #region SteineZurVerfügung
+        public int anzahlHinweissteine = 7;
+        public int portalStein1 = 1;
+        public int portalStein2 = 1;
+        public int portalStein3 = 1;
+        public System.Random rnd = new System.Random();
+        #endregion
+
+
         #region Question-related
         public TimeSpan TimeTakenUntilNow { get { return GameStateObject.LevelState.Time; } }
         public void AddTime(TimeSpan timeTaken) {
@@ -302,10 +311,12 @@ namespace Assets.Code.Manager {
                 Debug.Log("Frage korrekt beantwortet");
                 /* Portalstein oder Hintstein bekommen */
                 // wenn noch nicht alle Portalsteine bekommen
+              
+                //Dominiks Steine ziehen
+                /*
                 if (!GotAllPortalStones())
                 {
                     // zufällig auswählen zwischen Portalstein und Hintstein
-
                     var randomizer = new System.Random((int) DateTime.Now.Ticks);
                     var rdmInt = randomizer.Next(0, 2);
                     switch (rdmInt)
@@ -326,9 +337,10 @@ namespace Assets.Code.Manager {
                     // nur Hintsteine ausgeben
                     WinHintstone();
                 }
-            }
+                */
+          }
         }
-
+        //TODO triggert funktion in chestscript? 
         public void CloseChest(bool answerCorrect)
         {
             if (answerCorrect)
