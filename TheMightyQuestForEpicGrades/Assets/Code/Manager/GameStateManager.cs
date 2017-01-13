@@ -286,16 +286,19 @@ namespace Assets.Code.Manager {
 
         #endregion
 
+        GameObject opendChest = null;
+
         #region Chest
         //TODO chestToOpen parameter korrekt?
         // TODO wenn alle Hintsteine bekommen und alle Portalsteine was dann?
         public void OpenChest(GameObject chestToOpen) { //chestToOpen nicht zwingend erforderlich weil es eine bestimmte Instanz des ChestScripts sein sollte
             Debug.Log(chestToOpen.GetInstanceID());
+            opendChest = chestToOpen;
             var questionDialogController = Master.Instance().CurrentDialogController.GetComponent<QuestionDialogController>();
             questionDialogController.ShowQuestion();
             if (questionDialogController.AnswerCorrect())
             {
-                chestToOpen.GetComponent<ChestScript>().Lock();
+                //chestToOpen.GetComponent<ChestScript>().Lock();
                 Debug.Log("Frage korrekt beantwortet");
                 /* Portalstein oder Hintstein bekommen */
                 // wenn noch nicht alle Portalsteine bekommen
@@ -324,6 +327,21 @@ namespace Assets.Code.Manager {
                     WinHintstone();
                 }
             }
+        }
+
+        public void CloseChest(bool answerCorrect)
+        {
+            if (answerCorrect)
+            {
+                opendChest.GetComponentInChildren<Light>().enabled = true;
+                opendChest.GetComponent<SphereCollider>().enabled = false;
+            }
+            else
+            {
+                opendChest.GetComponentInChildren<Light>().enabled = false;
+                opendChest.GetComponent<SphereCollider>().enabled = true;
+            }
+            opendChest = null;
         }
         #endregion
 
