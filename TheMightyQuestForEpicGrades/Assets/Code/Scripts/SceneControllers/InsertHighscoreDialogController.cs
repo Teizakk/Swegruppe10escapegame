@@ -25,13 +25,13 @@ namespace Assets.Code.Scripts.SceneControllers {
             zeit.text = Master.Instance().MyGameState.TimeTakenUntilNow.ToString();
         }
 
-        public void InsertHighscore()
+        public void NextWindowOnClick()
         {
-            if (SceneManager.GetActiveScene().name == "InsertHighscoreEndOFGame")
+            if (SceneManager.GetActiveScene().name == "InsertHighscoreEndOfGame")
             {
                 try
                 {
-                    if(Persist.Load<List<Highscore>>(Name)==null)
+                    if (Persist.Load<List<Highscore>>(Name) == null)
                     {
                         highscoreliste = new List<Highscore>();
                     }
@@ -45,11 +45,12 @@ namespace Assets.Code.Scripts.SceneControllers {
                     Debug.LogError(e);
                     highscoreliste = new List<Highscore>();
                 }
-
+                string time = Master.Instance().MyGameState.TimeTakenUntilNow.Hours + ":" + Master.Instance().MyGameState.TimeTakenUntilNow.Minutes + ":" + Master.Instance().MyGameState.TimeTakenUntilNow.Seconds;
+                
                 Highscore neu = new Highscore()
                 {
                     PlayerName = string.IsNullOrEmpty(playerName.text) ? oldPlayerName.text : playerName.text,
-                    Zeit = Master.Instance().MyGameState.TimeTakenUntilNow.ToString(),
+                    Zeit =time,
                     Score = Master.Instance().MyGameState.ScoreCurrent
                 };
 
@@ -62,7 +63,8 @@ namespace Assets.Code.Scripts.SceneControllers {
             }
         }
 
-        public void LeaveWithoutInsert() {
+        public void LeaveWithoutInsert()
+        {
             Master.KILLME();
             SceneManager.LoadScene("MainMenu");
         }
@@ -70,21 +72,21 @@ namespace Assets.Code.Scripts.SceneControllers {
         public List<Highscore> Order(List<Highscore> unsortiert)
         {
             List<Highscore> neu = new List<Highscore>();
-            
-            if(unsortiert.Count>10)
+
+            if (unsortiert.Count > 10)
             {
                 int niedrigste = 0;
                 for (int i = 1; i < 11; i++)
                 {
-                    if(unsortiert[i].Score <= unsortiert[niedrigste].Score)
+                    if (unsortiert[i].Score <= unsortiert[niedrigste].Score)
                     {
                         niedrigste = i;
                     }
                 }
 
-                for(int i=0;i<10;i++)
+                for (int i = 0; i < 10; i++)
                 {
-                    if(i!=niedrigste)
+                    if (i != niedrigste)
                     {
                         neu.Add(unsortiert[i]);
                     }
@@ -119,6 +121,9 @@ namespace Assets.Code.Scripts.SceneControllers {
             }
             return input;
         }
+
+        
+            
 
         #region Master-Link
         private void Start() {

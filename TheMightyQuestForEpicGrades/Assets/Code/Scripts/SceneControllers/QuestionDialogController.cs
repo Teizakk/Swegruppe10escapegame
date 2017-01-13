@@ -155,6 +155,9 @@ namespace Assets.Code.Scripts.SceneControllers
             if (chosenAnswerIndex == q.CorrectAnswer)
             {
                 _answerCorrect = true;
+
+                // Success Sound
+                System.Media.SystemSounds.Beep.Play();
                 // Popup anzeigen
                 ShowPopup("Frage korrekt beantwortet!");
              
@@ -164,7 +167,9 @@ namespace Assets.Code.Scripts.SceneControllers
             else
             {
                 _answerCorrect = false;
-                if (Master.Instance().MyGameState.LivesRemaining > 0)
+                // Error Sound
+                System.Media.SystemSounds.Hand.Play();
+		        if (Master.Instance().MyGameState.LivesRemaining > 0)
                 {
                     ShowPopup("Frage wurde falsch beantwortet!");
                     Debug.Log("Frage wurde falsch beantwortet!");
@@ -182,24 +187,68 @@ namespace Assets.Code.Scripts.SceneControllers
         }
 
         private void DrawStone() {
-            //Stein vergeben
-            var AnzahlHints = Master.Instance().MyGameState.anzahlHinweissteine;
-            var portal1 = Master.Instance().MyGameState.portalStein1;
-            var portal2 = Master.Instance().MyGameState.portalStein2;
-            var portal3 = Master.Instance().MyGameState.portalStein3;
-            System.Random rnd = Master.Instance().MyGameState.rnd;
+            	//Stein vergeben
+                var AnzahlHints = Master.Instance().MyGameState.anzahlHinweissteine;
+                var portal1= Master.Instance().MyGameState.portalStein1;
+                var portal2 = Master.Instance().MyGameState.portalStein2;
+                var portal3 = Master.Instance().MyGameState.portalStein3;
+                System.Random rnd = Master.Instance().MyGameState.rnd;
 
-            int zahl = rnd.Next(1, 11);
-            //Hintstone
-            if (zahl >= 1 && zahl <= 9)
-            {
-                if (AnzahlHints > 0)
-                {
-                    AnzahlHints--;
-                    //Gebe dem spieler einen Hintstone
-                    Master.Instance().MyGameState.WinHintstone();
-                    Master.Instance().MyGameState.anzahlHinweissteine = AnzahlHints;
-                    Console.WriteLine("hinweistein");
+                int zahl = rnd.Next(1, 12);
+                //Hintstone
+                if (zahl !=5 && zahl != 10) {               
+                    if (AnzahlHints > 0)
+                    {
+                        AnzahlHints--;
+                        //Gebe dem spieler einen Hintstone
+                        Master.Instance().MyGameState.WinHintstone();
+                        Master.Instance().MyGameState.anzahlHinweissteine = AnzahlHints;
+                        Console.WriteLine("hinweistein");
+                    }
+                    else
+                    {
+
+                        bool gezogen = false;
+
+                        while (!gezogen)
+                        {
+                            int stone = rnd.Next(1, 4);
+                            if (stone == 1 && portal1 == 1 && gezogen == false)
+                            {
+                                portal1--;
+                                gezogen = true;
+                                //Gebe dem Spieler Portalstein1
+                                Master.Instance().MyGameState.WinPortalStone(PortalColor.Blue);
+                                Master.Instance().MyGameState.portalStein1 = 0;
+                                Console.WriteLine("portalstein1");
+                            }
+                            if (stone == 2 && portal2 == 1 && gezogen == false)
+                            {
+                                portal2--;
+                                gezogen = true;
+                                //Gebe dem Spieler Portalstein2
+                                Master.Instance().MyGameState.WinPortalStone(PortalColor.Green);
+                                Master.Instance().MyGameState.portalStein2 = 0;
+                                Console.WriteLine("portalstein2");
+                            }
+                            if (stone == 3 && portal3 == 1 && gezogen == false)
+                            {
+                                portal3--;
+                                gezogen = true;
+                                Master.Instance().MyGameState.WinPortalStone(PortalColor.Pink);
+                                Master.Instance().MyGameState.portalStein3 = 0;
+                                Console.WriteLine("portalstein3");
+                            }
+                            if (portal1 == 0 && portal2 == 0 && portal3 == 0)
+                            {
+
+                                //keine steine mehr vorhanden
+                                Console.WriteLine("keine steine mehr vorhanden");
+                                break;
+                            }
+
+                        }
+                    }
                 }
                 else
                 {
@@ -216,6 +265,7 @@ namespace Assets.Code.Scripts.SceneControllers
                             Master.Instance().MyGameState.WinPortalStone(PortalColor.Blue);
                             Master.Instance().MyGameState.portalStein1 = 0;
                             Console.WriteLine("portalstein1");
+
                         }
                         if (stone == 2 && portal2 == 1 && gezogen == false)
                         {
@@ -232,17 +282,33 @@ namespace Assets.Code.Scripts.SceneControllers
                             gezogen = true;
                             Master.Instance().MyGameState.WinPortalStone(PortalColor.Pink);
                             Master.Instance().MyGameState.portalStein3 = 0;
+                            //Gebe dem Spieler Portalstein3
                             Console.WriteLine("portalstein3");
                         }
-                        if (portal1 == 0 && portal2 == 0 && portal3 == 0)
+                        else if (portal1 == 0 && portal2 == 0 && portal3 == 0)
                         {
+                            if (AnzahlHints > 0)
+                            {
+                                AnzahlHints--;
+                                gezogen = true;
+                                //Gebe Hinweisstein
+                                Master.Instance().MyGameState.WinHintstone();
+                                Master.Instance().MyGameState.anzahlHinweissteine = AnzahlHints;
+                                Console.WriteLine("hinweistein");
 
-                            //keine steine mehr vorhanden
-                            Console.WriteLine("keine steine mehr vorhanden");
-                            break;
+                            }
+                            else
+                            {
+                                //keine Steine mehr vorhanden
+                                Console.WriteLine("keine steine mehr vorhanden");
+                                break;
+                            }
                         }
                     }
                 }
+                //TODO muss das hier noch stehen?!?!
+                Master.Instance().MyGameState.CloseChest(_answerCorrect);
+
             }
             else
             {

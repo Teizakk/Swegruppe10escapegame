@@ -275,5 +275,34 @@ namespace Assets.Code.Manager {
             Debug.Log("Erstellen der Modul-Speicher-Datei war erfolgreich? " + success);
             return success;
         }
+
+        public bool AllUsed(string kapitel)
+        {
+            bool all = false;
+            for(int i=0; i <Questions.Count;i++)
+            {
+               if(Questions[i].Chapter==kapitel)
+                {
+                    if (Questions[i].Used == false)
+                    {
+                        return all;
+                    }
+                }
+                
+            }
+            return true;
+        }
+
+        public void ResetAllToUnused(string kapitel)
+        {
+            for(int i=0;i<Questions.Count;i++)
+            {
+                if(Questions[i].Chapter==kapitel)
+                {
+                    Questions[i].Used = false;
+                }
+                
+            }
+        }
     }
 }
