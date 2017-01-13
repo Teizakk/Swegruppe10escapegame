@@ -33,6 +33,10 @@ namespace Assets.Code.Manager {
             Debug.Log(PlayerScript.GetInstance().GetPosition());
             PlayerPosCurrent = PlayerScript.GetInstance().GetPosition();
             Debug.Log(PlayerPosCurrent);
+
+            //Fragen abspeichern
+            GameStateObject.LevelState.Questions = Master.Instance().MyQuestion.GetQuestionField();
+
             var sgi = new SavegameInfo
             {
                 ChosenDifficulty = this.DifficultyChosen,
@@ -63,8 +67,20 @@ namespace Assets.Code.Manager {
             InBetweenLevelsDialogController._firstTimeUseOfScript = true; //Muss resettet werden da sonst falsche Sachen von dem Skript gemacht werden
             InBetweenLevelsDialogController._loadingASaveGame = true;
             PlayerScript._loadingASavedGame = true;
+            Master.Instance().MyQuestion.SetQuestionFromSavegame(GameStateObject.LevelState.Questions);
             SceneManager.LoadScene("InBetweenLevels");
             EnterNewGameOrSaveGame.Invoke();
+        }
+
+        public void OverwriteGame(string nameOfSavegameFile)
+        {
+            //PlayerPos auslesen
+            Debug.Log(PlayerPosCurrent);
+            Debug.Log(PlayerScript.GetInstance().GetPosition());
+            PlayerPosCurrent = PlayerScript.GetInstance().GetPosition();
+            Debug.Log(PlayerPosCurrent);
+
+            Persist.Save(GameStateObject, nameOfSavegameFile);
         }
         
         public List<SavegameInfo> GetAllGSIs() {
@@ -279,43 +295,65 @@ namespace Assets.Code.Manager {
 
         #endregion
 
+        GameObject opendChest = null;
+
         #region Chest
         //TODO chestToOpen parameter korrekt?
         // TODO wenn alle Hintsteine bekommen und alle Portalsteine was dann?
         public void OpenChest(GameObject chestToOpen) { //chestToOpen nicht zwingend erforderlich weil es eine bestimmte Instanz des ChestScripts sein sollte
             Debug.Log(chestToOpen.GetInstanceID());
+            opendChest = chestToOpen;
             var questionDialogController = Master.Instance().CurrentDialogController.GetComponent<QuestionDialogController>();
             questionDialogController.ShowQuestion();
             if (questionDialogController.AnswerCorrect())
             {
-                chestToOpen.GetComponent<ChestScript>().Lock();
+                //chestToOpen.GetComponent<ChestScript>().Lock();
                 Debug.Log("Frage korrekt beantwortet");
                 /* Portalstein oder Hintstein bekommen */
                 // wenn noch nicht alle Portalsteine bekommen
-                //if (!GotAllPortalStones())
-                //{
-                //    // zufällig auswählen zwischen Portalstein und Hintstein
-                //    var randomizer = new System.Random((int) DateTime.Now.Ticks);
-                //    var rdmInt = randomizer.Next(0, 2);
-                //    switch (rdmInt)
-                //    {
-                //        case 0:
-                //            WinHintstone();
-                //            break;
-                //        case 1:
-                //            // PortalStein mit zufälliger Farbe vergeben
-                //            var color = (PortalColor) randomizer.Next((int) PortalColor.Blue, (int) PortalColor.Pink);
-                //            Debug.Log(color + " bekommen");
-                //            WinPortalStone(color);
-                //            break;
-                //    }
-                //}
-                //else
-                //{
-                //    // nur Hintsteine ausgeben
-                //    WinHintstone();
-                //}
+              
+                //Dominiks Steine ziehen
+                /*
+                if (!GotAllPortalStones())
+                {
+                    // zufällig auswählen zwischen Portalstein und Hintstein
+                    var randomizer = new System.Random((int) DateTime.Now.Ticks);
+                    var rdmInt = randomizer.Next(0, 2);
+                    switch (rdmInt)
+                    {
+                        case 0:
+                            WinHintstone();
+                            break;
+                        case 1:
+                            // PortalStein mit zufälliger Farbe vergeben
+                            var color = (PortalColor) randomizer.Next((int) PortalColor.Blue, (int) PortalColor.Pink);
+                            Debug.Log(color + " bekommen");
+                            WinPortalStone(color);
+                            break;
+                    }
+                }
+                else
+                {
+                    // nur Hintsteine ausgeben
+                    WinHintstone();
+                }
+                */
+          }
+        }
+        //TODO triggert funktion in chestscript? 
+        public void CloseChest(bool answerCorrect)
+        {
+            if (answerCorrect)
+            {
+                opendChest.GetComponentInChildren<Light>().enabled = true;
+                opendChest.GetComponent<SphereCollider>().enabled = false;
             }
+            else
+            {
+                opendChest.GetComponentInChildren<Light>().enabled = false;
+                opendChest.GetComponent<SphereCollider>().enabled = true;
+            }
+            opendChest = null;
         }
         #endregion
 
@@ -341,14 +379,10 @@ namespace Assets.Code.Manager {
             Debug.Log("Anzahl der Leben auf: " + GameStateObject.LevelState.Lives + " zurückgesetzt.\nDies sollte nie außerhalb des Levelwechsels passieren");
         }
         public void LoseOneLive() {
-            if (GameStateObject.LevelState.Lives > 1) {
+            if (GameStateObject.LevelState.Lives > 1)
+            {
                 GameStateObject.LevelState.Lives--;
-                if (SceneManager.GetActiveScene().name == "MainGame")
-                {
-                    Master.Instance()
-                        .CurrentDialogController.GetComponent<MainGameDialogController>()
-                        .HUD.RemoveHeart();
-                }
+                Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().HUD.RemoveHeart();
                 return;
             }
             if (GameStateObject.LevelState.Lives == 1) {
@@ -441,7 +475,7 @@ namespace Assets.Code.Manager {
             get { return GameStateObject.LevelState.PinkPortalStone.Used; }
             private set { GameStateObject.LevelState.PinkPortalStone.Used = value; }
         }
-
+        
         public bool HasUsedAllPortalStones() {
             if (GameStateObject.LevelState.PinkPortalStone.Used &&
                 GameStateObject.LevelState.GreenPortalStone.Used &&
@@ -453,7 +487,7 @@ namespace Assets.Code.Manager {
 
         public bool GotAllPortalStones()
         {
-            return PortalStonePinkIsInPossession && PortalStoneBlueIsInPossession && PortalStoneGreenIsInPossession;
+            return (PortalStonePinkIsInPossession || PortalStonePinkHasBeenUsed) && (PortalStoneBlueIsInPossession || PortalStoneBlueHasBeenUsed) && (PortalStoneGreenIsInPossession || PortalStoneGreenHasBeenUsed);
         }
 
         public void WinPortalStone(PortalColor color) {

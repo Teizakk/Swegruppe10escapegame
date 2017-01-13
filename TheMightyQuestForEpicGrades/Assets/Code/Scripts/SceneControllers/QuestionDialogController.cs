@@ -228,7 +228,6 @@ namespace Assets.Code.Scripts.SceneControllers
                 }
                 else
                 {
-
                     bool gezogen = false;
 
                     while (!gezogen)
@@ -281,10 +280,10 @@ namespace Assets.Code.Scripts.SceneControllers
                                 break;
                             }
                         }
-
                     }
-
                 }
+                //TODO muss das hier noch stehen?!?!
+                Master.Instance().MyGameState.CloseChest(_answerCorrect);
 
             }
             else
@@ -296,6 +295,7 @@ namespace Assets.Code.Scripts.SceneControllers
                     Debug.Log("Frage wurde falsch beantwortet!");
                     Debug.Log("Leben - 1");
                     Master.Instance().MyGameState.LoseOneLive();
+                    Master.Instance().MyGameState.CloseChest(_answerCorrect);
                 }
                 else
                 {
