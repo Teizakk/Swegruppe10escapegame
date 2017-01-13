@@ -33,6 +33,10 @@ namespace Assets.Code.Manager {
             Debug.Log(PlayerScript.GetInstance().GetPosition());
             PlayerPosCurrent = PlayerScript.GetInstance().GetPosition();
             Debug.Log(PlayerPosCurrent);
+
+            //Fragen abspeichern
+            GameStateObject.LevelState.Questions = Master.Instance().MyQuestion.GetQuestionField();
+
             var sgi = new SavegameInfo
             {
                 ChosenDifficulty = this.DifficultyChosen,
@@ -63,6 +67,7 @@ namespace Assets.Code.Manager {
             InBetweenLevelsDialogController._firstTimeUseOfScript = true; //Muss resettet werden da sonst falsche Sachen von dem Skript gemacht werden
             InBetweenLevelsDialogController._loadingASaveGame = true;
             PlayerScript._loadingASavedGame = true;
+            Master.Instance().MyQuestion.SetQuestionFromSavegame(GameStateObject.LevelState.Questions);
             SceneManager.LoadScene("InBetweenLevels");
             EnterNewGameOrSaveGame.Invoke();
         }
