@@ -1,4 +1,5 @@
-﻿using Assets.Code.GLOBALS;
+﻿using System.Linq;
+using Assets.Code.GLOBALS;
 using Assets.Code.Manager;
 using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
@@ -9,10 +10,15 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         public Dropdown difficultyDropdown;
         public Dropdown moduleDropdown;
-       public InputField playerName;
+        public InputField playerName;
+        public Button StartGame;
 
         private void Awake() {
             moduleDropdown.AddOptions(Master.Instance().MyModule.GetModulesWithEnoughQuestionsAsList());
+
+            if (moduleDropdown.options.Count == 0) {
+                StartGame.interactable = false;
+            }
 
             // Damit die neu eingefügten Optionen angezeigt werden können
             moduleDropdown.value = 1;
