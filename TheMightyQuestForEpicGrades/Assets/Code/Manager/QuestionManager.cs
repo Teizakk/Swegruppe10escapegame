@@ -186,6 +186,16 @@ namespace Assets.Code.Manager {
             Questions = null;
         }
 
+        public List<Question> GetQuestionField()
+        {
+            return Questions;
+        }
+
+        public void SetQuestionFromSavegame(List<Question> lq)
+        {
+            Questions = lq;
+        }
+
         public List<Question> GetAllQuestions(string moduleName){
             LoadQuestionsFromFile(moduleName, Difficulties.Easy);
             var list = new List<Question>(Questions);
@@ -233,6 +243,10 @@ namespace Assets.Code.Manager {
                 var question = unusedQuestions[rand.Next(unusedQuestions.Count)];
                 question.Used = true;
                 return question;
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                throw new UnityException("Es wurde keine unbenutze Frage gefunden", e);
             }
             catch (IndexOutOfRangeException e) {
                 throw new UnityException("Es wurde keine unbenutze Frage gefunden", e);

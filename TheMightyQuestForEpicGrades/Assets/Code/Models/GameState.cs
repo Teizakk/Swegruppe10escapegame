@@ -50,7 +50,7 @@ namespace Assets.Code.Models {
             public int Stage { get; set; } //Aktuelle Stufe bzw das 'Level' im Spieldurchgang
             public Vector3_Serializable PlayerPosition { get; set; } //Die aktuelle Position des Spielers
             public bool[] Chests { get; set; } //Bool-Array[10] wo an der Stelle der ID der Truhe (in der Truhe gespeichert) steht ob sie locked ist 
-            //public List<Question> Questions { get; set; } aktuell in QuestionManager gespeichert //Die Liste aller zum Modul und zum Schwierigkeitsgrad passenden Fragen 
+            public List<Question> Questions { get; set; } //Die Liste aller zum Modul und zum Schwierigkeitsgrad passenden Fragen 
             public int Lives { get; set; } //Die noch verbleibende Anzahl Leben
             public int HintStones { get; set; } //Die noch verbleibende Anzahl an Hinweissteinen
             public int Score { get; set; } //Der bisher erreichte Punktestand
