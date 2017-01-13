@@ -65,6 +65,9 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
         public void SwitchControlBlock() {
             controlsBlocked = !controlsBlocked;
+            //Geschwindigkeit auf 0 setzen, damit man nicht weiter läuft
+            rb.velocity = new Vector3(0.0f, 0.0f, 0.0f);
+
             //Debug Ausgabe
             //Debug.Log(controlsBlocked ? "Controls are now blocked" : "Controls are now enabled");
         }
