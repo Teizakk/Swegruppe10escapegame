@@ -28,8 +28,12 @@ namespace Assets.Code.Scripts.SceneControllers {
             //Wenn Spiel gewonnen
             if (Master.Instance().MyGameState.GameIsWon)
             {
+                
                 highscoreliste = Persist.Load<List<Highscore>>(Name);
-                if (highscoreliste != null) { //Wenn highscores erfolgreich geladen
+                if (highscoreliste != null) {
+                    //Wenn highscores erfolgreich geladen
+                    int highscore = HighscoreBerechnung(Master.Instance().MyGameState.ScoreCurrent, Master.Instance().MyGameState.TimeTakenUntilNow);
+                    Master.Instance().MyGameState.ScoreCurrent = highscore;
                     if (highscoreliste.Count == 0 || (Master.Instance().MyGameState.ScoreCurrent > highscoreliste[highscoreliste.Count - 1].Score)) { //TODO reicht es Scores zu vergleichen? Was ist mit der Zeit?
                         //Wenn es noch keine Highscores gibt oder wenn der erreichte Score ein Highscore ist
                         nextWindow = 11;
@@ -55,6 +59,37 @@ namespace Assets.Code.Scripts.SceneControllers {
             }
         }
 
+        public int HighscoreBerechnung(int score,System.TimeSpan zeit)
+        {
+            int highscore = score *1000;
+            int zeitInSekunden = 0;
+
+            if(zeit.Seconds != 0)
+            {
+                zeitInSekunden += zeit.Seconds;
+            }
+
+            if(zeit.Minutes!=0)
+            {
+                int temp = zeit.Minutes * 60;
+                zeitInSekunden += temp;
+            }
+
+            if(zeit.Hours!=0)
+            {
+                int temp = zeit.Hours * 60 * 60;
+                zeitInSekunden += temp;
+            }
+
+            if(zeit.Days!=0)
+            {
+                int temp = zeit.Days * 24 * 60 * 60;
+                zeitInSekunden += temp;
+            }
+
+            highscore /= zeitInSekunden;
+            return highscore;
+        }
         public void NextWindowOnClick()
         {
             if (nextWindow == 0) { //== zurück ins Hauptmenu
