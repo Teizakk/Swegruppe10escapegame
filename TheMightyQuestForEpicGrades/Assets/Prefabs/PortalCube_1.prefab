@@ -45,7 +45,7 @@ GameObject:
   m_TagString: PinkPortal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4000010568316638
 Transform:
@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bab6c06d159c2948b1cfbf8590ef676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeshToReset: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!135 &135000012188644116
 SphereCollider:
   m_ObjectHideFlags: 1
