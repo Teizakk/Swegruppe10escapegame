@@ -342,53 +342,52 @@ namespace Assets.Code.Manager {
                 Master.Instance().MyQuestion.ResetAllToUnused(Master.Instance().MyGameState.ChapterInUse);
             }
             questionDialogController.ShowQuestion();
-            if (questionDialogController.AnswerCorrect())
+            //if (questionDialogController.AnswerCorrect()) {
+            //    chestToOpen.GetComponent<ChestScript>().Lock();
+            //    Debug.Log("Frage korrekt beantwortet");
+            //}
+            /* Portalstein oder Hintstein bekommen */
+            // wenn noch nicht alle Portalsteine bekommen
+
+            //Dominiks Steine ziehen
+            /*
+            if (!GotAllPortalStones())
             {
-                //chestToOpen.GetComponent<ChestScript>().Lock();
-                Debug.Log("Frage korrekt beantwortet");
-                /* Portalstein oder Hintstein bekommen */
-                // wenn noch nicht alle Portalsteine bekommen
-              
-                //Dominiks Steine ziehen
-                /*
-                if (!GotAllPortalStones())
+                // zufällig auswählen zwischen Portalstein und Hintstein
+                var randomizer = new System.Random((int) DateTime.Now.Ticks);
+                var rdmInt = randomizer.Next(0, 2);
+                switch (rdmInt)
                 {
-                    // zufällig auswählen zwischen Portalstein und Hintstein
-                    var randomizer = new System.Random((int) DateTime.Now.Ticks);
-                    var rdmInt = randomizer.Next(0, 2);
-                    switch (rdmInt)
-                    {
-                        case 0:
-                            WinHintstone();
-                            break;
-                        case 1:
-                            // PortalStein mit zufälliger Farbe vergeben
-                            var color = (PortalColor) randomizer.Next((int) PortalColor.Blue, (int) PortalColor.Pink);
-                            Debug.Log(color + " bekommen");
-                            WinPortalStone(color);
-                            break;
-                    }
+                    case 0:
+                        WinHintstone();
+                        break;
+                    case 1:
+                        // PortalStein mit zufälliger Farbe vergeben
+                        var color = (PortalColor) randomizer.Next((int) PortalColor.Blue, (int) PortalColor.Pink);
+                        Debug.Log(color + " bekommen");
+                        WinPortalStone(color);
+                        break;
                 }
-                else
-                {
-                    // nur Hintsteine ausgeben
-                    WinHintstone();
-                }
-                */
-          }
+            }
+            else
+            {
+                // nur Hintsteine ausgeben
+                WinHintstone();
+            }
+
+      } */
         }
         //TODO triggert funktion in chestscript? 
-        public void CloseChest(bool answerCorrect)
-        {
+        public void CloseChest(bool answerCorrect) {
             if (answerCorrect)
             {
                 opendChest.GetComponent<ChestScript>().Lock();
                 ChestCheckArray[opendChest.GetComponent<ChestScript>().Index] = true; // = ist gelocked
             }
             else
-            { 
+            {
                 //eigentlich nicht erforderlich aber eine art unlock
-                opendChest.GetComponentInChildren<Light>().enabled = false;
+                //opendChest.GetComponentInChildren<Light>().enabled = false;
                 opendChest.GetComponent<SphereCollider>().enabled = true;
             }
             opendChest = null;
