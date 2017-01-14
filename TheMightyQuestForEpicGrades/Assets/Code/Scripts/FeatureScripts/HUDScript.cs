@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using Assets.Code.GLOBALS;
 using Assets.Code.Manager;
 using UnityEngine;
@@ -61,9 +62,9 @@ namespace Assets.Code.Scripts.FeatureScripts {
             numberOfHints = gameStateLink.HintstonesRemaining;
 
             //Anzeige der Portalsteine setzen
-            bluePortalStone.enabled = gameStateLink.PortalStoneBlueIsInPossession;
-            greenPortalStone.enabled = gameStateLink.PortalStoneGreenIsInPossession;
-            pinkPortalStone.enabled = gameStateLink.PortalStonePinkIsInPossession;
+            bluePortalStone.enabled = gameStateLink.PortalStoneBlueIsInPossession || gameStateLink.PortalStoneBlueHasBeenUsed;
+            greenPortalStone.enabled = gameStateLink.PortalStoneGreenIsInPossession || gameStateLink.PortalStoneGreenHasBeenUsed;
+            pinkPortalStone.enabled = gameStateLink.PortalStonePinkIsInPossession || gameStateLink.PortalStonePinkHasBeenUsed;
 
             //Anzeige ob PortalSteine genutzt wurden
             if (gameStateLink.PortalStoneBlueHasBeenUsed) UsePortalStone(PortalColor.Blue);

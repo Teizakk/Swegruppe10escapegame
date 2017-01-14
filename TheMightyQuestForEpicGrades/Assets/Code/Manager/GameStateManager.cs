@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Assets.Code.GLOBALS;
 using Assets.Code.Models;
 using Assets.Code.Scripts.FeatureScripts;
@@ -68,6 +69,30 @@ namespace Assets.Code.Manager {
             InBetweenLevelsDialogController._loadingASaveGame = true;
             PlayerScript._loadingASavedGame = true;
             Master.Instance().MyQuestion.SetQuestionFromSavegame(GameStateObject.LevelState.Questions);
+            //Steinchen-Lotterie an damaligen Stand anpassen
+            //das was der Spieler besitzt oder besessen hat abziehen (0 sonst 1 wenn noch nicht)
+            if (PortalStonePinkIsInPossession || PortalStonePinkHasBeenUsed) {
+                portalStein1 = 0;
+            }
+            if (PortalStoneBlueIsInPossession || PortalStoneBlueHasBeenUsed) {
+                portalStein2 = 0;
+            }
+            if (PortalStoneGreenIsInPossession || PortalStoneGreenHasBeenUsed) {
+                portalStein3 = 0;
+            }
+            
+            //Nachdem man weiß wieviele Portalsteine noch gewonnen werden können
+            var numOfChestsWon = 0;
+            Debug.LogWarning(portalStein2);
+            var numOfPortalStonesWon = portalStein1 + portalStein2 + portalStein3;
+            Debug.LogWarning(portalStein2);
+            numOfPortalStonesWon = 3 - numOfPortalStonesWon;
+            foreach (var chest in ChestCheckArray) {
+                if (chest) { // == ist locked
+                    numOfChestsWon++;
+                }
+            }
+            anzahlHinweissteine -= (numOfChestsWon - numOfPortalStonesWon);
             SceneManager.LoadScene("InBetweenLevels");
             EnterNewGameOrSaveGame.Invoke();
         }
@@ -230,6 +255,8 @@ namespace Assets.Code.Manager {
                 PortalStoneBlueHasBeenUsed = false;
                 PortalStoneGreenHasBeenUsed = false;
                 PortalStonePinkHasBeenUsed = false;
+
+                ChestCheckArray = new bool[10];
                 
                 //HUD sollte sich daraus ergeben wenn er refreshed wird
             }
@@ -254,9 +281,8 @@ namespace Assets.Code.Manager {
         public int portalStein1 = 1;
         public int portalStein2 = 1;
         public int portalStein3 = 1;
-        public System.Random rnd = new System.Random();
+        public System.Random rnd = new System.Random((int)DateTime.Now.Ticks);
         #endregion
-
 
         #region Question-related
         public TimeSpan TimeTakenUntilNow { get { return GameStateObject.LevelState.Time; } }
@@ -356,15 +382,21 @@ namespace Assets.Code.Manager {
         {
             if (answerCorrect)
             {
-                opendChest.GetComponentInChildren<Light>().enabled = true;
-                opendChest.GetComponent<SphereCollider>().enabled = false;
+                opendChest.GetComponent<ChestScript>().Lock();
+                ChestCheckArray[opendChest.GetComponent<ChestScript>().Index] = true; // = ist gelocked
             }
             else
-            {
+            { 
+                //eigentlich nicht erforderlich aber eine art unlock
                 opendChest.GetComponentInChildren<Light>().enabled = false;
                 opendChest.GetComponent<SphereCollider>().enabled = true;
             }
             opendChest = null;
+        }
+
+        public bool[] ChestCheckArray {
+            get { return GameStateObject.LevelState.Chests; }
+            set { GameStateObject.LevelState.Chests = value; }
         }
         #endregion
 
@@ -547,7 +579,6 @@ namespace Assets.Code.Manager {
             switch (color) {
                 case PortalColor.Blue:
                     PortalStoneBlueIsInPossession = false;
-                    
                     PortalStoneBlueHasBeenUsed = true;
                     break;
                 case PortalColor.Green:
@@ -568,6 +599,7 @@ namespace Assets.Code.Manager {
                     .HUD.UsePortalStone(color);
             }
             portal.GetComponent<PortalScript>().Activate();
+            Master.Instance().CurrentDialogController.GetComponent<MainGameDialogController>().DeactivateTooltip();
         }
         #endregion
 

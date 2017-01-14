@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Assets.Code.GLOBALS;
+using UnityEngine;
 
 namespace Assets.Code.Scripts.FeatureScripts {
     public class PortalScript : MonoBehaviour {
-        public int Index { get; set; }
+        public PortalColor Color { get; set; }
 
         public void Activate() { //aka start glowing
             GetComponentInChildren<Light>().enabled = true;
