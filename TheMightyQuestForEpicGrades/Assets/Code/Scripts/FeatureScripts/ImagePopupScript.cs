@@ -67,10 +67,23 @@ namespace Assets.Code.Scripts.FeatureScripts
             {
                 var bytes = File.ReadAllBytes(q_or_a_image_path);
                 var new_texture = new Texture2D(15, 15);
-                //new_texture.filterMode
                 new_texture.LoadImage(bytes);
+                //Texture konfigurieren
+                Debug.Log(new_texture.dimension);
+                new_texture.wrapMode = TextureWrapMode.Clamp;
+                new_texture.mipMapBias = 0;
+                new_texture.filterMode = FilterMode.Bilinear;
+                new_texture.Apply();
+                
                 QOrAImage.texture = new_texture;
                 QOrAImage.gameObject.SetActive(true);
+                /*
+                 * For GUI, most of the time you should scale it the same size as it's intended size of how it will appear in the game.
+                 * Then just make sure it has the appropriate import settings for the texture. Disable mipmapping, disable NPOT scaling,
+                 * set the filtering to bilinear, set the wrap mode to clamp, set it's size to something bigger or equals to your source
+                 * texture size and finally set it's format to something uncompressed if you are still suffering quality.
+                 * 
+                 */
             }
             else
             {
