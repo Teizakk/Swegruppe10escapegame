@@ -12,7 +12,7 @@ namespace Assets.Code.Models {
             GameOptions = new Preselectives();
             LevelState = new CurrentLevelState();
             //LevelState.PlayerPosition wird beim ersten Speichern gesetzt
-            LevelState.Chests = new[] {false};
+            LevelState.Chests = new bool[10]; 
             //LevelState.Questions = new List<Question>(); aktuell in QuestionManager gespeichert
             LevelState.BluePortalStone = new PortalStone();
             LevelState.GreenPortalStone = new PortalStone();

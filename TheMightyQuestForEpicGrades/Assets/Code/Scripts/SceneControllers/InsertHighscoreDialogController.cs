@@ -22,12 +22,14 @@ namespace Assets.Code.Scripts.SceneControllers {
         {
             oldPlayerName.text = Master.Instance().MyGameState.PlayerName;
             score.text = Master.Instance().MyGameState.ScoreCurrent.ToString();
-            zeit.text = Master.Instance().MyGameState.TimeTakenUntilNow.ToString();
+            zeit.text = String.Format("{0:hh\\:mm\\:ss\\:ff}", Master.Instance().MyGameState.TimeTakenUntilNow);
+            //zeit.text = String.Format("{0:hh\\:mm\\:ss}", Master.Instance().MyGameState.TimeTakenUntilNow);
         }
 
         public void NextWindowOnClick()
         {
-            if (SceneManager.GetActiveScene().name == "InsertHighscoreEndOfGame")
+            if (SceneManager.GetActiveScene().name == "InsertHighscoreEndOfGame" ||
+                SceneManager.GetActiveScene().name == "InsertHighscoreEndOFGame")
             {
                 try
                 {

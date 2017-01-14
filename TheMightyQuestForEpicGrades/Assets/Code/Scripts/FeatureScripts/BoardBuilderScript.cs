@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Code.GLOBALS;
 using Assets.Code.Manager;
 using UnityEngine;
 
@@ -33,6 +34,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
             _instantiatedObjects = new GameObject[max_x,max_z];
 
             var portalNumber = 0;
+            var chestIndex = 0;
             GameObject toInstantiate = null;
 
             for (var x = 0; x < max_x; ++x) {
@@ -77,6 +79,36 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
                     if (toInstantiate != null) {
                         var instance = Instantiate(toInstantiate, new Vector3(x, height, z), Quaternion.identity) as GameObject;
+
+                        //Debug.Log("Name von toInstatiate: " + toInstantiate.name);
+                        //Hier werden bei der gleichen Map die Blocks immer in der gleichen Reihenfolge landen und so ihren index bekommen
+                        if (toInstantiate == ChestBlock && instance != null) {
+                            instance.GetComponent<ChestScript>().Index = chestIndex;
+                            if (Master.Instance().MyGameState.ChestCheckArray[chestIndex]) { //war im vorherigen Savegame bereits gelocked
+                                    instance.GetComponent<ChestScript>().Lock();
+                            }
+                            Debug.LogWarning("Chestindex: " + chestIndex);
+                            chestIndex++;
+                        }
+
+                        if (toInstantiate == PortalBlock[0] && instance != null) {
+                            instance.GetComponent<PortalScript>().Color = PortalColor.Pink; //nicht zwingend erforderlich
+                            if (Master.Instance().MyGameState.PortalStonePinkHasBeenUsed) { //wenn im letztetn Spiel aktiviert erneut aktivieren
+                                instance.GetComponent<PortalScript>().Activate();
+                            }
+                        }
+                        else if (toInstantiate == PortalBlock[1] && instance != null) {
+                            instance.GetComponent<PortalScript>().Color = PortalColor.Blue; //nicht zwingend erforderlich
+                            if (Master.Instance().MyGameState.PortalStoneBlueHasBeenUsed) { 
+                                instance.GetComponent<PortalScript>().Activate();
+                            }
+                        }
+                        else if (toInstantiate == PortalBlock[2] && instance != null) {
+                            instance.GetComponent<PortalScript>().Color = PortalColor.Green; //nicht zwingend erforderlich
+                            if (Master.Instance().MyGameState.PortalStoneGreenHasBeenUsed) { 
+                                instance.GetComponent<PortalScript>().Activate();
+                            }
+                        }
                         
                         if (toInstantiate == EndDoor && (lastInstatiatedBlock == null || lastInstatiatedBlock == FloorBlock)) { //Prüft vermutlich nur auf Referenzgleichheit sollte aber ok sein
                             instance.transform.rotation = Quaternion.AngleAxis(90, Vector3.up); //wenn der EndDoor Block in einer vertikalen Wand ist dann um 90° drehen

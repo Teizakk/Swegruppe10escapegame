@@ -120,7 +120,8 @@ namespace Assets.Code.Scripts.SceneControllers
         {
             usedTime = TimeSpan.FromTicks(DateTime.Now.Ticks - startTime.Ticks);
             if (_updateTimer) {
-                TimerText.text = String.Format("{0:hh\\:mm\\:ss\\:ff}", usedTime);
+                //TimerText.text = String.Format("{0:hh\\:mm\\:ss\\:ff}", usedTime);
+                TimerText.text = String.Format("{0:hh\\:mm\\:ss}", usedTime);
             }
         }
 
@@ -218,7 +219,7 @@ namespace Assets.Code.Scripts.SceneControllers
                             portal1--;
                             gezogen = true;
                             //Gebe dem Spieler Portalstein1
-                            Master.Instance().MyGameState.WinPortalStone(PortalColor.Blue);
+                            Master.Instance().MyGameState.WinPortalStone(PortalColor.Pink);
                             Master.Instance().MyGameState.portalStein1 = 0;
                             Debug.Log("portalstein1");
                         }
@@ -227,7 +228,7 @@ namespace Assets.Code.Scripts.SceneControllers
                             portal2--;
                             gezogen = true;
                             //Gebe dem Spieler Portalstein2
-                            Master.Instance().MyGameState.WinPortalStone(PortalColor.Green);
+                            Master.Instance().MyGameState.WinPortalStone(PortalColor.Blue);
                             Master.Instance().MyGameState.portalStein2 = 0;
                             Debug.Log("portalstein2");
                         }
@@ -235,7 +236,7 @@ namespace Assets.Code.Scripts.SceneControllers
                         {
                             portal3--;
                             gezogen = true;
-                            Master.Instance().MyGameState.WinPortalStone(PortalColor.Pink);
+                            Master.Instance().MyGameState.WinPortalStone(PortalColor.Green);
                             Master.Instance().MyGameState.portalStein3 = 0;
                             Debug.Log("portalstein3");
                         }
@@ -260,7 +261,7 @@ namespace Assets.Code.Scripts.SceneControllers
                         portal1--;
                         gezogen = true;
                         //Gebe dem Spieler Portalstein1
-                        Master.Instance().MyGameState.WinPortalStone(PortalColor.Blue);
+                        Master.Instance().MyGameState.WinPortalStone(PortalColor.Pink);
                         Master.Instance().MyGameState.portalStein1 = 0;
                         Debug.Log("portalstein1");
                     }
@@ -269,7 +270,7 @@ namespace Assets.Code.Scripts.SceneControllers
                         portal2--;
                         gezogen = true;
                         //Gebe dem Spieler Portalstein2
-                        Master.Instance().MyGameState.WinPortalStone(PortalColor.Green);
+                        Master.Instance().MyGameState.WinPortalStone(PortalColor.Blue);
                         Master.Instance().MyGameState.portalStein2 = 0;
                         Debug.Log("portalstein2");
                     }
@@ -277,7 +278,7 @@ namespace Assets.Code.Scripts.SceneControllers
                     {
                         portal3--;
                         gezogen = true;
-                        Master.Instance().MyGameState.WinPortalStone(PortalColor.Pink);
+                        Master.Instance().MyGameState.WinPortalStone(PortalColor.Green);
                         Master.Instance().MyGameState.portalStein3 = 0;
                         //Gebe dem Spieler Portalstein3
                         Debug.Log("portalstein3");

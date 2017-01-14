@@ -10,9 +10,9 @@ namespace Assets.Code.GLOBALS {
     }
 
     public enum PortalColor {
-        Blue = 0,
-        Green = 1,
-        Pink = 2
+        Pink = 0,
+        Blue = 1,
+        Green = 2
     }
 
     public static class HELPER {
