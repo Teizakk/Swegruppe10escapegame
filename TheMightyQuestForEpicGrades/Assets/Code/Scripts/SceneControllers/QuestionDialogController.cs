@@ -364,15 +364,56 @@ namespace Assets.Code.Scripts.SceneControllers
             outQuestion.text = q.QuestionText;
 
             imagePaths = new string[q.Answers.Count + 1];
-
             // Bildpfad zu Frage
             imagePaths[0] = q.ImagePath;
+            imagePaths[1] = q.Answers[0].ImagePath;
+            imagePaths[2] = q.Answers[1].ImagePath;
+            imagePaths[3] = q.Answers[2].ImagePath;
+
+            if (imagePaths[0] != "" && imagePaths[0] != null)
+            {
+                imagePaths[0] = ChangePath(imagePaths[0]);
+            }
+
+            if (imagePaths[1] != "" && imagePaths[1]!=null)
+            {
+                imagePaths[1] = ChangePath(imagePaths[1]);
+            }
+
+            if (imagePaths[2] != "" && imagePaths[2] != null)
+            {
+                imagePaths[2] = ChangePath(imagePaths[2]);
+            }
+
+            if (imagePaths[3] != "" && imagePaths[3] != null)
+            {
+                imagePaths[3] = ChangePath(imagePaths[3]);
+            }
+
 
             // Bild vorhanden?
             if (!string.IsNullOrEmpty(imagePaths[0]) && File.Exists(Path.GetFullPath(imagePaths[0])))
             {
                 // Button anzeigen
                 btnPictures[0].SetActive(true);
+            }
+
+            if (!string.IsNullOrEmpty(imagePaths[1]) && File.Exists(Path.GetFullPath(imagePaths[1])))
+            {
+                // Button anzeigen
+                btnPictures[1].SetActive(true);
+            }
+
+            if (!string.IsNullOrEmpty(imagePaths[2]) && File.Exists(Path.GetFullPath(imagePaths[2])))
+            {
+                // Button anzeigen
+                btnPictures[2].SetActive(true);
+            }
+
+            if (!string.IsNullOrEmpty(imagePaths[3]) && File.Exists(Path.GetFullPath(imagePaths[3])))
+            {
+                // Button anzeigen
+                btnPictures[3].SetActive(true);
             }
 
             // Antworten laden
@@ -409,6 +450,36 @@ namespace Assets.Code.Scripts.SceneControllers
             _updateTimer = true;
         }
 
+        public string ChangePath(string str)
+        {
+            string richtig = Application.persistentDataPath + "/Resources/";
+            for (int i = 0; i < str.Length; i++)
+            {
+                string pictures = "";
+                for (int j=0;j<8;j++)
+                {
+                    pictures += str[i];
+                    i++;
+                }
+                i -= 8;
+                if(pictures=="Pictures")
+                {
+                    
+                    for(int k=i;k<str.Length;k++)
+                    {
+                        if (str[i] == '\\')
+                            richtig += '/';
+                        else
+                            richtig += str[i];
+                        i++;
+                    }
+                    break;
+                }
+            }
+            
+            return richtig;
+        }
+
         #region Popups
         //zeigt Bild(ImagePopup) an
         public void ShowPicture(int index)
@@ -418,11 +489,11 @@ namespace Assets.Code.Scripts.SceneControllers
             imagePopup.usedQuestion = q;
             if (index > 0)
             {
-                imagePopup.SetUpImagePopupAnswer(tippsShowed, index - 1);
+                imagePopup.SetUpImagePopupAnswer(tippsShowed, imagePaths[index-1],index);
             }
             else
             {
-                imagePopup.SetUpImagePopupQuestion(tippsShowed);
+                imagePopup.SetUpImagePopupQuestion(tippsShowed, imagePaths[0]);
             }
             Debug.Log("Bild '" + imagePaths[index] + "' anzeigen!");
         }
