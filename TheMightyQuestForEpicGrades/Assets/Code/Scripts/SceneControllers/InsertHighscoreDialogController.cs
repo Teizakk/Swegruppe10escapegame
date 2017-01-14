@@ -47,7 +47,7 @@ namespace Assets.Code.Scripts.SceneControllers {
                     Debug.LogError(e);
                     highscoreliste = new List<Highscore>();
                 }
-                string time = Master.Instance().MyGameState.TimeTakenUntilNow.Hours + ":" + Master.Instance().MyGameState.TimeTakenUntilNow.Minutes + ":" + Master.Instance().MyGameState.TimeTakenUntilNow.Seconds;
+                string time = Master.Instance().MyGameState.TimeTakenUntilNow.Hours.ToString().PadLeft(2, '0') + ":" + Master.Instance().MyGameState.TimeTakenUntilNow.Minutes.ToString().PadLeft(2, '0') + ":" + Master.Instance().MyGameState.TimeTakenUntilNow.Seconds.ToString().PadLeft(2, '0');
                 
                 Highscore neu = new Highscore()
                 {

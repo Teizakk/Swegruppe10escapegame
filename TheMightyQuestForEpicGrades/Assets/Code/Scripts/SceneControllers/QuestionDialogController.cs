@@ -176,7 +176,7 @@ namespace Assets.Code.Scripts.SceneControllers
                     Debug.Log("Frage wurde falsch beantwortet!");
                     Debug.Log("Leben - 1");
                     Master.Instance().MyGameState.LoseOneLive();
-                    Master.Instance().MyGameState.CloseChest(_answerCorrect);
+                    //Master.Instance().MyGameState.CloseChest(_answerCorrect);
                 }
                 else
                 {
@@ -303,7 +303,6 @@ namespace Assets.Code.Scripts.SceneControllers
                     }
                 }
             }
-            //TODO muss das hier noch stehen?!?!
             Master.Instance().MyGameState.CloseChest(_answerCorrect);
         }
 
