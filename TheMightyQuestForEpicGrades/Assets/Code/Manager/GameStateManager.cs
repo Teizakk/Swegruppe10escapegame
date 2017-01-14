@@ -344,7 +344,7 @@ namespace Assets.Code.Manager {
             questionDialogController.ShowQuestion();
             if (questionDialogController.AnswerCorrect())
             {
-                //chestToOpen.GetComponent<ChestScript>().Lock();
+                chestToOpen.GetComponent<ChestScript>().Lock();
                 Debug.Log("Frage korrekt beantwortet");
                 /* Portalstein oder Hintstein bekommen */
                 // wenn noch nicht alle Portalsteine bekommen
