@@ -126,47 +126,47 @@ namespace Assets.Code.Scripts.FeatureScripts
             }
         }
 
-        public void SetUpImagePopupQuestion(int hintsToShow)
+        public void SetUpImagePopupQuestion(int hintsToShow, string path)
         {
             switch (hintsToShow)
             {
                 case 0:
-                    ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath);
+                    ConfigureAndShow(usedQuestion.QuestionText, path);
                     break;
                 case 1:
-                    ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath,
+                    ConfigureAndShow(usedQuestion.QuestionText, path,
                         usedQuestion.Hints[0]);
                     break;
                 case 2:
-                    ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath,
+                    ConfigureAndShow(usedQuestion.QuestionText, path,
                         usedQuestion.Hints[0], usedQuestion.Hints[1]);
                     break;
                 case 3:
-                    ConfigureAndShow(usedQuestion.QuestionText, usedQuestion.ImagePath,
+                    ConfigureAndShow(usedQuestion.QuestionText, path,
                         usedQuestion.Hints[0], usedQuestion.Hints[1], usedQuestion.Hints[2]);
                     break;
             }
         }
 
-        public void SetUpImagePopupAnswer(int hintsToShow, int index)
+        public void SetUpImagePopupAnswer(int hintsToShow, string path,int index)
         {
             switch (hintsToShow)
             {
                 case 0:
                     ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
-                        usedQuestion.Answers[index].ImagePath);
+                        path);
                     break;
                 case 1:
                     ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
-                        usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0]);
+                        path, usedQuestion.Hints[0]);
                     break;
                 case 2:
                     ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
-                        usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0], usedQuestion.Hints[1]);
+                        path, usedQuestion.Hints[0], usedQuestion.Hints[1]);
                     break;
                 case 3:
                     ConfigureAndShow(usedQuestion.Answers[index].AnswerText,
-                        usedQuestion.Answers[index].ImagePath, usedQuestion.Hints[0], usedQuestion.Hints[1],
+                        path, usedQuestion.Hints[0], usedQuestion.Hints[1],
                         usedQuestion.Hints[2]);
                     break;
             }
