@@ -12,10 +12,6 @@ namespace Assets.Code.Manager {
 
         private List<Question> Questions { get; set; } //Wenn geladen nur enthält dies nur Fragen für das aktuell gewählte Modul
 
-        public QuestionManager()
-        {
-            
-        }
         /*
         private QuestionManager()
         {
@@ -221,7 +217,6 @@ namespace Assets.Code.Manager {
                 return false;
             }
 
-            
             //Fragen entsprechend des Schwierigkeits abspeichern
             switch (difficulty) {
                 case Difficulties.Easy:
