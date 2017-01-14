@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using Assets.Code.GLOBALS;
+using UnityEngine;
 
 namespace Assets.Code.Models {
 
@@ -14,8 +15,13 @@ namespace Assets.Code.Models {
         public string ImagePath {
             get {
                 if (!string.IsNullOrEmpty(_imgPath))
-                    return Path.GetFullPath(_imgPath);
-                return _imgPath;
+                {
+                    var a = _imgPath.Split(new string[] { "The Mighty Quest For Epic Grades" }, StringSplitOptions.None);
+                    var b = Application.persistentDataPath;
+                    var c = b + a[1];
+                    return c;
+                }
+                return null;
             }
             set { _imgPath = value; }
         }
