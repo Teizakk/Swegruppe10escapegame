@@ -46,8 +46,72 @@ namespace Assets.Code.Models {
             return (QuestionsEasy.Count + QuestionsMedium.Count + QuestionsHard.Count);
         }
 
+		private bool HasEnoughQuestionsInChapter(Dictionary<string, int>.ValueCollection vc, int QuestionCount, int enough) {
+			int x = 0;
+
+			foreach (int n in vc) {
+				if (n >= QuestionCount)
+					++x;
+			}
+				
+			return (x >= enough);
+		}
+
+		public bool HasEnoughQuestionsPerChapter() {
+			Dictionary<string, int> chaptersEasy = new Dictionary<string, int> ();
+			Dictionary<string, int> chaptersMedium = new Dictionary<string, int> ();
+			Dictionary<string, int> chaptersHard = new Dictionary<string, int> ();
+			chaptersEasy.Clear ();
+			chaptersMedium.Clear ();
+			chaptersHard.Clear ();
+
+			int max = Math.Max (QuestionsEasy.Count, Math.Max (QuestionsMedium.Count, QuestionsHard.Count));
+			for (int i = 0; i < max; ++i) {
+				if (i < QuestionsEasy.Count) {
+					if (chaptersEasy.ContainsKey (QuestionsEasy [i].Chapter))
+						chaptersEasy [QuestionsEasy [i].Chapter] += 1;
+					else {
+						chaptersEasy.Add (QuestionsEasy [i].Chapter, 1);
+						Debug.Log ("QuestionsEasy[" + i + "].Chapter = " + QuestionsEasy [i].Chapter);
+					}
+				}
+
+				if (i < QuestionsMedium.Count) {
+					if (chaptersMedium.ContainsKey (QuestionsMedium [i].Chapter))
+						chaptersMedium [QuestionsMedium [i].Chapter] += 1;
+					else {
+						chaptersMedium.Add (QuestionsMedium [i].Chapter, 1);
+						Debug.Log ("QuestionsMedium[" + i + "].Chapter = " + QuestionsMedium [i].Chapter);
+					}
+				}
+
+				if (i < QuestionsHard.Count) {
+					if (chaptersHard.ContainsKey (QuestionsHard [i].Chapter))
+						chaptersHard [QuestionsHard [i].Chapter] += 1;
+					else {
+						chaptersHard.Add (QuestionsHard [i].Chapter, 1);
+						Debug.Log ("QuestionsHard[" + i + "].Chapter = " + QuestionsHard [i].Chapter);
+					}
+				}
+			}
+
+			return (HasEnoughQuestionsInChapter (chaptersEasy.Values, 10, 3) &&
+					HasEnoughQuestionsInChapter (chaptersMedium.Values, 10, 3) &&
+					HasEnoughQuestionsInChapter (chaptersHard.Values, 10, 3));
+		}
+
+		public bool HasEnoughQuestionsPerDifficulty() {
+			bool ok = false;
+
+			if (QuestionsEasy.Count >= 30 && QuestionsMedium.Count >= 30 && QuestionsHard.Count >= 30)
+				ok = true;
+
+			return ok;
+		}
+
         public bool HasEnoughQuestions() {
-            return (GetCombinedNumberOfQuestions() >= 90);
+            //return (GetCombinedNumberOfQuestions() >= 90);
+			return (HasEnoughQuestionsPerDifficulty() && HasEnoughQuestionsPerChapter());
         }
     }
 }
