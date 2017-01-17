@@ -33,13 +33,14 @@ namespace Assets.Code.Scripts.SceneControllers {
             {
                 try
                 {
-                    if (Persist.Load<List<Highscore>>(Name) == null)
+                    if (Persist.Load<HighscoreWrapper>(Name) == null)
                     {
                         highscoreliste = new List<Highscore>();
                     }
-                    else
-                    {
-                        highscoreliste = Persist.Load<List<Highscore>>(Name);
+                    else {
+                        //entpacken
+                        var wrappendHighscore = Persist.Load<HighscoreWrapper>(Name);
+                        highscoreliste = wrappendHighscore.List;
                     }
                 }
                 catch (Exception e)
@@ -49,6 +50,7 @@ namespace Assets.Code.Scripts.SceneControllers {
                 }
                 string time = Master.Instance().MyGameState.TimeTakenUntilNow.Hours.ToString().PadLeft(2, '0') + ":" + Master.Instance().MyGameState.TimeTakenUntilNow.Minutes.ToString().PadLeft(2, '0') + ":" + Master.Instance().MyGameState.TimeTakenUntilNow.Seconds.ToString().PadLeft(2, '0');
 
+                //Highscore schreiben
                 Highscore neu = new Highscore()
                 {
                     PlayerName = string.IsNullOrEmpty(playerName.text) ? oldPlayerName.text : playerName.text,
@@ -56,11 +58,15 @@ namespace Assets.Code.Scripts.SceneControllers {
                     Score = Master.Instance().MyGameState.ScoreCurrent,
                     Datum = DateTime.Now
                 };
-
+                //Highscore hinzufügen
                 highscoreliste.Add(neu);
                 //highscoreliste.OrderBy(x => Convert.ToInt32(x.Score)).Take(10).ToList();
+                //sortieren
                 highscoreliste = Order(highscoreliste);
-                Persist.Save<List<Highscore>>(highscoreliste, Name);
+                //verpacken
+                var hsw = new HighscoreWrapper();
+                hsw.List = highscoreliste;
+                Persist.Save<HighscoreWrapper>(hsw, Name);
 
                 LeaveWithoutInsert(); //Macht das gleiche
             }
@@ -74,7 +80,7 @@ namespace Assets.Code.Scripts.SceneControllers {
 
         public List<Highscore> Order(List<Highscore> unsortiert)
         {
-            List<Highscore> neu = new List<Highscore>();
+            var neu = new List<Highscore>();
 
             if (unsortiert.Count > 10)
             {
@@ -105,7 +111,7 @@ namespace Assets.Code.Scripts.SceneControllers {
             return neu;
         }
 
-        List<Highscore> insertionSort(List<Highscore> input)
+        private List<Highscore> insertionSort(List<Highscore> input)
         {
             int i = 1;
             while (i < input.Count)

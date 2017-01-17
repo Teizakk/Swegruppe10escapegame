@@ -5,23 +5,22 @@ using UnityEngine;
 namespace Assets.Code.Models {
     [Serializable]
     public class ModuleQuestions {
-        public List<Question> QuestionsEasy { get; private set; }
-        public List<Question> QuestionsMedium { get; private set; }
-        public List<Question> QuestionsHard { get; private set; }
-        public string Name { get; private set; }
-        public DateTime DateCreated { get; private set; }
+        public List<Question> QuestionsEasy; 
+        public List<Question> QuestionsMedium;
+        public List<Question> QuestionsHard;
+        public string Name;
+        public DateTime DateCreated;
+        public DateTime LastUpdated;
 
-        private DateTime _lastUpdated;
-
-        public DateTime LastUpdated {
-            get { return _lastUpdated; }
-            set {
-                if (value.Ticks >= _lastUpdated.Ticks) {
-                    _lastUpdated = value;
-                }
-                Debug.LogWarning("Wert der eingetragen werden soll: " + value + "\nWert der drin steht: " + _lastUpdated);
-            }
-        }
+        //public DateTime LastUpdated {
+        //    get { return _lastUpdated; }
+        //    set {
+        //        if (value.Ticks >= _lastUpdated.Ticks) {
+        //            _lastUpdated = value;
+        //        }
+        //        Debug.LogWarning("Wert der eingetragen werden soll: " + value + "\nWert der drin steht: " + _lastUpdated);
+        //    }
+        //}
 
         public ModuleQuestions(string moduleName) {
             QuestionsEasy = new List<Question>();
@@ -35,11 +34,24 @@ namespace Assets.Code.Models {
 
             Name = moduleName;
             DateCreated = DateTime.Now.ToLocalTime();
-            _lastUpdated = DateCreated;
+            LastUpdated = DateCreated;
         }
 
         public ModuleQuestions() {
             // nur benötigt um über Load herein zu laden
+            //Trotzdem lieber mal Speichern allokieren :O
+            QuestionsEasy = new List<Question>();
+            QuestionsEasy.Clear();
+
+            QuestionsMedium = new List<Question>();
+            QuestionsMedium.Clear();
+
+            QuestionsHard = new List<Question>();
+            QuestionsHard.Clear();
+
+            Name = "EMPTY";
+            DateCreated = DateTime.Now.ToLocalTime();
+            LastUpdated = DateCreated;
         }
 
         public int GetCombinedNumberOfQuestions() {

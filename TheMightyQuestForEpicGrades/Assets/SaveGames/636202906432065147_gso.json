@@ -1,0 +1,1309 @@
+{
+    "GameOptions": {
+        "Difficulty": 2,
+        "Module": "DNIS",
+        "PlayerName": "Anonymous"
+    },
+    "LevelState": {
+        "Level": 3,
+        "LevelsUsed": [],
+        "Chapter": "Transportschicht",
+        "ChaptersUsed": [],
+        "Stage": 1,
+        "PlayerPosition": {
+            "x": 9.832779884338379,
+            "y": 1.5,
+            "z": 4.441338539123535
+        },
+        "Chests": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+        ],
+        "Questions": [
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Endsysteme",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Anwendungen",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Anwendungen und Endsysteme",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Was gehört zum Netzwerkrand?",
+                "ImagePath": "",
+                "Hints": [
+                    "Router gehören zum Inneren Netz",
+                    "Es ist der Start bzw. das Ende einer Übertragung",
+                    "Mehrere Dinge"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 2
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Switch",
+                        "ImagePath": "Switch_alt_alt.jpg"
+                    },
+                    {
+                        "AnswerText": "Router",
+                        "ImagePath": "Router_alt_alt_alt_alt_alt_alt_alt.jpg"
+                    },
+                    {
+                        "AnswerText": "Hub",
+                        "ImagePath": "Hub_alt_alt.jpg"
+                    }
+                ],
+                "QuestionText": "Was passt nicht?",
+                "ImagePath": "",
+                "Hints": [
+                    "Es verbindet auf einer anderen Schicht",
+                    "Es ist kein Vorgänger des Switch",
+                    "Es ist nicht die Erweiterung des Hub"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Leiter, Isolationsschicht, Leiter, Hülle",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Leiter, Leiter, Isolationsschicht, Hülle",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Hülle, Leiter, Isolationsschicht, Leiter",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Wie ist ein Coax Kable aufgebaut (innen nach außen)?",
+                "ImagePath": "",
+                "Hints": [
+                    "Leiter treffen nicht auf Leiter",
+                    "Man isoliert zwei Leiter von einander",
+                    "Das gesamte wird von einer Hülle umgeben"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 0
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Multimode und Anymode",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Singlemode und Anymode?",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Singlemode und Multimode",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Welche Arten gibt es bei Glasfaserkabeln?",
+                "ImagePath": "",
+                "Hints": [
+                    "Es gibt zwei Arten",
+                    "Einzelmodus",
+                    "Mehrfachmodus"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 2
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Paketvermittlung und Leistungsvermittlung",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Paketvermittlung und Leitungsvermittlung",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Leistungsvermittlung und Leitungsvermittlung",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Welche Vermittlungsarten gibt es?",
+                "ImagePath": "",
+                "Hints": [
+                    "Daten werden meist in Stücken übertragen",
+                    "Sie werden über Leitungen übertragen, aber...",
+                    "Man kann der Übertragung eine feste Bandbreite geben"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "TDM, CDM, FDM, Mischformen",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "TDM, BDM, FDM, Mischformen",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "TDM, PDM, FDM, Mischformen",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Welche Multiplexingverfahren gibt es ?",
+                "ImagePath": "",
+                "Hints": [
+                    "T = Time",
+                    "F= Frequenz",
+                    "C= Code"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 0
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Daten",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "einen Header und Daten",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "einen Header",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Jedes Paket enthält...",
+                "ImagePath": "",
+                "Hints": [
+                    "Daten werden übertragen ",
+                    "Pakete übertragen etwas",
+                    "Pakete brauchen etwas um zu wissen wo sie hin sollen"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Kann nur ein Benutzer das Netz nutzen.",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Nutzer können das Netz nacheinander Nutzen",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "können mehrere Benutzer das Netz nutzen.",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Bei Paketvermittlung...",
+                "ImagePath": "",
+                "Hints": [
+                    "Ein Router nimmt Pakete von mehreren Stellen an ",
+                    "Mehrere Stellen senden ",
+                    "Gleichzeitig"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 2
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "besser bei Bursty Traffic.",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "immer besser als Leistungsvermittlung.",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "immer schlechter als Leistungsvermittlung.",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Paketvermittlung ist...",
+                "ImagePath": "",
+                "Hints": [
+                    "Nicht Definierbar",
+                    "Meistens aber nicht immer ",
+                    "Mal so mal so"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 0
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "3",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "2",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "1",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Wie viele ISP-Tier-Level gibt es?",
+                "ImagePath": "",
+                "Hints": [
+                    "Lokal",
+                    "Regional",
+                    "International"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 0
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "R/L",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "L/R",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "L/L",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Übertragungsverzögerung = ",
+                "ImagePath": "",
+                "Hints": [
+                    "Dateigröße durch Übertragung",
+                    "L steht für Länge",
+                    "R steht für Rate"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "n (L/R)",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "(n-2)* (L/R)",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "(n-1)* (L/R)",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Warteschlangenverzögerung =",
+                "ImagePath": "",
+                "Hints": [
+                    "Abhängig von der Anzahl wartender Pakete",
+                    "Sich selbst zählt man nicht mit",
+                    " (n-x)"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Darstellungs- und Sicherungsschicht",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Darstellungs- und Sitzungsschicht",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Darstellungs- und Bitübertragungsschicht",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Welche Schichten fehlen dem Internen Protokollstapel?",
+                "ImagePath": "",
+                "Hints": [
+                    "Übertragen werden muss unbedingt",
+                    "Was wurde nicht in der Vorlesung nicht genau besprochen?",
+                    "Darstellungsschicht ist eine der nicht besprochenen Schichten"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "7",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "6",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "5",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Wie viele OSI Layer gibt es?",
+                "ImagePath": "",
+                "Hints": [
+                    "zwei wurden in der Vorlesung nicht genau besprochen",
+                    "Es gibt 2 Schichten vor den 2 nicht besprochenen",
+                    "Und mehr als eine danach"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 0
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Datentransfer zwischen Prozessen der Hosts",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Routet Pakete von Quell-zu Zielhost",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Datentransfer zwischen benachbarten Knoten",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Netzwerkschicht ist verantwortlich für",
+                "ImagePath": "",
+                "Hints": [
+                    "IP arbeitet auf der Netzwerkschicht",
+                    "Nicht nur zwischen Nachbarn",
+                    "Findet eine Route"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Datennetze und interne Netze",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Zwischen Transportschicht und Netzwerkschicht",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Zwischen Prozess und Transportschicht",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Zwischen Prozess und Hardware",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Wo befinden sich die Sockets?",
+                "ImagePath": "",
+                "Hints": [
+                    "Sockets dienen einer Verbindung",
+                    "Die Anwendungsschicht kommuniziert mit den Sockets",
+                    "Im TCP Header werden Sockets angegeben"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "520",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "530",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "80",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Welchen Port verwendet RIP?",
+                "ImagePath": "",
+                "Hints": [
+                    "Egal welche Version von RIP",
+                    "Es gibt nur einen Port den RIP benutzt.",
+                    "RIPv1 ist in RFC 1058 definiert."
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 0
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "60",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "80",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "70",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Welchen Port verwendet HTTP?",
+                "ImagePath": "",
+                "Hints": [
+                    "GET benutzt diesen Port",
+                    "Ist oft der Zielport beim senden von Daten zu einem Server",
+                    "Ist oft der Quellport beim empfangen von Daten von einem Server"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Sicherheitsgarantien",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Flusskontrolle",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Staukontrolle",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Was bietet TCP nicht?",
+                "ImagePath": "",
+                "Hints": [
+                    "Es kommen alle Pakete beim Empfänger an",
+                    "Datenraten können angeglichen werden",
+                    "CongWin"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 0
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "RTT + Übertragungsverzögerung",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "(N - 1)* RTT + Übertragungsverzögerung",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "2 * RTT + Übertragungsverzögerung",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Wie berechnet sich bei HTTP die Antwortzeit?",
+                "ImagePath": "",
+                "Hints": [
+                    "Es gibt eine Hin- und einen Rückweg",
+                    "Alles Bytes müssen übertragen werden.",
+                    "RTT=Round Trip Time"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 2
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "PULL",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Return",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "PUT",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Was ist eine HTTP Methode?",
+                "ImagePath": "",
+                "Hints": [
+                    "HTTP dient der Kommunikation",
+                    "Andere Methoden sind GET und POST",
+                    "Return ist falsch"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 2
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "3 mal <cr> <lf>",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "2 mal <cr> <lf>",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "1 mal <cr> <lf> ",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Was steht am Ende einer SMTP Nachricht?",
+                "ImagePath": "",
+                "Hints": [
+                    "<lf>= lien feed",
+                    "<cr>= carriage",
+                    "1 mal genügt nicht"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "HEAD",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "DELETE",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "GET",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Was gehört nicht zu HTTP/1.0?",
+                "ImagePath": "",
+                "Hints": [
+                    "Eines sieht man in der URL",
+                    "Eines ist fast identisch zu GET",
+                    "HTTP versendet Daten"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "max{N*F/Us,F/Dmin}",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "N * F / Us",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "max{F/Us,N*F/(Us+Summe(Ui))}",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Wie berechnet sich die minimale Verteilzeit bei Client-Server?",
+                "ImagePath": "",
+                "Hints": [
+                    "Wer ist Bottelneck?",
+                    "Client kann Bottelneck sein",
+                    "Server kann Bottelneck sein"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 0
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "HTTP",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "TCP",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "UDP",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Welches Protokoll nutzt SMTP?",
+                "ImagePath": "",
+                "Hints": [
+                    "UDP ist unzuverlässig",
+                    "TCP ist zuverlässig",
+                    "SMTP ist ein Mailprotokoll"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Mails",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Webbrowser",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Anwendungen",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Wofür wird MIME verwendet?",
+                "ImagePath": "",
+                "Hints": [
+                    "Das erste M steht für Multi",
+                    "Es wird benutzt um verschiedene Datentypen zusammen zu verschicken",
+                    "Es wird gebraucht um etwas bestimmtes zu verschicken"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 0
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "13",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "12",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "10",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Wie viele DNS Root Server gibt es?",
+                "ImagePath": "",
+                "Hints": [
+                    "DNS dient der Namensauflösung",
+                    "ROOT Server ist der Server der zu .com, .de, ... rootet",
+                    "Bevor Anycast eingesetzt wurde, befanden sich 10 in den USA"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 0
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "TLC",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "TLS",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "TLD",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Welchen DNS Servertypen gibt es?",
+                "ImagePath": "",
+                "Hints": [
+                    "T=Top",
+                    "L=Level",
+                    "S=Server"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 2
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "name, value, type, ttl",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "name, ttl, type, value",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "ttl, value, name, teil",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Wie sehen DNS Einträge aus?",
+                "ImagePath": "",
+                "Hints": [
+                    "ttl=time to live",
+                    "typ= Legt fest was in Name und was in Value gespeichert ist",
+                    "(n, , ,t)"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 0
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Distributed Hash Table",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Distribution Hash Task",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Distributed Hover Table",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Was bedeutet DHT?",
+                "ImagePath": "DHT_alt.jpg",
+                "Hints": [
+                    "Hoever beschreibt was passiert wenn man mit der Maus auf etwas zeigt",
+                    "Wird genutzt um zu wissen wo sich Daten befinden",
+                    "Bei P2P eingesetzt"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Anwendungsschicht",
+                "CorrectAnswer": 0
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "4",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "3",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "2",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Durch wie viele Tupel werden UDP-Sockets definiert?",
+                "ImagePath": "",
+                "Hints": [
+                    "UDP braucht aufgrund der Unzuverlässigkeit weniger Sockets als TCP",
+                    "TCP verwendet 2 Sockets mehr",
+                    "UDP benötigt 2 Sockets"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": true,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 2
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "2",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "4",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "3",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Durch wie viele Tupel werden TCP-Sockets definiert?",
+                "ImagePath": "",
+                "Hints": [
+                    "TCP benötigt aufgrund der Zuverlässigkeits-Mechanismen 2 Sockets mehr als UDP",
+                    "TCP verwendet 2 Sockets mehr als UDP",
+                    "TCP benötigt 4 Sockets"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "6",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "3",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "4",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Nach wie vielen Duplikat-ACKs wird das Segment bei TCP wiederholt?",
+                "ImagePath": "",
+                "Hints": [
+                    "Das Segment wird relativ früh wiederholt",
+                    "6 Duplikate sind zu viel",
+                    "Nach 3 Duplikaten"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": true,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Bytestromorientiert",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "verbindungslos",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "nachrichtenorientiert",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "TCP ist ...",
+                "ImagePath": "",
+                "Hints": [
+                    "UDP ist verbindungslos",
+                    "TCP baut über IP eine Verbindung auf",
+                    "TCP ist bytestromorientiert"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 0
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "netzabhängig",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "ja",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "nein",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Kann ein Sender einen Empfänger mit TCP-Segmenten überlasten?",
+                "ImagePath": "",
+                "Hints": [
+                    "Mit UDP wäre es möglich",
+                    "Es gibt eine Staukontrolle",
+                    "Deshalb ist dies nicht möglich"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 2
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "AIMD",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Slow Start",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "beides",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "TCP benutzt ...",
+                "ImagePath": "TCP_Diagramm_alt.png",
+                "Hints": [
+                    "TCP nutzt Slow Start",
+                    "TCP nutzt allerdings auch AIMD",
+                    "TCP nutzt deshalb beides "
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 2
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "alle",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "alle im Sendefenster",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "1",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Wenn bei Selective Repeat ein Timeout einsetzt, werden wie viele Pakete wiederholt?",
+                "ImagePath": "",
+                "Hints": [
+                    "Bei Go-Back-n werden alle des Sendefensters wiederholt",
+                    "Bei Selective Repeat werden nicht alle des Sendefensters wiederholt",
+                    "Nur ein Einzelnes wird wiederholt"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 2
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Minimum Segment Size",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Maximum Source Segments",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Maximum Segment Size",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Wofür steht MSS?",
+                "ImagePath": "",
+                "Hints": [
+                    "Es geht nicht um die Quelle",
+                    "Es geht um die Segment Größe",
+                    "Genau genommen um die maximale Segment Größe"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 2
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "exponentiell",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "logarithmisch",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "linear",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Wie steigert AIMD die Übertragungsrate?",
+                "ImagePath": "",
+                "Hints": [
+                    "Multiple Decrease",
+                    "Additive Increase",
+                    "Addition ist linear"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 2
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "CongWin vierteln",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "CongWin halbieren",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "CongWin auf 1 MSS setzen",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Was macht TCP Reno bei 3 Duplikaten-ACKs?",
+                "ImagePath": "",
+                "Hints": [
+                    "TCP Tahoe geht damit anders um",
+                    "TCP Tahoe setzt MSS auf 1",
+                    "Das CongWin wird halbiert"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "CongWin halbieren",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "CongWin auf 1 MSS setzen",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "CongWin vierteln",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Was macht TCP Tahoe bei 3 Duplikaten-ACKs?",
+                "ImagePath": "",
+                "Hints": [
+                    "TCP Reno geht damit anders um",
+                    "TCP Reno setzt MSS auf die Hälfte des CongWin",
+                    "Das CongWin wird auf 1 gesetzt"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "CongWin halbieren",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "CongWin auf 1 MSS setzen",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "CongWin vierteln",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Was macht TCP Tahoe bei einem Timeout?",
+                "ImagePath": "",
+                "Hints": [
+                    "TCP Reno geht damit anders um",
+                    "TCP Tahoe geht mit Duplikats-ACKs und Timeouts gleich um",
+                    "Das CongWin wird auf 1 gesetzt"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 1
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "exponentiell wachsen",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "linear wachsen",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "logarithmisch wachsen",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Was macht TCP Reno nach einem Timeout?",
+                "ImagePath": "",
+                "Hints": [
+                    "TCP Tahoe geht damit anders um",
+                    "TCP Reno geht mit Duplikats-ACKS und Timeout anders um",
+                    "Es wächst nach einem Timeout exponentiell"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 0
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "ein maximal Wert",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "ein minimal Wert",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "ein Schwellwert",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "Was ist Threshold?",
+                "ImagePath": "",
+                "Hints": [
+                    "Ein bestimmter Wert des CongWin",
+                    "Wird bei bestimmten Events gesetzt",
+                    "Wird bei Timeouts und Duplikat-ACKs auf den maximalen Wert des Cong-Wins gesetzt"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 2
+            },
+            {
+                "Answers": [
+                    {
+                        "AnswerText": "Slow-Start-Phase",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "AIMD-Phase",
+                        "ImagePath": ""
+                    },
+                    {
+                        "AnswerText": "Congestion-Avoidance-Phase",
+                        "ImagePath": ""
+                    }
+                ],
+                "QuestionText": "In welcher Phase befindet sich TCP, wenn CongWin < Threshold?",
+                "ImagePath": "",
+                "Hints": [
+                    "Sobald der Threshold überschritten wird, geht TCP vorsichtiger vor",
+                    "Genauer gesagt versucht TCP nach dem Überschreiten, einen Stau zu verhindern",
+                    "Vor dem Überschreiten des Tresholds geht TCP im Slow-Start vor"
+                ],
+                "Difficulty": 2,
+                "Modul": "DNIS",
+                "Used": false,
+                "Chapter": "Transportschicht",
+                "CorrectAnswer": 0
+            }
+        ],
+        "Lives": 5,
+        "HintStones": 1,
+        "Score": 934,
+        "BluePortalStone": {
+            "InPossession": false,
+            "Used": false
+        },
+        "GreenPortalStone": {
+            "InPossession": false,
+            "Used": true
+        },
+        "PinkPortalStone": {
+            "InPossession": false,
+            "Used": false
+        },
+        "Cheatmode": false
+    }
+}

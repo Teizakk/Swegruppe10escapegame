@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 using Assets.Code.Models;
 using UnityEngine;
 
@@ -12,14 +13,11 @@ namespace Assets.Code.Scripts.UtilityScripts
     internal class Persist
     {
         private static readonly string executeable_path_;
-        private static readonly string f_ext_;
-
         static Persist()
         {
             //ExecuteablePath = Application.persistentDataPath;
             executeable_path_ = Application.dataPath;
             Debug.LogError("Pfad der Datenhaltung: " + ExecuteablePath); //das ist logError, damit man das in den DevBuilds sieht
-            f_ext_ = ".dat";
             AssureDirectoryAndFilesExists();
         }
 
@@ -27,9 +25,8 @@ namespace Assets.Code.Scripts.UtilityScripts
             get { return executeable_path_; }
         }
 
-        private static string FExt {
-            get { return f_ext_; }
-        }
+        private const string FExtBinary = ".dat";
+        private const string FExtHumanReadable = ".json";
 
         // Highscores/highscores
         // SavedStates
@@ -49,12 +46,12 @@ namespace Assets.Code.Scripts.UtilityScripts
                 Directory.CreateDirectory(rp);
         }
 
-        public static void Save<T>(T state, string fileName)
+        public static void SaveDAT<T>(T state, string fileName)
         {
             try
             {
                 var bf = new BinaryFormatter();
-                using (var file = File.Open(ExecuteablePath + "\\" + fileName + FExt, FileMode.OpenOrCreate))
+                using (var file = File.Open(ExecuteablePath + "\\" + fileName + FExtBinary, FileMode.OpenOrCreate))
                 {
                     bf.Serialize(file, state);
                     file.Close();
@@ -67,14 +64,32 @@ namespace Assets.Code.Scripts.UtilityScripts
             }
         }
 
-        public static T Load<T>(string fileName) where T : new()
+        public static void Save<T>(T state, string fileName) {
+            try {
+                var jsonString = JsonUtility.ToJson(state, true);
+                //var jsonString = JsonUtility.ToJson(state);
+                using (var file = File.Open(ExecuteablePath + "\\" + fileName + FExtHumanReadable, FileMode.OpenOrCreate))
+                {
+                    file.Close();
+                    //File.WriteAllText(ExecuteablePath + fileName, jsonString, Encoding.UTF8);
+                    File.WriteAllText(ExecuteablePath + "\\" + fileName + FExtHumanReadable, jsonString);
+                    Debug.Log("Datei gespeichert: " + ExecuteablePath + "\\" + fileName + FExtHumanReadable);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
+        }
+
+        public static T LoadDAT<T>(string fileName) where T : new()
         {
             try
             {
-                if (File.Exists(ExecuteablePath + "\\" + fileName + FExt))
+                if (File.Exists(ExecuteablePath + "\\" + fileName + FExtBinary))
                 {
                     var bf = new BinaryFormatter();
-                    using (var file = File.Open(ExecuteablePath + "\\" + fileName + FExt, FileMode.Open))
+                    using (var file = File.Open(ExecuteablePath + "\\" + fileName + FExtBinary, FileMode.Open))
                     {
                         var state = (T)bf.Deserialize(file);
                         file.Close();
@@ -89,23 +104,67 @@ namespace Assets.Code.Scripts.UtilityScripts
             catch (Exception e)
             {
                 Debug.LogError(e);
+                return new T();
+            }
+        }
+
+        public static T Load<T>(string fileName) where T : new() {
+            try
+            {
+                if (File.Exists(ExecuteablePath + "\\" + fileName + FExtHumanReadable))
+                {
+                    using (var file = File.Open(ExecuteablePath + "\\" + fileName + FExtHumanReadable, FileMode.Open))
+                    {
+                        var sr = new StreamReader(file);
+                        var jsonString = sr.ReadToEnd();
+                        Debug.Log(jsonString);
+                        var state = JsonUtility.FromJson<T>(jsonString);
+                        Debug.LogWarning("State = " + ((state == null) ? "Null" : "Not null"));
+                        file.Close();
+                        Debug.Log("Datei: " + fileName + " \n Geladen aus: " + ExecuteablePath + "\\");
+                        return state;
+                    }
+                }
+                Debug.LogError(ExecuteablePath + "\\" + fileName + " existiert nicht!");
+                return default(T);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
                 Debug.Break();
                 return new T();
             }
         }
 
-        public static List<string> GetModuleFiles()
+        public static List<string> GetModuleFilesDAT()
         {
             if (Directory.Exists(ExecuteablePath + "\\Modules"))
-                return Directory.GetFiles(ExecuteablePath + "\\Modules").ToList().Where(x => Path.GetExtension(x) == FExt).Select(x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
+                return Directory.GetFiles(ExecuteablePath + "\\Modules").ToList().Where(x => Path.GetExtension(x) == FExtBinary).Select(x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
             Directory.CreateDirectory(ExecuteablePath + "\\Modules"); //eigentlich unnötig, da dies oben im Konstruktor schon gemacht wird.
             return new List<string>();
         }
 
-        public static List<string> GetAllSGIFileNames()
+        public static List<string> GetModuleFiles() {
+            if (Directory.Exists(ExecuteablePath + "\\Modules"))
+                return Directory.GetFiles(ExecuteablePath + "\\Modules").ToList().Where(x => Path.GetExtension(x) == FExtHumanReadable).Select(x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
+            Directory.CreateDirectory(ExecuteablePath + "\\Modules"); //eigentlich unnötig, da dies oben im Konstruktor schon gemacht wird.
+            return new List<string>();
+        }
+
+        public static List<string> GetAllSGIFileNamesDAT()
         {
             if (Directory.Exists(ExecuteablePath + "\\SaveGames"))
-                return Directory.GetFiles(ExecuteablePath + "\\SaveGames").Where(x => Path.GetExtension(x) == FExt).ToList().Select(x => {
+                return Directory.GetFiles(ExecuteablePath + "\\SaveGames").Where(x => Path.GetExtension(x) == FExtBinary).ToList().Select(x => {
+                    x = Path.GetFileNameWithoutExtension(x);
+                    return x;
+                }).Where(x => !string.IsNullOrEmpty(x) && x.Contains("_sgi")).ToList();
+            Directory.CreateDirectory(ExecuteablePath + "\\SaveGames"); //eigentlich unnötig, da dies oben im Konstruktor schon gemacht wird.
+            return new List<string>();
+        }
+
+        public static List<string> GetAllSGIFileNames() {
+            if (Directory.Exists(ExecuteablePath + "\\SaveGames"))
+                return Directory.GetFiles(ExecuteablePath + "\\SaveGames").Where(x => Path.GetExtension(x) == FExtHumanReadable).ToList().Select(x => {
                     x = Path.GetFileNameWithoutExtension(x);
                     return x;
                 }).Where(x => !string.IsNullOrEmpty(x) && x.Contains("_sgi")).ToList();
@@ -139,8 +198,8 @@ namespace Assets.Code.Scripts.UtilityScripts
                 Debug.LogError("Konstruktor hätte Verzeichnis \\Highscores erstellen sollen?!");
                 return false;
             }
-            if (File.Exists(ExecuteablePath + "\\Highscores\\" + "highscores" + FExt))
-            {
+            //if (File.Exists(ExecuteablePath + "\\Highscores\\" + "highscores" + FExtBinary))
+            if (File.Exists(ExecuteablePath + "\\Highscores\\" + "highscores" + FExtHumanReadable)) {
                 return true;
             }
             var hsl = new List<Highscore>()

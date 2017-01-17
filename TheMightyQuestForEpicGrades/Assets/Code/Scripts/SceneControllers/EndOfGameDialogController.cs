@@ -16,7 +16,7 @@ namespace Assets.Code.Scripts.SceneControllers {
 		public Text timeText;
 		public Text pointsText;
 
-        List<Highscore> highscoreliste = new List<Highscore>();
+        HighscoreWrapper highscoreliste = new HighscoreWrapper();
         private static string Name = @"Highscores\highscores";
 
         //0= Main Menü
@@ -30,9 +30,9 @@ namespace Assets.Code.Scripts.SceneControllers {
             //Wenn Spiel gewonnen
             if (Master.Instance().MyGameState.GameIsWon)
             {
-                highscoreliste = Persist.Load<List<Highscore>>(Name);
+                highscoreliste = Persist.Load<HighscoreWrapper>(Name);
                 if (highscoreliste != null) { //Wenn highscores erfolgreich geladen
-                    if (highscoreliste.Count == 0 || (Master.Instance().MyGameState.ScoreCurrent > highscoreliste[highscoreliste.Count - 1].Score)) {
+                    if (highscoreliste.List.Count == 0 || (Master.Instance().MyGameState.ScoreCurrent > highscoreliste.List[highscoreliste.List.Count - 1].Score)) {
                         //Wenn es noch keine Highscores gibt oder wenn der erreichte Score ein Highscore ist
                         nextWindow = 11;
                         loseOrWin.text = "Sie haben Gewonnen\nund einen Highscore erzielt!";

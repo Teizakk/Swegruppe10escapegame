@@ -54,16 +54,19 @@ namespace Assets.Code.Manager {
         }
 
         public List<string> GetModulesWithEnoughQuestionWarningAsList() {
-            var tmpModuleList = new List<string>(module);
             var allModuls = Persist.GetModuleFiles();
+            var tmpModuleList = new List<string>(module);
             for (var index = 0; index < allModuls.Count; index++) {
                 var modul = allModuls[index];
                 var loadedModuleFile = Persist.Load<ModuleQuestions>("Modules\\" + modul);
+                Debug.LogWarning("loadedModule = " + ((loadedModuleFile == null) ? "Null" : "Not null"));
+                Debug.Log(loadedModuleFile.Name);
                 if (!loadedModuleFile.HasEnoughQuestions()) {
-					if (loadedModuleFile.GetCombinedNumberOfQuestions () >= 90)
-						tmpModuleList [index] += " (Add Kapitel/Frage)";
-					else
-                    	tmpModuleList[index] += " (" + loadedModuleFile.GetCombinedNumberOfQuestions() + "/90 Fragen)";
+                    if (loadedModuleFile.GetCombinedNumberOfQuestions() >= 90)
+                        tmpModuleList[index] += " (Add Kapitel/Frage)";
+                    else {
+                        tmpModuleList[index] += " (" + loadedModuleFile.GetCombinedNumberOfQuestions() + "/90 Fragen)";
+                    }
                 }
             }
             return tmpModuleList;
@@ -80,7 +83,7 @@ namespace Assets.Code.Manager {
             try {
                 var sucess = Master.Instance().MyQuestion.CreateNewModuleFile(newModuleName);
                 if(sucess)
-                    Debug.Log("Modul erstellt und in Module.txt eingetragen");
+                    Debug.Log("Modul erstellt und in Ordner \\Modules eingetragen");
                 return sucess;
             }
             catch (Exception e) {
@@ -94,7 +97,7 @@ namespace Assets.Code.Manager {
         public void DEVReadQuestionsFromCSV(string fileName, string modul, Difficulties difficulty, string chapter) {
             //diese werte müssen "händisch" übergeben werden in diesem Fall
             var data = CSVReader.Read(fileName);
-            modul = "DNIS";
+            
             //weil es im Moment nur das gibt 
             foreach (var zeile in data) {
                 try
@@ -177,6 +180,7 @@ namespace Assets.Code.Manager {
             var moduleFile = Persist.Load<ModuleQuestions>( "Modules\\" + q.Modul);
             if (moduleFile == null) {
                 throw new FileNotFoundException("Modulfile konnte nicht geladen/geöffnet werden!");
+                //moduleFile = new ModuleQuestions(q.Modul);
             }
 
             //Das Speichern sollte ab hier funktionieren - es müssen allerdings noch ein paar Werte angepasst werden:

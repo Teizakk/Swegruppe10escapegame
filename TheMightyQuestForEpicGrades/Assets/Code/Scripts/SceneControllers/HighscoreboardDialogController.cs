@@ -28,9 +28,10 @@ namespace Assets.Code.Scripts.SceneControllers {
         private void Awake() {
             if (SceneManager.GetActiveScene().name == "Highscore") {
                 if(Persist.InitializeHighscoreList())
-                //if (Persist.Load<List<Highscore>>(Name) != null) -> funktioniert schmeißt aber einen Fehler beim Laden, wenn keine Datei da ist und verursacht im Moment einen Debug.Break()
+                //if (Persist.Load<HighscoreWrapper>(Name) != null) -> funktioniert schmeißt aber einen Fehler beim Laden, wenn keine Datei da ist und verursacht im Moment einen Debug.Break()
                 {
-                    highscoreliste = Persist.Load<List<Highscore>>(Name);
+                    var wrappedHighscore = Persist.Load<HighscoreWrapper>(Name);
+                    highscoreliste = wrappedHighscore.List;
                 }
 
                 //Wenn Liste voll ist

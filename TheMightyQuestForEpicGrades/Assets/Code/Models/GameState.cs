@@ -35,43 +35,43 @@ namespace Assets.Code.Models {
 
         [Serializable]
         public class Preselectives { //Vorausgewählte Einstellungen
-            public Difficulties Difficulty { get; set; } //Ausgewählter Schwierigkeitsgrad
-            public string Module { get; set; } //imo fehleranfällig, mal gucken ob wir damit durchkommen (sollte aber ok sein, weil in der Frage das Modul auch als String gespeichert ist)
-            public string PlayerName { get; set; }
+            public Difficulties Difficulty; //Ausgewählter Schwierigkeitsgrad
+            public string Module; //imo fehleranfällig, mal gucken ob wir damit durchkommen (sollte aber ok sein, weil in der Frage das Modul auch als String gespeichert ist)
+            public string PlayerName;
         }
 
         [Serializable]
         public class CurrentLevelState {
             //Der Index müsste reichen, allerdings sind dann Savegames broken, wenn die Leveldateien nicht mehr übereinstimmen
-            public int Level { get; set; } //Nach Muster Level_X.txt X = der hier gespeicherte int32-Wert
-            public List<int> LevelsUsed { get; set; }
-            public string Chapter { get; set; } //Aktuelles Kapitel im Spieldurchgang -> Bestimmt den Fragenpool
-            public List<string> ChaptersUsed { get; set; } //Bereits benutzte Kapitel in diesem Spieldurchgang (um Duplikate zu verhindern)
-            public int Stage { get; set; } //Aktuelle Stufe bzw das 'Level' im Spieldurchgang
-            public Vector3_Serializable PlayerPosition { get; set; } //Die aktuelle Position des Spielers
-            public bool[] Chests { get; set; } //Bool-Array[10] wo an der Stelle der ID der Truhe (in der Truhe gespeichert) steht ob sie locked ist 
-            public List<Question> Questions { get; set; } //Die Liste aller zum Modul und zum Schwierigkeitsgrad passenden Fragen 
-            public int Lives { get; set; } //Die noch verbleibende Anzahl Leben
-            public int HintStones { get; set; } //Die noch verbleibende Anzahl an Hinweissteinen
-            public int Score { get; set; } //Der bisher erreichte Punktestand
-            public TimeSpan Time { get; set; } // Die bisher benötigte Zeit
-            public PortalStone BluePortalStone { get; set; } //'Zustand'des blauen Portalsteins und damit auch Portals
-            public PortalStone GreenPortalStone { get; set; } //'Zustand'des grünen Portalsteins und damit auch Portals
-            public PortalStone PinkPortalStone { get; set; } //'Zustand'des pinken Portalsteins und damit auch Portals
-            public bool Cheatmode { get; set; } //Ob der CheatModeScript aktiv ist
+            public int Level; //Nach Muster Level_X.txt X = der hier gespeicherte int32-Wert
+            public List<int> LevelsUsed;
+            public string Chapter; //Aktuelles Kapitel im Spieldurchgang -> Bestimmt den Fragenpool
+            public List<string> ChaptersUsed; //Bereits benutzte Kapitel in diesem Spieldurchgang (um Duplikate zu verhindern)
+            public int Stage; //Aktuelle Stufe bzw das 'Level' im Spieldurchgang
+            public Vector3_Serializable PlayerPosition; //Die aktuelle Position des Spielers
+            public bool[] Chests; //Bool-Array[10] wo an der Stelle der ID der Truhe (in der Truhe gespeichert) steht ob sie locked ist 
+            public List<Question> Questions; //Die Liste aller zum Modul und zum Schwierigkeitsgrad passenden Fragen 
+            public int Lives; //Die noch verbleibende Anzahl Leben
+            public int HintStones; //Die noch verbleibende Anzahl an Hinweissteinen
+            public int Score; //Der bisher erreichte Punktestand
+            public TimeSpan Time; // Die bisher benötigte Zeit
+            public PortalStone BluePortalStone; //'Zustand'des blauen Portalsteins und damit auch Portals
+            public PortalStone GreenPortalStone; //'Zustand'des grünen Portalsteins und damit auch Portals
+            public PortalStone PinkPortalStone; //'Zustand'des pinken Portalsteins und damit auch Portals
+            public bool Cheatmode; //Ob der CheatModeScript aktiv ist
         }
 
         [Serializable]
         public class PortalStone {
-            public bool InPossession { get; set; } //Ob der Portalstein 'gewonnen' wurde
-            public bool Used { get; set; } //Ob der Portalstein in das Portal eingesetzt wurde
+            public bool InPossession; //Ob der Portalstein 'gewonnen' wurde
+            public bool Used; //Ob der Portalstein in das Portal eingesetzt wurde
         }
 
         [Serializable]
         public class Vector3_Serializable {
-            public float x { get; set; }
-            public float y { get; set; }
-            public float z { get; set; }
+            public float x;
+            public float y;
+            public float z;
             public Vector3_Serializable(float x, float y, float z) {
                 this.x = x;
                 this.y = y;

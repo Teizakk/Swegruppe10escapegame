@@ -13,16 +13,16 @@ namespace Assets.Code.Models {
     {
         #region Dateipfad zum gespeicherten Spielstand
 
-        public string FilenameOfGameStateSave { get; set; }
-        public string FilenameOfSaveGameInfo { get; set; }
+        public string FilenameOfGameStateSave;
+        public string FilenameOfSaveGameInfo;
 
         #endregion
         #region "Meta-Tags"
-        public string CustomName { get; set; }
-        public string PlayerName { get; set; }
-        public Difficulties ChosenDifficulty { get; set; }
-        public string ChosenModule { get; set; }
-        public long TimeCode { get; set; }
+        public string CustomName;
+        public string PlayerName;
+        public Difficulties ChosenDifficulty;
+        public string ChosenModule;
+        public long TimeCode;
         #endregion
         public override string ToString() {
              return string.Format("{0} | {1} | {2} | {3} | ", CustomName, PlayerName, ChosenModule, HELPER.DifficultyToString(ChosenDifficulty));

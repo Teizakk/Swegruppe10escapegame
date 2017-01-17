@@ -8,53 +8,27 @@ namespace Assets.Code.Models {
 
     [Serializable]
     public class Question {
-        public List<Answer> Answers { get; set; }
-        public string QuestionText { get; set; }
-        private string _imgPath { get; set; }
-
-        public string ImagePath {
-            get {
-                if (!string.IsNullOrEmpty(_imgPath))
-                {
-                    //TODO muss das bei relativen Pfaden?!?!? (ist ja auch gerade auskommentiert)
-                    //var a = _imgPath.Split(new string[] { "The Mighty Quest For Epic Grades" }, StringSplitOptions.None);
-                    //var b = Application.persistentDataPath;
-                    //var c = b + a[1];
-                    //return c;
-					return _imgPath;
-                }
-                return null;
-            }
-            set { _imgPath = value; }
-        }
-
-        public List<string> Hints { get; set; }
-        public Difficulties Difficulty { get; set; }
-        public string Modul { get; set; }
-        public bool Used { get; set; }
-        public string Chapter { get; set; }
-        public int CorrectAnswer { get; set; }
-        public TimeSpan QuestionDuration { get; set; }
+        public List<Answer> Answers;
+        public string QuestionText;
+        public string ImagePath;
+        public List<string> Hints;
+        public Difficulties Difficulty;
+        public string Modul;
+        public bool Used;
+        public string Chapter;
+        public int CorrectAnswer;
+        public TimeSpan QuestionDuration;
 
         [Serializable]
         public class Answer {
-            public string AnswerText { get; set; }
-            private string _imgPath { get; set; }
-
-            public string ImagePath {
-                get {
-                    if (!string.IsNullOrEmpty(_imgPath))
-                        return Path.GetFullPath(_imgPath);
-                    return _imgPath;
-                }
-                set { _imgPath = value; }
-            }
+            public string AnswerText;
+            public string ImagePath;
         }
 
         public override string ToString()
         {
             return ("Frage: " + QuestionText +
-                    "\nFragenbildpfad: " + _imgPath +
+                    "\nFragenbildpfad: " + ImagePath +
                         "\nAntwort1: " + Answers[0].AnswerText +
                         "\nAntwort1Bildpfad: " + Answers[0].ImagePath +
                         "\nAntwort2: " + Answers[1].AnswerText +

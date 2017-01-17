@@ -1,11 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Assets.Code.Models {
     [Serializable]
     public class Highscore {
-        public int Score { get; set; }
-        public string Zeit { get; set; }
-        public string PlayerName { get; set; }
-        public DateTime Datum { get; set; }
+        public int Score;
+        public string Zeit;
+        public string PlayerName;
+        public DateTime Datum;
+    }
+
+    [Serializable]
+    public class HighscoreWrapper {
+        public List<Highscore> List;
+        public HighscoreWrapper() {
+            List = new List<Highscore>();
+        }
     }
 }
