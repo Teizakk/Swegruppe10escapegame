@@ -134,6 +134,10 @@ namespace Assets.Code.Scripts.FeatureScripts {
             return _gamePaused;
         }
 
+        public void BlockUnblockPauseMenu() {
+            //wenn im subwindow dann kann nicht geöffnet werden
+            _inSubWindow = !_inSubWindow;
+        }
         //"Nachrichten"-Funktion an PlayerScript
         public void blockAndUnblockMovement() {
             PlayerScript.GetInstance().SwitchControlBlock();
