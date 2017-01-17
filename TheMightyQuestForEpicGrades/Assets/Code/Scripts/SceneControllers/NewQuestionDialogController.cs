@@ -47,7 +47,7 @@ namespace Assets.Code.Scripts.SceneControllers
         void Awake()
         {
             lblChosenModule.text = Master.Instance().MyModule.ModuleToEdit;  // sollte so klappen
-            
+
             // ToggleGroup initialisieren
             toggleGroup.RegisterToggle(tglAnswer1);
 
@@ -69,7 +69,7 @@ namespace Assets.Code.Scripts.SceneControllers
                 }
             }
         }
-        
+
 
         public void AddQuestion()
         {
@@ -85,7 +85,7 @@ namespace Assets.Code.Scripts.SceneControllers
                 _hints[i] = this.hints[i].text;
             }
 
-           var q = new Question()
+            var q = new Question()
             {
                 QuestionText = inQuestion.text,
                 ImagePath = _imagePath,
@@ -93,7 +93,7 @@ namespace Assets.Code.Scripts.SceneControllers
                 Modul = Master.Instance().MyModule.ModuleToEdit,
                 Answers = _answers,
                 Hints = _hints,
-                Difficulty = (Difficulties) dpdDifficulty.value + 1,
+                Difficulty = (Difficulties)dpdDifficulty.value + 1,
                 CorrectAnswer = _correctAnswerIndex
             };
             Debug.Log("ImagePath: " + q.ImagePath);
@@ -104,7 +104,7 @@ namespace Assets.Code.Scripts.SceneControllers
             //    list = new List<Question>();
             //list.Add(q);
             //Persist.Save(list, "Module\\" + q.Modul);
-            
+
             Master.Instance().MyModule.AddQuestionToModule(q);
 
             MessageBox.Show("Die Frage wurde erfolgreich hinzugefügt.");
@@ -122,24 +122,26 @@ namespace Assets.Code.Scripts.SceneControllers
             {
                 ofd = new OpenFileDialog()
                 {
-                    InitialDirectory = Environment.ExpandEnvironmentVariables(@"%SYSTEMDRIVE%\Users\%USERNAME%"),
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
                     Filter =
-                        "png Dateien (*.png)|*.png|jpg Dateien (*.jpg)|*.jpg|bitmap (*.bmp)|*.bmp|jpeg Dateien (*.jpeg)|*.jpeg",
+                    "png Dateien (*.png)|*.png|jpg Dateien (*.jpg)|*.jpg|bitmap (*.bmp)|*.bmp|jpeg Dateien (*.jpeg)|*.jpeg",
                     AutoUpgradeEnabled = true,
                     Multiselect = false,
-                    RestoreDirectory = true
+                    CheckFileExists = true,
+                    CheckPathExists = true
                 };
+                Debug.Log("InitialDirectory : "+ ofd.InitialDirectory);
             }
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 if (index > 0)
                 {
-                    _answers[index - 1].ImagePath = Path.Combine(ofd.InitialDirectory, ofd.FileName);
+                    _answers[index - 1].ImagePath = Persist.CopyPictureToResourcesFolder(Path.Combine(ofd.InitialDirectory, ofd.FileName));
                 }
                 else
                 {
-                    _imagePath = Path.Combine(ofd.InitialDirectory, ofd.FileName);
+                    _imagePath = Persist.CopyPictureToResourcesFolder(Path.Combine(ofd.InitialDirectory, ofd.FileName));
                 }
             }
         }
@@ -153,7 +155,7 @@ namespace Assets.Code.Scripts.SceneControllers
 
         private bool IsOneFieldEmpty()
         {
-            if (inQuestion.text.Equals(string.Empty) /*|| inChapter.text.Equals(string.Empty)*/)
+            if (inQuestion.text.Equals(string.Empty) || inChapter.text.Equals(string.Empty))
                 return true;
             for (int i = 0; i < answers.Count; i++)
             {
@@ -167,12 +169,12 @@ namespace Assets.Code.Scripts.SceneControllers
         {
             inQuestion.text = string.Empty;
             inChapter.text = string.Empty;
-            for(int i = 0; i < answers.Count;i++)
+            for (int i = 0; i < answers.Count; i++)
             {
                 answers[i].text = string.Empty;
                 hints[i].text = string.Empty;
             }
-            
+
         }
 
         #region Master-Link

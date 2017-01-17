@@ -7,6 +7,7 @@ using Assets.Code.Manager;
 using Assets.Code.Models;
 using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -14,7 +15,6 @@ namespace Assets.Code.Scripts.SceneControllers
 {
     public class QuestionDialogController : MonoBehaviour
     {
-        private const string correctAnswerColor = "00FF01FF";
         #region UnityObjects
 
         public Text TimerText;
@@ -142,6 +142,9 @@ namespace Assets.Code.Scripts.SceneControllers
 
             FindObjectOfType<PauseMenuScript>().BlockUnblockPauseMenu();
 
+            // "Beantworten" button blockieren
+            EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
+
             //imagepaths zurücksetzen
             imagePaths[0] = null;
             btnPictures[0].SetActive(false);
@@ -179,12 +182,6 @@ namespace Assets.Code.Scripts.SceneControllers
                     Debug.Log("Leben - 1");
                     Master.Instance().MyGameState.LoseOneLive();
                     //Master.Instance().MyGameState.CloseChest(_answerCorrect);
-                }
-                else
-                {
-                     //TODO herausfinden, wieso dies hier nie aufgerufen wird - das wäre auch falsch, das Spiel so zu verlassen ohne End of Game Szene!!
-                    ShowPopup("Game Over!");
-                    LeaveToMainMenu();
                 }
             }
         }

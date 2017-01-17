@@ -38,15 +38,11 @@ namespace Assets.Code.Manager {
 
 
         public List<string> GetModulesWithEnoughQuestionsAsList() {
-            //var tmpModuleList = new List<string>(module); //TODO wofür sollte das nochmal sein? xD
 			var tmpList = new List<string> ();
             var allModuls = Persist.GetModuleFiles();
             foreach (var modul in allModuls) {
-                Debug.Log ("count: " + allModuls.Count);
                 var loadedModuleFile = Persist.Load<ModuleQuestions>("Modules\\" + modul);
                 if (loadedModuleFile.HasEnoughQuestions()) {
-                    Debug.Log (modul + " hat zu wenig Einträge!");
-                    //tmpModuleList.RemoveAt(index);
                     tmpList.Add(modul);
                 }
             }

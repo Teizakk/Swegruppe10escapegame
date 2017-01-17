@@ -207,17 +207,23 @@ namespace Assets.Code.Scripts.UtilityScripts
                 new Highscore() {
                     PlayerName = "Hoever",
                     Score = 50,
-                    Zeit = "Hoever"
+                    Zeit = "Hoever",
+					Datum = DateTime.Now,
+					Module = "None"
                 },
                 new Highscore() {
                     PlayerName = "Claßen",
                     Score = 30,
-                    Zeit = "schneller"
+                    Zeit = "schneller",
+					Datum = DateTime.Now,
+					Module = "None"
                 },
                 new Highscore() {
                     PlayerName = "Fassbender",
                     Score = 10,
-                    Zeit = "schnell"
+                    Zeit = "schnell",
+					Datum = DateTime.Now,
+					Module = "None"
                 }
             };
             Save(hsl, "Highscores\\" + "highscores");

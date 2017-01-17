@@ -8,6 +8,7 @@ namespace Assets.Code.Models {
         public string Zeit;
         public string PlayerName;
         public DateTime Datum;
+		public string Module;
     }
 
     [Serializable]

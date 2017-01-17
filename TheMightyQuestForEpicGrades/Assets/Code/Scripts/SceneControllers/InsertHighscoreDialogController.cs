@@ -56,7 +56,8 @@ namespace Assets.Code.Scripts.SceneControllers {
                     PlayerName = string.IsNullOrEmpty(playerName.text) ? oldPlayerName.text : playerName.text,
                     Zeit = time,
                     Score = Master.Instance().MyGameState.ScoreCurrent,
-                    Datum = DateTime.Now
+                    Datum = DateTime.Now,
+					Module = Master.Instance().MyGameState.ModuleChosen
                 };
                 //Highscore hinzufügen
                 highscoreliste.Add(neu);

@@ -80,40 +80,15 @@ namespace Assets.Code.Scripts.SceneControllers {
         }
 
         public void FileDialogOpener() {
-            //Wenn der FolderBrowser noch nie geöffnet wurde
-            if (fbd == null)
-                fbd = new FolderBrowserDialog
-                {
-                    RootFolder = Environment.SpecialFolder.Desktop,
-                    ShowNewFolderButton = false
-                };
-
-            //Folder Browsing Dialog wird immer angezeigt, wenn die Funktion aufgerufen wurde
-            var fbdDialogResult = fbd.ShowDialog();
-
-            //Nur wenn erfolgreich abgeschlossen gehts weiter, sonst abbruch
-            if (fbdDialogResult != DialogResult.OK) {
-                //Resettet die Optik des Buttons (wird nicht mehr als gedrückt angezeigt)
-                BrowseButton.enabled = false;
-                BrowseButton.enabled = true;
-                return;
-            }
-
-            PreselectedFolderPath = fbd.SelectedPath;
-
-            //Debug.Log("Im FolderBrowser ausgewählter Pfad: " + PreselectedFolderPath);
-
-            //In ausgewähltem Ordner den FileOpenDialog konfigurieren
+            /* Dialog in Users\Documents konfigurieren */
             var ofd = new OpenFileDialog
             {
                 Filter = "Textdatei (*.txt) | *.txt",
                 AutoUpgradeEnabled = true,
                 Multiselect = true,
-                InitialDirectory = PreselectedFolderPath,
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal),
                 RestoreDirectory = true //könnte sein, dass man das braucht daher packen wir das einfach dazu
             };
-
-            //Debug.Log(ofd.InitialDirectory);
 
             //Dialog öffnen
             var ofdDialogResult = ofd.ShowDialog();
@@ -124,25 +99,27 @@ namespace Assets.Code.Scripts.SceneControllers {
                 BrowseButton.enabled = true;
                 return;
             }
-
-            Debug.Log(Directory.GetCurrentDirectory());
-
-            var fileNames = ofd.SafeFileNames;
-
+            
+            var fileNames = ofd.FileNames;
+            
             //Wenn Dateien ausgewählt wurden
             if (fileNames.Length != 0)
+            {
                 foreach (var file in fileNames)
-                    if (FileNameHelper.filePathList.Contains(PreselectedFolderPath + "\\" + file)) {
+                    if (FileNameHelper.filePathList.Contains(file))
+                    {
                         //Wenn Pfad bereits vorhanden
-                        AddToFileDisplay(PreselectedFolderPath + "\\" + file, true, false, true);
+                        AddToFileDisplay(file, true, false, true);
                         //Debug.Log("Bereits vorhandene Datei hinzugefügt");
                     }
-                    else {
-                        var fileNameHelperObject = new FileNameHelper(PreselectedFolderPath + "\\" + file, false, false);
+                    else
+                    {
+                        var fileNameHelperObject = new FileNameHelper(file, false, false);
                         //Der Liste der gespeicherten Pfade hinzufügen
                         FilePathsAndStatus.Add(fileNameHelperObject);
-                        AddToFileDisplay(PreselectedFolderPath + "\\" + file, false, false);
+                        AddToFileDisplay(file, false, false);
                     }
+            }
             else Debug.Log("Keine Dateien ausgewählt...");
             BrowseButton.enabled = false;
             BrowseButton.enabled = true;
