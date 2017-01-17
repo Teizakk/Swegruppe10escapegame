@@ -58,7 +58,10 @@ namespace Assets.Code.Manager {
                 var modul = allModuls[index];
                 var loadedModuleFile = Persist.Load<ModuleQuestions>("Modules\\" + modul);
                 if (!loadedModuleFile.HasEnoughQuestions()) {
-                    tmpModuleList[index] += " (" + loadedModuleFile.GetCombinedNumberOfQuestions() + "/90 Fragen)";
+					if (loadedModuleFile.GetCombinedNumberOfQuestions () >= 90)
+						tmpModuleList [index] += " (Add Kapitel/Frage)";
+					else
+                    	tmpModuleList[index] += " (" + loadedModuleFile.GetCombinedNumberOfQuestions() + "/90 Fragen)";
                 }
             }
             return tmpModuleList;
