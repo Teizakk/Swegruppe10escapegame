@@ -182,7 +182,7 @@ namespace Assets.Code.Scripts.SceneControllers
                 }
                 else
                 {
-                     // TODO : eventuel überflüssig
+                     //TODO herausfinden, wieso dies hier nie aufgerufen wird - das wäre auch falsch, das Spiel so zu verlassen ohne End of Game Szene!!
                     ShowPopup("Game Over!");
                     LeaveToMainMenu();
                 }
