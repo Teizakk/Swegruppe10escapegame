@@ -7,5 +7,6 @@ namespace Assets.Code.Models {
         public string Zeit { get; set; }
         public string PlayerName { get; set; }
         public DateTime Datum { get; set; }
+		public string Module { get; set; }
     }
 }
