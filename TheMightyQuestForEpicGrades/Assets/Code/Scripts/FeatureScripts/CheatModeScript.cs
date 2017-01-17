@@ -11,14 +11,14 @@ namespace Assets.Code.Scripts.FeatureScripts {
         public Canvas CheatInfoPrefab;
         private Canvas CheatInfo = null;
 
-        private bool HaxActivated; //für schnellere Abfragen ohne Master.Instance()... bemühen zu müssen
+        private static bool HaxActivated; //für schnellere Abfragen ohne Master.Instance()... bemühen zu müssen
 
         //Nur für Fehlermeldung falls nicht gesetzt
         public void Awake() {
             if (CheatInfoPrefab == null) {
                 Debug.LogError("CheatInfo-Text-Prefab muss gesetzt sein!");
             }
-            if (Master.Instance().MyGameState.CheatmodeActive) {
+            if (HaxActivated) {
                 CheatInfo = FindObjectsOfType<Canvas>().FirstOrDefault(x => x.gameObject.name == "Cheatinfo-Canvas(Clone)");
                 HaxActivated = true;
             }

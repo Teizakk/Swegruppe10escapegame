@@ -62,6 +62,8 @@ namespace Assets.Code.Scripts.FeatureScripts
             QOrAText.gameObject.SetActive(true); //Könnte sein, dass man das nicht braucht
             BackButton.gameObject.SetActive(true);
 
+            Debug.LogError("Hier wird jetzt die Bilddatei gesucht in: " + q_or_a_image_path);
+            Debug.LogError("Gibt das Sinn?");
             //Bild konfigurieren
             if (File.Exists(q_or_a_image_path))
             {
