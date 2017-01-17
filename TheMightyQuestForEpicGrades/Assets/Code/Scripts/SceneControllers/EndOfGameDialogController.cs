@@ -13,6 +13,8 @@ namespace Assets.Code.Scripts.SceneControllers {
         // Use this for initialization
         //Anzeigetext der Scene
         public Text loseOrWin;
+		public Text timeText;
+		public Text pointsText;
 
         List<Highscore> highscoreliste = new List<Highscore>();
         private static string Name = @"Highscores\highscores";
@@ -53,6 +55,9 @@ namespace Assets.Code.Scripts.SceneControllers {
                 loseOrWin.text = "Game over!\n Versuchs Nochmal!";
                 nextWindow = 0;
             }
+
+			timeText.text = System.String.Format("Zeit: {0:hh\\:mm\\:ss\\:ff}", Master.Instance().MyGameState.TimeTakenUntilNow);
+			pointsText.text = "Punkte: " + Master.Instance ().MyGameState.ScoreCurrent.ToString ();
         }
 
         public void NextWindowOnClick()
