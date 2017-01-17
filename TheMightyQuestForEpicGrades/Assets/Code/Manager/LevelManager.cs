@@ -43,6 +43,8 @@ namespace Assets.Code.Manager {
             var levelNumberToAdd = findNextFileName();
             
             File.Copy(filePathToAdd, Master.Instance().MyLevel.ExecutingDirectory + "\\Levels\\Level_" + levelNumberToAdd + ".txt");
+			string p = Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData); // ---
+			File.Copy (filePathToAdd, p + "\\..\\LocalLow\\SWEGruppe10\\The Mighty Quest For Epic Grades\\Levels\\Level_" + levelNumberToAdd + ".txt"); // ---
             levelNumberToAdd++;
             Debug.Log("Datei: " + filePathToAdd + "\n" + "Kopiert in Level-Ordner als:" + "Level_" + (levelNumberToAdd - 1) +
                 ".txt");

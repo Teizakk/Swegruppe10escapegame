@@ -18,8 +18,9 @@ namespace Assets.Code.Models {
                 {
                     var a = _imgPath.Split(new string[] { "The Mighty Quest For Epic Grades" }, StringSplitOptions.None);
                     var b = Application.persistentDataPath;
-                    var c = b + a[1];
-                    return c;
+                    //var c = b + a[1];
+                    //return c;
+					return _imgPath;
                 }
                 return null;
             }
