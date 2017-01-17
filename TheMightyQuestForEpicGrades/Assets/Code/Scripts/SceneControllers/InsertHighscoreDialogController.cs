@@ -48,12 +48,13 @@ namespace Assets.Code.Scripts.SceneControllers {
                     highscoreliste = new List<Highscore>();
                 }
                 string time = Master.Instance().MyGameState.TimeTakenUntilNow.Hours.ToString().PadLeft(2, '0') + ":" + Master.Instance().MyGameState.TimeTakenUntilNow.Minutes.ToString().PadLeft(2, '0') + ":" + Master.Instance().MyGameState.TimeTakenUntilNow.Seconds.ToString().PadLeft(2, '0');
-                
+
                 Highscore neu = new Highscore()
                 {
                     PlayerName = string.IsNullOrEmpty(playerName.text) ? oldPlayerName.text : playerName.text,
-                    Zeit =time,
-                    Score = Master.Instance().MyGameState.ScoreCurrent
+                    Zeit = time,
+                    Score = Master.Instance().MyGameState.ScoreCurrent,
+                    Datum = DateTime.Now
                 };
 
                 highscoreliste.Add(neu);
