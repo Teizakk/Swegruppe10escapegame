@@ -7,6 +7,7 @@ using Assets.Code.Manager;
 using Assets.Code.Models;
 using Assets.Code.Scripts.FeatureScripts;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -14,7 +15,6 @@ namespace Assets.Code.Scripts.SceneControllers
 {
     public class QuestionDialogController : MonoBehaviour
     {
-        private const string correctAnswerColor = "00FF01FF";
         #region UnityObjects
 
         public Text TimerText;
@@ -141,6 +141,9 @@ namespace Assets.Code.Scripts.SceneControllers
             _updateTimer = false;
 
             FindObjectOfType<PauseMenuScript>().BlockUnblockPauseMenu();
+
+            // "Beantworten" button blockieren
+            EventSystem.current.GetComponent<EventSystem>().SetSelectedGameObject(null);
 
             //imagepaths zurücksetzen
             imagePaths[0] = null;
