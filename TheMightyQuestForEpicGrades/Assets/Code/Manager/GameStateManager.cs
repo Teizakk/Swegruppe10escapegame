@@ -331,7 +331,6 @@ namespace Assets.Code.Manager {
         GameObject opendChest = null;
 
         #region Chest
-        //TODO chestToOpen parameter korrekt?
         // TODO wenn alle Hintsteine bekommen und alle Portalsteine was dann?
         public void OpenChest(GameObject chestToOpen) { //chestToOpen nicht zwingend erforderlich weil es eine bestimmte Instanz des ChestScripts sein sollte
             Debug.Log(chestToOpen.GetInstanceID());
@@ -377,7 +376,7 @@ namespace Assets.Code.Manager {
 
       } */
         }
-        //TODO triggert funktion in chestscript? 
+        //triggert funktion in chestscript => .Lock()
         public void CloseChest(bool answerCorrect) {
             if (answerCorrect)
             {
@@ -430,7 +429,7 @@ namespace Assets.Code.Manager {
             if (GameStateObject.LevelState.Lives == 1) {
                 GameStateObject.LevelState.Lives--;
                 Debug.Log("Spiel ist nun game over");
-                //TODO noch mehr zu tun?
+                //noch mehr zu tun?
                 SetGameLost();
                 SceneManager.LoadScene("EndOfGame");
                 return;
@@ -628,7 +627,10 @@ namespace Assets.Code.Manager {
             //Stage ist durch Default-Wert gesetzt
             ResetLivesDependingOnDifficulty();
             //Hintstones ist durch Default-Wert gesetzt
-            //TODO - braucht es hier noch was?
+            
+            //braucht es hier noch was?
+
+
             EnterNewGameOrSaveGame.Invoke();
             Master.Instance().MyQuestion.LoadQuestionsFromFile(moduleName, difficulty);
         }

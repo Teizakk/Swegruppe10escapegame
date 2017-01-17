@@ -18,7 +18,7 @@ namespace Assets.Code.Scripts.UtilityScripts
         {
             //ExecuteablePath = Application.persistentDataPath;
             executeable_path_ = Application.dataPath;
-            Debug.LogError(ExecuteablePath);
+            Debug.LogError("Pfad der Datenhaltung: " + ExecuteablePath); //das ist logError, damit man das in den DevBuilds sieht
             f_ext_ = ".dat";
             AssureDirectoryAndFilesExists();
         }
