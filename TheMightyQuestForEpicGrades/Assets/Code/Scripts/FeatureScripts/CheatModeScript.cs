@@ -1,4 +1,5 @@
-﻿using Assets.Code.Manager;
+﻿using System.Linq;
+using Assets.Code.Manager;
 using UnityEngine;
 
 namespace Assets.Code.Scripts.FeatureScripts {
@@ -8,7 +9,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
         private bool a;
 
         public Canvas CheatInfoPrefab;
-        private Canvas CheatInfo;
+        private Canvas CheatInfo = null;
 
         private bool HaxActivated; //für schnellere Abfragen ohne Master.Instance()... bemühen zu müssen
 
@@ -17,6 +18,11 @@ namespace Assets.Code.Scripts.FeatureScripts {
             if (CheatInfoPrefab == null) {
                 Debug.LogError("CheatInfo-Text-Prefab muss gesetzt sein!");
             }
+            if (Master.Instance().MyGameState.CheatmodeActive) {
+                CheatInfo = FindObjectsOfType<Canvas>().FirstOrDefault(x => x.gameObject.name == "Cheatinfo-Canvas(Clone)");
+                HaxActivated = true;
+            }
+
         }
         // Update is called once per frame
         private void Update() {
