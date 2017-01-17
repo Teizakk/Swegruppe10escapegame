@@ -9,9 +9,7 @@ using UnityEngine;
 
 namespace Assets.Code.Manager {
     public class LevelManager : MonoBehaviour {
-
-        public readonly string ExecutingDirectory = Environment.CurrentDirectory;
-
+       
         //Temporärer Link
         public BoardBuilderScript BoardBuilder_TMP;
 
@@ -20,11 +18,14 @@ namespace Assets.Code.Manager {
 
         #region Dateinamen-Konfiguration
         private readonly string Dateiendung = ".txt";
-        private readonly string Dateipfad = "./Levels/";
+        private string Dateipfad;
         private readonly string Dateiprefix = "Level_";
+        private void Awake() {
+            Dateipfad = Application.dataPath + "\\Levels\\";
+        }
         #endregion
 
-        public void LoadFromFile(int index) {
+       public void LoadFromFile(int index) {
             var Dateiname = Dateiprefix + index + Dateiendung;
             var levelData = new List<string>();
             levelData.Clear();
@@ -41,8 +42,8 @@ namespace Assets.Code.Manager {
 
         public void CopyFileToLevelFolder(string filePathToAdd) {
             var levelNumberToAdd = findNextFileName();
-            
-            File.Copy(filePathToAdd, Master.Instance().MyLevel.ExecutingDirectory + "\\Levels\\Level_" + levelNumberToAdd + ".txt");
+            //Debug.LogError(Application.dataPath);
+            File.Copy(filePathToAdd, Dateipfad + "Level_" + levelNumberToAdd + ".txt");
             levelNumberToAdd++;
             Debug.Log("Datei: " + filePathToAdd + "\n" + "Kopiert in Level-Ordner als:" + "Level_" + (levelNumberToAdd - 1) +
                 ".txt");
@@ -51,8 +52,9 @@ namespace Assets.Code.Manager {
         //Hilfsfunktionen
         private int findNextFileName() {
             var levelNumberToAdd = 1;
+            //Debug.LogError(Application.dataPath);
             for (var i = 1; i < 200; i++)
-                if (File.Exists(Master.Instance().MyLevel.ExecutingDirectory + "\\Levels\\Level_" + i + ".txt"))
+                if (File.Exists(Dateipfad + "Level_" + i + ".txt"))
                     levelNumberToAdd++;
                 else
                     break;

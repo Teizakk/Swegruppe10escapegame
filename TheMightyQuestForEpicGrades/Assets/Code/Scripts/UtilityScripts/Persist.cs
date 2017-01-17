@@ -11,15 +11,25 @@ namespace Assets.Code.Scripts.UtilityScripts
 {
     internal class Persist
     {
+        private static readonly string executeable_path_;
+        private static readonly string f_ext_;
+
         static Persist()
         {
-            ExecuteablePath = Application.persistentDataPath;
-            FExt = ".dat";
+            //ExecuteablePath = Application.persistentDataPath;
+            executeable_path_ = Application.dataPath;
+            Debug.LogError(ExecuteablePath);
+            f_ext_ = ".dat";
             AssureDirectoryAndFilesExists();
         }
 
-        private static string ExecuteablePath { get; set; }
-        private static string FExt { get; set; }
+        public static string ExecuteablePath {
+            get { return executeable_path_; }
+        }
+
+        private static string FExt {
+            get { return f_ext_; }
+        }
 
         // Highscores/highscores
         // SavedStates
@@ -44,7 +54,7 @@ namespace Assets.Code.Scripts.UtilityScripts
             try
             {
                 var bf = new BinaryFormatter();
-                using (var file = File.Open(ExecuteablePath + "\\" + fileName + ".dat", FileMode.OpenOrCreate))
+                using (var file = File.Open(ExecuteablePath + "\\" + fileName + FExt, FileMode.OpenOrCreate))
                 {
                     bf.Serialize(file, state);
                     file.Close();
@@ -61,10 +71,10 @@ namespace Assets.Code.Scripts.UtilityScripts
         {
             try
             {
-                if (File.Exists(ExecuteablePath + "\\" + fileName + ".dat"))
+                if (File.Exists(ExecuteablePath + "\\" + fileName + FExt))
                 {
                     var bf = new BinaryFormatter();
-                    using (var file = File.Open(ExecuteablePath + "\\" + fileName + ".dat", FileMode.Open))
+                    using (var file = File.Open(ExecuteablePath + "\\" + fileName + FExt, FileMode.Open))
                     {
                         var state = (T)bf.Deserialize(file);
                         file.Close();
@@ -87,7 +97,7 @@ namespace Assets.Code.Scripts.UtilityScripts
         public static List<string> GetModuleFiles()
         {
             if (Directory.Exists(ExecuteablePath + "\\Modules"))
-                return Directory.GetFiles(ExecuteablePath + "\\Modules").ToList().Where(x => Path.GetExtension(x) == ".dat").Select(x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
+                return Directory.GetFiles(ExecuteablePath + "\\Modules").ToList().Where(x => Path.GetExtension(x) == FExt).Select(x => { x = Path.GetFileNameWithoutExtension(x); return x; }).ToList();
             Directory.CreateDirectory(ExecuteablePath + "\\Modules"); //eigentlich unnötig, da dies oben im Konstruktor schon gemacht wird.
             return new List<string>();
         }
@@ -95,7 +105,7 @@ namespace Assets.Code.Scripts.UtilityScripts
         public static List<string> GetAllSGIFileNames()
         {
             if (Directory.Exists(ExecuteablePath + "\\SaveGames"))
-                return Directory.GetFiles(ExecuteablePath + "\\SaveGames").Where(x => Path.GetExtension(x) == ".dat").ToList().Select(x => {
+                return Directory.GetFiles(ExecuteablePath + "\\SaveGames").Where(x => Path.GetExtension(x) == FExt).ToList().Select(x => {
                     x = Path.GetFileNameWithoutExtension(x);
                     return x;
                 }).Where(x => !string.IsNullOrEmpty(x) && x.Contains("_sgi")).ToList();
@@ -129,7 +139,7 @@ namespace Assets.Code.Scripts.UtilityScripts
                 Debug.LogError("Konstruktor hätte Verzeichnis \\Highscores erstellen sollen?!");
                 return false;
             }
-            if (File.Exists(ExecuteablePath + "\\Highscores\\" + "highscores" + ".dat"))
+            if (File.Exists(ExecuteablePath + "\\Highscores\\" + "highscores" + FExt))
             {
                 return true;
             }
