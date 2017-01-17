@@ -75,7 +75,7 @@ namespace Assets.Code.Scripts.SceneControllers
         // zeigt die Frage an
         public void ShowQuestion()
         {
-            //Master.Instance().CurrentDialogController = this.gameObject;
+            FindObjectOfType<PauseMenuScript>().BlockUnblockPauseMenu();
 
             blockAndUnblockMovement();
 
@@ -139,6 +139,8 @@ namespace Assets.Code.Scripts.SceneControllers
             endTime = DateTime.Now;
             usedTime = new TimeSpan(endTime.Ticks - startTime.Ticks);
             _updateTimer = false;
+
+            FindObjectOfType<PauseMenuScript>().BlockUnblockPauseMenu();
 
             //imagepaths zurücksetzen
             imagePaths[0] = null;
