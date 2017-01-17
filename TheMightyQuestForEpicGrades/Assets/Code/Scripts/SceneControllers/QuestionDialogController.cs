@@ -180,12 +180,6 @@ namespace Assets.Code.Scripts.SceneControllers
                     Master.Instance().MyGameState.LoseOneLive();
                     //Master.Instance().MyGameState.CloseChest(_answerCorrect);
                 }
-                else
-                {
-                     //TODO herausfinden, wieso dies hier nie aufgerufen wird - das wäre auch falsch, das Spiel so zu verlassen ohne End of Game Szene!!
-                    ShowPopup("Game Over!");
-                    LeaveToMainMenu();
-                }
             }
         }
 

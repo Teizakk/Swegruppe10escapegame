@@ -42,15 +42,14 @@ namespace Assets.Code.Manager {
 
         public void CopyFileToLevelFolder(string filePathToAdd) {
             var levelNumberToAdd = findNextFileName();
-//=======
-//TODO mögliche Fehlerquelle - hier war schonmal ein Fehler!
 
-            //Debug.LogError(Application.dataPath);
-            File.Copy(filePathToAdd, Dateipfad + "Level_" + levelNumberToAdd + ".txt");
-//=======            
-levelNumberToAdd++;
-            Debug.Log("Datei: " + filePathToAdd + "\n" + "Kopiert in Level-Ordner als:" + "Level_" + (levelNumberToAdd - 1) +
-                ".txt");
+			if (File.Exists (filePathToAdd) && Directory.Exists (Dateipfad)) {
+				File.Copy (filePathToAdd, Dateipfad + "Level_" + levelNumberToAdd + ".txt");
+			
+				levelNumberToAdd++;
+				Debug.Log ("Datei: " + filePathToAdd + "\n" + "Kopiert in Level-Ordner als:" + "Level_" + (levelNumberToAdd - 1) +
+				".txt");
+			}
         }
         
         //Hilfsfunktionen

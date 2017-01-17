@@ -72,7 +72,6 @@ namespace Assets.Code.Models {
 						chaptersEasy [QuestionsEasy [i].Chapter] += 1;
 					else {
 						chaptersEasy.Add (QuestionsEasy [i].Chapter, 1);
-						Debug.Log ("QuestionsEasy[" + i + "].Chapter = " + QuestionsEasy [i].Chapter);
 					}
 				}
 
@@ -81,7 +80,6 @@ namespace Assets.Code.Models {
 						chaptersMedium [QuestionsMedium [i].Chapter] += 1;
 					else {
 						chaptersMedium.Add (QuestionsMedium [i].Chapter, 1);
-						Debug.Log ("QuestionsMedium[" + i + "].Chapter = " + QuestionsMedium [i].Chapter);
 					}
 				}
 
@@ -90,7 +88,6 @@ namespace Assets.Code.Models {
 						chaptersHard [QuestionsHard [i].Chapter] += 1;
 					else {
 						chaptersHard.Add (QuestionsHard [i].Chapter, 1);
-						Debug.Log ("QuestionsHard[" + i + "].Chapter = " + QuestionsHard [i].Chapter);
 					}
 				}
 			}
