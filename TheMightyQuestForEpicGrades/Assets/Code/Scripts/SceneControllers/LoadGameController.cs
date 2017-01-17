@@ -67,8 +67,10 @@ namespace Assets.Code.Scripts.SceneControllers
                 saveGameDisplay.GetComponent<DataHolderScript>().StoredValues.Add("IndexOfSGI", index);
                 _saveGameLinks.Add(saveGameDisplay);
             }
-            EventSystem.current.SetSelectedGameObject(_saveGameLinks[0]);
-            _saveGameLinks[0].GetComponent<Button>().onClick.Invoke();
+			if (_saveGameLinks.Count > 0) {
+				EventSystem.current.SetSelectedGameObject (_saveGameLinks [0]);
+				_saveGameLinks [0].GetComponent<Button> ().onClick.Invoke ();
+			}
         }
 
         public void SetSelectedSaveGameLink()
