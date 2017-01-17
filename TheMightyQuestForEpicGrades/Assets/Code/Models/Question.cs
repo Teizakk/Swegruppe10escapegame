@@ -16,7 +16,6 @@ namespace Assets.Code.Models {
             get {
                 if (!string.IsNullOrEmpty(_imgPath))
                 {
-                    //TODO muss das bei relativen Pfaden?!?!? (ist ja auch gerade auskommentiert)
                     //var a = _imgPath.Split(new string[] { "The Mighty Quest For Epic Grades" }, StringSplitOptions.None);
                     //var b = Application.persistentDataPath;
                     //var c = b + a[1];

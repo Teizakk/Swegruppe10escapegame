@@ -331,7 +331,6 @@ namespace Assets.Code.Manager {
         GameObject opendChest = null;
 
         #region Chest
-        // TODO wenn alle Hintsteine bekommen und alle Portalsteine was dann?
         public void OpenChest(GameObject chestToOpen) { //chestToOpen nicht zwingend erforderlich weil es eine bestimmte Instanz des ChestScripts sein sollte
             Debug.Log(chestToOpen.GetInstanceID());
             opendChest = chestToOpen;
@@ -341,6 +340,8 @@ namespace Assets.Code.Manager {
                 Master.Instance().MyQuestion.ResetAllToUnused(Master.Instance().MyGameState.ChapterInUse);
             }
             questionDialogController.ShowQuestion();
+
+
             //if (questionDialogController.AnswerCorrect()) {
             //    chestToOpen.GetComponent<ChestScript>().Lock();
             //    Debug.Log("Frage korrekt beantwortet");
