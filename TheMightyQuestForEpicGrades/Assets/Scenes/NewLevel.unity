@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37356392, g: 0.38112, b: 0.35887662, a: 1}
+  m_IndirectSpecularColor: {r: 0.3735644, g: 0.38112032, b: 0.35887682, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -322,7 +322,7 @@ Prefab:
     - target: {fileID: 114000011704715848, guid: 6d29f56592784b94da6ed44ea2462178,
         type: 2}
       propertyPath: m_Text
-      value: "Order & Datei w\xE4hlen"
+      value: "Ordner & Datei w\xE4hlen"
       objectReference: {fileID: 0}
     - target: {fileID: 1000013994654520, guid: 6d29f56592784b94da6ed44ea2462178, type: 2}
       propertyPath: m_Name
@@ -913,7 +913,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2125384591}
   m_HandleRect: {fileID: 2125384590}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
