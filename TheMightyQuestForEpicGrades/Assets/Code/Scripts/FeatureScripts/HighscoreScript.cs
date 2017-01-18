@@ -29,11 +29,6 @@ namespace Assets.Code.Scripts.FeatureScripts {
         // Use this for initialization
         //nur beim Highscoreboard genutzt
         private void Start() {
-            //if (Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory()) != null)
-            //{
-            //    highscoreliste = Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory());
-            //}
-
             if (SceneManager.GetActiveScene().name == "Highscore")
                 if (highscoreliste.Count >= 10) {
                     p1.text = "1. " + highscoreliste[0].PlayerName + "\t" + highscoreliste[0].Score + "\t" +
@@ -135,14 +130,7 @@ namespace Assets.Code.Scripts.FeatureScripts {
         //beim klicken auf Hinzufügen 
         public void NextWindowOnClick(int level) {
             if (SceneManager.GetActiveScene().name == "InsertHighscoreEndOFGame") {
-                //if (Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory()) != null)
-                //{
-                //    highscoreliste = Persist.load<List<Highscore>>("highscores", Directory.GetCurrentDirectory());
-                //}
-                //else fall kommt jetzt
-                //{
                 highscoreliste = new List<Highscore>();
-                //}
 
                 var neu = new Highscore();
 
@@ -157,7 +145,6 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
 
                 highscoreliste = InsertInto(highscoreliste, neu);
-                //Persist.save<List<Highscore>>(highscoreliste);
                 SceneManager.LoadScene(level);
             }
         }

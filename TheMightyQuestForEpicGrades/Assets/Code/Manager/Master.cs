@@ -73,7 +73,7 @@ namespace Assets.Code.Manager {
             throw new UnityException("Master darf und sollte zu diesem Zeitpunkt nicht gelöscht werden!");
         }
 
-        //TODO sobald wir das auskommentieren gibt es keinen Devmode ingame mehr
+        // sobald wir das auskommentieren gibt es keinen Devmode ingame mehr
         private void Update() {
             if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.V)) {
                 _devMode = !_devMode;

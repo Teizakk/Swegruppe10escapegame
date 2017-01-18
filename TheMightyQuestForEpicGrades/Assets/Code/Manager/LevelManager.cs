@@ -55,13 +55,11 @@ namespace Assets.Code.Manager {
         //Hilfsfunktionen
         private int findNextFileName() {
             var levelNumberToAdd = 1;
-            //Debug.LogError(Application.dataPath);
             for (var i = 1; i < 200; i++)
                 if (File.Exists(Dateipfad + "Level_" + i + ".txt"))
                     levelNumberToAdd++;
                 else
                     break;
-            //Debug.Log("Letztes gefundenes Level: " + (levelNumberToAdd - 1));
             return levelNumberToAdd;
         }
 
@@ -98,13 +96,6 @@ namespace Assets.Code.Manager {
             }
 
             return levelIndices;
-
-            //Linq Version
-            //return Persist.GetAllLevelFileNames().Select(
-            //    x => {
-            //        var fileName = Path.GetFileNameWithoutExtension(x);
-            //        return Int32.Parse(fileName[fileName.Length - 1].ToString());
-            //    }).ToArray();
         }
     }
 }

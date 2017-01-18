@@ -52,10 +52,6 @@ namespace Assets.Code.Scripts.FeatureScripts
             //Fenster aktivieren
             imagePopupObject.SetActive(true);
 
-            ////BackButton konfigurieren
-            //BackButton.onClick.RemoveAllListeners();
-            //BackButton.onClick.AddListener(closePopup); //müsste so gehen
-
             //q_or_a_image_path an dataPath anpassen
             q_or_a_image_path = Application.dataPath + q_or_a_image_path;
 
@@ -65,8 +61,6 @@ namespace Assets.Code.Scripts.FeatureScripts
             QOrAText.gameObject.SetActive(true); //Könnte sein, dass man das nicht braucht
             BackButton.gameObject.SetActive(true);
 
-            //Debug.LogError("Hier wird jetzt die Bilddatei gesucht in: " + q_or_a_image_path);
-            //Debug.LogError("Gibt das Sinn?");
             //Bild konfigurieren
             Debug.Log("Filelookup bei: " + q_or_a_image_path);
             if (File.Exists(q_or_a_image_path))

@@ -63,7 +63,6 @@ namespace Assets.Code.Scripts.FeatureScripts {
             //Trigger Collider für LevelEnde anschalten
             GetComponent<CapsuleCollider>().enabled = true;
             Debug.Log("Collider geswitched");
-            //Debug.Log("Unterschied zur Startposition: " + (_colStartPos - transform.localPosition));
         }
 
         private void GoToNextScreenPromt() {
