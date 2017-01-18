@@ -10,21 +10,22 @@ namespace Assets.Code.Models {
     public class Question {
         public List<Answer> Answers { get; set; }
         public string QuestionText { get; set; }
-        private string _imgPath { get; set; }
+     //   private string _imgPath { get; set; }
 
-        public string ImagePath {
-            get {
-                if (!string.IsNullOrEmpty(_imgPath))
-                {
-                    Regex reg = new Regex(@"Resources[\]{1}Pictures[\][\S|\s]*.[jpg|png]");
-                    var x = reg.Match(_imgPath).Value;
-					return (Application.dataPath + @"\" + x).Replace(@"\","/");
-                }
-                return null;
-            }
-            set { _imgPath = value; }
-        }
+     //   public string ImagePath {
+     //       get {
+     //           if (!string.IsNullOrEmpty(_imgPath))
+     //           {
+     //               Regex reg = new Regex(@"Resources[\]{1}Pictures[\][\S|\s]*.[jpg|png]");
+     //               var x = reg.Match(_imgPath).Value;
+					//return (Application.dataPath + @"\" + x).Replace(@"\","/");
+     //           }
+     //           return null;
+     //       }
+     //       set { _imgPath = value; }
+     //   }
 
+        public string ImagePath { get; set; }
         public List<string> Hints { get; set; }
         public Difficulties Difficulty { get; set; }
         public string Modul { get; set; }
@@ -36,22 +37,23 @@ namespace Assets.Code.Models {
         [Serializable]
         public class Answer {
             public string AnswerText { get; set; }
-            private string _imgPath { get; set; }
+            //private string _imgPath { get; set; }
 
-            public string ImagePath {
-                get {
-                    if (!string.IsNullOrEmpty(_imgPath))
-                        return Path.GetFullPath(_imgPath);
-                    return _imgPath;
-                }
-                set { _imgPath = value; }
-            }
+            //public string ImagePath {
+            //    get {
+            //        if (!string.IsNullOrEmpty(_imgPath))
+            //            return Path.GetFullPath(_imgPath);
+            //        return _imgPath;
+            //    }
+            //    set { _imgPath = value; }
+            //}
+            public string ImagePath { get; set; }
         }
 
         public override string ToString()
         {
             return ("Frage: " + QuestionText +
-                    "\nFragenbildpfad: " + _imgPath +
+                    "\nFragenbildpfad: " + ImagePath +
                         "\nAntwort1: " + Answers[0].AnswerText +
                         "\nAntwort1Bildpfad: " + Answers[0].ImagePath +
                         "\nAntwort2: " + Answers[1].AnswerText +
