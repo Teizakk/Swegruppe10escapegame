@@ -48,6 +48,7 @@ namespace Assets.Code.Scripts.SceneControllers {
             // onValueChangedListener hinzufügen
             ModuleDropdown.onValueChanged.RemoveAllListeners();
             ModuleDropdown.onValueChanged.AddListener(NewModule);
+            DEVDummyModuleButton.gameObject.SetActive(false);
         }
 
         public void SetModuleToEdit() {
@@ -66,6 +67,18 @@ namespace Assets.Code.Scripts.SceneControllers {
             }
             SetModuleToEdit();
         }
+
+        #region DEVTOOL
+        [Header("DEV Tools")]
+        public Button DEVDummyModuleButton;
+        public void DEVGimmeModuleDude() {
+            Master.Instance().MyModule.SaveToFile("DummyModule");
+        }
+
+        private void FixedUpdate() {
+            DEVDummyModuleButton.gameObject.SetActive(Master.IsDEVMode());
+        }
+        #endregion
 
         #region Master-Link
         private void Start()

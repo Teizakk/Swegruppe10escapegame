@@ -10,6 +10,7 @@ namespace Assets.Code.Models {
     public class Question {
         public List<Answer> Answers { get; set; }
         public string QuestionText { get; set; }
+        //Joachims imba fix mit Style Points
      //   private string _imgPath { get; set; }
 
      //   public string ImagePath {
@@ -37,6 +38,7 @@ namespace Assets.Code.Models {
         [Serializable]
         public class Answer {
             public string AnswerText { get; set; }
+            //Joachims imba fix mit Style Points von oben fehlt hier aber es klappte wohl trotzdem :O
             //private string _imgPath { get; set; }
 
             //public string ImagePath {
