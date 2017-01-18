@@ -99,12 +99,6 @@ namespace Assets.Code.Scripts.SceneControllers
             Debug.Log("ImagePath: " + q.ImagePath);
             Debug.Log("Answer ImagePath: " + q.Answers[0].ImagePath);
 
-            //var list = Persist.Load<List<Question>>("Module\\" + q.Modul);
-            //if(list == null)
-            //    list = new List<Question>();
-            //list.Add(q);
-            //Persist.Save(list, "Module\\" + q.Modul);
-
             Master.Instance().MyModule.AddQuestionToModule(q);
 
             MessageBox.Show("Die Frage wurde erfolgreich hinzugefügt.");

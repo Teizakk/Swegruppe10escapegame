@@ -26,10 +26,6 @@ namespace Assets.Code.Scripts.SceneControllers {
             if (FilePathsAndStatus.Count != 0)
                 for (var i = 0; i < FilePathsAndStatus.Count; i++) {
                     var file = FilePathsAndStatus[i];
-                    //Debug.Log("Anzahl Elemente in Filepath...: " + FilePathsAndStatus.Count);
-                    /*Debug.Log("Gerade behandeltes Objekt: " + file.FullFilePath + " IsValid = " + file.isValid + "\n" +
-                           " isChecked = " + file.isChecked + " HasBeenShown = " + file.statusHasBeenShown + " Index: " + i
-                           ); */
                     //alle die noch nicht gezeigt wurden anzeigen
                     if (!file.statusHasBeenShown) {
                         AddToFileDisplay(file.FullFilePath, file.isChecked, file.isValid);
@@ -65,7 +61,7 @@ namespace Assets.Code.Scripts.SceneControllers {
 
                 //Bereits geprüfte muss man nicht nochmals prüfen
                 if (!file.isChecked) {
-                    var isValid = true;// i%2 == 0; //checkLevelFile(file); //Gerade ist einfach jede richtig
+                    var isValid = true;
                     if (isValid)
                         FilePathsAndStatus[i].isValid = true;
                     else FilePathsAndStatus[i].isValid = false;
@@ -76,7 +72,6 @@ namespace Assets.Code.Scripts.SceneControllers {
             RefreshSelectedFiles(false);
 
             Debug.LogWarning("Diese checkFiles Funktion hat leider noch keine richtige Funktionalität");
-            //DIESES FEATURE IST FÜR DEN MOMENT LEIDER ZU ZEITAUFWENDIG BZW WIRD ES NICHT EXPLIZIT GEFORDERT UND DIE ZEIT WIRD ANDERWEITIG GEBRAUCHT
         }
 
         public void FileDialogOpener() {
