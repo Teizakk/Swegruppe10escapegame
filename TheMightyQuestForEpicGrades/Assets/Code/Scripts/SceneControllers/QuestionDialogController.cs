@@ -328,34 +328,6 @@ namespace Assets.Code.Scripts.SceneControllers
         // Frage und Antworten in den Dialog laden
         void LoadQuestion()
         {
-            /*q = new Question {
-                  QuestionText = "Was ist das Internet?",
-                  Difficulty = Difficulties.Easy,
-                  Chapter = "Einstieg",
-                  ImagePath = Path.GetFullPath("Assets/Samples+Placeholder/Beispielbild.png"),
-                  Answers =
-                      new List<Question.Answer>()
-                      {
-                              new Question.Answer()
-                              {
-                                  AnswerText = "Ein Netz",
-                                  ImagePath = ""
-                              },
-                              new Question.Answer()
-                              {
-                                  AnswerText = "Nur physikalisch vorhanden",
-                                  ImagePath = "Assets/Samples+Placeholder/Bild2.png"
-                              },
-                              new Question.Answer()
-                              {
-                                  AnswerText = "Ein Netz von Netzen",
-                                  ImagePath = ""
-                              },
-                      },
-                  CorrectAnswer = 3,
-                  Hints = new List<string> { "inter", "connected", "networks" }
-              };*/
-
             //Neue Fragen laden
             q = Master.Instance().MyQuestion.ProvideUnusedQuestion(Master.Instance().MyGameState.ChapterInUse);
 
