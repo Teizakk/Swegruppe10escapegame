@@ -61,7 +61,8 @@ namespace Assets.Code.Scripts.FeatureScripts {
                             toInstantiate = StartBlock;
                             break;
                         case 'f':
-                        case 'F': //Floor
+                        case 'F':
+                        case ' ': //Floor
                         case 'd':
                         case 'D': //Door
                             height = 0.0f;

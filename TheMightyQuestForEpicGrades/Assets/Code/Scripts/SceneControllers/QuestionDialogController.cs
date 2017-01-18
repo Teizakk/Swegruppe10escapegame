@@ -365,7 +365,8 @@ namespace Assets.Code.Scripts.SceneControllers
             imagePaths = new string[q.Answers.Count + 1];
 
             // Bildpfad zu Frage
-            imagePaths[0] = q.ImagePath;
+            imagePaths[0] = Application.dataPath + q.ImagePath;
+            //imagePaths[0] = q.ImagePath;
 
             // Bild vorhanden?
             if (!string.IsNullOrEmpty(imagePaths[0]) && File.Exists(Path.GetFullPath(imagePaths[0])))
@@ -380,7 +381,8 @@ namespace Assets.Code.Scripts.SceneControllers
             foreach (var answer in q.Answers)
             {
                 outAnswer[i - 1].text = answer.AnswerText;
-                imagePaths[i] = answer.ImagePath;
+                //imagePaths[i] = answer.ImagePath;
+                imagePaths[i] = Application.dataPath + answer.ImagePath;
                 // Bild vorhanden?
                 if (!string.IsNullOrEmpty(imagePaths[i]) && File.Exists(Path.GetFullPath(imagePaths[i])))
                 {
