@@ -286,10 +286,10 @@ namespace Assets.Code.Manager {
         #endregion
 
         #region Question-related
-        public TimeSpan TimeTakenUntilNow { get { return GameStateObject.LevelState.Time; } }
+        public TimeSpan TimeTakenUntilNow { get { return new TimeSpan(GameStateObject.LevelState.Time); } }
         public void AddTime(TimeSpan timeTaken) {
             if (timeTaken.Ticks > 0) {
-                GameStateObject.LevelState.Time += timeTaken;
+                GameStateObject.LevelState.Time += timeTaken.Ticks;
                 return;
             }
             Debug.LogError("Hinzuzufügende Zeit darf nicht kleiner oder gleich 0 sein!");

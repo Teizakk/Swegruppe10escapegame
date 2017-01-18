@@ -27,7 +27,6 @@ namespace Assets.Code.Models {
             LevelState.Lives = 0;
             LevelState.HintStones = 0;
             LevelState.Score = 0;
-            LevelState.Time = new TimeSpan(0);
             LevelState.Cheatmode = false;
         }
 
@@ -54,7 +53,7 @@ namespace Assets.Code.Models {
             public int Lives; //Die noch verbleibende Anzahl Leben
             public int HintStones; //Die noch verbleibende Anzahl an Hinweissteinen
             public int Score; //Der bisher erreichte Punktestand
-            public TimeSpan Time; // Die bisher benötigte Zeit
+            public long Time; // Die bisher benötigte Zeit
             public PortalStone BluePortalStone; //'Zustand'des blauen Portalsteins und damit auch Portals
             public PortalStone GreenPortalStone; //'Zustand'des grünen Portalsteins und damit auch Portals
             public PortalStone PinkPortalStone; //'Zustand'des pinken Portalsteins und damit auch Portals
