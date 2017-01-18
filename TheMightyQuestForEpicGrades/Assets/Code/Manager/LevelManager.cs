@@ -98,13 +98,6 @@ namespace Assets.Code.Manager {
             }
 
             return levelIndices;
-
-            //Linq Version
-            //return Persist.GetAllLevelFileNames().Select(
-            //    x => {
-            //        var fileName = Path.GetFileNameWithoutExtension(x);
-            //        return Int32.Parse(fileName[fileName.Length - 1].ToString());
-            //    }).ToArray();
         }
     }
 }

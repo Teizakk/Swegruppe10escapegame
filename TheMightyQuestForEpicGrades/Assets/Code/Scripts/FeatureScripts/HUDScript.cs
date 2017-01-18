@@ -176,17 +176,6 @@ namespace Assets.Code.Scripts.FeatureScripts {
         }
         #endregion
 
-        // Use this for initialization
-        //private void Start() {
-        //    //Werte initialisieren (-1 um sicher zu stellen, dass firstSetUp aufgerufen wurde)
-        //    numberOfLives = -1;
-        //    numberOfHints = -1;
-
-        //    scoreDisplay.text = points.ToString().PadLeft(6, '0');
-        //    bluePortalStone.enabled = false;
-        //    greenPortalStone.enabled = false;
-        //    pinkPortalStone.enabled = false;
-        //}
 
         // Update is called once per frame
         private void Update() {
