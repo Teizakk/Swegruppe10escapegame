@@ -35,7 +35,7 @@ namespace Assets.Code.Models {
         [Serializable]
         public class Preselectives { //Vorausgewählte Einstellungen
             public Difficulties Difficulty; //Ausgewählter Schwierigkeitsgrad
-            public string Module; //imo fehleranfällig, mal gucken ob wir damit durchkommen (sollte aber ok sein, weil in der Frage das Modul auch als String gespeichert ist)
+            public string Module; 
             public string PlayerName;
         }
 

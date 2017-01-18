@@ -12,16 +12,6 @@ namespace Assets.Code.Models {
         public DateTime DateCreated;
         public DateTime LastUpdated;
 
-        //public DateTime LastUpdated {
-        //    get { return _lastUpdated; }
-        //    set {
-        //        if (value.Ticks >= _lastUpdated.Ticks) {
-        //            _lastUpdated = value;
-        //        }
-        //        Debug.LogWarning("Wert der eingetragen werden soll: " + value + "\nWert der drin steht: " + _lastUpdated);
-        //    }
-        //}
-
         public ModuleQuestions(string moduleName) {
             QuestionsEasy = new List<Question>();
             QuestionsEasy.Clear();
@@ -119,7 +109,6 @@ namespace Assets.Code.Models {
 		}
 
         public bool HasEnoughQuestions() {
-            //return (GetCombinedNumberOfQuestions() >= 90);
 			return (HasEnoughQuestionsPerDifficulty() && HasEnoughQuestionsPerChapter());
         }
     }

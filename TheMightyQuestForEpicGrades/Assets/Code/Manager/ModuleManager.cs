@@ -182,19 +182,6 @@ namespace Assets.Code.Manager {
             //Das Speichern sollte ab hier funktionieren - es müssen allerdings noch ein paar Werte angepasst werden:
             //Bilder hereinladen und Pfade ändern
 
-            //Das ist doppelt beim Fragen hinzufügen wird dies von selbst aufgerufen und für den CSV import brauchen wir es nicht....
-
-            //if (!string.IsNullOrEmpty(q.ImagePath)) { //Wenn es eine Frage-Bild gibt
-            //    q.ImagePath = Persist.CopyPictureToResourcesFolder(q.ImagePath); //schreibt direkt den aktuellen Pfad herein
-            //}
-
-            //foreach (var a in q.Answers) {
-            //    var answerImagePath = a.ImagePath;
-            //    if (!string.IsNullOrEmpty(answerImagePath)) { //Wenn es ein Antwort-Bild gibt
-            //        a.ImagePath = Persist.CopyPictureToResourcesFolder(answerImagePath); //siehe oben
-            //    }
-            //}
-
             switch (q.Difficulty) {
                 case Difficulties.Easy:
                     moduleFile.QuestionsEasy.Add(q);

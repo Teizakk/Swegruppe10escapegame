@@ -91,10 +91,8 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 return;
             }
             //muss hier vorher gemacht werden, oder halt nachher mit [numberOfHints]...
-            //Debug.Log("Anzahl Hints vor Entfernen: " + numberOfHints);
             hints[numberOfHints - 1].enabled = false;
             numberOfHints--;
-            //Debug.Log("Anzahl Hints nach Entfernen: " + numberOfHints);
         }
 
         public void RemoveHeart() {
@@ -107,10 +105,8 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 Debug.Break();
                 return;
             }
-            //Debug.Log("Anzahl Leben vor Entfernen: " + numberOfLives);
             hearts[numberOfLives - 1].enabled = false;
             numberOfLives--;
-            //Debug.Log("Anzahl Leben nach Entfernen: " + numberOfLives);
         }
 
        public void ReceivePortalStone(PortalColor color) {
@@ -175,18 +171,6 @@ namespace Assets.Code.Scripts.FeatureScripts {
             numberOfLives = Master.Instance().MyGameState.LivesRemaining;
         }
         #endregion
-
-        // Use this for initialization
-        //private void Start() {
-        //    //Werte initialisieren (-1 um sicher zu stellen, dass firstSetUp aufgerufen wurde)
-        //    numberOfLives = -1;
-        //    numberOfHints = -1;
-
-        //    scoreDisplay.text = points.ToString().PadLeft(6, '0');
-        //    bluePortalStone.enabled = false;
-        //    greenPortalStone.enabled = false;
-        //    pinkPortalStone.enabled = false;
-        //}
 
         // Update is called once per frame
         private void Update() {

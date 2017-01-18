@@ -61,7 +61,6 @@ namespace Assets.Code.Scripts.FeatureScripts {
                     a = false;
                 }
                 else {
-                    //Debug.Log("false Key"); //sollte auskommentiert sein, spammt sonst zu viel :)
                     h = false;
                     a = false;
                 }

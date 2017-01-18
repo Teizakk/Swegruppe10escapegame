@@ -81,7 +81,6 @@ namespace Assets.Code.Scripts.FeatureScripts {
                     if (toInstantiate != null) {
                         var instance = Instantiate(toInstantiate, new Vector3(x, height, z), Quaternion.identity) as GameObject;
 
-                        //Debug.Log("Name von toInstatiate: " + toInstantiate.name);
                         //Hier werden bei der gleichen Map die Blocks immer in der gleichen Reihenfolge landen und so ihren index bekommen
                         if (toInstantiate == ChestBlock && instance != null) {
                             instance.GetComponent<ChestScript>().Index = chestIndex;

@@ -85,7 +85,6 @@ namespace Assets.Code.Scripts.FeatureScripts {
                 var item = _listOfSavegameDescriptions[index];
 
                 //Nur Savegames vom gleichen Spieler anzeigen
-                //if (!item.PlayerName.Equals(Master.Instance().MyGameState.PlayerName)) continue;
                 GameObject saveGameDisplay;
                 // wenn im LoadMenu
                 if (!SaveGame)
@@ -101,7 +100,6 @@ namespace Assets.Code.Scripts.FeatureScripts {
 
                 DateTime timeOfSaving = new DateTime(item.TimeCode, DateTimeKind.Local);
 
-                //var ci = CultureInfo.CurrentCulture; //oder "de-DE"
                 var ci = new CultureInfo("de-DE");
 
                 saveGameDisplay.GetComponentInChildren<Text>().text = item.ToString() +
