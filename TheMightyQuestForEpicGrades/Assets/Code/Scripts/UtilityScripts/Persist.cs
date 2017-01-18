@@ -17,6 +17,7 @@ namespace Assets.Code.Scripts.UtilityScripts
         {
             //ExecuteablePath = Application.persistentDataPath;
             executeable_path_ = Application.dataPath;
+            Debug.LogError("Das unter mir ist kein Fehler - wird aber ohne LogError nicht angezeigt :)");
             Debug.LogError("Pfad der Datenhaltung: " + ExecuteablePath); //das ist logError, damit man das in den DevBuilds sieht
             AssureDirectoryAndFilesExists();
         }
@@ -178,16 +179,21 @@ namespace Assets.Code.Scripts.UtilityScripts
             {
                 throw new FileNotFoundException("Zu kopierendes Bild war unter dem gesetzten Pfad nicht zu finden! PFAD = " + filePathAndName);
             }
-            var desiredFilePathAndNameAfterCopy = ExecuteablePath + "\\Resources\\Pictures\\" + Path.GetFileName(filePathAndName);
-            while (File.Exists(desiredFilePathAndNameAfterCopy))
+            var desiredFilePathAndNameAfterCopy = "\\Resources\\Pictures\\" + Path.GetFileName(filePathAndName);
+            Debug.LogError("Executable Path: " + ExecuteablePath);
+            Debug.Log("desiredFilePath... : " + desiredFilePathAndNameAfterCopy);
+            Debug.LogError("\"Gewünschter\" Pfad: " + ExecuteablePath + desiredFilePathAndNameAfterCopy);
+            while (File.Exists(ExecuteablePath + desiredFilePathAndNameAfterCopy))
             { //falls Dateiname bereits vorhanden
-                desiredFilePathAndNameAfterCopy = Path.GetFileNameWithoutExtension(desiredFilePathAndNameAfterCopy) + "_alt" + Path.GetExtension(filePathAndName);
+                desiredFilePathAndNameAfterCopy = "\\Resources\\Pictures\\" + Path.GetFileNameWithoutExtension(desiredFilePathAndNameAfterCopy) + "_alt" + Path.GetExtension(filePathAndName);
             }
-            File.Copy(filePathAndName, desiredFilePathAndNameAfterCopy);
-            if (!File.Exists(desiredFilePathAndNameAfterCopy))
+            File.Copy(filePathAndName, ExecuteablePath + desiredFilePathAndNameAfterCopy);
+            if (!File.Exists(ExecuteablePath + desiredFilePathAndNameAfterCopy))
             {
                 throw new FileNotFoundException("Kopieren der Bilddatei in den Resources-Ordner gescheitert!");
             }
+            Debug.LogError("Tatsächlicher Pfad: " + ExecuteablePath + desiredFilePathAndNameAfterCopy);
+            Debug.LogError("Im Attribut hinterlegter Pfad: " + desiredFilePathAndNameAfterCopy);
             return desiredFilePathAndNameAfterCopy;
         }
 
